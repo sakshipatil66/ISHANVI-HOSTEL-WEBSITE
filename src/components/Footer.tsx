@@ -47,6 +47,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenEnquiry }) => 
                 { id: 'rooms', label: 'Rooms' },
                 { id: 'amenities', label: 'Amenities' },
                 { id: 'gallery', label: 'Gallery' },
+                { id: 'reviews', label: 'Reviews' },
                 { id: 'contact', label: 'Contact' },
               ].map((link) => (
                 <li key={link.id}>

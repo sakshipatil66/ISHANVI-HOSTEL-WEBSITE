@@ -42,31 +42,43 @@ export const EditorialInterlude: React.FC = () => {
 
         {/* 4 Animated Verified Metrics */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="pt-6 grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-white/15"
+          className="pt-8 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 border-t border-white/15"
         >
-          <div className="space-y-1">
+          <motion.div
+            whileHover={{ y: -5, scale: 1.03 }}
+            className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-[#DFB76C]/60 hover:bg-white/10 transition-all cursor-default space-y-1 shadow-lg"
+          >
             <p className="font-serif text-3xl sm:text-4xl font-bold text-[#DFB76C] tabular-nums">100m</p>
-            <p className="text-xs sm:text-[13px] text-[#E2E8F0]">To ISMS Sankalp Gates</p>
-          </div>
+            <p className="text-xs sm:text-[13px] text-[#E2E8F0] font-medium">To ISMS Sankalp Gates</p>
+          </motion.div>
 
-          <div className="space-y-1">
+          <motion.div
+            whileHover={{ y: -5, scale: 1.03 }}
+            className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-[#DFB76C]/60 hover:bg-white/10 transition-all cursor-default space-y-1 shadow-lg"
+          >
             <p className="font-serif text-3xl sm:text-4xl font-bold text-[#DFB76C] tabular-nums">4 Meals</p>
-            <p className="text-xs sm:text-[13px] text-[#E2E8F0]">Cooked Fresh Daily</p>
-          </div>
+            <p className="text-xs sm:text-[13px] text-[#E2E8F0] font-medium">Cooked Fresh Daily</p>
+          </motion.div>
 
-          <div className="space-y-1">
-            <p className="font-serif text-3xl sm:text-4xl font-bold text-[#DFB76C] tabular-nums">24x7</p>
-            <p className="text-xs sm:text-[13px] text-[#E2E8F0]">Guarded Security & CCTV</p>
-          </div>
+          <motion.div
+            whileHover={{ y: -5, scale: 1.03 }}
+            className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-[#DFB76C]/60 hover:bg-white/10 transition-all cursor-default space-y-1 shadow-lg"
+          >
+            <p className="font-serif text-3xl sm:text-4xl font-bold text-[#DFB76C] tabular-nums">24×7</p>
+            <p className="text-xs sm:text-[13px] text-[#E2E8F0] font-medium">Guarded Security &amp; CCTV</p>
+          </motion.div>
 
-          <div className="space-y-1">
+          <motion.div
+            whileHover={{ y: -5, scale: 1.03 }}
+            className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-[#DFB76C]/60 hover:bg-white/10 transition-all cursor-default space-y-1 shadow-lg"
+          >
             <p className="font-serif text-3xl sm:text-4xl font-bold text-[#DFB76C] tabular-nums">100%</p>
-            <p className="text-xs sm:text-[13px] text-[#E2E8F0]">Power & Wi-Fi Uptime</p>
-          </div>
+            <p className="text-xs sm:text-[13px] text-[#E2E8F0] font-medium">Power &amp; Wi-Fi Uptime</p>
+          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -17,24 +17,36 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onLearnMore }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Room Image with Arched Framing and Floating Animation */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -35 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.65, ease: 'easeOut' }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-6 relative"
           >
             <div className="relative rounded-tl-3xl rounded-tr-[5.5rem] rounded-bl-3xl rounded-br-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] group bg-[#FAF8F5]">
               <img
                 src="/assets/ref/about_room.jpg"
                 alt="Comfortable living room at ISHANVI"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none" />
+
+              {/* Floating Verified Sanctuary Badge */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.35 }}
+                className="absolute bottom-4 left-4 z-10 px-3.5 py-1.5 rounded-full bg-[#102A1C]/90 backdrop-blur-md text-[#DFB76C] text-xs font-bold border border-[#DFB76C]/40 flex items-center gap-2 shadow-lg animate-float-slow"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-[#DFB76C]" />
+                <span>Dedicated Scholar Sanctuary</span>
+              </motion.div>
             </div>
 
-            {/* Subtle ambient glow */}
-            <div className="absolute -bottom-6 -left-6 w-44 h-44 bg-[#C5A059]/20 rounded-full blur-3xl -z-10" />
+            {/* Pulsing ambient glow */}
+            <div className="absolute -bottom-8 -left-8 w-56 h-56 bg-[#C5A059]/25 rounded-full blur-3xl pointer-events-none animate-aura-slow -z-10" />
           </motion.div>
 
           {/* Right Content with Staggered Entrance */}

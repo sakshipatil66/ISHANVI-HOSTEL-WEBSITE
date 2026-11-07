@@ -52,32 +52,38 @@ export const ExperiencePillarsSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              whileHover={{ y: -4 }}
-              className="bg-white rounded-2xl p-7 border border-[#EFEAE1] shadow-xs hover:shadow-xl transition-all flex flex-col justify-between space-y-6 group"
+              whileHover={{ y: -7, scale: 1.01 }}
+              className="bg-white rounded-3xl p-7 sm:p-8 border border-[#EFEAE1] shadow-sm hover:shadow-2xl hover:border-[#DFB76C]/80 transition-all flex flex-col justify-between space-y-6 group cursor-default relative overflow-hidden"
             >
-              <div className="space-y-4">
+              {/* Subtle gold corner highlight */}
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#DFB76C]/15 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity" />
+
+              <div className="space-y-4 relative z-10">
                 <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-xl bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center group-hover:scale-105 transition-transform">
-                    {getIcon(pillar.icon)}
+                  <div className="w-13 h-13 rounded-2xl bg-[#FAF8F5] border border-[#EFEAE1] group-hover:bg-[#102A1C] group-hover:border-[#102A1C] flex items-center justify-center transition-all duration-300 shadow-2xs group-hover:scale-110">
+                    <span className="text-[#102A1C] group-hover:text-[#DFB76C] transition-colors">
+                      {getIcon(pillar.icon)}
+                    </span>
                   </div>
-                  <span className="font-serif text-2xl font-bold text-[#C5A059]/50 group-hover:text-[#C5A059] transition-colors tabular-nums">
+                  <span className="font-serif text-3xl font-bold text-[#C5A059]/40 group-hover:text-[#8C6D2D] transition-colors tabular-nums">
                     {pillar.number}
                   </span>
                 </div>
 
-                <h3 className="heading-card text-[#102A1C]">
+                <h3 className="heading-card text-[#102A1C] group-hover:text-[#142E20] transition-colors">
                   {pillar.title}
                 </h3>
 
-                <p className="text-body-sm">
+                <p className="text-body-sm leading-relaxed text-[#4A5568]">
                   {pillar.description}
                 </p>
               </div>
 
-              <div className="pt-2 border-t border-[#EFEAE1]/60">
-                <span className="text-[11px] font-semibold text-[#C5A059] tracking-wider uppercase">
+              <div className="pt-3 border-t border-[#EFEAE1]/80 flex items-center justify-between relative z-10">
+                <span className="text-[11px] font-bold text-[#8C6D2D] tracking-wider uppercase">
                   Verified Resident Standard
                 </span>
+                <span className="w-2 h-2 rounded-full bg-[#DFB76C] opacity-0 group-hover:opacity-100 transition-opacity animate-ping" />
               </div>
             </motion.div>
           ))}

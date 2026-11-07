@@ -222,6 +222,72 @@ img {
   background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.35), transparent);
 }
 
+/* ========================================================
+   HIGH-POLISH VISUAL ANIMATIONS & HOVER DYNAMICS
+   ======================================================== */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(223, 183, 108, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px rgba(223, 183, 108, 0.2);
+  }
+}
+
+@keyframes shimmerSweep {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(250%) skewX(-20deg);
+  }
+}
+
+@keyframes auraSpinSlow {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.08);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 4.5s ease-in-out infinite;
+}
+
+.animate-float-delay {
+  animation: floatSlow 5s ease-in-out 1.5s infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s infinite;
+}
+
+.animate-aura-slow {
+  animation: auraSpinSlow 22s linear infinite;
+}
+
+.hover-card-elevate {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+.hover-card-elevate:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 35px -10px rgba(16, 42, 28, 0.12), 0 0 0 1px rgba(223, 183, 108, 0.3);
+}
+
 /* Accessibility: Prefers Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
@@ -250,3 +316,4 @@ img {
 ::-webkit-scrollbar-thumb:hover {
   background: #1B3B2B;
 }
+

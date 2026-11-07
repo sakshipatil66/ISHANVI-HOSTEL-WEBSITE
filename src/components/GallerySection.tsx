@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { ArrowRight, Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { GALLERY_PHOTOS } from '../data/hostelData';
 
@@ -98,66 +99,76 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
           /* Standalone Page: Clean cards with image on top and descriptive text cleanly below */
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {displayPhotos.map((photo, index) => (
-              <div
+              <motion.div
                 key={photo.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: index * 0.05 }}
+                whileHover={{ y: -6 }}
                 onClick={() => openLightbox(index)}
-                className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl border border-[#E2D9C8] hover:border-[#DFB76C] transition-all duration-300 cursor-pointer flex flex-col"
+                className="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl border border-[#E2D9C8] hover:border-[#DFB76C] transition-all duration-300 cursor-pointer flex flex-col"
               >
                 {/* 100% Clean Image Container with Zero Text Overlay */}
                 <div className="relative aspect-[16/11] overflow-hidden bg-[#FAF8F5]">
                   <img
                     src={photo.image}
                     alt={photo.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
                     referrerPolicy="no-referrer"
                     loading="lazy"
                   />
-                  <div className="absolute top-2.5 right-2.5 p-1.5 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute top-3 right-3 p-2 rounded-full bg-black/60 backdrop-blur-md text-white opacity-0 group-hover:opacity-100 transition-opacity">
                     <Maximize2 className="w-3.5 h-3.5 text-[#DFB76C]" />
                   </div>
                 </div>
 
                 {/* Clean Descriptive Content Area BELOW the Photo */}
-                <div className="p-4 sm:p-5 bg-white flex-1 flex flex-col justify-between border-t border-[#EFEAE1]">
+                <div className="p-5 sm:p-6 bg-white flex-1 flex flex-col justify-between border-t border-[#EFEAE1]">
                   <div>
                     <span className="text-[10px] font-bold text-[#A88238] uppercase tracking-wider block mb-1">
                       {photo.category.toUpperCase()}
                     </span>
-                    <h3 className="font-serif text-sm sm:text-base font-bold text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">
+                    <h3 className="font-serif text-base font-bold text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">
                       {photo.title}
                     </h3>
-                    <p className="text-xs text-[#5B6676] mt-1 leading-relaxed">
+                    <p className="text-xs text-[#5B6676] mt-1.5 leading-relaxed">
                       {photo.caption}
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         ) : (
           /* Homepage: 5 clean, un-overlayed rounded photo cards matching Screenshot exactly */
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
             {displayPhotos.map((photo, index) => (
-              <div
+              <motion.div
                 key={photo.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                whileHover={{ y: -6, scale: 1.02 }}
                 onClick={() => openLightbox(index)}
-                className="group relative rounded-2xl overflow-hidden aspect-[4/3] bg-black/20 border border-white/15 hover:border-[#DFB76C] shadow-lg cursor-pointer transition-all duration-300"
+                className="group relative rounded-2xl overflow-hidden aspect-[4/3] bg-black/20 border border-white/15 hover:border-[#DFB76C] shadow-lg hover:shadow-2xl cursor-pointer transition-all duration-300"
                 title={photo.title}
               >
                 {/* Clean Photo - Zero Text Overlay on Image */}
                 <img
                   src={photo.image}
                   alt={photo.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                   loading="lazy"
                 />
 
                 {/* Subtle zoom button indicator on hover */}
-                <div className="absolute top-2 right-2 p-1.5 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="absolute top-2.5 right-2.5 p-2 rounded-full bg-black/60 backdrop-blur-md text-white opacity-0 group-hover:opacity-100 transition-opacity">
                   <Maximize2 className="w-3.5 h-3.5 text-[#DFB76C]" />
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         )}

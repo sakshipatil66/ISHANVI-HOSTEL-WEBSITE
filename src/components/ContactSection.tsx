@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle2, MessageSquare, Clock, ArrowRight } from 'lucide-react';
+import { motion } from 'motion/react';
+import { Mail, Phone, MapPin, Send, CheckCircle2, MessageSquare, Clock, ArrowRight, Sparkles } from 'lucide-react';
 import { HOSTEL_INFO, ROOMS_DATA } from '../data/hostelData';
 
 interface ContactSectionProps {
@@ -61,9 +62,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id="contact" className={`${isStandalonePage ? 'section-space-lg' : 'section-space'} bg-[#FDFBF7]`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-14">
+    <section id="contact" className={`${isStandalonePage ? 'section-space-lg' : 'section-space'} bg-[#FDFBF7] relative overflow-hidden`}>
+      {/* Background ambient lighting */}
+      <div className="absolute top-1/4 -left-20 w-80 h-80 bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-2xl mx-auto mb-14"
+        >
           <div className="kicker-label justify-center mb-2">
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
             <span>CONTACT US</span>
@@ -75,22 +85,29 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           <p className="mt-3 text-lead max-w-xl mx-auto">
             We are here to answer questions, share room pricing, and schedule your campus tour.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Left: Contact Info matching official banner */}
-          <div className="lg:col-span-5 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: -25 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55 }}
+            className="lg:col-span-5 space-y-6"
+          >
             <div className="bg-white rounded-3xl p-7 sm:p-10 border border-[#EFEAE1] shadow-md space-y-6">
               <h3 className="font-serif text-2xl font-bold text-[#102A1C]">
                 Campus & Enquiry Desk
               </h3>
 
               <div className="space-y-4 pt-1">
-                <a
+                <motion.a
+                  whileHover={{ x: 4 }}
                   href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
                   className="flex items-start gap-3.5 p-3.5 rounded-xl bg-[#FAF8F5] border border-[#EFEAE1] hover:border-[#102A1C] transition-colors"
                 >
-                  <div className="w-10 h-10 rounded-full bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0 shadow-xs">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
@@ -99,10 +116,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       {HOSTEL_INFO.phonePrimary}
                     </p>
                   </div>
-                </a>
+                </motion.a>
 
                 <div className="flex items-start gap-3.5 p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E2D9C8]">
-                  <div className="w-10 h-10 rounded-full bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0 shadow-xs">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
@@ -114,7 +131,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 </div>
 
                 <div className="flex items-start gap-3.5 p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E2D9C8]">
-                  <div className="w-10 h-10 rounded-full bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0 shadow-xs">
                     <Clock className="w-4 h-4" />
                   </div>
                   <div>
@@ -128,21 +145,29 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
               {/* Direct WhatsApp Action */}
               <div className="pt-2">
-                <a
+                <motion.a
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   href={`https://wa.me/917767058988?text=${encodeURIComponent('Hello ISHANVI Hostel, I would like to inquire about room availability.')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-semibold transition-all shadow-sm"
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-semibold transition-all shadow-md cursor-pointer"
                 >
                   <MessageSquare className="w-4 h-4" />
                   <span>Chat with Us on WhatsApp</span>
-                </a>
+                </motion.a>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right: Enquiry Form */}
-          <div className="lg:col-span-7">
+          <motion.div
+            initial={{ opacity: 0, x: 25 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.1 }}
+            className="lg:col-span-7"
+          >
             <div className="bg-white rounded-3xl p-7 sm:p-10 lg:p-12 border border-[#EFEAE1] shadow-lg">
               {submitted ? (
                 <div className="text-center py-8 space-y-4 animate-in zoom-in-95">
@@ -276,17 +301,19 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     />
                   </div>
 
-                  <button
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     type="submit"
-                    className="btn-primary w-full"
+                    className="btn-primary w-full cursor-pointer"
                   >
                     <Send className="w-3.5 h-3.5" />
                     <span>Submit Enquiry</span>
-                  </button>
+                  </motion.button>
                 </form>
               )}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ChevronDown, Search, MessageSquare, Phone, HelpCircle } from 'lucide-react';
+import { ChevronDown, Search, MessageSquare, Phone, HelpCircle, Sparkles } from 'lucide-react';
 import { FAQS_DATA, HOSTEL_INFO, FaqItem } from '../data/hostelData';
 
 interface FaqSectionProps {
@@ -38,8 +38,11 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
   };
 
   return (
-    <section id="faq" className="section-space bg-[#FDFBF7]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="faq" className="section-space bg-[#FDFBF7] relative overflow-hidden">
+      {/* Decorative ambient light */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none" />
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -62,7 +65,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
         </motion.div>
 
         {/* Search & Category Filter Controls */}
-        <div className="space-y-3 mb-8">
+        <div className="space-y-4 mb-8">
           {/* Search Box */}
           <div className="relative max-w-lg mx-auto">
             <Search className="w-4 h-4 text-[#5B6676] absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -71,12 +74,12 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
               placeholder="Search questions (e.g. curfew, Wi-Fi, meals, deposit)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-full bg-white border border-[#EFEAE1] text-xs text-[#102A1C] placeholder:text-[#A0AEC0] shadow-2xs focus:outline-none focus:border-[#102A1C] transition-colors"
+              className="w-full pl-10 pr-4 py-2.5 rounded-full bg-white border border-[#EFEAE1] text-xs text-[#102A1C] placeholder:text-[#A0AEC0] shadow-2xs focus:outline-none focus:border-[#102A1C] focus:ring-2 focus:ring-[#DFB76C]/30 transition-all"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-[#5B6676] hover:text-[#102A1C]"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs text-[#5B6676] hover:text-[#102A1C] cursor-pointer"
               >
                 Clear
               </button>
@@ -84,29 +87,38 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
           </div>
 
           {/* Category Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-1.5 pt-1">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => {
-                  setSelectedCategory(cat.id);
-                  setOpenIndex(0);
-                }}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
-                  selectedCategory === cat.id
-                    ? 'bg-[#102A1C] text-white shadow-2xs'
-                    : 'bg-white text-[#4A5568] hover:text-[#102A1C] border border-[#EFEAE1]'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-1">
+            {categories.map((cat) => {
+              const isSelected = selectedCategory === cat.id;
+              return (
+                <motion.button
+                  key={cat.id}
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.96 }}
+                  onClick={() => {
+                    setSelectedCategory(cat.id);
+                    setOpenIndex(0);
+                  }}
+                  className={`px-4 py-2 rounded-full text-xs font-semibold transition-all cursor-pointer relative ${
+                    isSelected
+                      ? 'bg-[#102A1C] text-[#DFB76C] shadow-md border border-[#DFB76C]/40'
+                      : 'bg-white text-[#4A5568] hover:text-[#102A1C] border border-[#EFEAE1] hover:border-[#DFB76C]/60'
+                  }`}
+                >
+                  {cat.label}
+                </motion.button>
+              );
+            })}
           </div>
         </div>
 
         {/* Structured Questions Accordion */}
         {filteredFaqs.length === 0 ? (
-          <div className="p-8 text-center bg-white rounded-2xl border border-[#EFEAE1] space-y-2">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="p-8 text-center bg-white rounded-2xl border border-[#EFEAE1] space-y-2 shadow-xs"
+          >
             <HelpCircle className="w-8 h-8 text-[#C5A059] mx-auto" />
             <p className="text-sm font-semibold text-[#102A1C]">No matching questions found</p>
             <p className="text-xs text-[#5B6676]">
@@ -117,11 +129,11 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
                 setSearchQuery('');
                 setSelectedCategory('all');
               }}
-              className="btn-secondary !py-2 !px-4 text-xs mt-2"
+              className="btn-secondary !py-2 !px-4 text-xs mt-2 cursor-pointer"
             >
               Reset Filters
             </button>
-          </div>
+          </motion.div>
         ) : (
           <div className="space-y-3">
             {filteredFaqs.map((faq: FaqItem, index: number) => {
@@ -132,8 +144,9 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.3 }}
-                  className="bg-white rounded-2xl border border-[#EFEAE1] overflow-hidden shadow-2xs hover:border-[#DFB76C]/70 transition-all"
+                  transition={{ duration: 0.3, delay: index * 0.04 }}
+                  whileHover={{ y: -2 }}
+                  className="bg-white rounded-2xl border border-[#EFEAE1] overflow-hidden shadow-2xs hover:border-[#DFB76C]/70 hover:shadow-md transition-all"
                 >
                   <button
                     onClick={() => toggleFaq(index)}
@@ -164,16 +177,19 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25 }}
+                        transition={{ duration: 0.28, ease: 'easeOut' }}
                         className="overflow-hidden"
                       >
                         <div className="px-5 pb-5 pt-3 sm:px-6 text-xs sm:text-sm text-[#4A5568] leading-relaxed border-t border-[#EFEAE1]/60 bg-[#FAF8F5]/40 space-y-3">
                           <p>{faq.answer}</p>
                           <div className="flex items-center justify-between pt-2 border-t border-[#EFEAE1]/40 text-[11px] text-[#5B6676]">
-                            <span>Category: {faq.category || 'General Residence'}</span>
+                            <span className="flex items-center gap-1">
+                              <Sparkles className="w-3 h-3 text-[#C5A059]" />
+                              Category: {faq.category || 'General Residence'}
+                            </span>
                             <button
                               onClick={() => onOpenEnquiry(faq.question)}
-                              className="text-[#8C6D2D] font-semibold hover:underline"
+                              className="text-[#8C6D2D] font-semibold hover:underline cursor-pointer"
                             >
                               Need further clarity? Enquire →
                             </button>
@@ -189,7 +205,13 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
         )}
 
         {/* Direct Contact Assistance Strip */}
-        <div className="mt-8 p-5 sm:p-6 rounded-2xl bg-[#FAF8F5] border border-[#EFEAE1] text-center space-y-2">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mt-8 p-5 sm:p-6 rounded-2xl bg-[#FAF8F5] border border-[#EFEAE1] text-center space-y-2 shadow-xs"
+        >
           <h3 className="font-serif text-sm sm:text-base font-bold text-[#102A1C]">
             Still have an unanswered question about admissions?
           </h3>
@@ -197,14 +219,18 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
             Our admissions warden is directly reachable by phone and WhatsApp to discuss room availability and booking.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
-            <a
+            <motion.a
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
               href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
               className="btn-primary !py-2 !px-4 text-xs"
             >
               <Phone className="w-3.5 h-3.5 text-[#DFB76C]" />
               <span>Call: {HOSTEL_INFO.phonePrimary}</span>
-            </a>
-            <a
+            </motion.a>
+            <motion.a
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
               href={`https://wa.me/917767058988?text=${encodeURIComponent('Hello ISHANVI, I have a query regarding hostel admissions.')}`}
               target="_blank"
               rel="noopener noreferrer"
@@ -212,9 +238,9 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
             >
               <MessageSquare className="w-3.5 h-3.5 text-[#25D366]" />
               <span>Chat on WhatsApp</span>
-            </a>
+            </motion.a>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

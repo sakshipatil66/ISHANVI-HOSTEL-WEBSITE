@@ -65,9 +65,9 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center bg-white p-6 sm:p-10 lg:p-12 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center bg-white p-6 sm:p-8 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
           >
-            <div className="w-full min-w-0 space-y-3">
+            <div className="lg:col-span-5 w-full min-w-0 space-y-3">
               {/* Spacious Proportionate Image Container - Zero Cut-off & Zero Horizontal Overlap */}
               <div
                 onClick={() => setInspectingRoom(ROOMS_DATA[0])}
@@ -94,7 +94,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               </div>
             </div>
 
-            <div className="w-full min-w-0 space-y-5">
+            <div className="lg:col-span-7 w-full min-w-0 space-y-5">
               <div className="kicker-label">
                 <span className="w-5 h-[1.5px] bg-[#C5A059]" />
                 <span>{ROOMS_DATA[0].kicker}</span>
@@ -169,9 +169,9 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center bg-white p-6 sm:p-10 lg:p-12 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center bg-white p-6 sm:p-8 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
           >
-            <div className="w-full min-w-0 order-2 lg:order-1 space-y-5">
+            <div className="lg:col-span-7 w-full min-w-0 order-2 lg:order-1 space-y-5">
               <div className="kicker-label">
                 <span className="w-5 h-[1.5px] bg-[#C5A059]" />
                 <span>{ROOMS_DATA[1].kicker}</span>
@@ -239,7 +239,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               </div>
             </div>
 
-            <div className="w-full min-w-0 order-1 lg:order-2 space-y-3">
+            <div className="lg:col-span-5 w-full min-w-0 order-1 lg:order-2 space-y-3">
               {/* Spacious Proportionate Image Container - Complete Twin Bed View */}
               <div
                 onClick={() => setInspectingRoom(ROOMS_DATA[1])}
@@ -273,9 +273,9 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center bg-white p-6 sm:p-10 lg:p-12 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center bg-white p-6 sm:p-8 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
           >
-            <div className="w-full min-w-0 space-y-3">
+            <div className="lg:col-span-5 w-full min-w-0 space-y-3">
               {/* Spacious Proportionate Image Container - Complete Premium Room Perspective */}
               <div
                 onClick={() => setInspectingRoom(ROOMS_DATA[2])}
@@ -301,7 +301,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               </div>
             </div>
 
-            <div className="w-full min-w-0 space-y-5">
+            <div className="lg:col-span-7 w-full min-w-0 space-y-5">
               <div className="kicker-label">
                 <span className="w-5 h-[1.5px] bg-[#C5A059]" />
                 <span>{ROOMS_DATA[2].kicker}</span>

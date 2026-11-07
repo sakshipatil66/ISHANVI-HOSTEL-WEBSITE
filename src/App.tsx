@@ -25,6 +25,7 @@ import { Footer } from './components/Footer';
 import { EnquiryModal } from './components/EnquiryModal';
 import { PageHeader } from './components/PageHeader';
 import { OpeningLogoIntro } from './components/OpeningLogoIntro';
+import { ReviewsPageSection } from './components/ReviewsPageSection';
 import { MessageCircle, Calendar } from 'lucide-react';
 import { HOSTEL_INFO } from './data/hostelData';
 
@@ -32,24 +33,10 @@ export default function App() {
   const [activePage, setActivePage] = useState<string>('home');
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState<boolean>(false);
   const [selectedRoomForEnquiry, setSelectedRoomForEnquiry] = useState<string | undefined>(undefined);
-  const [showLogoIntro, setShowLogoIntro] = useState<boolean>(() => {
-    try {
-      if (typeof window !== 'undefined') {
-        return !sessionStorage.getItem('ishanvi_intro_seen');
-      }
-    } catch {
-      // ignore in SSR or restricted storage
-    }
-    return true;
-  });
+  const [showLogoIntro, setShowLogoIntro] = useState<boolean>(true);
 
   const handleLogoIntroComplete = () => {
     setShowLogoIntro(false);
-    try {
-      sessionStorage.setItem('ishanvi_intro_seen', 'true');
-    } catch {
-      // ignore
-    }
   };
 
   React.useEffect(() => {
@@ -59,6 +46,7 @@ export default function App() {
       rooms: 'Rooms & Pricing Enquiry | Single & Sharing Rooms | ISHANVI Hostel Pune',
       amenities: 'Hostel Amenities & Facilities | Wi-Fi, Food, Gym | ISHANVI Pune',
       gallery: 'Photo Gallery | Verified Property & Rooms | ISHANVI Hostel Pune',
+      reviews: 'Resident Reviews & Testimonials | ISHANVI Hostel Ambegaon Pune',
       contact: 'Contact & Admissions Desk | ISHANVI Hostel Ambegaon Bk Pune',
     };
     if (titles[activePage]) {
@@ -96,7 +84,6 @@ export default function App() {
         activePage={activePage}
         setActivePage={handlePageChange}
         onOpenEnquiry={handleOpenEnquiry}
-        onReplayIntro={() => setShowLogoIntro(true)}
       />
 
       <main className="flex-1">
@@ -217,6 +204,20 @@ export default function App() {
               onOpenEnquiry={handleOpenEnquiry}
             />
             <GallerySection isStandalonePage={true} />
+            <BottomCtaSection onOpenEnquiry={handleOpenEnquiry} />
+          </div>
+        )}
+
+        {/* DEDICATED REVIEWS / TESTIMONIALS PAGE */}
+        {activePage === 'reviews' && (
+          <div className="w-full">
+            <PageHeader
+              kicker="RESIDENT VOICES & PARENT REVIEWS"
+              title="What Our Residents & Parents Say"
+              subtitle="Verified ratings and experiences from scholars at ISMS Sankalp Business School, engineering students, and parents living at ISHANVI Hostel."
+              onOpenEnquiry={handleOpenEnquiry}
+            />
+            <ReviewsPageSection onOpenEnquiry={handleOpenEnquiry} />
             <BottomCtaSection onOpenEnquiry={handleOpenEnquiry} />
           </div>
         )}

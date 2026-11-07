@@ -6,14 +6,12 @@ interface NavbarProps {
   activePage: string;
   setActivePage: (page: string) => void;
   onOpenEnquiry: (roomName?: string) => void;
-  onReplayIntro?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activePage,
   setActivePage,
   onOpenEnquiry,
-  onReplayIntro,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -23,13 +21,11 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'rooms', label: 'Rooms' },
     { id: 'amenities', label: 'Amenities' },
     { id: 'gallery', label: 'Gallery' },
+    { id: 'reviews', label: 'Reviews' },
     { id: 'contact', label: 'Contact' },
   ];
 
   const handleNavClick = (id: string) => {
-    if (id === 'home' && activePage === 'home' && onReplayIntro) {
-      onReplayIntro();
-    }
     setActivePage(id);
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -43,7 +39,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={() => handleNavClick('home')}
             className="flex items-center gap-2 text-left cursor-pointer focus:outline-none group"
-            title="ISHANVI Hostel & Accommodation - Return to Top / Replay Intro"
+            title="ISHANVI Hostel & Accommodation - Home"
           >
             <img
               src={HOSTEL_INFO.logoUrl}
@@ -74,6 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Right Action: Forest Green Pill Enquire Now Button */}
           <div className="hidden md:flex items-center gap-4">
+
             <a
               href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
               className="flex items-center gap-1.5 text-xs font-semibold text-[#102A1C] hover:text-[#C5A059] transition-colors"

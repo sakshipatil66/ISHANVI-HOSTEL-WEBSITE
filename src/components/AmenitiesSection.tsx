@@ -73,17 +73,17 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
           {AMENITIES_LIST.map((item, idx) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.04 }}
-              whileHover={{ y: -4 }}
-              className="flex flex-col items-center text-center justify-center space-y-3 group cursor-default p-2"
+              transition={{ duration: 0.5, delay: idx * 0.05 }}
+              whileHover={{ y: -6, scale: 1.05 }}
+              className="flex flex-col items-center text-center justify-center space-y-3 group cursor-pointer p-2 rounded-2xl hover:bg-white/60 transition-colors"
             >
-              <div className="w-14 h-14 rounded-full bg-white border border-[#EFEAE1] shadow-2xs flex items-center justify-center group-hover:scale-110 group-hover:bg-[#102A1C] group-hover:border-[#102A1C] group-hover:text-[#DFB76C] transition-all">
+              <div className="w-15 h-15 rounded-2xl bg-white border border-[#EFEAE1] shadow-2xs flex items-center justify-center group-hover:scale-110 group-hover:bg-[#102A1C] group-hover:border-[#102A1C] group-hover:text-[#DFB76C] transition-all duration-300 group-hover:shadow-lg">
                 {getAmenityIcon(item.iconName)}
               </div>
-              <h3 className="font-serif text-xs sm:text-sm font-bold text-[#102A1C] leading-snug">
+              <h3 className="font-serif text-xs sm:text-sm font-bold text-[#102A1C] leading-snug group-hover:text-[#8C6D2D] transition-colors">
                 {item.title}
               </h3>
             </motion.div>
@@ -97,39 +97,47 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-8"
+            className="text-center mb-10"
           >
-            <span className="text-xs font-bold text-[#A88238] uppercase tracking-[0.16em]">
-              AUTHENTIC RESIDENCE FACILITIES
-            </span>
-            <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#102A1C] mt-1">
-              Curated Spaces for Focus, Fitness & Feasting
+            <div className="inline-flex items-center gap-2 mb-2">
+              <span className="w-4 h-4 rounded-full bg-[#DFB76C]/30 flex items-center justify-center animate-ping">
+                <span className="w-2 h-2 rounded-full bg-[#DFB76C]" />
+              </span>
+              <span className="text-xs font-bold text-[#A88238] uppercase tracking-[0.18em]">
+                AUTHENTIC RESIDENCE FACILITIES
+              </span>
+            </div>
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#102A1C] mt-1">
+              Curated Spaces for Focus, Fitness &amp; Feasting
             </h3>
           </motion.div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <motion.div
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              whileHover={{ y: -5 }}
-              className="group rounded-2xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl transition-all"
+              transition={{ duration: 0.55 }}
+              whileHover={{ y: -8, scale: 1.01 }}
+              className="group rounded-3xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-2xl hover:border-[#DFB76C]/80 transition-all duration-300"
             >
               <div className="aspect-[4/3] overflow-hidden relative bg-[#FAF8F5]">
                 <img
                   src="/assets/images/amenity_dining_hall_1793879543322.jpg"
                   alt="Hygienic Dining Hall"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
                 />
+                <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[#102A1C]/90 backdrop-blur-md text-[#DFB76C] text-[10px] font-bold border border-[#DFB76C]/30 shadow-xs">
+                  4 Chef Meals Daily
+                </div>
               </div>
-              <div className="p-4 space-y-1">
+              <div className="p-5 space-y-1.5">
                 <span className="text-[10px] font-bold text-[#A88238] uppercase tracking-wider block">
                   Hygienic Dining
                 </span>
-                <h4 className="font-serif text-base font-bold text-[#102A1C]">Fresh Homestyle Meals</h4>
+                <h4 className="font-serif text-base font-bold text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">Fresh Homestyle Meals</h4>
                 <p className="text-xs text-[#5A655F] leading-relaxed">
-                  Nutritious breakfast, lunch & dinner prepared in sanitized kitchens with seasonal menus.
+                  Nutritious breakfast, lunch &amp; dinner prepared in sanitized kitchens with seasonal menus.
                 </p>
               </div>
             </motion.div>
