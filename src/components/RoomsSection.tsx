@@ -57,21 +57,21 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
   // DEDICATED ROOMS PAGE WITH EXPANDED SPECS & FULL-VISIBILITY PHOTOGRAPHS
   if (isStandalonePage) {
     return (
-      <section className="py-8 lg:py-12 bg-[#FDFBF7]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 lg:space-y-16">
+      <section className="py-14 sm:py-20 lg:py-24 bg-[#FDFBF7]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 lg:space-y-20">
           {/* Room 1: Single Room (Image on Left, Rich Specs on Right) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-white p-6 sm:p-10 rounded-3xl border border-[#EFEAE1] shadow-md"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center bg-white p-6 sm:p-10 lg:p-12 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
           >
-            <div className="lg:col-span-6 space-y-3">
-              {/* 4:3 Proportionate Image Container - Zero Cut-off of Bed, Wardrobe or Window */}
+            <div className="w-full min-w-0 space-y-3">
+              {/* Spacious Proportionate Image Container - Zero Cut-off & Zero Horizontal Overlap */}
               <div
                 onClick={() => setInspectingRoom(ROOMS_DATA[0])}
-                className="relative rounded-2xl overflow-hidden shadow-lg border-2 border-[#EFEAE1] aspect-[4/3] max-h-[440px] bg-[#FAF8F5] group cursor-pointer"
+                className="relative rounded-2xl overflow-hidden shadow-lg border-2 border-[#EFEAE1] aspect-[4/3] sm:aspect-[16/11] max-h-[380px] w-full bg-[#FAF8F5] group cursor-pointer"
               >
                 <img
                   src={ROOMS_DATA[0].image}
@@ -89,12 +89,12 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                 </div>
               </div>
               <div className="flex items-center justify-between text-xs text-[#5B6676] px-1">
-                <span>Natural Daylight & Private Study Desk</span>
-                <span className="font-semibold text-[#102A1C]">Private Lock & Wardrobe</span>
+                <span>Natural Daylight &amp; Private Study Desk</span>
+                <span className="font-semibold text-[#102A1C]">Private Lock &amp; Wardrobe</span>
               </div>
             </div>
 
-            <div className="lg:col-span-6 space-y-5">
+            <div className="w-full min-w-0 space-y-5">
               <div className="kicker-label">
                 <span className="w-5 h-[1.5px] bg-[#C5A059]" />
                 <span>{ROOMS_DATA[0].kicker}</span>
@@ -169,9 +169,9 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-white p-6 sm:p-10 rounded-3xl border border-[#EFEAE1] shadow-md"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center bg-white p-6 sm:p-10 lg:p-12 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
           >
-            <div className="lg:col-span-6 order-2 lg:order-1 space-y-5">
+            <div className="w-full min-w-0 order-2 lg:order-1 space-y-5">
               <div className="kicker-label">
                 <span className="w-5 h-[1.5px] bg-[#C5A059]" />
                 <span>{ROOMS_DATA[1].kicker}</span>
@@ -203,7 +203,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
 
               {/* Room Furnishings List */}
               <div className="space-y-2 pt-1">
-                <p className="text-xs font-bold text-[#102A1C] uppercase tracking-wider">Room Furnishings & Features:</p>
+                <p className="text-xs font-bold text-[#102A1C] uppercase tracking-wider">Room Furnishings &amp; Features:</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {ROOMS_DATA[1].highlights.map((h, i) => (
                     <div key={i} className="flex items-start gap-2 text-xs text-[#4A5568]">
@@ -239,11 +239,11 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               </div>
             </div>
 
-            <div className="lg:col-span-6 order-1 lg:order-2 space-y-3">
-              {/* 4:3 Proportionate Image Container - Complete Twin Bed View */}
+            <div className="w-full min-w-0 order-1 lg:order-2 space-y-3">
+              {/* Spacious Proportionate Image Container - Complete Twin Bed View */}
               <div
                 onClick={() => setInspectingRoom(ROOMS_DATA[1])}
-                className="relative rounded-2xl overflow-hidden shadow-lg border-2 border-[#EFEAE1] aspect-[4/3] max-h-[440px] bg-[#FAF8F5] group cursor-pointer"
+                className="relative rounded-2xl overflow-hidden shadow-lg border-2 border-[#EFEAE1] aspect-[4/3] sm:aspect-[16/11] max-h-[380px] w-full bg-[#FAF8F5] group cursor-pointer"
               >
                 <img
                   src={ROOMS_DATA[1].image}
@@ -261,7 +261,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                 </div>
               </div>
               <div className="flex items-center justify-between text-xs text-[#5B6676] px-1">
-                <span>Both Beds, Headboards & Wardrobes Fully Visible</span>
+                <span>Both Beds, Headboards &amp; Wardrobes Fully Visible</span>
                 <span className="font-semibold text-[#102A1C]">Separate Wooden Units</span>
               </div>
             </div>
@@ -273,13 +273,13 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center bg-white p-6 sm:p-10 rounded-3xl border border-[#EFEAE1] shadow-md"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center bg-white p-6 sm:p-10 lg:p-12 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
           >
-            <div className="lg:col-span-6 space-y-3">
-              {/* 4:3 Proportionate Image Container - Complete Premium Room Perspective */}
+            <div className="w-full min-w-0 space-y-3">
+              {/* Spacious Proportionate Image Container - Complete Premium Room Perspective */}
               <div
                 onClick={() => setInspectingRoom(ROOMS_DATA[2])}
-                className="relative rounded-2xl overflow-hidden shadow-lg border-2 border-[#EFEAE1] aspect-[4/3] max-h-[440px] bg-[#FAF8F5] group cursor-pointer"
+                className="relative rounded-2xl overflow-hidden shadow-lg border-2 border-[#EFEAE1] aspect-[4/3] sm:aspect-[16/11] max-h-[380px] w-full bg-[#FAF8F5] group cursor-pointer"
               >
                 <img
                   src={ROOMS_DATA[2].image}
@@ -297,12 +297,11 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                 </div>
               </div>
               <div className="flex items-center justify-between text-xs text-[#5B6676] px-1">
-                <span>Executive Workstation & Large Wardrobe Unit</span>
-                <span className="font-semibold text-[#102A1C]">Extra Space & Ventilation</span>
+                <span className="font-semibold text-[#102A1C]">Extra Space &amp; Ventilation</span>
               </div>
             </div>
 
-            <div className="lg:col-span-6 space-y-5">
+            <div className="w-full min-w-0 space-y-5">
               <div className="kicker-label">
                 <span className="w-5 h-[1.5px] bg-[#C5A059]" />
                 <span>{ROOMS_DATA[2].kicker}</span>
@@ -372,7 +371,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
           </motion.div>
 
           {/* Informational Section: What is Included with Every Room */}
-          <div className="rounded-3xl bg-[#FAF8F5] border border-[#EFEAE1] p-8 sm:p-12 space-y-8">
+          <div className="rounded-3xl bg-[#FAF8F5] border border-[#EFEAE1] p-8 sm:p-14 lg:p-16 space-y-10">
             <div className="text-center max-w-2xl mx-auto space-y-2">
               <span className="text-xs font-bold text-[#C5A059] uppercase tracking-widest">TRANSPARENT AMENITIES</span>
               <h3 className="heading-section text-[#102A1C]">What's Included In Every Room Stay</h3>
@@ -534,11 +533,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                   loading="lazy"
                 />
 
-                {/* Verified Room Badge */}
-                <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full text-[11px] font-semibold text-[#102A1C] border border-[#EFEAE1] shadow-xs flex items-center gap-1">
-                  <Sparkles className="w-3 h-3 text-[#C5A059]" />
-                  <span>Ambegaon Bk, Pune</span>
-                </div>
+
 
                 {/* Inspect Zoom Icon */}
                 <button

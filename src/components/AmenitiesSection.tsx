@@ -42,7 +42,7 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
   };
 
   return (
-    <section id="amenities" className="section-space bg-[#FDFBF7]">
+    <section id="amenities" className={`${isStandalonePage ? 'section-space-lg' : 'section-space'} bg-[#FDFBF7]`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header matching Screenshot 074113 */}
         <motion.div
@@ -116,17 +116,17 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
               whileHover={{ y: -5 }}
               className="group rounded-2xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl transition-all"
             >
-              <div className="aspect-[4/3] overflow-hidden relative">
+              <div className="aspect-[4/3] overflow-hidden relative bg-[#FAF8F5]">
                 <img
                   src="/assets/images/amenity_dining_hall_1793879543322.jpg"
                   alt="Hygienic Dining Hall"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[#DFB76C] text-[11px] font-bold">
-                  Hygienic Dining
-                </div>
               </div>
               <div className="p-4 space-y-1">
+                <span className="text-[10px] font-bold text-[#A88238] uppercase tracking-wider block">
+                  Hygienic Dining
+                </span>
                 <h4 className="font-serif text-base font-bold text-[#102A1C]">Fresh Homestyle Meals</h4>
                 <p className="text-xs text-[#5A655F] leading-relaxed">
                   Nutritious breakfast, lunch & dinner prepared in sanitized kitchens with seasonal menus.
@@ -142,17 +142,17 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
               whileHover={{ y: -5 }}
               className="group rounded-2xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl transition-all"
             >
-              <div className="aspect-[4/3] overflow-hidden relative">
+              <div className="aspect-[4/3] overflow-hidden relative bg-[#FAF8F5]">
                 <img
                   src="/assets/images/amenity_study_lounge_1793879542441.jpg"
                   alt="Silent Study Lounge"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[#DFB76C] text-[11px] font-bold">
-                  Study & Focus
-                </div>
               </div>
               <div className="p-4 space-y-1">
+                <span className="text-[10px] font-bold text-[#A88238] uppercase tracking-wider block">
+                  Study & Focus
+                </span>
                 <h4 className="font-serif text-base font-bold text-[#102A1C]">Silent Study Lounge</h4>
                 <p className="text-xs text-[#5A655F] leading-relaxed">
                   Noise-damped zones with ergonomic seating, individual power sockets and high-speed Wi-Fi.
@@ -168,17 +168,17 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
               whileHover={{ y: -5 }}
               className="group rounded-2xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl transition-all"
             >
-              <div className="aspect-[4/3] overflow-hidden relative">
+              <div className="aspect-[4/3] overflow-hidden relative bg-[#FAF8F5]">
                 <img
                   src="/assets/images/amenity_security_lobby_1793879543609.jpg"
                   alt="24x7 Security Lobby"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[#DFB76C] text-[11px] font-bold">
-                  24×7 Safety
-                </div>
               </div>
               <div className="p-4 space-y-1">
+                <span className="text-[10px] font-bold text-[#A88238] uppercase tracking-wider block">
+                  24×7 Safety
+                </span>
                 <h4 className="font-serif text-base font-bold text-[#102A1C]">Secure Reception Desk</h4>
                 <p className="text-xs text-[#5A655F] leading-relaxed">
                   Biometric gated entry, 24/7 CCTV surveillance, and resident warden attendance registers.
@@ -194,17 +194,17 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
               whileHover={{ y: -5 }}
               className="group rounded-2xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl transition-all"
             >
-              <div className="aspect-[4/3] overflow-hidden relative">
+              <div className="aspect-[4/3] overflow-hidden relative bg-[#FAF8F5]">
                 <img
                   src="/assets/images/amenity_fitness_hd_1793946898388.jpg"
                   alt="Resident Fitness Hub"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[#DFB76C] text-[11px] font-bold">
-                  Wellness Hub
-                </div>
               </div>
               <div className="p-4 space-y-1">
+                <span className="text-[10px] font-bold text-[#A88238] uppercase tracking-wider block">
+                  Wellness Hub
+                </span>
                 <h4 className="font-serif text-base font-bold text-[#102A1C]">Fitness & Recreation</h4>
                 <p className="text-xs text-[#5A655F] leading-relaxed">
                   Cardio and strength stations alongside indoor recreation games to recharge between study hours.

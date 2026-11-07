@@ -48,7 +48,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <img
               src={HOSTEL_INFO.logoUrl}
               alt="ISHANVI Hostel & Accommodation"
-              className="h-9 sm:h-11 w-auto object-contain max-w-[180px] sm:max-w-[240px] transition-transform duration-300 group-hover:scale-[1.02]"
+              className="h-9 sm:h-11 w-auto object-contain max-w-[180px] sm:max-w-[240px] mix-blend-multiply transition-transform duration-300 group-hover:scale-[1.02]"
             />
           </button>
 

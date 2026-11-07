@@ -63,15 +63,13 @@ export const TestimonialsSection: React.FC = () => {
         </div>
 
         {/* 3 Review Cards with AnimatePresence & Micro-hover interactions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           <AnimatePresence mode="wait">
             {visibleReviews.map((t, idx) => {
-              const avatarUrl =
-                t.author === 'Riya S.'
-                  ? 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'
-                  : t.author === 'Aakiv K.'
-                  ? 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80'
-                  : 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80';
+              const initials = t.author
+                .split(' ')
+                .map((n) => n[0])
+                .join('');
 
               return (
                 <motion.div
@@ -81,23 +79,20 @@ export const TestimonialsSection: React.FC = () => {
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.4, delay: idx * 0.08 }}
                   whileHover={{ y: -5 }}
-                  className="bg-white rounded-2xl p-6 sm:p-7 border border-[#EFEAE1] shadow-xs hover:shadow-xl hover:border-[#DFB76C]/60 transition-all flex flex-col justify-between space-y-5 group"
+                  className="bg-white rounded-3xl p-7 sm:p-8 lg:p-9 border border-[#EFEAE1] shadow-xs hover:shadow-xl hover:border-[#DFB76C]/60 transition-all flex flex-col justify-between space-y-6 group"
                 >
-                  <div className="space-y-3">
-                    <Quote className="w-7 h-7 text-[#DFB76C]/40 group-hover:text-[#DFB76C] transition-colors" />
-                    <p className="text-body text-[#4A5568] leading-relaxed italic">
+                  <div className="space-y-4">
+                    <Quote className="w-8 h-8 text-[#DFB76C]/40 group-hover:text-[#DFB76C] transition-colors" />
+                    <p className="text-body text-[#4A5568] leading-relaxed italic min-h-[120px]">
                       "{t.quote}"
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[#EFEAE1]/60 flex items-center justify-between">
+                  <div className="pt-5 border-t border-[#EFEAE1]/60 flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <img
-                        src={avatarUrl}
-                        alt={t.author}
-                        className="w-10 h-10 rounded-full object-cover border-2 border-[#EFEAE1] group-hover:border-[#DFB76C] shrink-0 transition-colors"
-                        referrerPolicy="no-referrer"
-                      />
+                      <div className="w-11 h-11 rounded-full bg-[#102A1C] text-[#DFB76C] font-serif font-bold text-sm flex items-center justify-center border-2 border-[#DFB76C]/40 group-hover:bg-[#1B3B2B] shrink-0 transition-colors shadow-xs">
+                        {initials}
+                      </div>
                       <div>
                         <h4 className="heading-card text-sm text-[#102A1C]">{t.author}</h4>
                         <p className="text-caption text-[#5B6676]">{t.role}</p>

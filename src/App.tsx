@@ -32,7 +32,25 @@ export default function App() {
   const [activePage, setActivePage] = useState<string>('home');
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState<boolean>(false);
   const [selectedRoomForEnquiry, setSelectedRoomForEnquiry] = useState<string | undefined>(undefined);
-  const [showLogoIntro, setShowLogoIntro] = useState<boolean>(true);
+  const [showLogoIntro, setShowLogoIntro] = useState<boolean>(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        return !sessionStorage.getItem('ishanvi_intro_seen');
+      }
+    } catch {
+      // ignore in SSR or restricted storage
+    }
+    return true;
+  });
+
+  const handleLogoIntroComplete = () => {
+    setShowLogoIntro(false);
+    try {
+      sessionStorage.setItem('ishanvi_intro_seen', 'true');
+    } catch {
+      // ignore
+    }
+  };
 
   React.useEffect(() => {
     const titles: Record<string, string> = {
@@ -67,7 +85,7 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-[#FDFBF7] text-[#222B25] font-sans selection:bg-[#102A1C] selection:text-[#DFB76C] overflow-x-hidden">
       {/* Premium Opening Logo Intro Animation */}
       {showLogoIntro && (
-        <OpeningLogoIntro onComplete={() => setShowLogoIntro(false)} />
+        <OpeningLogoIntro onComplete={handleLogoIntroComplete} />
       )}
 
       {/* Hairline Scroll Progress Bar */}
@@ -141,7 +159,7 @@ export default function App() {
 
         {/* DEDICATED ROOMS PAGE WITH EXPANDED INFORMATION */}
         {activePage === 'rooms' && (
-          <div className="space-y-6 sm:space-y-8">
+          <div className="w-full">
             <PageHeader
               kicker="ACCOMMODATION & SPECIFICATIONS"
               title="Rooms Designed For Your Comfort"
@@ -159,7 +177,7 @@ export default function App() {
 
         {/* DEDICATED ABOUT PAGE */}
         {activePage === 'about' && (
-          <div className="space-y-12">
+          <div className="w-full">
             <PageHeader
               kicker="OUR STORY & VALUES"
               title="About ISHANVI Residence"
@@ -176,7 +194,7 @@ export default function App() {
 
         {/* DEDICATED AMENITIES PAGE */}
         {activePage === 'amenities' && (
-          <div className="space-y-12">
+          <div className="w-full">
             <PageHeader
               kicker="COMFORT IN EVERY DETAIL"
               title="Comprehensive Living Amenities"
@@ -191,7 +209,7 @@ export default function App() {
 
         {/* DEDICATED GALLERY PAGE */}
         {activePage === 'gallery' && (
-          <div className="space-y-12">
+          <div className="w-full">
             <PageHeader
               kicker="IMMERSIVE SPACES"
               title="A Glimpse Of Our Spaces"
@@ -205,7 +223,7 @@ export default function App() {
 
         {/* DEDICATED CONTACT PAGE */}
         {activePage === 'contact' && (
-          <div className="space-y-12">
+          <div className="w-full">
             <PageHeader
               kicker="REACH OUT DIRECTLY"
               title="Contact & Admissions Desk"
@@ -228,21 +246,13 @@ export default function App() {
         onOpenEnquiry={handleOpenEnquiry}
       />
 
-      {/* Floating Quick Action Widgets */}
-      <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-2.5 items-end">
-        <button
-          onClick={() => handleOpenEnquiry()}
-          className="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#102A1C] text-white text-xs font-semibold shadow-xl border border-[#DFB76C]/40 hover:bg-[#1B3B2B] hover:scale-105 active:scale-95 transition-all cursor-pointer"
-        >
-          <Calendar className="w-3.5 h-3.5 text-[#DFB76C]" />
-          <span>Book Tour</span>
-        </button>
-
+      {/* Floating WhatsApp Action Widget (matching reference screenshot) */}
+      <div className="fixed bottom-6 right-6 z-40">
         <a
           href={`https://wa.me/917767058988?text=${encodeURIComponent('Hello ISHANVI Hostel, I would like to inquire about room availability.')}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-105 active:scale-95 transition-transform"
+          className="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-transform"
           title="Chat on WhatsApp (+91 77670 58988)"
         >
           <MessageCircle className="w-6 h-6 fill-white text-[#25D366]" />

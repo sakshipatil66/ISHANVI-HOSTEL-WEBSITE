@@ -61,7 +61,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id="contact" className="section-space bg-[#FDFBF7]">
+    <section id="contact" className={`${isStandalonePage ? 'section-space-lg' : 'section-space'} bg-[#FDFBF7]`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-14">
           <div className="kicker-label justify-center mb-2">
@@ -80,7 +80,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Left: Contact Info matching official banner */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#EFEAE1] shadow-sm space-y-5">
+            <div className="bg-white rounded-3xl p-7 sm:p-10 border border-[#EFEAE1] shadow-md space-y-6">
               <h3 className="font-serif text-2xl font-bold text-[#102A1C]">
                 Campus & Enquiry Desk
               </h3>
@@ -143,7 +143,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
           {/* Right: Enquiry Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#EFEAE1] shadow-lg">
+            <div className="bg-white rounded-3xl p-7 sm:p-10 lg:p-12 border border-[#EFEAE1] shadow-lg">
               {submitted ? (
                 <div className="text-center py-8 space-y-4 animate-in zoom-in-95">
                   <div className="w-14 h-14 rounded-full bg-[#102A1C]/10 text-[#102A1C] flex items-center justify-center mx-auto">

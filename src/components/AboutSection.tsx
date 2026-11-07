@@ -30,22 +30,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onLearnMore }) => {
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-
-              {/* Floating Story Badge */}
-              <div className="absolute bottom-4 left-4 right-4 sm:right-auto px-4 py-2.5 rounded-xl bg-white/90 backdrop-blur-md border border-[#EFEAE1] shadow-lg flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-4 h-4" />
-                </div>
-                <div>
-                  <span className="block text-[11px] uppercase font-bold text-[#A88238] tracking-wider">
-                    Resident Assurance
-                  </span>
-                  <span className="block text-xs font-bold text-[#102A1C]">
-                    Safe · Hygienic · Homely
-                  </span>
-                </div>
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
             </div>
 
             {/* Subtle ambient glow */}

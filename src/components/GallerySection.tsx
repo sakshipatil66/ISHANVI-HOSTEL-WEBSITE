@@ -44,7 +44,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
   };
 
   return (
-    <section id="gallery" className={`section-space ${isStandalonePage ? 'bg-[#FDFBF7] text-[#102A1C]' : 'bg-[#102A1C] text-white'} overflow-hidden`}>
+    <section id="gallery" className={`${isStandalonePage ? 'section-space-lg bg-[#FDFBF7] text-[#102A1C]' : 'section-space bg-[#102A1C] text-white'} overflow-hidden`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
@@ -76,7 +76,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
 
         {/* Category Filters for Standalone Page */}
         {isStandalonePage && (
-          <div className="flex flex-wrap items-center gap-2 mb-8 pb-3 border-b border-[#E2D9C8]">
+          <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-[#E2D9C8]">
             {categories.map((cat) => (
               <button
                 key={cat.id}
@@ -93,34 +93,74 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
           </div>
         )}
 
-        {/* Photos Grid: 5 columns on homepage to match Screenshot 074059, responsive 3 cols on standalone */}
-        <div className={`grid ${isStandalonePage ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6' : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4'}`}>
-          {displayPhotos.map((photo, index) => (
-            <div
-              key={photo.id}
-              onClick={() => openLightbox(index)}
-              className={`group relative rounded-2xl overflow-hidden aspect-[4/3] ${
-                isStandalonePage
-                  ? 'bg-white shadow-md border border-[#E2D9C8]'
-                  : 'bg-black/20 border border-white/15 shadow-lg'
-              } cursor-pointer hover:border-[#DFB76C] transition-all`}
-            >
-              <img
-                src={photo.image}
-                alt={photo.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-106"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3.5">
-                <p className="text-xs font-bold text-white line-clamp-1">{photo.title}</p>
-              </div>
+        {/* Photos Grid: Clean photos with zero text overlay to match Ma'am's reference screenshot */}
+        {isStandalonePage ? (
+          /* Standalone Page: Clean cards with image on top and descriptive text cleanly below */
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {displayPhotos.map((photo, index) => (
+              <div
+                key={photo.id}
+                onClick={() => openLightbox(index)}
+                className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl border border-[#E2D9C8] hover:border-[#DFB76C] transition-all duration-300 cursor-pointer flex flex-col"
+              >
+                {/* 100% Clean Image Container with Zero Text Overlay */}
+                <div className="relative aspect-[16/11] overflow-hidden bg-[#FAF8F5]">
+                  <img
+                    src={photo.image}
+                    alt={photo.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    referrerPolicy="no-referrer"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-2.5 right-2.5 p-1.5 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Maximize2 className="w-3.5 h-3.5 text-[#DFB76C]" />
+                  </div>
+                </div>
 
-              <div className="absolute top-2 right-2 p-1.5 rounded-full bg-black/40 text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                <Maximize2 className="w-3.5 h-3.5" />
+                {/* Clean Descriptive Content Area BELOW the Photo */}
+                <div className="p-4 sm:p-5 bg-white flex-1 flex flex-col justify-between border-t border-[#EFEAE1]">
+                  <div>
+                    <span className="text-[10px] font-bold text-[#A88238] uppercase tracking-wider block mb-1">
+                      {photo.category.toUpperCase()}
+                    </span>
+                    <h3 className="font-serif text-sm sm:text-base font-bold text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">
+                      {photo.title}
+                    </h3>
+                    <p className="text-xs text-[#5B6676] mt-1 leading-relaxed">
+                      {photo.caption}
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          /* Homepage: 5 clean, un-overlayed rounded photo cards matching Screenshot exactly */
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
+            {displayPhotos.map((photo, index) => (
+              <div
+                key={photo.id}
+                onClick={() => openLightbox(index)}
+                className="group relative rounded-2xl overflow-hidden aspect-[4/3] bg-black/20 border border-white/15 hover:border-[#DFB76C] shadow-lg cursor-pointer transition-all duration-300"
+                title={photo.title}
+              >
+                {/* Clean Photo - Zero Text Overlay on Image */}
+                <img
+                  src={photo.image}
+                  alt={photo.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                />
+
+                {/* Subtle zoom button indicator on hover */}
+                <div className="absolute top-2 right-2 p-1.5 rounded-full bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Maximize2 className="w-3.5 h-3.5 text-[#DFB76C]" />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Lightbox Modal */}
