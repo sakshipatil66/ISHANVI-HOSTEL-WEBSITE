@@ -24,6 +24,7 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { EnquiryModal } from './components/EnquiryModal';
 import { PageHeader } from './components/PageHeader';
+import { OpeningLogoIntro } from './components/OpeningLogoIntro';
 import { MessageCircle, Calendar } from 'lucide-react';
 import { HOSTEL_INFO } from './data/hostelData';
 
@@ -31,6 +32,7 @@ export default function App() {
   const [activePage, setActivePage] = useState<string>('home');
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState<boolean>(false);
   const [selectedRoomForEnquiry, setSelectedRoomForEnquiry] = useState<string | undefined>(undefined);
+  const [showLogoIntro, setShowLogoIntro] = useState<boolean>(true);
 
   React.useEffect(() => {
     const titles: Record<string, string> = {
@@ -63,6 +65,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FDFBF7] text-[#222B25] font-sans selection:bg-[#102A1C] selection:text-[#DFB76C] overflow-x-hidden">
+      {/* Premium Opening Logo Intro Animation */}
+      {showLogoIntro && (
+        <OpeningLogoIntro onComplete={() => setShowLogoIntro(false)} />
+      )}
+
       {/* Hairline Scroll Progress Bar */}
       <ScrollProgress />
 
@@ -71,6 +78,7 @@ export default function App() {
         activePage={activePage}
         setActivePage={handlePageChange}
         onOpenEnquiry={handleOpenEnquiry}
+        onReplayIntro={() => setShowLogoIntro(true)}
       />
 
       <main className="flex-1">

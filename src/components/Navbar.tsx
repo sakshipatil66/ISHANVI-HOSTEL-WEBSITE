@@ -6,9 +6,15 @@ interface NavbarProps {
   activePage: string;
   setActivePage: (page: string) => void;
   onOpenEnquiry: (roomName?: string) => void;
+  onReplayIntro?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ activePage, setActivePage, onOpenEnquiry }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  activePage,
+  setActivePage,
+  onOpenEnquiry,
+  onReplayIntro,
+}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -21,6 +27,9 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, setActivePage, onOpe
   ];
 
   const handleNavClick = (id: string) => {
+    if (id === 'home' && activePage === 'home' && onReplayIntro) {
+      onReplayIntro();
+    }
     setActivePage(id);
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -33,12 +42,13 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, setActivePage, onOpe
           {/* Exact Brand Logo from Reference */}
           <button
             onClick={() => handleNavClick('home')}
-            className="flex items-center gap-2 text-left cursor-pointer focus:outline-none"
+            className="flex items-center gap-2 text-left cursor-pointer focus:outline-none group"
+            title="ISHANVI Hostel & Accommodation - Return to Top / Replay Intro"
           >
             <img
               src={HOSTEL_INFO.logoUrl}
               alt="ISHANVI Hostel & Accommodation"
-              className="h-9 sm:h-11 w-auto object-contain max-w-[180px] sm:max-w-[240px]"
+              className="h-9 sm:h-11 w-auto object-contain max-w-[180px] sm:max-w-[240px] transition-transform duration-300 group-hover:scale-[1.02]"
             />
           </button>
 
