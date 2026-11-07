@@ -1,0 +1,6 @@
+{
+  "name": "ISHANVI Hostel & Luxury Student Living",
+  "description": "Premium student and working professional hostel accommodation featuring single, double sharing, and executive studio rooms, 24/7 security, high-speed Wi-Fi, hygienic meals, and quiet study lounges.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,168 @@
+import React from 'react';
+import { motion } from 'motion/react';
+import { MapPin, Navigation, Clock, Building, Train, BookOpen, Stethoscope, ShoppingBag, ExternalLink, Phone } from 'lucide-react';
+import { HOSTEL_INFO, NEARBY_CONNECTIVITY } from '../data/hostelData';
+
+export const LocationSection: React.FC = () => {
+  const getIcon = (type: string) => {
+    switch (type) {
+      case 'transit':
+        return <Train className="w-4 h-4 text-[#102A1C]" />;
+      case 'education':
+        return <Building className="w-4 h-4 text-[#102A1C]" />;
+      case 'study':
+        return <BookOpen className="w-4 h-4 text-[#102A1C]" />;
+      case 'health':
+        return <Stethoscope className="w-4 h-4 text-[#102A1C]" />;
+      case 'convenience':
+        return <ShoppingBag className="w-4 h-4 text-[#102A1C]" />;
+      default:
+        return <MapPin className="w-4 h-4 text-[#102A1C]" />;
+    }
+  };
+
+  return (
+    <section className="section-space bg-[#F4EFE6]/70 border-y border-[#EFEAE1]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
+          <div className="kicker-label justify-center mb-3">
+            <span className="w-5 h-[1.5px] bg-[#C5A059]" />
+            <span>STRATEGIC NEIGHBORHOOD</span>
+            <span className="w-5 h-[1.5px] bg-[#C5A059]" />
+          </div>
+          <h2 className="heading-section text-[#102A1C]">
+            Prime Campus Location: Ambegaon Bk, Pune
+          </h2>
+          <p className="text-lead mt-3">
+            Conveniently positioned right near ISMS Sankalp Business School with immediate access to public transit, grocery markets, libraries, and healthcare clinics.
+          </p>
+        </motion.div>
+
+        {/* 2-Column Location Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+          {/* Left Column: Proximity Metrics */}
+          <div className="lg:col-span-6 space-y-4 flex flex-col justify-between">
+            <div className="space-y-3">
+              <h3 className="heading-card text-[#102A1C] mb-2">
+                Nearby Colleges & Transit Nodes
+              </h3>
+
+              {NEARBY_CONNECTIVITY.map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.08 }}
+                  className="p-4 rounded-2xl bg-white border border-[#EFEAE1] shadow-xs flex items-center justify-between gap-4 hover:border-[#102A1C] transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center shrink-0">
+                      {getIcon(item.type)}
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-[#102A1C]">{item.name}</h4>
+                      <p className="text-xs text-[#5B6676] flex items-center gap-1 mt-0.5">
+                        <Clock className="w-3 h-3 text-[#C5A059]" />
+                        <span>{item.time}</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  <span className="text-xs font-bold text-[#102A1C] bg-[#FAF8F5] px-3 py-1.5 rounded-full border border-[#EFEAE1] whitespace-nowrap tabular-nums">
+                    {item.distance}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="p-4 rounded-2xl bg-white border border-[#EFEAE1] text-xs text-[#5A655F]">
+              <strong className="text-[#102A1C]">Safe Walking Corridor:</strong> Well-lit streets, regular auto-rickshaw stands, and safe student neighborhood.
+            </div>
+          </div>
+
+          {/* Right Column: Visual Location Showcase & Contact */}
+          <div className="lg:col-span-6 flex flex-col">
+            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#EFEAE1] shadow-lg flex-1 flex flex-col justify-between space-y-6">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-[#C5A059]" />
+                    <h3 className="font-serif text-xl font-bold text-[#102A1C]">Campus Address</h3>
+                  </div>
+                  <span className="text-[11px] font-semibold text-[#102A1C] bg-[#DFB76C]/30 px-2.5 py-1 rounded-full">
+                    Near ISMS Sankalp (100m)
+                  </span>
+                </div>
+
+                <p className="text-sm text-[#5A655F] leading-relaxed mb-5">
+                  {HOSTEL_INFO.address}
+                </p>
+
+                {/* Banner Photo */}
+                <div className="relative rounded-2xl overflow-hidden aspect-[16/9] bg-[#FAF8F5] border border-[#EFEAE1] mb-5 group">
+                  <img
+                    src={HOSTEL_INFO.bannerUrl}
+                    alt="ISHANVI Hostel Banner"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                  <div className="absolute bottom-3 left-4 right-4 text-white text-xs">
+                    <p className="font-serif font-bold text-sm text-[#DFB76C]">Ambegaon Bk, Pune</p>
+                    <p className="text-[11px] text-slate-200">Visiting Hours: {HOSTEL_INFO.visitingHours}</p>
+                  </div>
+                </div>
+
+                {/* Interactive Google Map Embed */}
+                <div className="relative rounded-2xl overflow-hidden aspect-[16/9] border border-[#EFEAE1] mb-5 shadow-inner">
+                  <iframe
+                    title="ISHANVI Hostel Location near ISMS Sankalp Ambegaon Pune"
+                    src="https://maps.google.com/maps?q=ISMS+Sankalp+Business+School+Ambegaon+Bk+Pune+411066&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full"
+                  />
+                </div>
+
+                <div className="space-y-2 text-xs text-[#5A655F]">
+                  <div className="flex justify-between py-1.5 border-b border-[#EFEAE1]">
+                    <span className="text-[#5B6676]">Standard Gate Hours:</span>
+                    <span className="font-semibold text-[#102A1C]">{HOSTEL_INFO.gateCurfew}</span>
+                  </div>
+                  <div className="flex justify-between py-1.5 border-b border-[#EFEAE1]">
+                    <span className="text-[#5B6676]">Admissions Helpline:</span>
+                    <span className="font-semibold text-[#102A1C]">{HOSTEL_INFO.phonePrimary}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <a
+                  href={HOSTEL_INFO.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-full bg-[#102A1C] hover:bg-[#1B3B2B] text-white text-xs font-semibold shadow-sm transition-all"
+                >
+                  <Navigation className="w-4 h-4 text-[#DFB76C]" />
+                  <span>Open Direct Directions in Google Maps</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};

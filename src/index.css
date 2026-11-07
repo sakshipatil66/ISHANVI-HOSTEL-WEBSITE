@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --color-cream-50: #FDFBF7;
+  --color-cream-100: #FAF8F2;
+  --color-cream-200: #F3EFE6;
+  --color-cream-300: #EAE3D2;
+  --color-forest-900: #0E2016;
+  --color-forest-800: #142E20;
+  --color-forest-700: #1B3B2B;
+  --color-forest-600: #26523D;
+  --color-gold-400: #DFB76C;
+  --color-gold-500: #C5A059;
+  --color-gold-600: #A8833E;
+}
+
+:root {
+  font-family: "Inter", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  color-scheme: light;
+}
+
+.font-serif {
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+.font-sans {
+  font-family: "Inter", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+}
+
+/* ========================================================
+   QUALITY & RESPONSIVENESS BASE (added)
+   ======================================================== */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Never let media overflow its container on small screens */
+img, video {
+  max-width: 100%;
+}
+
+/* Crisper downscaling of the enhanced high-resolution photographs */
+img {
+  image-rendering: auto;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Soft shadow for text laid over photographs (keeps copy readable on any crop) */
+.text-on-photo {
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+}
+
+/* Touch devices: comfortable minimum tap targets */
+@media (pointer: coarse) {
+  button, a.btn-primary, a.btn-secondary {
+    min-height: 40px;
+  }
+}
+
+/* ========================================================
+   UNIFIED ISHANVI TYPOGRAPHY DESIGN SYSTEM (PREMIUM & BALANCED)
+   Harmonized across ALL sections of the website.
+   ======================================================== */
+
+/* H1: Main Page & Hero Display Title (Unified Across Site) */
+.title-page {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* H2: Section Headings (Uniform across every single section) */
+.heading-section {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.65rem, 2.5vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+/* Overline / Kicker with Gold Accent (Uniform across all sections) */
+.kicker-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  font-size: 0.75rem; /* 12px */
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #C5A059;
+}
+
+/* Section Subtitle / Lead Paragraph (Uniform across all sections) */
+.text-lead {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1rem); /* 15-16px */
+  line-height: 1.65;
+  color: #2D3748;
+}
+
+/* H3: Card & Subsection Headings (Uniform across all cards) */
+.heading-card {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.1875rem; /* 19px */
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: #102A1C;
+}
+
+/* Standard Body Paragraph */
+.text-body {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.6;
+  color: #374151;
+}
+
+/* Compact Body Text */
+.text-body-sm {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  font-size: 0.8125rem; /* 13px */
+  line-height: 1.55;
+  color: #4B5563;
+}
+
+/* Micro Caption / Label / Status */
+.text-caption {
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  font-size: 0.75rem; /* 12px (raised from 11px for legibility) */
+  line-height: 1.45;
+  color: #5B6676;
+  font-weight: 500;
+}
+
+/* Unified Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6875rem 1.5rem;
+  border-radius: 9999px;
+  background-color: #102A1C;
+  color: #FFFFFF;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  box-shadow: 0 3px 12px rgba(16, 42, 28, 0.18);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background-color: #1B3B2B;
+  box-shadow: 0 6px 18px rgba(16, 42, 28, 0.24);
+  transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 9999px;
+  background-color: #FFFFFF;
+  border: 1px solid #EFEAE1;
+  color: #102A1C;
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.btn-secondary:hover {
+  border-color: #102A1C;
+  background-color: #FAF8F5;
+}
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+/* Standardized Compact Section Vertical Spacing (Excess Removed) */
+.section-space {
+  padding-top: clamp(2rem, 3.5vw, 3.25rem);
+  padding-bottom: clamp(2rem, 3.5vw, 3.25rem);
+}
+
+/* Subtle Golden Divider Accent */
+.gold-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.35), transparent);
+}
+
+/* Accessibility: Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF8F5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D8D2C2;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1B3B2B;
+}

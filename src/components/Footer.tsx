@@ -1,0 +1,105 @@
+import React from 'react';
+import { Phone, Mail, MapPin, ArrowUp } from 'lucide-react';
+import { HOSTEL_INFO, ROOMS_DATA } from '../data/hostelData';
+
+interface FooterProps {
+  onNavClick: (id: string) => void;
+  onOpenEnquiry: (roomName?: string) => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenEnquiry }) => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return (
+    <footer className="bg-[#0E2016] text-[#EFEAE1] pt-14 pb-10 border-t border-[#1B3B2B]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-10 border-b border-[#1B3B2B]">
+          {/* Column 1: Logo & Tagline */}
+          <div className="lg:col-span-5 space-y-4">
+            <div className="bg-white/95 p-3 rounded-xl inline-block shadow-sm">
+              <img
+                src={HOSTEL_INFO.logoUrl}
+                alt="ISHANVI Hostel & Accommodation"
+                className="h-10 sm:h-12 w-auto object-contain"
+              />
+            </div>
+
+            <p className="text-xs text-[#CBD5E0] leading-relaxed max-w-sm">
+              Safe, secure and well-managed accommodation for students & working professionals in Ambegaon Bk, Pune.
+            </p>
+
+            <p className="text-xs text-[#DFB76C] font-semibold tracking-wider">
+              {HOSTEL_INFO.tagline}
+            </p>
+          </div>
+
+          {/* Column 2: Navigation Links */}
+          <div className="lg:col-span-3 space-y-3">
+            <h4 className="font-serif text-sm font-bold uppercase tracking-wider text-white">
+              Navigation
+            </h4>
+            <ul className="space-y-2 text-xs text-[#CBD5E0]">
+              {[
+                { id: 'home', label: 'Home' },
+                { id: 'about', label: 'About' },
+                { id: 'rooms', label: 'Rooms' },
+                { id: 'amenities', label: 'Amenities' },
+                { id: 'gallery', label: 'Gallery' },
+                { id: 'contact', label: 'Contact' },
+              ].map((link) => (
+                <li key={link.id}>
+                  <button
+                    onClick={() => onNavClick(link.id)}
+                    className="hover:text-[#DFB76C] transition-colors cursor-pointer text-left"
+                  >
+                    {link.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 3: Contact & Visiting Hours */}
+          <div className="lg:col-span-4 space-y-3">
+            <h4 className="font-serif text-sm font-bold uppercase tracking-wider text-white">
+              Contact & Address
+            </h4>
+            <div className="space-y-2.5 text-xs text-[#CBD5E0]">
+              <p className="flex items-start gap-2">
+                <MapPin className="w-4 h-4 text-[#DFB76C] shrink-0 mt-0.5" />
+                <span>{HOSTEL_INFO.address}</span>
+              </p>
+              <p className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-[#DFB76C] shrink-0" />
+                <a
+                  href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
+                  className="hover:text-white font-semibold text-white"
+                >
+                  {HOSTEL_INFO.phonePrimary}
+                </a>
+              </p>
+              <p className="text-[11px] text-[#A0AEC0] pt-1">
+                Visiting Hours: {HOSTEL_INFO.visitingHours}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#A0AEC0]">
+          <p>© {new Date().getFullYear()} ISHANVI HOSTEL & ACCOMMODATION. All Rights Reserved.</p>
+          <button
+            onClick={scrollToTop}
+            className="flex items-center gap-1.5 p-2 rounded-lg bg-[#142E20] hover:bg-[#1B3B2B] text-white transition-colors cursor-pointer"
+            title="Back to Top"
+          >
+            <ArrowUp className="w-3.5 h-3.5 text-[#DFB76C]" />
+            <span>Top</span>
+          </button>
+        </div>
+      </div>
+    </footer>
+  );
+};
