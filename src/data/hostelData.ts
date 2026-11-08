@@ -48,7 +48,7 @@ export const HOSTEL_INFO = {
   name: 'ISHANVI',
   fullName: 'ISHANVI HOSTEL & ACCOMMODATION',
   logoUrl: '/assets/aistudio/WhatsApp_Image_2026-11-05_at_11.09.48_AM_ffe35bd4.jpeg',
-  bannerUrl: '/assets/images/hero_slide_flyer.jpg',
+  bannerUrl: '/assets/images/hero_slide_flyer_clean.jpg',
   tagline: 'SAFE STAY  |  BETTER LIVING  |  BRIGHTER TOMORROW',
   heroKicker: 'A SAFE PLACE FOR A BRIGHTER TOMORROW',
   heroTitle: 'Premium Hostel & Accommodation',
@@ -329,7 +329,7 @@ export const GALLERY_PHOTOS = [
   { id: '9', title: 'Silent Study Library', category: 'study', image: '/assets/images/amenity_study_lounge_1793879542441.jpg', caption: 'Dedicated quiet study lounge with high-speed Wi-Fi, individual charging points, and desk lamps' },
   { id: '10', title: 'Fitness & Wellness Facility', category: 'amenities', image: '/assets/images/amenity_fitness_hd_1793946898388.jpg', caption: 'Dedicated fitness and workout area with treadmills, free weights, and stretching mats' },
   { id: '11', title: 'Study Workstation Suite', category: 'study', image: '/assets/ref/about_room.jpg', caption: 'Comfortable study suite with integrated bookshelf, ergonomic seating, and deep focus ambiance' },
-  { id: '12', title: 'Official Facility Information & Room Flyer', category: 'campus', image: '/assets/images/hero_slide_flyer.jpg', caption: 'Official ISHANVI banner detailing room highlights, security, and admissions desk helpline' },
+  { id: '12', title: 'ISHANVI Campus & Suite Interior', category: 'campus', image: '/assets/images/hero_slide_flyer_clean.jpg', caption: 'Signature ISHANVI suite architectural presentation and furnished twin accommodations' },
   { id: '13', title: 'Student Living & Grand Reception Showcase', category: 'campus', image: '/assets/images/hero_student_clean_hd.jpg', caption: 'Welcoming resident reception desk with illuminated 3D golden emblem and scholar study lounge' },
   { id: '14', title: 'Furnished Bedroom Sanctuary (Twin Beds)', category: 'rooms', image: '/assets/images/hero_room_clean_hd.jpg', caption: 'Spacious interior of twin-sharing student bedroom with orthopaedic beds, wardrobe, and daylight window' },
 ];

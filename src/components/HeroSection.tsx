@@ -29,6 +29,7 @@ interface HeroSlide {
   image: string;
   label: string;
   tagline: string;
+  hideTextOverlay?: boolean;
 }
 
 const HERO_SLIDES: HeroSlide[] = [
@@ -45,35 +46,35 @@ const HERO_SLIDES: HeroSlide[] = [
   },
   {
     id: 1,
-    kicker: 'OFFICIAL PROPERTY SHOWCASE',
-    title: 'Modern Living',
-    titleAccent: 'Steps From ISMS Sankalp',
-    subtitle:
-      'Furnished rooms with orthopaedic bedding, dedicated study workstations, high-speed Wi-Fi, 4 wholesome meals daily, and 24/7 guarded security.',
+    kicker: '',
+    title: '',
+    titleAccent: '',
+    subtitle: '',
     image: '/assets/images/hero_slide_flyer.jpg',
     label: 'Property Showcase',
     tagline: 'Safe, Secure & Well-Managed Accommodation',
+    hideTextOverlay: true,
   },
   {
     id: 2,
-    kicker: 'ACCOMMODATION & SPECIFICATIONS',
-    title: 'Furnished Living Suites',
+    kicker: 'FURNISHED SCHOLAR BEDROOMS',
+    title: 'Spacious Twin Sanctuary',
     titleAccent: 'Tailored For Focus',
     subtitle:
-      'Spacious twin and private rooms featuring solid wooden floor-to-ceiling wardrobes, ergonomic study desks with daylight windows, and attached hygienic baths.',
-    image: '/assets/images/hero_room_clean_hd.jpg',
-    label: 'Furnished Suites',
+      'Bright twin sharing and private bedrooms with solid wooden wardrobes, individual study desks with natural daylight, and spotless attached baths.',
+    image: '/assets/images/hero_slide_room_hd.jpg',
+    label: 'Twin Bedrooms',
     tagline: 'Spacious Rooms · Solid Wooden Wardrobes · Natural Daylight',
   },
   {
     id: 3,
     kicker: 'SECURITY & PEACE OF MIND',
-    title: 'Guarded Campus',
+    title: 'Guarded Residence',
     titleAccent: '& Inspiring Community',
     subtitle:
       'Continuous CCTV surveillance, biometric access gates, dedicated on-premise warden care, and a peaceful study atmosphere for your academic journey.',
     image: '/assets/images/hero_facade_clean_hd.jpg',
-    label: 'Campus Architecture',
+    label: 'Campus Living',
     tagline: '24/7 Guarded Security · Caring Warden · Verified Visitors',
   },
 ];
@@ -185,23 +186,26 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
               src={slide.image}
               alt={slide.title}
               initial={{ scale: 1 }}
-              animate={{ scale: 1.05 }}
-              transition={{ duration: 5.2, ease: 'easeOut' }}
+              animate={{ scale: 1.055 }}
+              transition={{ duration: 5.4, ease: 'easeOut' }}
               className="w-full h-full object-cover object-center select-none"
               style={{
-                filter: 'contrast(1.03) brightness(1.02)',
+                filter: 'contrast(1.04) brightness(1.03) saturate(1.04)',
               }}
               fetchPriority="high"
               loading="eager"
             />
 
             {/* 
-              Soft, elegant, and lighter forest-green ambient gradient:
-              Preserves natural colors, lighting and sharpness without muddy darkness
+              Luminous forest-green lateral ambient gradient:
+              Rendered on slides with text overlay for maximum readability.
+              Omitted on slide 1 so the original flyer artwork and typography are 100% clean and unobstructed.
             */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0C2216]/80 via-[#0C2216]/40 sm:via-[#0C2216]/15 to-transparent pointer-events-none" />
-            <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#08170F]/80 via-[#08170F]/25 to-transparent pointer-events-none" />
-            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/30 to-transparent pointer-events-none" />
+            {!slide.hideTextOverlay && (
+              <div className="absolute inset-0 bg-gradient-to-r from-[#06180E]/85 via-[#06180E]/45 sm:via-[#06180E]/20 to-transparent pointer-events-none" />
+            )}
+            <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#040E08]/85 via-[#040E08]/30 to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/25 to-transparent pointer-events-none" />
           </motion.div>
         </AnimatePresence>
       </div>
@@ -209,86 +213,86 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
       {/* 
         ========================================================================
         FOREGROUND CINEMATIC CONTENT LAYER
-        Staggered typography reveal, clean hierarchy, authentic visitor actions
+        Only rendered on slides with text overlay (slides 0, 2, 3).
+        The second slide (slide 1) has NO extra website-added text overlay!
         ========================================================================
       */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 lg:pt-40 pb-16 my-auto">
-        <div className="max-w-2xl space-y-6 text-left">
-          <AnimatePresence mode="wait">
+      {!slide.hideTextOverlay ? (
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 lg:pt-40 pb-16 my-auto">
+          <div className="max-w-2xl space-y-6 text-left">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={slide.id}
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -16 }}
+                transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-4"
+              >
+                {/* Subtle Gold Kicker */}
+                <div className="flex items-center gap-3">
+                  <span className="w-8 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C]" />
+                  <span className="text-xs sm:text-sm font-semibold tracking-widest text-[#DFB76C] uppercase font-sans drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
+                    {slide.kicker}
+                  </span>
+                </div>
+
+                {/* Dominant Headline with Balance and Contrast */}
+                <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.12] tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
+                  {slide.title}{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#E8C680] italic font-normal">
+                    {slide.titleAccent}
+                  </span>
+                </h1>
+
+                {/* Refined Descriptive Subtitle */}
+                <p className="text-sm sm:text-base lg:text-lg text-slate-100 font-medium leading-relaxed font-sans max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]">
+                  {slide.subtitle}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* 
+              Visitor-Facing Action Buttons:
+              - Primary: Explore Rooms (Navigates to full room details)
+              - Secondary: Enquire for Admission (Opens admissions modal)
+            */}
             <motion.div
-              key={slide.id}
-              initial={{ opacity: 0, y: 22 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-4"
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="flex flex-wrap items-center gap-3.5 pt-2"
             >
-              {/* Subtle Gold Kicker (Unboxed text, no pill clutter) */}
-              <div className="flex items-center gap-3">
-                <span className="w-8 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C]" />
-                <span className="text-xs sm:text-sm font-semibold tracking-widest text-[#DFB76C] uppercase font-sans drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
-                  {slide.kicker}
-                </span>
-              </div>
+              {/* Primary Action */}
+              <button
+                onClick={() => {
+                  if (onExploreRooms) onExploreRooms();
+                  else onOpenEnquiry('Room Enquiry');
+                }}
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_6px_24px_rgba(223,183,108,0.35)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              >
+                <span>Explore Rooms</span>
+                <ArrowRight className="w-4 h-4 text-[#051009]" />
+              </button>
 
-              {/* Dominant Headline with Balance and Contrast */}
-              <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.12] tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
-                {slide.title}{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#E8C680] italic font-normal">
-                  {slide.titleAccent}
-                </span>
-              </h1>
-
-              {/* Refined Descriptive Subtitle */}
-              <p className="text-sm sm:text-base lg:text-lg text-slate-100 font-medium leading-relaxed font-sans max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]">
-                {slide.subtitle}
-              </p>
+              {/* Secondary Action */}
+              <button
+                onClick={() => onOpenEnquiry(slide.label)}
+                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-black/60 hover:bg-[#102A1C] text-white border border-[#DFB76C]/60 hover:border-[#DFB76C] text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              >
+                <span>Enquire for Admission</span>
+              </button>
             </motion.div>
-          </AnimatePresence>
-
-          {/* 
-            Visitor-Facing Action Buttons:
-            - Primary: Explore Rooms
-            - Secondary: Enquire Now
-            - Tertiary: Schedule a Visit
-          */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="flex flex-wrap items-center gap-3.5 pt-2"
-          >
-            {/* Primary Action */}
-            <button
-              onClick={() => {
-                if (onExploreRooms) onExploreRooms();
-                else onOpenEnquiry('Room Enquiry');
-              }}
-              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_6px_24px_rgba(223,183,108,0.35)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
-            >
-              <span>Explore Rooms</span>
-              <ArrowRight className="w-4 h-4 text-[#051009]" />
-            </button>
-
-            {/* Secondary Action */}
-            <button
-              onClick={() => onOpenEnquiry(slide.label)}
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-black/60 hover:bg-black/85 text-white border border-[#DFB76C]/60 text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
-            >
-              <span>Enquire Now</span>
-            </button>
-
-            {/* Tertiary Action: Schedule a Visit */}
-            <button
-              onClick={() => onOpenEnquiry('Campus Tour Booking')}
-              className="inline-flex items-center gap-2 px-4 py-3 text-xs sm:text-sm font-medium text-slate-300 hover:text-[#DFB76C] transition-colors cursor-pointer"
-            >
-              <Calendar className="w-4 h-4 text-[#DFB76C]" />
-              <span>Schedule a Visit</span>
-            </button>
-          </motion.div>
+          </div>
         </div>
-      </div>
+      ) : (
+        /* On slide 1 (original flyer), preserve clean full-width artwork with zero text overlay */
+        <div
+          onClick={() => onOpenEnquiry('Property Showcase')}
+          className="relative z-20 w-full flex-1 cursor-pointer min-h-[50vh]"
+          aria-label="Enquire about ISHANVI Hostel & Accommodation"
+        />
+      )}
 
       {/* 
         ========================================================================

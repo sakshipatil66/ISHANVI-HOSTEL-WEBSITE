@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { GALLERY_PHOTOS } from '../data/hostelData';
 
 interface GallerySectionProps {
@@ -118,9 +118,6 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                     referrerPolicy="no-referrer"
                     loading="lazy"
                   />
-                  <div className="absolute top-3 right-3 p-2 rounded-full bg-black/60 backdrop-blur-md text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Maximize2 className="w-3.5 h-3.5 text-[#DFB76C]" />
-                  </div>
                 </div>
 
                 {/* Clean Descriptive Content Area BELOW the Photo */}
@@ -163,11 +160,6 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                   referrerPolicy="no-referrer"
                   loading="lazy"
                 />
-
-                {/* Subtle zoom button indicator on hover */}
-                <div className="absolute top-2.5 right-2.5 p-2 rounded-full bg-black/60 backdrop-blur-md text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Maximize2 className="w-3.5 h-3.5 text-[#DFB76C]" />
-                </div>
               </motion.div>
             ))}
           </div>
