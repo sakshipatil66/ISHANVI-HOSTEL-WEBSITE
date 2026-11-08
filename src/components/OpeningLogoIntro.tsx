@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { HOSTEL_INFO } from '../data/hostelData';
-import { Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Sparkles, ArrowRight } from 'lucide-react';
 
 interface OpeningLogoIntroProps {
   onComplete: () => void;
 }
 
 export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }) => {
-  // Phase: 'intro' (logo & tagline presentation) -> 'revealing' (expanding circular mask opening)
+  // Phase: 'intro' (logo & tagline presentation) -> 'revealing' (dramatic expanding circular mask)
   const [phase, setPhase] = useState<'intro' | 'revealing'>('intro');
   const [progress, setProgress] = useState<number>(0);
 
@@ -18,12 +18,12 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
     // Allow dramatic circular mask to expand fully across viewport before unmounting
     setTimeout(() => {
       onComplete();
-    }, 950);
+    }, 1000);
   }, [phase, onComplete]);
 
   useEffect(() => {
-    // 2.4 seconds presentation with smooth progress bar
-    const duration = 2400;
+    // 2.5 seconds presentation with smooth progress bar
+    const duration = 2500;
     const interval = 20;
     const step = (interval / duration) * 100;
 
@@ -59,22 +59,28 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
     <div
       className="fixed inset-0 z-[100] overflow-hidden select-none"
       onClick={triggerReveal}
+      role="banner"
       aria-label="ISHANVI Opening Intro with Expanding Circular Reveal"
     >
-      {/* SVG Definitions for the Iris Hole Mask */}
+      {/* 
+        ========================================================================
+        SVG DEFINITION FOR THE DRAMATIC CIRCULAR MASK (IRIS HOLE)
+        White rectangle = opaque overlay
+        Black expanding circle = cuts a transparent hole in the center,
+        dramatically revealing the full-width website underneath!
+        ========================================================================
+      */}
       <svg className="absolute w-0 h-0 pointer-events-none" aria-hidden="true">
         <defs>
-          <mask id="ishanvi-iris-mask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
-            {/* White base = fully visible */}
+          <mask id="ishanvi-circular-iris-mask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
             <rect x="0" y="0" width="1" height="1" fill="white" />
-            {/* Black expanding circle = cuts a transparent hole in center revealing website */}
             <circle
               cx="0.5"
               cy="0.5"
-              r={isRevealing ? 0.95 : 0}
+              r={isRevealing ? 0.98 : 0}
               fill="black"
               style={{
-                transition: isRevealing ? 'r 0.9s cubic-bezier(0.77, 0, 0.175, 1)' : 'none',
+                transition: isRevealing ? 'r 0.95s cubic-bezier(0.77, 0, 0.175, 1)' : 'none',
               }}
             />
           </mask>
@@ -82,48 +88,48 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
       </svg>
 
       {/* 
-        ====================================================================
-        DARK OVERLAY WITH EXPANDING CIRCULAR IRIS MASK
-        Reveals the website underneath as the circle expands from center
-        ====================================================================
+        ========================================================================
+        DARK CINEMATIC OVERLAY WITH CIRCULAR HOLE MASK
+        ========================================================================
       */}
       <div
-        className="absolute inset-0 bg-[#07130D] transition-opacity duration-300"
+        className="absolute inset-0 bg-[#05110A] transition-opacity duration-300"
         style={{
-          mask: 'url(#ishanvi-iris-mask)',
-          WebkitMask: 'url(#ishanvi-iris-mask)',
+          mask: 'url(#ishanvi-circular-iris-mask)',
+          WebkitMask: 'url(#ishanvi-circular-iris-mask)',
+          opacity: isRevealing ? 0.96 : 1,
         }}
       >
-        {/* Luxury Background Layers */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#06110B] via-[#0D2418] to-[#06110B]" />
-        
+        {/* Luxury Background Gradient Layers */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#040C07] via-[#091F13] to-[#040C07]" />
+
         {/* Ambient Golden Radial Glows */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(223,183,108,0.25)_0%,rgba(197,160,89,0.08)_45%,transparent_70%)] blur-3xl pointer-events-none animate-aura-slow" />
-        <div className="absolute top-0 right-0 w-[450px] h-[450px] rounded-full bg-[radial-gradient(circle,rgba(27,59,43,0.4)_0%,transparent_70%)] blur-2xl pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] rounded-full bg-[radial-gradient(circle,rgba(223,183,108,0.22)_0%,rgba(197,160,89,0.06)_45%,transparent_70%)] blur-3xl pointer-events-none animate-aura-slow" />
+        <div className="absolute top-0 right-0 w-[480px] h-[480px] rounded-full bg-[radial-gradient(circle,rgba(27,59,43,0.35)_0%,transparent_70%)] blur-2xl pointer-events-none" />
 
         {/* Delicate Golden Grid Watermark Lines */}
-        <div className="absolute inset-0 bg-[radial-gradient(#DFB76C_1px,transparent_1px)] [background-size:36px_36px] opacity-[0.07] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(#DFB76C_1px,transparent_1px)] [background-size:40px_40px] opacity-[0.06] pointer-events-none" />
 
         {/* Floating Subtle Gold Stardust Particles */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {[...Array(20)].map((_, i) => (
+          {[...Array(24)].map((_, i) => (
             <motion.span
               key={i}
               initial={{
-                x: `${(i * 17 + 5) % 100}vw`,
-                y: `${((i * 29) % 80) + 10}vh`,
+                x: `${(i * 19 + 7) % 100}vw`,
+                y: `${((i * 31) % 80) + 10}vh`,
                 opacity: 0,
                 scale: 0.4,
               }}
               animate={{
-                y: [null, `${((i * 29) % 80) - 20}vh`],
-                opacity: [0, 0.8, 0],
-                scale: [0.4, 1.2, 0.4],
+                y: [null, `${((i * 31) % 80) - 24}vh`],
+                opacity: [0, 0.85, 0],
+                scale: [0.4, 1.25, 0.4],
               }}
               transition={{
                 duration: 2.8 + (i % 4) * 0.4,
                 repeat: Infinity,
-                delay: (i * 0.12) % 1.5,
+                delay: (i * 0.1) % 1.6,
                 ease: 'easeInOut',
               }}
               className="absolute w-1.5 h-1.5 rounded-full bg-[#DFB76C] shadow-[0_0_10px_#DFB76C]"
@@ -132,31 +138,32 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
         </div>
 
         {/* 
-          ====================================================================
+          ========================================================================
           CENTER LOGO PRESENTATION
           Cinematic reveal, subtle glow, and scale animation
-          ====================================================================
+          ========================================================================
         */}
         <div className="absolute inset-0 flex flex-col items-center justify-center px-4 pointer-events-none">
           <motion.div
-            initial={{ opacity: 0, scale: 0.88, y: 15 }}
+            initial={{ opacity: 0, scale: 0.88, y: 16, filter: 'blur(8px)' }}
             animate={{
               opacity: isRevealing ? 0 : 1,
               scale: isRevealing ? 1.08 : 1,
-              y: isRevealing ? -10 : 0,
+              y: isRevealing ? -12 : 0,
+              filter: isRevealing ? 'blur(6px)' : 'blur(0px)',
             }}
             transition={{
-              duration: isRevealing ? 0.4 : 0.75,
+              duration: isRevealing ? 0.45 : 0.8,
               ease: [0.16, 1, 0.3, 1],
             }}
             className="relative z-50 max-w-xl w-full flex flex-col items-center text-center"
           >
-            {/* Top Luxury Pill */}
+            {/* Top Luxury Kicker */}
             <motion.div
-              initial={{ opacity: 0, y: -16, filter: 'blur(6px)' }}
+              initial={{ opacity: 0, y: -14, filter: 'blur(6px)' }}
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#DFB76C]/10 border border-[#DFB76C]/45 text-[11px] sm:text-xs font-bold text-[#DFB76C] uppercase tracking-[0.24em] mb-5 shadow-lg backdrop-blur-md"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#DFB76C]/10 border border-[#DFB76C]/40 text-[11px] sm:text-xs font-bold text-[#DFB76C] uppercase tracking-[0.22em] mb-5 shadow-lg backdrop-blur-md"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#DFB76C] animate-pulse" />
               <span>Welcome to ISHANVI Residence</span>
@@ -165,10 +172,10 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
             {/* Official ISHANVI Logo with Elegant Reveal, Subtle Glow, and Scale Animation */}
             <div className="relative group">
               {/* Outer Golden Halo Glow */}
-              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-[#DFB76C]/40 via-[#F3E3B8]/20 to-[#DFB76C]/40 blur-xl opacity-70 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-[#DFB76C]/40 via-[#F3E3B8]/25 to-[#DFB76C]/40 blur-xl opacity-75 transition-opacity pointer-events-none" />
 
               {/* Logo Presentation Frame */}
-              <div className="relative p-4 sm:p-7 rounded-3xl bg-white/95 backdrop-blur-xl shadow-[0_25px_60px_rgba(0,0,0,0.6),0_0_50px_rgba(223,183,108,0.35)] border-2 border-[#DFB76C]/70 w-full max-w-md sm:max-w-lg flex items-center justify-center overflow-hidden">
+              <div className="relative p-4 sm:p-7 rounded-3xl bg-white/95 backdrop-blur-xl shadow-[0_25px_60px_rgba(0,0,0,0.65),0_0_50px_rgba(223,183,108,0.35)] border-2 border-[#DFB76C]/70 w-full max-w-md sm:max-w-lg flex items-center justify-center overflow-hidden">
                 {/* Authentic ISHANVI Logo */}
                 <img
                   src={HOSTEL_INFO.logoUrl}
@@ -181,7 +188,7 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
                 {/* Shimmer Light Reflection Sweep Across Logo */}
                 <motion.div
                   initial={{ x: '-150%', opacity: 0 }}
-                  animate={{ x: '250%', opacity: [0, 0.85, 0] }}
+                  animate={{ x: '250%', opacity: [0, 0.9, 0] }}
                   transition={{ duration: 1.4, delay: 0.35, ease: 'easeInOut' }}
                   className="absolute inset-y-0 w-44 bg-gradient-to-r from-transparent via-white/90 to-transparent skew-x-[-22deg] pointer-events-none"
                 />
@@ -218,13 +225,14 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
           </motion.div>
         </div>
 
-        {/* Top Right "Skip Intro" Button */}
+        {/* Top Right "Enter Website" Button */}
         <button
           onClick={(e) => {
             e.stopPropagation();
             triggerReveal();
           }}
-          className="absolute top-5 right-5 z-50 px-3.5 py-1.5 rounded-full bg-black/60 hover:bg-[#102A1C] border border-[#DFB76C]/40 hover:border-[#DFB76C] text-[#DFB76C] text-xs font-semibold backdrop-blur-md transition-all cursor-pointer flex items-center gap-1.5 shadow-lg hover:scale-105 active:scale-95"
+          className="absolute top-5 right-5 z-50 px-4 py-2 rounded-full bg-black/60 hover:bg-[#102A1C] border border-[#DFB76C]/40 hover:border-[#DFB76C] text-[#DFB76C] text-xs font-semibold backdrop-blur-md transition-all cursor-pointer flex items-center gap-1.5 shadow-lg hover:scale-105 active:scale-95"
+          aria-label="Skip intro and enter website"
         >
           <span>Enter Website</span>
           <ArrowRight className="w-3.5 h-3.5" />
@@ -240,20 +248,19 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
       </div>
 
       {/* 
-        ====================================================================
+        ========================================================================
         DRAMATIC EXPANDING CIRCULAR APERTURE RING (IRIS OPENING)
         Golden glowing ring that explodes outward from center as the hole opens
-        ====================================================================
+        ========================================================================
       */}
       {isRevealing && (
         <motion.div
           initial={{ scale: 0, opacity: 1 }}
-          animate={{ scale: 6.2, opacity: [1, 0.9, 0] }}
-          transition={{ duration: 0.9, ease: [0.77, 0, 0.175, 1] }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[35vw] h-[35vw] rounded-full border-4 border-[#DFB76C] shadow-[0_0_60px_#DFB76C,inset_0_0_40px_#DFB76C] pointer-events-none z-[105]"
+          animate={{ scale: 6.5, opacity: [1, 0.95, 0] }}
+          transition={{ duration: 0.95, ease: [0.77, 0, 0.175, 1] }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[36vw] h-[36vw] rounded-full border-4 border-[#DFB76C] shadow-[0_0_70px_#DFB76C,inset_0_0_45px_#DFB76C] pointer-events-none z-[105]"
         />
       )}
     </div>
   );
 };
-

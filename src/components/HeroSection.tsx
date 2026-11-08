@@ -1,19 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
-  MessageSquare,
   ChevronLeft,
   ChevronRight,
-  Phone,
+  ArrowRight,
+  Play,
+  Pause,
   Bed,
-  Calendar,
-  Maximize2,
   Wifi,
   Utensils,
   ShieldCheck,
   MapPin,
-  Sparkles,
-  ArrowRight,
+  Calendar,
 } from 'lucide-react';
 import { HOSTEL_INFO } from '../data/hostelData';
 
@@ -22,24 +20,81 @@ interface HeroSectionProps {
   onExploreRooms?: () => void;
 }
 
+interface HeroSlide {
+  id: number;
+  kicker: string;
+  title: string;
+  titleAccent: string;
+  subtitle: string;
+  image: string;
+  label: string;
+  tagline: string;
+}
+
+const HERO_SLIDES: HeroSlide[] = [
+  {
+    id: 0,
+    kicker: 'SAFE STAY · BETTER LIVING · BRIGHTER TOMORROW',
+    title: 'A Comfortable Stay',
+    titleAccent: 'For A Brighter Tomorrow',
+    subtitle:
+      'Safe, secure, and thoughtfully managed accommodation for students & working professionals. Prime location near ISMS Sankalp Business School, Ambegaon Bk, Pune.',
+    image: '/assets/images/hero_student_clean_hd.jpg',
+    label: 'Student Living',
+    tagline: 'Comfortable Living · Safe Environment · Brighter Future',
+  },
+  {
+    id: 1,
+    kicker: 'OFFICIAL PROPERTY SHOWCASE',
+    title: 'Modern Living',
+    titleAccent: 'Steps From ISMS Sankalp',
+    subtitle:
+      'Furnished rooms with orthopaedic bedding, dedicated study workstations, high-speed Wi-Fi, 4 wholesome meals daily, and 24/7 guarded security.',
+    image: '/assets/images/hero_slide_flyer.jpg',
+    label: 'Property Showcase',
+    tagline: 'Safe, Secure & Well-Managed Accommodation',
+  },
+  {
+    id: 2,
+    kicker: 'ACCOMMODATION & SPECIFICATIONS',
+    title: 'Furnished Living Suites',
+    titleAccent: 'Tailored For Focus',
+    subtitle:
+      'Spacious twin and private rooms featuring solid wooden floor-to-ceiling wardrobes, ergonomic study desks with daylight windows, and attached hygienic baths.',
+    image: '/assets/images/hero_room_clean_hd.jpg',
+    label: 'Furnished Suites',
+    tagline: 'Spacious Rooms · Solid Wooden Wardrobes · Natural Daylight',
+  },
+  {
+    id: 3,
+    kicker: 'SECURITY & PEACE OF MIND',
+    title: 'Guarded Campus',
+    titleAccent: '& Inspiring Community',
+    subtitle:
+      'Continuous CCTV surveillance, biometric access gates, dedicated on-premise warden care, and a peaceful study atmosphere for your academic journey.',
+    image: '/assets/images/hero_facade_clean_hd.jpg',
+    label: 'Campus Architecture',
+    tagline: '24/7 Guarded Security · Caring Warden · Verified Visitors',
+  },
+];
+
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExploreRooms }) => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [direction, setDirection] = useState<number>(1);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
-  const [isFlyerModalOpen, setIsFlyerModalOpen] = useState<boolean>(false);
 
-  const SLIDE_DURATION = 5000; // Continuous 5-second auto-slide
+  const SLIDE_DURATION = 5000; // Continuous 5-second interval
 
   const nextSlide = useCallback(() => {
     setDirection(1);
-    setCurrentSlide((prev) => (prev + 1) % 3);
+    setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
     setProgress(0);
   }, []);
 
   const prevSlide = useCallback(() => {
     setDirection(-1);
-    setCurrentSlide((prev) => (prev - 1 + 3) % 3);
+    setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
     setProgress(0);
   }, []);
 
@@ -49,11 +104,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
     setProgress(0);
   };
 
-  // Continuous 5-second auto-sliding timer with hover pause
+  // Continuous 5-second auto-slider interval
   useEffect(() => {
     if (isPaused) return;
 
-    const intervalStep = 50;
+    const intervalStep = 25; // 40fps progress increment
     const stepIncrement = (intervalStep / SLIDE_DURATION) * 100;
 
     const timer = setInterval(() => {
@@ -69,286 +124,256 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
     return () => clearInterval(timer);
   }, [nextSlide, isPaused]);
 
-  // Keyboard navigation for carousel
+  // Keyboard arrow navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight') {
-        nextSlide();
-      } else if (e.key === 'ArrowLeft') {
-        prevSlide();
-      }
+      if (e.key === 'ArrowRight') nextSlide();
+      else if (e.key === 'ArrowLeft') prevSlide();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [nextSlide, prevSlide]);
 
+  const slide = HERO_SLIDES[currentSlide];
+
   return (
     <section
-      className="relative w-full min-h-[78vh] sm:min-h-[82vh] lg:min-h-[88vh] flex flex-col justify-between bg-[#06120B] text-white overflow-hidden select-none"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      aria-label="ISHANVI Full-Width Hero Slider"
+      className="relative w-full min-h-[86vh] sm:min-h-[90vh] lg:min-h-[94vh] flex flex-col justify-between bg-[#0B1E13] text-white overflow-hidden select-none"
+      aria-label="ISHANVI Luxury Full Width Hero Slider"
+      style={{ perspective: 1400 }}
     >
       {/* 
         ========================================================================
-        FULL-WIDTH EDGE-TO-EDGE CINEMATIC CAROUSEL
-        Slide 0: The Original 1st Image (WhatsApp Banner) - 100% Full Width Edge-to-Edge
-        Slide 1: Executive Lobby & Reception Lounge (High-Res Photo) - 100% Full Width
-        Slide 2: Deluxe Furnished Living & Study Sanctuary (High-Res Photo) - 100% Full Width
+        100% EDGE-TO-EDGE FULL-WIDTH HERO SLIDER WITH 3D CINEMATIC TRANSITIONS
+        Zero boxed margins, zero side gaps, zero empty borders.
         ========================================================================
       */}
-      <div className="relative w-full flex-1 flex flex-col justify-center overflow-hidden">
-        <AnimatePresence initial={false} mode="wait">
-          {currentSlide === 0 && (
-            /* ================================================================
-               SLIDE 0: ORIGINAL 1ST IMAGE (OFFICIAL BANNER) - 100% FULL WIDTH
-               Spanning edge-to-edge across the entire screen width with zero boxed margins!
-               ================================================================ */
-            <motion.div
-              key="hero-slide-0-original-banner"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.7, ease: 'easeInOut' }}
-              className="relative w-full h-[65vh] sm:h-[75vh] lg:h-[84vh] flex items-center justify-center overflow-hidden bg-gradient-to-r from-[#07130D] via-[#FAF8F5] to-[#07130D] cursor-pointer"
-              onClick={() => setIsFlyerModalOpen(true)}
-              title="Click to Zoom Full Official Brochure"
-            >
-              {/* Full-Width Edge-to-Edge Original Banner Image */}
-              <motion.img
-                src="/assets/images/hero_slide_flyer.jpg"
-                alt="ISHANVI Hostel & Accommodation Official Banner"
-                initial={{ scale: 1 }}
-                animate={{ scale: 1.03 }}
-                transition={{ duration: 5.2, ease: 'easeOut' }}
-                className="w-full h-full object-cover sm:object-contain object-center"
-                fetchPriority="high"
-                loading="eager"
-              />
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
+        <AnimatePresence initial={false} mode="popLayout" custom={direction}>
+          <motion.div
+            key={slide.id}
+            custom={direction}
+            initial={{
+              opacity: 0,
+              scale: 1.08,
+              rotateY: direction > 0 ? 3 : -3,
+              z: -70,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              rotateY: 0,
+              z: 0,
+            }}
+            exit={{
+              opacity: 0,
+              scale: 0.96,
+              rotateY: direction > 0 ? -3 : 3,
+              z: -80,
+            }}
+            transition={{
+              duration: 1.1,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="absolute inset-0 w-full h-full origin-center"
+            style={{ transformStyle: 'preserve-3d' }}
+          >
+            {/* Full-bleed background photography with continuous slow Ken Burns zoom */}
+            <motion.img
+              src={slide.image}
+              alt={slide.title}
+              initial={{ scale: 1 }}
+              animate={{ scale: 1.05 }}
+              transition={{ duration: 5.2, ease: 'easeOut' }}
+              className="w-full h-full object-cover object-center select-none"
+              style={{
+                filter: 'contrast(1.03) brightness(1.02)',
+              }}
+              fetchPriority="high"
+              loading="eager"
+            />
 
-              {/* Top-Right Click to Zoom Pill */}
-              <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 px-3.5 py-1.5 rounded-full bg-black/80 hover:bg-black/95 backdrop-blur-md text-[#DFB76C] text-xs font-bold border border-[#DFB76C]/60 flex items-center gap-2 shadow-2xl transition-transform hover:scale-105 pointer-events-auto">
-                <Maximize2 className="w-3.5 h-3.5 text-[#DFB76C]" />
-                <span>Click to Zoom</span>
-              </div>
-            </motion.div>
-          )}
-
-          {currentSlide === 1 && (
-            /* ================================================================
-               SLIDE 1: EXECUTIVE LOBBY & RECEPTION LOUNGE - 100% FULL WIDTH
-               ================================================================ */
-            <motion.div
-              key="hero-slide-1-lobby"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.7, ease: 'easeInOut' }}
-              className="relative w-full h-[65vh] sm:h-[75vh] lg:h-[84vh] flex items-end justify-start overflow-hidden"
-            >
-              <motion.img
-                src="/assets/images/hero_slide_resident_hd.jpg"
-                alt="ISHANVI Hostel Executive Lobby and Reception"
-                initial={{ scale: 1 }}
-                animate={{ scale: 1.05 }}
-                transition={{ duration: 5.2, ease: 'easeOut' }}
-                className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.88] contrast-[1.03]"
-                fetchPriority="high"
-                loading="eager"
-              />
-
-              <div className="absolute inset-0 bg-gradient-to-t from-[#07130D] via-[#07130D]/45 to-transparent pointer-events-none" />
-
-              <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 space-y-3">
-                <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold tracking-[0.16em] uppercase text-[#DFB76C]">
-                  <span className="w-6 h-[1.5px] bg-[#DFB76C]" />
-                  <span>RECEPTION &amp; RESIDENT LOUNGE</span>
-                </div>
-
-                <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight text-on-photo">
-                  Safe, Secure &amp; Homely Atmosphere <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFB76C] via-[#F6E6C2] to-[#DFB76C] italic font-normal">
-                    for Focused Scholars
-                  </span>
-                </h2>
-
-                <p className="text-xs sm:text-sm md:text-base text-gray-200 max-w-2xl font-sans text-on-photo">
-                  24/7 in-house warden, biometric security gates, CCTV surveillance, optical fiber Wi-Fi, and tranquil study ambience in Ambegaon Bk, Pune.
-                </p>
-
-                <div className="pt-2 flex flex-wrap items-center gap-3">
-                  <button
-                    onClick={() => onOpenEnquiry('Lobby Tour Booking')}
-                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-[#DFB76C] to-[#E8C680] text-[#102A1C] text-xs sm:text-sm font-bold shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer"
-                  >
-                    <Calendar className="w-4 h-4 text-[#102A1C]" />
-                    <span>Schedule Campus Tour</span>
-                  </button>
-
-                  <a
-                    href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/60 hover:bg-black/80 text-white border border-[#DFB76C]/60 text-xs sm:text-sm font-semibold backdrop-blur-md transition-all"
-                  >
-                    <Phone className="w-4 h-4 text-[#DFB76C]" />
-                    <span>Call: {HOSTEL_INFO.phonePrimary}</span>
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {currentSlide === 2 && (
-            /* ================================================================
-               SLIDE 2: DELUXE FURNISHED LIVING & STUDY SANCTUARY - 100% FULL WIDTH
-               ================================================================ */
-            <motion.div
-              key="hero-slide-2-room"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.7, ease: 'easeInOut' }}
-              className="relative w-full h-[65vh] sm:h-[75vh] lg:h-[84vh] flex items-end justify-start overflow-hidden"
-            >
-              <motion.img
-                src="/assets/images/hero_slide_room_hd.jpg"
-                alt="ISHANVI Furnished Study Room"
-                initial={{ scale: 1 }}
-                animate={{ scale: 1.05 }}
-                transition={{ duration: 5.2, ease: 'easeOut' }}
-                className="absolute inset-0 w-full h-full object-cover object-center filter brightness-[0.88] contrast-[1.03]"
-                fetchPriority="high"
-                loading="eager"
-              />
-
-              <div className="absolute inset-0 bg-gradient-to-t from-[#07130D] via-[#07130D]/45 to-transparent pointer-events-none" />
-
-              <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 space-y-3">
-                <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold tracking-[0.16em] uppercase text-[#DFB76C]">
-                  <span className="w-6 h-[1.5px] bg-[#DFB76C]" />
-                  <span>ACCOMMODATION &amp; SPECIFICATIONS</span>
-                </div>
-
-                <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight text-on-photo">
-                  Spacious Furnished Rooms <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFB76C] via-[#F6E6C2] to-[#DFB76C] italic font-normal">
-                    with Dedicated Study Desks
-                  </span>
-                </h2>
-
-                <p className="text-xs sm:text-sm md:text-base text-gray-200 max-w-2xl font-sans text-on-photo">
-                  Single and sharing configurations equipped with orthopaedic beds, solid wooden wardrobes, ergonomic study chairs, attached sanitized washrooms, and 4 hot hygienic meals.
-                </p>
-
-                <div className="pt-2 flex flex-wrap items-center gap-3">
-                  <button
-                    onClick={() => {
-                      if (onExploreRooms) onExploreRooms();
-                      else onOpenEnquiry('Room Plans');
-                    }}
-                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-gradient-to-r from-[#DFB76C] to-[#E8C680] text-[#102A1C] text-xs sm:text-sm font-bold shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer"
-                  >
-                    <Bed className="w-4 h-4 text-[#102A1C]" />
-                    <span>Explore Room Tariffs</span>
-                  </button>
-
-                  <button
-                    onClick={() => onOpenEnquiry('Room Availability')}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/60 hover:bg-black/80 text-white border border-[#DFB76C]/60 text-xs sm:text-sm font-semibold backdrop-blur-md transition-all cursor-pointer"
-                  >
-                    <MessageSquare className="w-4 h-4 text-[#DFB76C]" />
-                    <span>Check Availability</span>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          )}
+            {/* 
+              Soft, elegant, and lighter forest-green ambient gradient:
+              Preserves natural colors, lighting and sharpness without muddy darkness
+            */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0C2216]/80 via-[#0C2216]/40 sm:via-[#0C2216]/15 to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#08170F]/80 via-[#08170F]/25 to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/30 to-transparent pointer-events-none" />
+          </motion.div>
         </AnimatePresence>
-
-        {/* 
-          ========================================================================
-          EDGE MANUAL CHEVRONS (PREV & NEXT)
-          ========================================================================
-        */}
-        <button
-          onClick={prevSlide}
-          aria-label="Previous Slide"
-          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-[#102A1C] text-white hover:text-[#DFB76C] border border-white/20 hover:border-[#DFB76C] flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-2xl hover:scale-110 active:scale-95 group"
-        >
-          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:-translate-x-0.5" />
-        </button>
-
-        <button
-          onClick={nextSlide}
-          aria-label="Next Slide"
-          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-[#102A1C] text-white hover:text-[#DFB76C] border border-white/20 hover:border-[#DFB76C] flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-2xl hover:scale-110 active:scale-95 group"
-        >
-          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:translate-x-0.5" />
-        </button>
       </div>
 
       {/* 
         ========================================================================
-        BOTTOM SLIDE CONTROLS & 5-SECOND PROGRESS BAR
+        FOREGROUND CINEMATIC CONTENT LAYER
+        Staggered typography reveal, clean hierarchy, authentic visitor actions
         ========================================================================
       */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-3 pt-2">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-black/60 backdrop-blur-md p-2.5 sm:px-4 rounded-2xl border border-white/10 shadow-lg">
-          {/* Slide Selector Indicators with Titles */}
-          <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto max-w-full pb-0.5 sm:pb-0 scrollbar-none">
-            {[
-              { id: 0, title: 'Official Banner' },
-              { id: 1, title: 'Executive Lobby' },
-              { id: 2, title: 'Furnished Rooms' },
-            ].map((slide) => {
-              const isActive = currentSlide === slide.id;
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 lg:pt-40 pb-16 my-auto">
+        <div className="max-w-2xl space-y-6 text-left">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={slide.id}
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-4"
+            >
+              {/* Subtle Gold Kicker (Unboxed text, no pill clutter) */}
+              <div className="flex items-center gap-3">
+                <span className="w-8 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C]" />
+                <span className="text-xs sm:text-sm font-semibold tracking-widest text-[#DFB76C] uppercase font-sans drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
+                  {slide.kicker}
+                </span>
+              </div>
+
+              {/* Dominant Headline with Balance and Contrast */}
+              <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.12] tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
+                {slide.title}{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#E8C680] italic font-normal">
+                  {slide.titleAccent}
+                </span>
+              </h1>
+
+              {/* Refined Descriptive Subtitle */}
+              <p className="text-sm sm:text-base lg:text-lg text-slate-100 font-medium leading-relaxed font-sans max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]">
+                {slide.subtitle}
+              </p>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* 
+            Visitor-Facing Action Buttons:
+            - Primary: Explore Rooms
+            - Secondary: Enquire Now
+            - Tertiary: Schedule a Visit
+          */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="flex flex-wrap items-center gap-3.5 pt-2"
+          >
+            {/* Primary Action */}
+            <button
+              onClick={() => {
+                if (onExploreRooms) onExploreRooms();
+                else onOpenEnquiry('Room Enquiry');
+              }}
+              className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_6px_24px_rgba(223,183,108,0.35)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            >
+              <span>Explore Rooms</span>
+              <ArrowRight className="w-4 h-4 text-[#051009]" />
+            </button>
+
+            {/* Secondary Action */}
+            <button
+              onClick={() => onOpenEnquiry(slide.label)}
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-black/60 hover:bg-black/85 text-white border border-[#DFB76C]/60 text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            >
+              <span>Enquire Now</span>
+            </button>
+
+            {/* Tertiary Action: Schedule a Visit */}
+            <button
+              onClick={() => onOpenEnquiry('Campus Tour Booking')}
+              className="inline-flex items-center gap-2 px-4 py-3 text-xs sm:text-sm font-medium text-slate-300 hover:text-[#DFB76C] transition-colors cursor-pointer"
+            >
+              <Calendar className="w-4 h-4 text-[#DFB76C]" />
+              <span>Schedule a Visit</span>
+            </button>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* 
+        ========================================================================
+        EDGE CHEVRON NAVIGATION (LEFT & RIGHT)
+        ========================================================================
+      */}
+      <button
+        onClick={prevSlide}
+        aria-label="Previous Slide"
+        className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#0B1E13]/60 hover:bg-[#102A1C] text-white hover:text-[#DFB76C] border border-white/20 hover:border-[#DFB76C]/80 flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-2xl hover:scale-110 active:scale-95 group"
+      >
+        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:-translate-x-0.5" />
+      </button>
+
+      <button
+        onClick={nextSlide}
+        aria-label="Next Slide"
+        className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#0B1E13]/60 hover:bg-[#102A1C] text-white hover:text-[#DFB76C] border border-white/20 hover:border-[#DFB76C]/80 flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-2xl hover:scale-110 active:scale-95 group"
+      >
+        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:translate-x-0.5" />
+      </button>
+
+      {/* 
+        ========================================================================
+        BOTTOM CINEMATIC CONTROLS: CHAPTER MARKERS & 5-SECOND PROGRESS BAR
+        ========================================================================
+      */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#0B1E13]/65 backdrop-blur-md p-3 sm:px-5 py-2.5 rounded-2xl border border-white/10 shadow-xl">
+          {/* Minimalist Chapter Navigation Tabs */}
+          <div className="flex items-center gap-1 sm:gap-3 overflow-x-auto max-w-full pb-0.5 sm:pb-0 scrollbar-none">
+            {HERO_SLIDES.map((s) => {
+              const isActive = currentSlide === s.id;
               return (
                 <button
-                  key={slide.id}
-                  onClick={() => setSlide(slide.id)}
-                  className={`group flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                  key={s.id}
+                  onClick={() => setSlide(s.id)}
+                  className={`group flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${
                     isActive
-                      ? 'bg-[#DFB76C] text-[#0A1C12] shadow-lg shadow-[#DFB76C]/30 scale-105'
-                      : 'bg-black/40 hover:bg-black/60 text-white/70 hover:text-white border border-white/10'
+                      ? 'text-[#DFB76C] font-semibold bg-white/10'
+                      : 'text-slate-400 hover:text-white hover:bg-white/5'
                   }`}
-                  aria-label={`Go to slide ${slide.id + 1}: ${slide.title}`}
+                  aria-label={`Jump to slide ${s.id + 1}: ${s.label}`}
                 >
-                  <span className={`text-[10px] font-mono font-bold ${isActive ? 'text-[#0A1C12]' : 'text-[#DFB76C]'}`}>
-                    0{slide.id + 1}
+                  <span className={`text-[10px] font-mono font-bold ${isActive ? 'text-[#DFB76C]' : 'text-slate-500'}`}>
+                    0{s.id + 1}
                   </span>
-                  <span>{slide.title}</span>
+                  <span>{s.label}</span>
                 </button>
               );
             })}
           </div>
 
           {/* Continuous 5-Second Linear Progress Bar & Timer */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 self-end sm:self-auto shrink-0">
+            <button
+              onClick={() => setIsPaused(!isPaused)}
+              className="p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-[#DFB76C] transition-colors cursor-pointer"
+              title={isPaused ? 'Resume continuous 5s slider' : 'Pause slider'}
+              aria-label={isPaused ? 'Resume auto-slider' : 'Pause auto-slider'}
+            >
+              {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
+            </button>
+
             <span className="text-[11px] text-[#DFB76C] font-mono font-bold tracking-wider">
-              0{currentSlide + 1} / 03
+              0{currentSlide + 1} / 0{HERO_SLIDES.length}
             </span>
-            <div className="w-24 sm:w-32 h-1.5 bg-white/20 rounded-full overflow-hidden shadow-inner">
-              <motion.div
-                className="h-full bg-gradient-to-r from-[#DFB76C] to-[#FFF3D6] shadow-[0_0_8px_#DFB76C]"
+
+            <div className="w-20 sm:w-28 h-1 bg-white/20 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#DFB76C] shadow-[0_0_8px_#DFB76C] transition-all duration-75"
                 style={{ width: `${progress}%` }}
-                transition={{ ease: 'linear' }}
               />
             </div>
-            <span className="text-[10px] text-white/60 font-sans">
-              {isPaused ? 'Paused' : 'Auto 5s'}
-            </span>
           </div>
         </div>
       </div>
 
       {/* 
         ========================================================================
-        DOCKED LUXURY QUICK AMENITIES RIBBON (SEAMLESS EDGE-TO-EDGE)
-        Comfortable Rooms | High-Speed Wi-Fi | Hygienic Meals | 24/7 Security |
-        100m to ISMS Sankalp | Schedule Campus Tour
+        AMENITIES RIBBON (SEAMLESS EDGE-TO-EDGE FOUNDATION)
         ========================================================================
       */}
-      <div className="relative z-20 w-full bg-[#FAF8F5]/95 backdrop-blur-md border-t border-[#DFB76C]/40 text-[#102A1C] py-2.5 px-4 shadow-xl">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 sm:gap-4">
+      <div className="relative z-20 w-full bg-[#FAF8F5]/95 backdrop-blur-md border-t border-[#DFB76C]/30 text-[#102A1C] py-2.5 px-4 shadow-xl">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
           <div className="flex-1 flex flex-wrap items-center justify-around sm:justify-start gap-2 sm:gap-6 text-xs sm:text-sm font-semibold text-[#102A1C]">
             <button
               onClick={() => onOpenEnquiry('Comfortable Rooms')}
@@ -382,7 +407,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
               className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5"
             >
               <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>24/7 Guarded Security</span>
+              <span>24/7 Security</span>
             </button>
             <span className="text-gray-300 hidden md:inline">•</span>
 
@@ -391,70 +416,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
               className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5 hidden md:flex"
             >
               <MapPin className="w-3.5 h-3.5 text-[#C5A059]" />
-              <span>100m to ISMS Sankalp</span>
+              <span>Near ISMS Sankalp</span>
             </button>
           </div>
 
-          {/* Book Tour Action Button */}
-          <button
-            onClick={() => onOpenEnquiry('Campus Tour Booking')}
-            className="w-full sm:w-auto px-5 py-2 rounded-full bg-[#102A1C] hover:bg-[#1B3B2B] text-white text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer border border-[#DFB76C]/40 hover:scale-105 active:scale-95"
+          {/* Quick Direct Phone Call Link */}
+          <a
+            href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
+            className="text-xs font-bold text-[#102A1C] hover:text-[#8C6D2D] transition-colors flex items-center gap-1.5"
           >
-            <Calendar className="w-3.5 h-3.5 text-[#DFB76C]" />
-            <span>Schedule Campus Tour</span>
-          </button>
+            <span>Call Admissions:</span>
+            <span className="font-mono text-[#8C6D2D]">{HOSTEL_INFO.phonePrimary}</span>
+          </a>
         </div>
       </div>
-
-      {/* FULL FLYER ZOOM MODAL */}
-      {isFlyerModalOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 animate-in fade-in duration-200"
-          onClick={() => setIsFlyerModalOpen(false)}
-        >
-          <div
-            className="max-w-6xl w-full max-h-[92vh] flex flex-col items-center justify-center relative"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setIsFlyerModalOpen(false)}
-              className="absolute -top-10 right-0 sm:top-2 sm:right-2 z-10 w-9 h-9 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center transition-colors cursor-pointer"
-              aria-label="Close flyer"
-            >
-              ✕
-            </button>
-
-            <img
-              src="/assets/images/hero_slide_flyer.jpg"
-              alt="Official ISHANVI Brochure"
-              className="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl border border-white/20"
-            />
-
-            <div className="mt-4 w-full flex flex-col sm:flex-row items-center justify-between gap-3 text-white px-2">
-              <div>
-                <p className="font-serif text-lg font-bold text-[#DFB76C]">
-                  Official ISHANVI Hostel &amp; Accommodation Property Brochure
-                </p>
-                <p className="text-white/80 text-xs">
-                  Near ISMS Sankalp Business School · Ambegaon Bk, Pune · Call +91 77670 58988
-                </p>
-              </div>
-
-              <button
-                onClick={() => {
-                  setIsFlyerModalOpen(false);
-                  onOpenEnquiry('Property Brochure Modal');
-                }}
-                className="px-6 py-2.5 rounded-full bg-[#DFB76C] text-[#102A1C] text-xs font-bold hover:bg-[#EAC885] transition-all cursor-pointer shadow-lg"
-              >
-                Enquire For Admission
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };

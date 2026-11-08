@@ -280,6 +280,37 @@ img {
   animation: auraSpinSlow 22s linear infinite;
 }
 
+/* Cinematic Zoom & Reveal Utilities */
+@keyframes kenBurnsEffect {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.08) translate(-1%, -1%);
+  }
+}
+
+@keyframes blurToFocusAnim {
+  0% {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}
+
+.animate-kenburns {
+  animation: kenBurnsEffect 6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.animate-blur-focus {
+  animation: blurToFocusAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 .hover-card-elevate {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
 }

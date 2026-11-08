@@ -50,7 +50,9 @@ export const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ onOpenEnquir
                   <h4 className="heading-card text-base text-[#102A1C]">
                     Direct Parent Transparency
                   </h4>
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping shrink-0" />
+                  <span className="text-[11px] font-bold text-[#8C6D2D] uppercase tracking-wider bg-[#FAF6ED] px-2 py-0.5 rounded-full border border-[#DFB76C]/30">
+                    24/7 Verified
+                  </span>
                 </div>
                 <p className="text-body-sm mt-0.5">
                   Parents receive direct 24x7 phone access to the resident warden and verified student attendance tracking.

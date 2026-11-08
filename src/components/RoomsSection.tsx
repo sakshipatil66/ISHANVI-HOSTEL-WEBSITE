@@ -76,17 +76,9 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                 <img
                   src={ROOMS_DATA[0].image}
                   alt="Single Room at ISHANVI Hostel"
-                  className={`w-full h-full object-cover ${getRoomObjectPosition(ROOMS_DATA[0].id)} transition-transform duration-500 group-hover:scale-[1.02]`}
+                  className={`w-full h-full object-cover ${getRoomObjectPosition(ROOMS_DATA[0].id)} transition-transform duration-500 group-hover:scale-105`}
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute top-3 left-3 bg-[#102A1C]/85 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold text-[#DFB76C] border border-[#DFB76C]/30 shadow-sm flex items-center gap-1.5">
-                  <Sparkles className="w-3 h-3 text-[#DFB76C]" />
-                  <span>Verified Single Suite</span>
-                </div>
-                <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-lg text-white text-[11px] flex items-center gap-1 opacity-90 group-hover:opacity-100 transition-opacity">
-                  <Maximize2 className="w-3 h-3 text-[#DFB76C]" />
-                  <span>Click to Zoom</span>
-                </div>
               </div>
               <div className="flex items-center justify-between text-xs text-[#5B6676] px-1">
                 <span>Natural Daylight &amp; Private Study Desk</span>
@@ -248,17 +240,9 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                 <img
                   src={ROOMS_DATA[1].image}
                   alt="Double / Sharing Room at ISHANVI Hostel"
-                  className={`w-full h-full object-cover ${getRoomObjectPosition(ROOMS_DATA[1].id)} transition-transform duration-500 group-hover:scale-[1.02]`}
+                  className={`w-full h-full object-cover ${getRoomObjectPosition(ROOMS_DATA[1].id)} transition-transform duration-500 group-hover:scale-105`}
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute top-3 left-3 bg-[#102A1C]/85 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold text-[#DFB76C] border border-[#DFB76C]/30 shadow-sm flex items-center gap-1.5">
-                  <Sparkles className="w-3 h-3 text-[#DFB76C]" />
-                  <span>Verified Twin Sharing Room</span>
-                </div>
-                <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-lg text-white text-[11px] flex items-center gap-1 opacity-90 group-hover:opacity-100 transition-opacity">
-                  <Maximize2 className="w-3 h-3 text-[#DFB76C]" />
-                  <span>Click to Zoom</span>
-                </div>
               </div>
               <div className="flex items-center justify-between text-xs text-[#5B6676] px-1">
                 <span>Both Beds, Headboards &amp; Wardrobes Fully Visible</span>
@@ -284,17 +268,9 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                 <img
                   src={ROOMS_DATA[2].image}
                   alt="Premium Room at ISHANVI Hostel"
-                  className={`w-full h-full object-cover ${getRoomObjectPosition(ROOMS_DATA[2].id)} transition-transform duration-500 group-hover:scale-[1.02]`}
+                  className={`w-full h-full object-cover ${getRoomObjectPosition(ROOMS_DATA[2].id)} transition-transform duration-500 group-hover:scale-105`}
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute top-3 left-3 bg-[#102A1C]/85 backdrop-blur-md px-3 py-1 rounded-full text-[11px] font-semibold text-[#DFB76C] border border-[#DFB76C]/30 shadow-sm flex items-center gap-1.5">
-                  <Sparkles className="w-3 h-3 text-[#DFB76C]" />
-                  <span>Verified Premium Suite</span>
-                </div>
-                <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-lg text-white text-[11px] flex items-center gap-1 opacity-90 group-hover:opacity-100 transition-opacity">
-                  <Maximize2 className="w-3 h-3 text-[#DFB76C]" />
-                  <span>Click to Zoom</span>
-                </div>
               </div>
               <div className="flex items-center justify-between text-xs text-[#5B6676] px-1">
                 <span className="font-semibold text-[#102A1C]">Extra Space &amp; Ventilation</span>
@@ -532,21 +508,6 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                   referrerPolicy="no-referrer"
                   loading="lazy"
                 />
-
-
-
-                {/* Inspect Zoom Icon */}
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setInspectingRoom(room);
-                  }}
-                  title="Inspect Full Photo"
-                  aria-label="Inspect Full Photo"
-                  className="absolute bottom-3 right-3 w-7 h-7 rounded-lg bg-black/60 hover:bg-black/85 text-white flex items-center justify-center backdrop-blur-md opacity-85 group-hover:opacity-100 transition-all cursor-pointer"
-                >
-                  <Maximize2 className="w-3.5 h-3.5 text-[#DFB76C]" />
-                </button>
               </div>
 
               {/* Card Footer Bar matching reference */}
