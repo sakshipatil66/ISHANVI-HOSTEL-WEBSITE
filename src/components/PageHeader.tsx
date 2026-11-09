@@ -57,12 +57,12 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
           </div>
 
           {/* Page Display Title - Harmonized with site heading scale */}
-          <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-[2.6rem] font-bold text-white tracking-tight leading-[1.18]">
+          <h1 className="title-page text-white drop-shadow-md">
             {title}
           </h1>
 
           {/* High-Contrast Clear Description */}
-          <p className="text-xs sm:text-sm md:text-base text-white/95 leading-relaxed max-w-2xl mx-auto font-sans font-normal">
+          <p className="text-lead !text-white/95 max-w-2xl mx-auto font-sans font-normal">
             {subtitle}
           </p>
 

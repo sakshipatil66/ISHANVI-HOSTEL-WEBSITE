@@ -90,8 +90,9 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
           ))}
         </div>
 
-        {/* Visual Storytelling Showcase of Key Facilities */}
-        <div className="mt-14 pt-12 border-t border-[#EFEAE1]/80">
+        {/* Visual Storytelling Showcase of Key Facilities (Dedicated Page Only) */}
+        {isStandalonePage && (
+          <div className="mt-14 pt-12 border-t border-[#EFEAE1]/80">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -221,6 +222,7 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
             </motion.div>
           </div>
         </div>
+        )}
       </div>
     </section>
   );

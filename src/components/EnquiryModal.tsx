@@ -80,11 +80,11 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
       onClick={handleClose}
     >
       <div
-        className="bg-white rounded-3xl max-w-lg w-full border border-[#EFEAE1] shadow-2xl overflow-hidden relative"
+        className="bg-white rounded-3xl max-w-lg w-full border border-[#EFEAE1] shadow-2xl overflow-hidden relative max-h-[92vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="bg-[#102A1C] text-white p-6 relative">
+        <div className="bg-[#102A1C] text-white p-5 sm:p-6 relative shrink-0">
           <button
             onClick={handleClose}
             className="absolute top-5 right-5 p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
@@ -96,7 +96,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
             <MessageSquare className="w-3.5 h-3.5" />
             <span>Admissions & Enquiry</span>
           </div>
-          <h3 className="font-serif text-2xl font-bold text-white">
+          <h3 className="heading-card text-xl sm:text-2xl font-bold !text-white">
             Enquire for {formData.room || 'Accommodation'}
           </h3>
           <p className="text-xs text-[#EAE3D2]/80 mt-1">
@@ -105,7 +105,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="p-5 sm:p-6 overflow-y-auto flex-1">
           {submitted ? (
             <div className="text-center py-4 space-y-4">
               <div className="w-14 h-14 rounded-full bg-[#102A1C]/10 text-[#102A1C] flex items-center justify-center mx-auto">

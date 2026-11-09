@@ -75,7 +75,9 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
 
   return (
     <div
-      className="fixed inset-0 z-[100] overflow-hidden select-none cursor-pointer"
+      className={`fixed inset-0 z-[100] overflow-hidden select-none ${
+        isRevealing ? 'pointer-events-none' : 'cursor-pointer'
+      }`}
       onClick={triggerReveal}
       role="banner"
       aria-label="ISHANVI Opening Intro with Expanding Circular Reveal"

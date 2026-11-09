@@ -238,7 +238,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
                 </div>
 
                 {/* Dominant Headline with Balance and Contrast */}
-                <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.12] tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
+                <h1 className="title-page text-white leading-[1.14] tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)] break-words">
                   {slide.title}{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#E8C680] italic font-normal">
                     {slide.titleAccent}
@@ -246,7 +246,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
                 </h1>
 
                 {/* Refined Descriptive Subtitle */}
-                <p className="text-sm sm:text-base lg:text-lg text-slate-100 font-medium leading-relaxed font-sans max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]">
+                <p className="text-lead !text-slate-100 font-medium leading-relaxed font-sans max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]">
                   {slide.subtitle}
                 </p>
               </motion.div>

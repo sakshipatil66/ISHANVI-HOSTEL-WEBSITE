@@ -103,7 +103,7 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
                   <div className="kicker-label mb-1">
                     <span>{selectedRoom.kicker}</span>
                   </div>
-                  <h3 className="heading-section text-[#102A1C]">
+                  <h3 className="heading-card !text-2xl text-[#102A1C]">
                     {selectedRoom.name}
                   </h3>
                   <p className="text-lead mt-1.5">

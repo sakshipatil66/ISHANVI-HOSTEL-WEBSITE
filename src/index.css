@@ -61,10 +61,10 @@ img {
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
 }
 
-/* Touch devices: comfortable minimum tap targets */
+/* Touch devices: comfortable minimum tap targets (WCAG compliant 44x44px) */
 @media (pointer: coarse) {
-  button, a.btn-primary, a.btn-secondary {
-    min-height: 40px;
+  button, a.btn-primary, a.btn-secondary, input[type="button"], input[type="submit"] {
+    min-height: 44px;
   }
 }
 

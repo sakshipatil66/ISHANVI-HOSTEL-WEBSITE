@@ -16,19 +16,18 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'rooms', label: 'Rooms' },
-    { id: 'amenities', label: 'Amenities' },
-    { id: 'gallery', label: 'Gallery' },
-    { id: 'reviews', label: 'Reviews' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'home', label: 'Home', path: '/' },
+    { id: 'about', label: 'About Us', path: '/about' },
+    { id: 'rooms', label: 'Rooms', path: '/rooms' },
+    { id: 'amenities', label: 'Amenities', path: '/amenities' },
+    { id: 'gallery', label: 'Gallery', path: '/gallery' },
+    { id: 'reviews', label: 'Reviews', path: '/reviews' },
+    { id: 'contact', label: 'Contact Us', path: '/contact' },
   ];
 
   const handleNavClick = (id: string) => {
     setActivePage(id);
     setMobileMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -36,8 +35,12 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-[68px]">
           {/* Exact Brand Logo from Reference */}
-          <button
-            onClick={() => handleNavClick('home')}
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('home');
+            }}
             className="flex items-center gap-2 text-left cursor-pointer focus:outline-none group"
             title="ISHANVI Hostel & Accommodation - Home"
           >
@@ -46,16 +49,20 @@ export const Navbar: React.FC<NavbarProps> = ({
               alt="ISHANVI Hostel & Accommodation"
               className="h-9 sm:h-11 w-auto object-contain max-w-[180px] sm:max-w-[240px] mix-blend-multiply transition-transform duration-300 group-hover:scale-[1.02]"
             />
-          </button>
+          </a>
 
           {/* Center Navigation Links matching reference */}
           <nav className="hidden lg:flex items-center gap-5 xl:gap-7 text-xs xl:text-sm font-medium text-[#2C3530]">
             {navLinks.map((link) => {
               const isActive = activePage === link.id;
               return (
-                <button
+                <a
                   key={link.id}
-                  onClick={() => handleNavClick(link.id)}
+                  href={link.path}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(link.id);
+                  }}
                   className={`transition-colors cursor-pointer py-1 ${
                     isActive
                       ? 'text-[#102A1C] font-semibold border-b-2 border-[#C5A059]'
@@ -63,7 +70,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   }`}
                 >
                   {link.label}
-                </button>
+                </a>
               );
             })}
           </nav>
@@ -89,18 +96,19 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </div>
 
-          {/* Mobile Hamburger Button */}
-          <div className="flex items-center gap-2 md:hidden">
+          {/* Mobile Actions */}
+          <div className="flex items-center gap-1.5 sm:gap-2 md:hidden">
             <button
               onClick={() => onOpenEnquiry()}
-              className="px-3.5 py-1.5 text-xs font-semibold text-white bg-[#102A1C] rounded-full sm:hidden"
+              className="px-3 py-1.5 text-xs font-semibold text-white bg-[#102A1C] hover:bg-[#1B3B2B] active:scale-95 rounded-full transition-all"
             >
               Enquire
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-[#102A1C] hover:bg-[#F4EFE6] rounded-lg transition-colors cursor-pointer"
-              aria-label="Toggle menu"
+              className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-[#102A1C] hover:bg-[#F4EFE6] rounded-xl transition-colors cursor-pointer"
+              aria-label="Toggle navigation menu"
+              aria-expanded={mobileMenuOpen}
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -110,26 +118,33 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#FDFBF7] border-b border-[#EFEAE1] px-6 py-5 space-y-3 shadow-md animate-in slide-in-from-top-2">
-          {navLinks.map((link) => (
-            <button
-              key={link.id}
-              onClick={() => handleNavClick(link.id)}
-              className={`block w-full text-left py-2 text-sm font-medium transition-colors ${
-                activePage === link.id
-                  ? 'text-[#102A1C] font-bold text-base'
-                  : 'text-[#4A5568] hover:text-[#102A1C]'
-              }`}
-            >
-              {link.label}
-            </button>
-          ))}
-          <div className="pt-3 border-t border-[#EFEAE1] space-y-2">
+        <div className="md:hidden bg-[#FDFBF7] border-b border-[#EFEAE1] px-4 py-4 space-y-1.5 shadow-xl animate-in slide-in-from-top-2">
+          {navLinks.map((link) => {
+            const isActive = activePage === link.id;
+            return (
+              <a
+                key={link.id}
+                href={link.path}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(link.id);
+                }}
+                className={`block w-full text-left py-3 px-3.5 rounded-xl text-sm font-semibold transition-colors min-h-[44px] flex items-center ${
+                  isActive
+                    ? 'text-[#102A1C] bg-[#FAF6ED] border-l-4 border-[#C5A059]'
+                    : 'text-[#4A5568] hover:text-[#102A1C] hover:bg-white/70'
+                }`}
+              >
+                {link.label}
+              </a>
+            );
+          })}
+          <div className="pt-3 border-t border-[#EFEAE1] space-y-2.5">
             <a
               href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
-              className="flex items-center justify-center gap-2 w-full py-2.5 text-xs font-semibold text-[#102A1C] bg-white border border-[#EFEAE1] rounded-full"
+              className="flex items-center justify-center gap-2 w-full py-3 px-4 text-xs font-bold text-[#102A1C] bg-white border border-[#EFEAE1] hover:border-[#102A1C] rounded-full shadow-2xs transition-colors min-h-[44px]"
             >
-              <Phone className="w-3.5 h-3.5 text-[#C5A059]" />
+              <Phone className="w-4 h-4 text-[#C5A059]" />
               <span>Call: {HOSTEL_INFO.phonePrimary}</span>
             </a>
             <button
@@ -137,10 +152,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 setMobileMenuOpen(false);
                 onOpenEnquiry();
               }}
-              className="flex items-center justify-center gap-2 w-full py-2.5 text-xs font-semibold text-white bg-[#102A1C] rounded-full shadow-sm"
+              className="flex items-center justify-center gap-2 w-full py-3 px-4 text-xs font-bold text-white bg-[#102A1C] hover:bg-[#1B3B2B] active:scale-98 rounded-full shadow-md transition-all min-h-[44px] cursor-pointer"
             >
-              <MessageSquare className="w-3.5 h-3.5" />
-              <span>Enquire Now</span>
+              <MessageSquare className="w-4 h-4 text-[#DFB76C]" />
+              <span>Enquire for Room</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>

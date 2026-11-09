@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Navbar } from './components/Navbar';
 import { ScrollProgress } from './components/ScrollProgress';
 import { HeroSection } from './components/HeroSection';
@@ -26,33 +26,208 @@ import { EnquiryModal } from './components/EnquiryModal';
 import { PageHeader } from './components/PageHeader';
 import { OpeningLogoIntro } from './components/OpeningLogoIntro';
 import { ReviewsPageSection } from './components/ReviewsPageSection';
-import { MessageCircle, Calendar } from 'lucide-react';
-import { HOSTEL_INFO } from './data/hostelData';
+import { MessageCircle } from 'lucide-react';
+
+export type PageRoute = 'home' | 'about' | 'rooms' | 'amenities' | 'gallery' | 'reviews' | 'contact';
+
+export const ROUTE_PATH_MAP: Record<string, PageRoute> = {
+  '/': 'home',
+  '/home': 'home',
+  '/about': 'about',
+  '/about-us': 'about',
+  '/rooms': 'rooms',
+  '/rooms-and-pricing': 'rooms',
+  '/accommodation': 'rooms',
+  '/amenities': 'amenities',
+  '/facilities': 'amenities',
+  '/gallery': 'gallery',
+  '/photos': 'gallery',
+  '/reviews': 'reviews',
+  '/testimonials': 'reviews',
+  '/contact': 'contact',
+  '/contact-us': 'contact',
+  '/admissions': 'contact',
+};
+
+export const PAGE_TO_PATH: Record<PageRoute, string> = {
+  home: '/',
+  about: '/about',
+  rooms: '/rooms',
+  amenities: '/amenities',
+  gallery: '/gallery',
+  reviews: '/reviews',
+  contact: '/contact',
+};
+
+interface PageSeoData {
+  title: string;
+  description: string;
+  keywords: string;
+  path: string;
+}
+
+export const PAGE_SEO_MAP: Record<PageRoute, PageSeoData> = {
+  home: {
+    title: 'ISHANVI | Luxury Hostel & Accommodation near ISMS Sankalp Ambegaon Pune',
+    description: 'Safe, secure, and well-managed hostel accommodation in Ambegaon Pune near ISMS Sankalp Business School. Featuring furnished single and sharing rooms, 24/7 security, high-speed Wi-Fi, 4 hygienic meals, and quiet study lounge.',
+    keywords: 'Hostel in Ambegaon Pune, Hostel and Accommodation in Pune, Accommodation near ISMS Sankalp Business School, Hostel near Ambegaon Budruk, Student hostel Pune, Working professional hostel Katraj Pune',
+    path: '/',
+  },
+  about: {
+    title: 'About Us | ISHANVI Hostel & Accommodation Ambegaon Bk Pune',
+    description: 'Learn about ISHANVI Hostel & Accommodation near ISMS Sankalp Business School, Ambegaon Bk, Pune. Discover our mission to provide scholars and professionals with a quiet, secure, and supportive living environment.',
+    keywords: 'About ISHANVI Hostel, Hostel Ambegaon Pune background, student accommodation values, safe hostel near ISMS Sankalp, hostel facilities Pune',
+    path: '/about',
+  },
+  rooms: {
+    title: 'Rooms & Pricing Enquiry | Single & Sharing Rooms | ISHANVI Hostel Pune',
+    description: 'Explore furnished Single, Double, and Executive Premium Rooms at ISHANVI Hostel in Ambegaon Bk Pune. Each room features orthopaedic mattresses, study desks, wooden wardrobes, attached bathrooms, and all-inclusive pricing.',
+    keywords: 'Hostel rooms in Ambegaon Pune, Single room hostel Pune, Double sharing hostel near ISMS Sankalp, Premium AC room hostel, hostel room price Ambegaon',
+    path: '/rooms',
+  },
+  amenities: {
+    title: 'Hostel Amenities & Facilities | Wi-Fi, Food, Gym | ISHANVI Pune',
+    description: 'Enjoy premium amenities at ISHANVI Hostel: 4 homestyle meals daily, silent study lounge, high-speed Wi-Fi, 24/7 CCTV security, solar water heating, power backup, and modern fitness center in Ambegaon Pune.',
+    keywords: 'Hostel amenities Pune, hostel with mess food Ambegaon, study library hostel Pune, secure hostel CCTV Ambegaon Bk, gym hostel ISMS Sankalp',
+    path: '/amenities',
+  },
+  gallery: {
+    title: 'Photo Gallery | Verified Property & Rooms | ISHANVI Hostel Pune',
+    description: 'Browse verified, authentic photographs of ISHANVI Hostel & Accommodation in Ambegaon Bk, Pune. High-resolution images of deluxe bedrooms, study lounge, dining hall, recreation areas, and building exterior.',
+    keywords: 'Hostel photos Ambegaon Pune, room pictures ISHANVI hostel, hostel gallery Pune, student room photos ISMS Sankalp',
+    path: '/gallery',
+  },
+  reviews: {
+    title: 'Resident Reviews & Testimonials | ISHANVI Hostel Ambegaon Pune',
+    description: 'Read authentic reviews and ratings from students and working professionals living at ISHANVI Hostel near ISMS Sankalp Business School in Ambegaon Bk, Pune. 4.9/5 resident satisfaction.',
+    keywords: 'Hostel reviews Ambegaon Pune, ISHANVI hostel ratings, student feedback ISMS Sankalp hostel, safe hostel reviews Pune',
+    path: '/reviews',
+  },
+  contact: {
+    title: 'Contact & Admissions Desk | ISHANVI Hostel Ambegaon Bk Pune',
+    description: 'Get in touch with ISHANVI Hostel & Accommodation. Located near ISMS Sankalp Business School, Ambegaon Bk, Pune. Call +91 77670 58988 for room bookings, price details, and campus tours.',
+    keywords: 'Contact ISHANVI Hostel, Hostel phone number Ambegaon, hostel address near ISMS Sankalp, book hostel room Pune, admissions desk ISHANVI',
+    path: '/contact',
+  },
+};
+
+/**
+ * Determine the active page from the window location pathname or hash.
+ */
+function getPageFromLocation(): PageRoute {
+  if (typeof window === 'undefined') return 'home';
+
+  // 1. Direct pathname resolution
+  const pathname = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
+  if (ROUTE_PATH_MAP[pathname]) {
+    return ROUTE_PATH_MAP[pathname];
+  }
+
+  // 2. Hash fallback resolution (#about, #/about, #rooms, etc.)
+  const hash = window.location.hash.toLowerCase().replace(/^#\/?/, '');
+  if (hash) {
+    const hashPath = `/${hash}`;
+    if (ROUTE_PATH_MAP[hashPath]) {
+      return ROUTE_PATH_MAP[hashPath];
+    }
+  }
+
+  return 'home';
+}
 
 export default function App() {
-  const [activePage, setActivePage] = useState<string>('home');
+  const [activePage, setActivePage] = useState<PageRoute>(() => getPageFromLocation());
   const [isEnquiryModalOpen, setIsEnquiryModalOpen] = useState<boolean>(false);
   const [selectedRoomForEnquiry, setSelectedRoomForEnquiry] = useState<string | undefined>(undefined);
-  const [showLogoIntro, setShowLogoIntro] = useState<boolean>(true);
 
-  const handleLogoIntroComplete = () => {
-    setShowLogoIntro(false);
-  };
-
-  React.useEffect(() => {
-    const titles: Record<string, string> = {
-      home: 'ISHANVI | Luxury Hostel & Accommodation near ISMS Sankalp Ambegaon Pune',
-      about: 'About Us | ISHANVI Hostel & Accommodation Ambegaon Bk Pune',
-      rooms: 'Rooms & Pricing Enquiry | Single & Sharing Rooms | ISHANVI Hostel Pune',
-      amenities: 'Hostel Amenities & Facilities | Wi-Fi, Food, Gym | ISHANVI Pune',
-      gallery: 'Photo Gallery | Verified Property & Rooms | ISHANVI Hostel Pune',
-      reviews: 'Resident Reviews & Testimonials | ISHANVI Hostel Ambegaon Pune',
-      contact: 'Contact & Admissions Desk | ISHANVI Hostel Ambegaon Bk Pune',
-    };
-    if (titles[activePage]) {
-      document.title = titles[activePage];
+  // Cinematic intro plays ONLY once on initial entry of the browser session
+  const [showLogoIntro, setShowLogoIntro] = useState<boolean>(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        const seen = sessionStorage.getItem('ishanvi_intro_seen');
+        return seen !== 'true';
+      }
+    } catch {
+      // ignore
     }
+    return false;
+  });
+
+  const handleLogoIntroComplete = useCallback(() => {
+    setShowLogoIntro(false);
+    try {
+      sessionStorage.setItem('ishanvi_intro_seen', 'true');
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  // Dynamically update document title, meta description, keywords, canonical, and OG/Twitter tags per page
+  useEffect(() => {
+    const seo = PAGE_SEO_MAP[activePage] || PAGE_SEO_MAP.home;
+    document.title = seo.title;
+
+    // Helper to set or create meta tag
+    const setMetaTag = (attrName: string, attrVal: string, contentVal: string) => {
+      let element = document.querySelector(`meta[${attrName}="${attrVal}"]`);
+      if (!element) {
+        element = document.createElement('meta');
+        element.setAttribute(attrName, attrVal);
+        document.head.appendChild(element);
+      }
+      element.setAttribute('content', contentVal);
+    };
+
+    setMetaTag('name', 'description', seo.description);
+    setMetaTag('name', 'keywords', seo.keywords);
+    setMetaTag('property', 'og:title', seo.title);
+    setMetaTag('property', 'og:description', seo.description);
+    setMetaTag('name', 'twitter:title', seo.title);
+    setMetaTag('name', 'twitter:description', seo.description);
+
+    const canonicalUrl = `https://ishanvihostel.com${seo.path === '/' ? '' : seo.path}`;
+    setMetaTag('property', 'og:url', canonicalUrl);
+
+    // Canonical link
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', canonicalUrl);
   }, [activePage]);
+
+  // Handle browser Back / Forward buttons and URL hash changes
+  useEffect(() => {
+    const syncRouteFromLocation = () => {
+      const page = getPageFromLocation();
+      setActivePage(page);
+    };
+
+    window.addEventListener('popstate', syncRouteFromLocation);
+    window.addEventListener('hashchange', syncRouteFromLocation);
+
+    return () => {
+      window.removeEventListener('popstate', syncRouteFromLocation);
+      window.removeEventListener('hashchange', syncRouteFromLocation);
+    };
+  }, []);
+
+  // Multi-page navigation handler
+  const handlePageChange = (target: string) => {
+    const page: PageRoute =
+      ROUTE_PATH_MAP[target] ||
+      (target in PAGE_TO_PATH ? (target as PageRoute) : 'home');
+    const path = PAGE_TO_PATH[page] || '/';
+
+    if (window.location.pathname !== path) {
+      window.history.pushState({ page }, '', path);
+    }
+
+    setActivePage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleOpenEnquiry = (roomName?: string) => {
     setSelectedRoomForEnquiry(roomName);
@@ -64,14 +239,9 @@ export default function App() {
     setSelectedRoomForEnquiry(undefined);
   };
 
-  const handlePageChange = (page: string) => {
-    setActivePage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-[#FDFBF7] text-[#222B25] font-sans selection:bg-[#102A1C] selection:text-[#DFB76C] overflow-x-hidden">
-      {/* Premium Opening Logo Intro Animation */}
+      {/* Cinematic Logo Intro Animation (Initial session entry only) */}
       {showLogoIntro && (
         <OpeningLogoIntro onComplete={handleLogoIntroComplete} />
       )}
@@ -79,7 +249,7 @@ export default function App() {
       {/* Hairline Scroll Progress Bar */}
       <ScrollProgress />
 
-      {/* Top Navigation Bar with Official ISHANVI Logo */}
+      {/* Top Navigation Bar with Official ISHANVI Logo & Multi-page Links */}
       <Navbar
         activePage={activePage}
         setActivePage={handlePageChange}
@@ -87,64 +257,67 @@ export default function App() {
       />
 
       <main className="flex-1">
-        {/* HOMEPAGE: Connected Storytelling with Premium 2-Slide Hero Carousel */}
+        {/* =========================================================================
+            PAGE 1: HOME (EXACT SAME-TO-SAME REPLICA OF MA'AM'S REFERENCE SCREENSHOT)
+            Section Order:
+            1. HeroSection (Carousel with flyer & student reception)
+            2. AboutSection ("More Than Just A Stay - A Better Tomorrow")
+            3. RoomsSection (3-Card Layout with "View All Rooms ->")
+            4. AmenitiesSection ("Everything You Need For A Hassle-Free Stay")
+            5. GallerySection (5-Photo Showcase with "View Gallery ->")
+            6. TestimonialsSection ("What Our Residents Say")
+            7. BottomCtaSection ("Start Your Better Tomorrow With Ishanvi")
+            ========================================================================= */}
         {activePage === 'home' && (
           <>
-            {/* HERO SECTION: Dual-Slide Carousel with Both Uploaded Images */}
             <HeroSection
               onOpenEnquiry={handleOpenEnquiry}
               onExploreRooms={() => handlePageChange('rooms')}
             />
 
-            {/* Welcome to ISHANVI Philosophy (Matching Screenshot 074022) */}
             <AboutSection onLearnMore={() => handlePageChange('about')} />
 
-            {/* Editorial Interlude */}
-            <EditorialInterlude />
-
-            {/* Distinctive Pillars of Experience */}
-            <ExperiencePillarsSection />
-
-            {/* Rooms Designed For Your Comfort (Matching Screenshot 074113 Top) */}
             <RoomsSection
               onOpenEnquiry={handleOpenEnquiry}
               onViewAllRooms={() => handlePageChange('rooms')}
               isStandalonePage={false}
             />
 
-            {/* Room Comparison Matrix */}
-            <RoomComparisonSection onOpenEnquiry={handleOpenEnquiry} />
-
-            {/* Amenities Everything You Need (Matching Screenshot 074113 Bottom) */}
             <AmenitiesSection isStandalonePage={false} />
 
-            {/* Everyday Living Daily Rhythm Timeline */}
-            <LifestyleStorySection />
-
-            {/* Why Choose ISHANVI */}
-            <WhyChooseSection onOpenEnquiry={() => handleOpenEnquiry('Campus Visit')} />
-
-            {/* Immersive Gallery (Matching Screenshot 074059 Top) */}
             <GallerySection
               onViewAllGallery={() => handlePageChange('gallery')}
               isStandalonePage={false}
             />
 
-            {/* Testimonials (Matching Screenshot 074059 Middle) */}
             <TestimonialsSection />
 
-            {/* Location & Connectivity near ISMS Sankalp */}
-            <LocationSection />
-
-            {/* Bottom CTA Banner (Matching Screenshot 074059 Bottom) */}
             <BottomCtaSection onOpenEnquiry={handleOpenEnquiry} />
-
-            {/* Lead Capture Admissions Desk */}
-            <ContactSection initialRoom={selectedRoomForEnquiry} />
           </>
         )}
 
-        {/* DEDICATED ROOMS PAGE WITH EXPANDED INFORMATION */}
+        {/* =========================================================================
+            PAGE 2: ABOUT US (DEDICATED MULTI-PAGE VIEW)
+            ========================================================================= */}
+        {activePage === 'about' && (
+          <div className="w-full">
+            <PageHeader
+              kicker="OUR STORY & VALUES"
+              title="About ISHANVI Residence"
+              subtitle="Discover our philosophy of providing a peaceful sanctuary for scholars and professionals in Ambegaon Bk, Pune."
+              onOpenEnquiry={handleOpenEnquiry}
+            />
+            <AboutSection onLearnMore={() => handlePageChange('contact')} />
+            <EditorialInterlude />
+            <ExperiencePillarsSection />
+            <WhyChooseSection onOpenEnquiry={() => handleOpenEnquiry('Campus Visit')} />
+            <BottomCtaSection onOpenEnquiry={handleOpenEnquiry} />
+          </div>
+        )}
+
+        {/* =========================================================================
+            PAGE 3: ROOMS & SPECIFICATIONS (DEDICATED MULTI-PAGE VIEW)
+            ========================================================================= */}
         {activePage === 'rooms' && (
           <div className="w-full">
             <PageHeader
@@ -162,24 +335,9 @@ export default function App() {
           </div>
         )}
 
-        {/* DEDICATED ABOUT PAGE */}
-        {activePage === 'about' && (
-          <div className="w-full">
-            <PageHeader
-              kicker="OUR STORY & VALUES"
-              title="About ISHANVI Residence"
-              subtitle="Discover our philosophy of providing a peaceful sanctuary for scholars and professionals in Ambegaon Bk, Pune."
-              onOpenEnquiry={handleOpenEnquiry}
-            />
-            <AboutSection onLearnMore={() => handlePageChange('contact')} />
-            <EditorialInterlude />
-            <ExperiencePillarsSection />
-            <WhyChooseSection onOpenEnquiry={() => handleOpenEnquiry('Campus Visit')} />
-            <BottomCtaSection onOpenEnquiry={handleOpenEnquiry} />
-          </div>
-        )}
-
-        {/* DEDICATED AMENITIES PAGE */}
+        {/* =========================================================================
+            PAGE 4: AMENITIES & LIFESTYLE (DEDICATED MULTI-PAGE VIEW)
+            ========================================================================= */}
         {activePage === 'amenities' && (
           <div className="w-full">
             <PageHeader
@@ -194,7 +352,9 @@ export default function App() {
           </div>
         )}
 
-        {/* DEDICATED GALLERY PAGE */}
+        {/* =========================================================================
+            PAGE 5: PHOTO GALLERY (DEDICATED MULTI-PAGE VIEW)
+            ========================================================================= */}
         {activePage === 'gallery' && (
           <div className="w-full">
             <PageHeader
@@ -208,7 +368,9 @@ export default function App() {
           </div>
         )}
 
-        {/* DEDICATED REVIEWS / TESTIMONIALS PAGE */}
+        {/* =========================================================================
+            PAGE 6: REVIEWS & TESTIMONIALS (DEDICATED MULTI-PAGE VIEW)
+            ========================================================================= */}
         {activePage === 'reviews' && (
           <div className="w-full">
             <PageHeader
@@ -222,7 +384,9 @@ export default function App() {
           </div>
         )}
 
-        {/* DEDICATED CONTACT PAGE */}
+        {/* =========================================================================
+            PAGE 7: CONTACT US & ADMISSIONS (DEDICATED MULTI-PAGE VIEW)
+            ========================================================================= */}
         {activePage === 'contact' && (
           <div className="w-full">
             <PageHeader
@@ -237,20 +401,23 @@ export default function App() {
             />
             <LocationSection />
             <FaqSection onOpenEnquiry={handleOpenEnquiry} />
+            <BottomCtaSection onOpenEnquiry={handleOpenEnquiry} />
           </div>
         )}
       </main>
 
-      {/* Footer */}
+      {/* Global Footer */}
       <Footer
         onNavClick={handlePageChange}
         onOpenEnquiry={handleOpenEnquiry}
       />
 
-      {/* Floating WhatsApp Action Widget (matching reference screenshot) */}
+      {/* Floating WhatsApp Action Widget (matching reference) */}
       <div className="fixed bottom-6 right-6 z-40">
         <a
-          href={`https://wa.me/917767058988?text=${encodeURIComponent('Hello ISHANVI Hostel, I would like to inquire about room availability.')}`}
+          href={`https://wa.me/917767058988?text=${encodeURIComponent(
+            'Hello ISHANVI Hostel, I would like to inquire about room availability.'
+          )}`}
           target="_blank"
           rel="noopener noreferrer"
           className="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-transform"

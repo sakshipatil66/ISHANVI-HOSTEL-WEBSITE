@@ -75,9 +75,10 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               >
                 <img
                   src={ROOMS_DATA[0].image}
-                  alt="Single Room at ISHANVI Hostel"
+                  alt="Furnished Single Room with private study desk and wooden wardrobe at ISHANVI Hostel Ambegaon Bk Pune"
                   className={`w-full h-full object-cover ${getRoomObjectPosition(ROOMS_DATA[0].id)} transition-transform duration-500 group-hover:scale-105`}
                   referrerPolicy="no-referrer"
+                  loading="lazy"
                 />
               </div>
               <div className="flex items-center justify-between text-xs text-[#5B6676] px-1">
@@ -133,10 +134,10 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                 <p className="text-xs italic text-[#5B6676]">
                   {ROOMS_DATA[0].priceNote}
                 </p>
-                <div className="flex items-center gap-2.5">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
                   <button
                     onClick={() => onOpenEnquiry(ROOMS_DATA[0].name)}
-                    className="btn-primary !py-2.5 !px-5 text-xs"
+                    className="btn-primary !py-2.5 !px-5 text-xs text-center justify-center min-h-[44px]"
                   >
                     <MessageSquare className="w-3.5 h-3.5" />
                     <span>Enquire Now</span>
@@ -146,7 +147,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                     href={`https://wa.me/917767058988?text=${encodeURIComponent(`Hello ISHANVI, I would like to inquire about Single Room pricing and availability.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2.5 rounded-full bg-[#FAF8F5] text-[#102A1C] border border-[#EFEAE1] hover:border-[#DFB76C] text-xs font-semibold transition-colors"
+                    className="px-4 py-2.5 rounded-full bg-[#FAF8F5] text-[#102A1C] border border-[#EFEAE1] hover:border-[#DFB76C] text-xs font-semibold transition-colors flex items-center justify-center min-h-[44px]"
                   >
                     WhatsApp Enquiry
                   </a>
@@ -210,10 +211,10 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                 <p className="text-xs italic text-[#5B6676]">
                   {ROOMS_DATA[1].priceNote}
                 </p>
-                <div className="flex items-center gap-2.5">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
                   <button
                     onClick={() => onOpenEnquiry(ROOMS_DATA[1].name)}
-                    className="btn-primary !py-2.5 !px-5 text-xs"
+                    className="btn-primary !py-2.5 !px-5 text-xs text-center justify-center min-h-[44px]"
                   >
                     <MessageSquare className="w-3.5 h-3.5" />
                     <span>Enquire Now</span>
@@ -223,7 +224,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                     href={`https://wa.me/917767058988?text=${encodeURIComponent(`Hello ISHANVI, I would like to inquire about Double / Sharing Room pricing and availability.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2.5 rounded-full bg-[#FAF8F5] text-[#102A1C] border border-[#EFEAE1] hover:border-[#DFB76C] text-xs font-semibold transition-colors"
+                    className="px-4 py-2.5 rounded-full bg-[#FAF8F5] text-[#102A1C] border border-[#EFEAE1] hover:border-[#DFB76C] text-xs font-semibold transition-colors flex items-center justify-center min-h-[44px]"
                   >
                     WhatsApp Enquiry
                   </a>
@@ -239,9 +240,10 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               >
                 <img
                   src={ROOMS_DATA[1].image}
-                  alt="Double / Sharing Room at ISHANVI Hostel"
+                  alt="Furnished Double Sharing Twin Room layout at ISHANVI Hostel Ambegaon Bk Pune"
                   className={`w-full h-full object-cover ${getRoomObjectPosition(ROOMS_DATA[1].id)} transition-transform duration-500 group-hover:scale-105`}
                   referrerPolicy="no-referrer"
+                  loading="lazy"
                 />
               </div>
               <div className="flex items-center justify-between text-xs text-[#5B6676] px-1">
@@ -267,7 +269,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               >
                 <img
                   src={ROOMS_DATA[2].image}
-                  alt="Premium Room at ISHANVI Hostel"
+                  alt="Executive Premium Room Suite with attached bath, ergonomic study desk, and wooden wardrobe at ISHANVI Hostel Ambegaon Bk Pune"
                   className={`w-full h-full object-cover ${getRoomObjectPosition(ROOMS_DATA[2].id)} transition-transform duration-500 group-hover:scale-105`}
                   referrerPolicy="no-referrer"
                 />
@@ -320,14 +322,14 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-[#EFEAE1] flex flex-wrap items-center justify-between gap-4">
+              <div className="pt-2 border-t border-[#EFEAE1] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
                 <p className="text-xs italic text-[#5B6676]">
                   {ROOMS_DATA[2].priceNote}
                 </p>
-                <div className="flex items-center gap-2.5">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
                   <button
                     onClick={() => onOpenEnquiry(ROOMS_DATA[2].name)}
-                    className="btn-primary !py-2.5 !px-5 text-xs"
+                    className="btn-primary !py-2.5 !px-5 text-xs justify-center min-h-[44px]"
                   >
                     <MessageSquare className="w-3.5 h-3.5" />
                     <span>Enquire Now</span>
@@ -337,7 +339,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                     href={`https://wa.me/917767058988?text=${encodeURIComponent(`Hello ISHANVI, I would like to inquire about Premium Room pricing and availability.`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2.5 rounded-full bg-[#FAF8F5] text-[#102A1C] border border-[#EFEAE1] hover:border-[#DFB76C] text-xs font-semibold transition-colors"
+                    className="px-4 py-2.5 rounded-full bg-[#FAF8F5] text-[#102A1C] border border-[#EFEAE1] hover:border-[#DFB76C] text-xs font-semibold transition-colors flex items-center justify-center min-h-[44px]"
                   >
                     WhatsApp Enquiry
                   </a>
@@ -503,7 +505,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#FAF8F5]">
                 <img
                   src={room.image}
-                  alt={`${room.name} at ISHANVI Hostel`}
+                  alt={`${room.name} fully furnished accommodation with bed, study desk and wooden wardrobe at ISHANVI Hostel Ambegaon Pune`}
                   className={`w-full h-full object-cover ${getRoomObjectPosition(room.id)} transition-transform duration-500 group-hover:scale-[1.02]`}
                   referrerPolicy="no-referrer"
                   loading="lazy"

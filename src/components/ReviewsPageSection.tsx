@@ -291,7 +291,7 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
           onClick={() => setIsSubmitModalOpen(false)}
         >
           <div
-            className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 border border-[#EFEAE1] shadow-2xl relative"
+            className="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-8 border border-[#EFEAE1] shadow-2xl relative max-h-[92vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <button

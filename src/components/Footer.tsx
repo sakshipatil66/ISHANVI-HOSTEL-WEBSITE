@@ -18,13 +18,20 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenEnquiry }) => 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-10 border-b border-[#1B3B2B]">
           {/* Column 1: Logo & Tagline */}
           <div className="lg:col-span-5 space-y-4">
-            <div className="bg-white/95 p-3 rounded-xl inline-block shadow-sm">
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavClick('home');
+              }}
+              className="bg-white/95 p-3 rounded-xl inline-block shadow-sm hover:opacity-95 transition-opacity"
+            >
               <img
                 src={HOSTEL_INFO.logoUrl}
                 alt="ISHANVI Hostel & Accommodation"
                 className="h-10 sm:h-12 w-auto object-contain"
               />
-            </div>
+            </a>
 
             <p className="text-xs text-[#CBD5E0] leading-relaxed max-w-sm">
               Safe, secure and well-managed accommodation for students & working professionals in Ambegaon Bk, Pune.
@@ -42,21 +49,25 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenEnquiry }) => 
             </h4>
             <ul className="space-y-2 text-xs text-[#CBD5E0]">
               {[
-                { id: 'home', label: 'Home' },
-                { id: 'about', label: 'About' },
-                { id: 'rooms', label: 'Rooms' },
-                { id: 'amenities', label: 'Amenities' },
-                { id: 'gallery', label: 'Gallery' },
-                { id: 'reviews', label: 'Reviews' },
-                { id: 'contact', label: 'Contact' },
+                { id: 'home', label: 'Home', path: '/' },
+                { id: 'about', label: 'About Us', path: '/about' },
+                { id: 'rooms', label: 'Rooms', path: '/rooms' },
+                { id: 'amenities', label: 'Amenities', path: '/amenities' },
+                { id: 'gallery', label: 'Gallery', path: '/gallery' },
+                { id: 'reviews', label: 'Reviews', path: '/reviews' },
+                { id: 'contact', label: 'Contact Us', path: '/contact' },
               ].map((link) => (
                 <li key={link.id}>
-                  <button
-                    onClick={() => onNavClick(link.id)}
-                    className="hover:text-[#DFB76C] transition-colors cursor-pointer text-left"
+                  <a
+                    href={link.path}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onNavClick(link.id);
+                    }}
+                    className="hover:text-[#DFB76C] transition-colors cursor-pointer text-left block"
                   >
                     {link.label}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
