@@ -84,7 +84,6 @@ export default function App() {
         activePage={activePage}
         setActivePage={handlePageChange}
         onOpenEnquiry={handleOpenEnquiry}
-        onReplayIntro={() => setShowLogoIntro(true)}
       />
 
       <main className="flex-1">

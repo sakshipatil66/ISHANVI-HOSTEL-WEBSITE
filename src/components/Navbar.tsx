@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import { MessageSquare, ArrowRight, Menu, X, Phone, Sparkles } from 'lucide-react';
+import { MessageSquare, ArrowRight, Menu, X, Phone } from 'lucide-react';
 import { HOSTEL_INFO } from '../data/hostelData';
 
 interface NavbarProps {
   activePage: string;
   setActivePage: (page: string) => void;
   onOpenEnquiry: (roomName?: string) => void;
-  onReplayIntro?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activePage,
   setActivePage,
   onOpenEnquiry,
-  onReplayIntro,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -72,17 +70,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Right Action: Forest Green Pill Enquire Now Button */}
           <div className="hidden md:flex items-center gap-3 xl:gap-4">
-            {onReplayIntro && (
-              <button
-                onClick={onReplayIntro}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#8C6D2D] hover:text-[#102A1C] transition-colors cursor-pointer px-2.5 py-1.5 rounded-full hover:bg-[#FAF8F5] border border-transparent hover:border-[#DFB76C]/40"
-                title="Replay Cinematic Opening Reveal"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span className="hidden xl:inline">Cinematic Intro</span>
-              </button>
-            )}
-
             <a
               href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
               className="flex items-center gap-1.5 text-xs font-semibold text-[#102A1C] hover:text-[#C5A059] transition-colors"
