@@ -154,31 +154,61 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
             className="absolute inset-0 w-full h-full origin-center"
             style={{ transformStyle: 'preserve-3d' }}
           >
-            {/* Full-bleed background photography with continuous slow Ken Burns zoom */}
-            <motion.img
-              src={slide.image}
-              alt={slide.title}
-              initial={{ scale: 1 }}
-              animate={{ scale: 1.055 }}
-              transition={{ duration: 5.4, ease: 'easeOut' }}
-              className="w-full h-full object-cover object-center select-none"
-              style={{
-                filter: 'contrast(1.04) brightness(1.03) saturate(1.04)',
-              }}
-              fetchPriority="high"
-              loading="eager"
-            />
+            {slide.hideTextOverlay ? (
+              <div className="relative w-full h-full flex flex-col items-center justify-center p-3 sm:p-6 lg:p-8 overflow-hidden bg-[#07170E]">
+                {/* Ambient luxury backdrop glow from the flyer colors */}
+                <div
+                  className="absolute inset-0 bg-cover bg-center filter blur-3xl opacity-35 scale-110 pointer-events-none"
+                  style={{ backgroundImage: `url(${slide.image})` }}
+                  aria-hidden="true"
+                />
 
-            {/* 
-              Luminous forest-green lateral ambient gradient:
-              Rendered on slides with text overlay for maximum readability.
-              Omitted on slide 1 so the original flyer artwork and typography are 100% clean and unobstructed.
-            */}
-            {!slide.hideTextOverlay && (
-              <div className="absolute inset-0 bg-gradient-to-r from-[#06180E]/85 via-[#06180E]/45 sm:via-[#06180E]/20 to-transparent pointer-events-none" />
+                {/* Golden ambient radial light behind the flyer */}
+                <div className="absolute w-[85vw] max-w-[950px] h-[55vh] rounded-full bg-[radial-gradient(ellipse,rgba(223,183,108,0.22)_0%,transparent_70%)] pointer-events-none" />
+
+                {/* Full-resolution, 100% visible, uncropped showcase flyer */}
+                <motion.div
+                  initial={{ scale: 0.98, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative z-10 w-full max-w-6xl max-h-[76vh] flex items-center justify-center my-auto"
+                >
+                  <img
+                    src={slide.image}
+                    alt="ISHANVI Hostel & Accommodation Official Property Showcase"
+                    className="max-h-[70vh] sm:max-h-[75vh] w-auto max-w-full object-contain rounded-2xl sm:rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.65)] border border-[#DFB76C]/40 select-none cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
+                    fetchPriority="high"
+                    loading="eager"
+                    onClick={() => onOpenEnquiry('Official Property Showcase')}
+                  />
+                </motion.div>
+              </div>
+            ) : (
+              <>
+                {/* Full-bleed background photography with continuous slow Ken Burns zoom */}
+                <motion.img
+                  src={slide.image}
+                  alt={slide.title}
+                  initial={{ scale: 1 }}
+                  animate={{ scale: 1.055 }}
+                  transition={{ duration: 5.4, ease: 'easeOut' }}
+                  className="w-full h-full object-cover object-center select-none"
+                  style={{
+                    filter: 'contrast(1.04) brightness(1.03) saturate(1.04)',
+                  }}
+                  fetchPriority="high"
+                  loading="eager"
+                />
+
+                {/* 
+                  Luminous forest-green lateral ambient gradient:
+                  Rendered on slides with text overlay for maximum readability.
+                */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#06180E]/85 via-[#06180E]/45 sm:via-[#06180E]/20 to-transparent pointer-events-none" />
+                <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#040E08]/85 via-[#040E08]/30 to-transparent pointer-events-none" />
+                <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/25 to-transparent pointer-events-none" />
+              </>
             )}
-            <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#040E08]/85 via-[#040E08]/30 to-transparent pointer-events-none" />
-            <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/25 to-transparent pointer-events-none" />
           </motion.div>
         </AnimatePresence>
       </div>
@@ -259,12 +289,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
           </div>
         </div>
       ) : (
-        /* On slide 1 (original flyer), preserve clean full-width artwork with zero text overlay */
-        <div
-          onClick={() => onOpenEnquiry('Property Showcase')}
-          className="relative z-20 w-full flex-1 cursor-pointer min-h-[50vh]"
-          aria-label="Enquire about ISHANVI Hostel & Accommodation"
-        />
+        /* On slide 1 (flyer showcase), render a subtle bottom action button */
+        <div className="relative z-20 w-full flex-1 flex items-end justify-center pb-4 pt-2">
+          <button
+            onClick={() => onOpenEnquiry('Official Property Showcase')}
+            className="btn-primary !bg-[#102A1C]/90 hover:!bg-[#1B3B2B] backdrop-blur-md !border !border-[#DFB76C]/60 shadow-2xl !py-2.5 !px-6 text-xs sm:text-sm font-semibold flex items-center gap-2 group cursor-pointer transition-all hover:scale-105 active:scale-95"
+          >
+            <span>Enquire for Admissions &amp; Pricing</span>
+            <ArrowRight className="w-4 h-4 text-[#DFB76C] transition-transform group-hover:translate-x-1" />
+          </button>
+        </div>
       )}
 
       {/* 
