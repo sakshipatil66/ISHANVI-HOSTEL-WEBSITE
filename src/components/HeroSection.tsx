@@ -4,8 +4,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ArrowRight,
-  Play,
-  Pause,
   Bed,
   Wifi,
   Utensils,
@@ -82,48 +80,25 @@ const HERO_SLIDES: HeroSlide[] = [
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExploreRooms }) => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [direction, setDirection] = useState<number>(1);
-  const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [progress, setProgress] = useState<number>(0);
-
-  const SLIDE_DURATION = 5000; // Continuous 5-second interval
 
   const nextSlide = useCallback(() => {
     setDirection(1);
     setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-    setProgress(0);
   }, []);
 
   const prevSlide = useCallback(() => {
     setDirection(-1);
     setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
-    setProgress(0);
   }, []);
 
-  const setSlide = (idx: number) => {
-    setDirection(idx >= currentSlide ? 1 : -1);
-    setCurrentSlide(idx);
-    setProgress(0);
-  };
-
-  // Continuous 5-second auto-slider interval
+  // Continuous automatic sliding without any pause/play UI or progress bar line
   useEffect(() => {
-    if (isPaused) return;
-
-    const intervalStep = 25; // 40fps progress increment
-    const stepIncrement = (intervalStep / SLIDE_DURATION) * 100;
-
     const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          nextSlide();
-          return 0;
-        }
-        return prev + stepIncrement;
-      });
-    }, intervalStep);
+      nextSlide();
+    }, 5000);
 
     return () => clearInterval(timer);
-  }, [nextSlide, isPaused]);
+  }, [nextSlide]);
 
   // Keyboard arrow navigation
   useEffect(() => {
@@ -139,8 +114,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
 
   return (
     <section
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
       className="relative w-full min-h-[86vh] sm:min-h-[90vh] lg:min-h-[94vh] flex flex-col justify-between bg-[#0B1E13] text-white overflow-hidden select-none"
       aria-label="ISHANVI Luxury Full Width Hero Slider"
       style={{ perspective: 1400 }}
@@ -314,62 +287,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
       >
         <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:translate-x-0.5" />
       </button>
-
-      {/* 
-        ========================================================================
-        BOTTOM CINEMATIC CONTROLS: CHAPTER MARKERS & 5-SECOND PROGRESS BAR
-        ========================================================================
-      */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 bg-[#0B1E13]/65 backdrop-blur-md p-3 sm:px-5 py-2.5 rounded-2xl border border-white/10 shadow-xl">
-          {/* Minimalist Chapter Navigation Tabs */}
-          <div className="flex items-center gap-1 sm:gap-3 overflow-x-auto max-w-full pb-0.5 sm:pb-0 scrollbar-none">
-            {HERO_SLIDES.map((s) => {
-              const isActive = currentSlide === s.id;
-              return (
-                <button
-                  key={s.id}
-                  onClick={() => setSlide(s.id)}
-                  className={`group flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all cursor-pointer whitespace-nowrap ${
-                    isActive
-                      ? 'text-[#DFB76C] font-semibold bg-white/10'
-                      : 'text-slate-400 hover:text-white hover:bg-white/5'
-                  }`}
-                  aria-label={`Jump to slide ${s.id + 1}: ${s.label}`}
-                >
-                  <span className={`text-[10px] font-mono font-bold ${isActive ? 'text-[#DFB76C]' : 'text-slate-500'}`}>
-                    0{s.id + 1}
-                  </span>
-                  <span>{s.label}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Continuous 5-Second Linear Progress Bar & Timer */}
-          <div className="flex items-center gap-3 self-end sm:self-auto shrink-0">
-            <button
-              onClick={() => setIsPaused(!isPaused)}
-              className="p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-[#DFB76C] transition-colors cursor-pointer"
-              title={isPaused ? 'Resume continuous 5s slider' : 'Pause slider'}
-              aria-label={isPaused ? 'Resume auto-slider' : 'Pause auto-slider'}
-            >
-              {isPaused ? <Play className="w-3.5 h-3.5" /> : <Pause className="w-3.5 h-3.5" />}
-            </button>
-
-            <span className="text-[11px] text-[#DFB76C] font-mono font-bold tracking-wider">
-              0{currentSlide + 1} / 0{HERO_SLIDES.length}
-            </span>
-
-            <div className="w-20 sm:w-28 h-1 bg-white/20 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#DFB76C] shadow-[0_0_8px_#DFB76C] transition-all duration-75"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* 
         ========================================================================
