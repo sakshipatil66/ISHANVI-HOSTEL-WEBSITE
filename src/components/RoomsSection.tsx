@@ -353,7 +353,11 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
           {/* Informational Section: What is Included with Every Room */}
           <div className="rounded-3xl bg-[#FAF8F5] border border-[#EFEAE1] p-8 sm:p-14 lg:p-16 space-y-10">
             <div className="text-center max-w-2xl mx-auto space-y-2">
-              <span className="text-xs font-bold text-[#C5A059] uppercase tracking-widest">TRANSPARENT AMENITIES</span>
+              <div className="kicker-label justify-center mb-1">
+                <span className="w-5 h-[1.5px] bg-[#C5A059]" />
+                <span>TRANSPARENT AMENITIES</span>
+                <span className="w-5 h-[1.5px] bg-[#C5A059]" />
+              </div>
               <h3 className="heading-section text-[#102A1C]">What's Included In Every Room Stay</h3>
               <p className="text-xs sm:text-sm text-[#5B6676]">
                 All our rooms come with an all-inclusive package so scholars and parents face zero hidden expenses.
@@ -363,7 +367,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="p-5 bg-white rounded-2xl border border-[#EFEAE1] shadow-2xs space-y-2">
                 <div className="w-9 h-9 rounded-full bg-[#FAF8F5] text-[#C5A059] flex items-center justify-center font-bold text-sm">🍽️</div>
-                <h4 className="font-serif font-bold text-sm text-[#102A1C]">4 Homestyle Meals</h4>
+                <h4 className="heading-card !text-sm text-[#102A1C]">4 Homestyle Meals</h4>
                 <p className="text-xs text-[#5B6676] leading-relaxed">
                   Breakfast with tea, wholesome lunch, evening snacks & high-tea, and hot balanced dinner prepared fresh daily.
                 </p>
@@ -371,7 +375,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
 
               <div className="p-5 bg-white rounded-2xl border border-[#EFEAE1] shadow-2xs space-y-2">
                 <div className="w-9 h-9 rounded-full bg-[#FAF8F5] text-[#C5A059] flex items-center justify-center font-bold text-sm">⚡</div>
-                <h4 className="font-serif font-bold text-sm text-[#102A1C]">Power & Wi-Fi Backup</h4>
+                <h4 className="heading-card !text-sm text-[#102A1C]">Power & Wi-Fi Backup</h4>
                 <p className="text-xs text-[#5B6676] leading-relaxed">
                   High-speed optical fiber internet across all rooms, supported by 100% generator power backup for study lamps and fans.
                 </p>
@@ -379,7 +383,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
 
               <div className="p-5 bg-white rounded-2xl border border-[#EFEAE1] shadow-2xs space-y-2">
                 <div className="w-9 h-9 rounded-full bg-[#FAF8F5] text-[#C5A059] flex items-center justify-center font-bold text-sm">🧹</div>
-                <h4 className="font-serif font-bold text-sm text-[#102A1C]">Daily Housekeeping</h4>
+                <h4 className="heading-card !text-sm text-[#102A1C]">Daily Housekeeping</h4>
                 <p className="text-xs text-[#5B6676] leading-relaxed">
                   Regular room sweeping, mopping, trash clearance, and washroom sanitation handled diligently by professional staff.
                 </p>
@@ -387,7 +391,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
 
               <div className="p-5 bg-white rounded-2xl border border-[#EFEAE1] shadow-2xs space-y-2">
                 <div className="w-9 h-9 rounded-full bg-[#FAF8F5] text-[#C5A059] flex items-center justify-center font-bold text-sm">🛡️</div>
-                <h4 className="font-serif font-bold text-sm text-[#102A1C]">24/7 Security & Warden</h4>
+                <h4 className="heading-card !text-sm text-[#102A1C]">24/7 Security & Warden</h4>
                 <p className="text-xs text-[#5B6676] leading-relaxed">
                   Round-the-clock security guards at gates, continuous CCTV monitoring in corridors, and on-premise caring wardens.
                 </p>

@@ -307,7 +307,7 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                 <div className="w-14 h-14 rounded-full bg-[#102A1C] text-[#DFB76C] flex items-center justify-center mx-auto shadow-md">
                   <CheckCircle2 className="w-7 h-7" />
                 </div>
-                <h3 className="font-serif text-xl font-bold text-[#102A1C]">Thank You for Your Feedback!</h3>
+                <h3 className="heading-card text-xl text-[#102A1C]">Thank You for Your Feedback!</h3>
                 <p className="text-xs sm:text-sm text-[#5B6676]">
                   Your review has been successfully submitted and verified.
                 </p>
@@ -319,7 +319,7 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                     <span className="w-4 h-[1.5px] bg-[#C5A059]" />
                     <span>SHARE YOUR EXPERIENCE</span>
                   </div>
-                  <h3 className="font-serif text-xl font-bold text-[#102A1C]">Write a Resident Review</h3>
+                  <h3 className="heading-card text-xl text-[#102A1C]">Write a Resident Review</h3>
                   <p className="text-xs text-[#5B6676]">
                     Help future scholars and parents learn about living at ISHANVI.
                   </p>

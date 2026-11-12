@@ -97,7 +97,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             className="lg:col-span-5 space-y-6"
           >
             <div className="bg-white rounded-3xl p-5 sm:p-8 lg:p-10 border border-[#EFEAE1] shadow-md space-y-6">
-              <h3 className="font-serif text-2xl font-bold text-[#102A1C]">
+              <h3 className="heading-card !text-xl sm:!text-2xl text-[#102A1C]">
                 Campus & Enquiry Desk
               </h3>
 
@@ -217,7 +217,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <h3 className="font-serif text-xl font-bold text-[#102A1C] pb-2 border-b border-[#EFEAE1]">
+                  <h3 className="heading-card text-lg sm:text-xl text-[#102A1C] pb-2 border-b border-[#EFEAE1]">
                     Online Room Enquiry
                   </h3>
 

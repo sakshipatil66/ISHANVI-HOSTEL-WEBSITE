@@ -83,7 +83,7 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
               <div className="w-15 h-15 rounded-2xl bg-white border border-[#EFEAE1] shadow-2xs flex items-center justify-center group-hover:scale-110 group-hover:bg-[#102A1C] group-hover:border-[#102A1C] group-hover:text-[#DFB76C] transition-all duration-300 group-hover:shadow-lg">
                 {getAmenityIcon(item.iconName)}
               </div>
-              <h3 className="font-serif text-xs sm:text-sm font-bold text-[#102A1C] leading-snug group-hover:text-[#8C6D2D] transition-colors">
+              <h3 className="heading-card !text-xs sm:!text-sm text-[#102A1C] leading-snug group-hover:text-[#8C6D2D] transition-colors">
                 {item.title}
               </h3>
             </motion.div>
@@ -108,7 +108,7 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
                 AUTHENTIC RESIDENCE FACILITIES
               </span>
             </div>
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#102A1C] mt-1">
+            <h3 className="heading-section text-[#102A1C] mt-1">
               Curated Spaces for Focus, Fitness &amp; Feasting
             </h3>
           </motion.div>

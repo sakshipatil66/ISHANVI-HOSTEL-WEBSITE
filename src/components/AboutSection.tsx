@@ -70,7 +70,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onLearnMore }) => {
                 <div className="w-11 h-11 rounded-full bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center text-[#C5A059] mx-auto sm:mx-0 shadow-2xs">
                   <Sprout className="w-5 h-5 stroke-[1.75]" />
                 </div>
-                <h3 className="font-serif text-xs sm:text-sm font-bold text-[#102A1C] leading-snug">
+                <h3 className="heading-card !text-xs sm:!text-sm text-[#102A1C] leading-snug">
                   Comfortable Living
                 </h3>
               </motion.div>
@@ -82,7 +82,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onLearnMore }) => {
                 <div className="w-11 h-11 rounded-full bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center text-[#C5A059] mx-auto sm:mx-0 shadow-2xs">
                   <Heart className="w-5 h-5 stroke-[1.75]" />
                 </div>
-                <h3 className="font-serif text-xs sm:text-sm font-bold text-[#102A1C] leading-snug">
+                <h3 className="heading-card !text-xs sm:!text-sm text-[#102A1C] leading-snug">
                   Safe & Supportive
                 </h3>
               </motion.div>
@@ -94,7 +94,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onLearnMore }) => {
                 <div className="w-11 h-11 rounded-full bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center text-[#C5A059] mx-auto sm:mx-0 shadow-2xs">
                   <Sparkles className="w-5 h-5 stroke-[1.75]" />
                 </div>
-                <h3 className="font-serif text-xs sm:text-sm font-bold text-[#102A1C] leading-snug">
+                <h3 className="heading-card !text-xs sm:!text-sm text-[#102A1C] leading-snug">
                   Community Growth
                 </h3>
               </motion.div>

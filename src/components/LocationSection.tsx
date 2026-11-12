@@ -106,7 +106,7 @@ export const LocationSection: React.FC = () => {
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <MapPin className="w-5 h-5 text-[#C5A059]" />
-                    <h3 className="font-serif text-xl font-bold text-[#102A1C]">Campus Address</h3>
+                    <h3 className="heading-card text-[#102A1C]">Campus Address</h3>
                   </div>
                   <span className="text-[11px] font-semibold text-[#102A1C] bg-[#DFB76C]/30 px-3 py-1 rounded-full border border-[#DFB76C]/40 flex items-center gap-1">
                     <Sparkles className="w-3 h-3 text-[#102A1C]" />

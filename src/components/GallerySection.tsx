@@ -126,7 +126,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                     <span className="text-[10px] font-bold text-[#A88238] uppercase tracking-wider block mb-1">
                       {photo.category.toUpperCase()}
                     </span>
-                    <h3 className="font-serif text-base font-bold text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">
+                    <h3 className="heading-card !text-base text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">
                       {photo.title}
                     </h3>
                     <p className="text-xs text-[#5B6676] mt-1.5 leading-relaxed">
