@@ -127,6 +127,8 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
                   src="/assets/images/amenity_dining_hall_1793879543322.jpg"
                   alt="Hygienic Dining Hall"
                   className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[#102A1C]/90 backdrop-blur-md text-[#DFB76C] text-[10px] font-bold border border-[#DFB76C]/30 shadow-xs">
                   4 Chef Meals Daily
@@ -156,6 +158,8 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
                   src="/assets/images/amenity_study_lounge_1793879542441.jpg"
                   alt="Silent Study Lounge"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="p-4 space-y-1">
@@ -182,6 +186,8 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
                   src="/assets/images/amenity_security_lobby_1793879543609.jpg"
                   alt="24x7 Security Lobby"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="p-4 space-y-1">
@@ -208,6 +214,8 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
                   src="/assets/images/amenity_fitness_hd_1793946898388.jpg"
                   alt="Resident Fitness Hub"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="p-4 space-y-1">

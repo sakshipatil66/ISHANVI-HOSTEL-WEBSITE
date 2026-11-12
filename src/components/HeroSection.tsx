@@ -9,6 +9,7 @@ import {
   Wifi,
   Utensils,
   ShieldCheck,
+  Users,
   MapPin,
 } from 'lucide-react';
 import { HOSTEL_INFO } from '../data/hostelData';
@@ -26,11 +27,11 @@ interface HeroSlide {
 }
 
 /**
- * EXACT ORIGINAL FOUR HERO SLIDES
- * - Slide 1 (Index 0): Student Living & Reception Sanctuary -> Displays text overlay
- * - Slide 2 (Index 1): Official ISHANVI Property Showcase Flyer -> NO text overlay (embedded text preserved)
- * - Slide 3 (Index 2): Furnished Twin Bedroom Sanctuary -> Displays same text overlay as Slide 1
- * - Slide 4 (Index 3): Guarded Residence & Campus Living -> Displays same text overlay as Slide 1
+ * EXACT ORIGINAL FOUR HERO SLIDES (PRESERVED IN ORIGINAL ORDER)
+ * - Slide 1 (Index 0): Student Living & Reception Sanctuary
+ * - Slide 2 (Index 1): Official ISHANVI Property Showcase Flyer (Embedded text preserved)
+ * - Slide 3 (Index 2): Furnished Twin Bedroom Sanctuary
+ * - Slide 4 (Index 3): Guarded Residence & Campus Living
  */
 const HERO_SLIDES: HeroSlide[] = [
   {
@@ -42,7 +43,7 @@ const HERO_SLIDES: HeroSlide[] = [
     id: 1,
     image: '/assets/images/hero_slide_flyer.jpg',
     alt: 'Official ISHANVI Hostel & Accommodation showcase with room photos, facilities, and contact details',
-    hideTextOverlay: true, // Slide 2: Do NOT display any additional text overlay
+    hideTextOverlay: true, // Slide 2: Do NOT display HTML overlay on desktop or mobile
   },
   {
     id: 2,
@@ -57,7 +58,7 @@ const HERO_SLIDES: HeroSlide[] = [
 ];
 
 /**
- * UNIFIED TEXT CONTENT (SLIDES 1, 3, AND 4 USE THE EXACT SAME CONTENT & STYLING)
+ * UNIFIED TEXT CONTENT (SLIDES 1, 3, AND 4 ON DESKTOP)
  */
 const HERO_TEXT_CONTENT = {
   kicker: 'SAFE STAY · BETTER LIVING · BRIGHTER TOMORROW',
@@ -101,13 +102,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     }, 5000);
   }, []);
 
-  // Initialize continuous 5-second automatic sliding on mount
+  // Initialize continuous 5-second automatic sliding on mount & pause when hidden
   useEffect(() => {
     startTimer();
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+          timerRef.current = null;
+        }
+      } else {
+        startTimer();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
     return () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
       }
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [startTimer]);
 
@@ -146,222 +162,237 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
   return (
     <section
-      className="relative w-full h-[540px] sm:h-[600px] md:h-[640px] lg:h-[calc(100dvh-74px)] lg:min-h-[580px] lg:max-h-[860px] flex flex-col justify-between bg-[#07170E] text-white overflow-hidden select-none"
+      className="relative w-full flex flex-col justify-between bg-[#07170E] text-white overflow-hidden select-none md:h-[620px] lg:h-[calc(100dvh-74px)] lg:min-h-[580px] lg:max-h-[860px]"
       aria-label="ISHANVI Luxury 4-Image Hero Slider"
     >
       {/* 
         ========================================================================
-        100% EDGE-TO-EDGE FULL-WIDTH HERO SLIDER BACKGROUND
-        Smooth cross-fade across all 4 images with full desktop width
+        HERO SLIDER VIEWPORT CONTAINER
+        - On mobile: uses aspect-[16/9] with object-contain so NO part of the 
+          banner image, ISHANVI logo, heading, or contact info is cropped.
+        - On tablet & desktop: expands into full-height edge-to-edge presentation.
         ========================================================================
       */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <AnimatePresence initial={false}>
-          <motion.div
-            key={slide.id}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{
-              duration: 0.65,
-              ease: 'easeInOut',
-            }}
-            className="absolute inset-0 w-full h-full"
-          >
-            <img
-              src={slide.image}
-              alt={slide.alt}
-              className="w-full h-full object-cover object-center select-none"
-              fetchPriority={slide.id === 0 ? 'high' : 'auto'}
-              loading={slide.id === 0 ? 'eager' : 'lazy'}
-            />
+      <div className="relative w-full aspect-[16/9] sm:aspect-[1.8/1] md:aspect-auto md:flex-1 md:h-full overflow-hidden bg-[#07170E]">
+        {/* Background Slide Images with Cross-fade Transition */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <AnimatePresence initial={false}>
+            <motion.div
+              key={slide.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{
+                duration: 0.65,
+                ease: 'easeInOut',
+              }}
+              className="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer"
+              onClick={() => onOpenEnquiry(slide.hideTextOverlay ? 'Official Property Showcase' : 'Hero Admission Enquiry')}
+              title="Click to enquire about ISHANVI Hostel"
+            >
+              <img
+                src={slide.image}
+                alt={slide.alt}
+                className="w-full h-full object-contain md:object-cover object-center select-none"
+                fetchPriority={slide.id === 0 ? 'high' : 'auto'}
+                loading={slide.id === 0 ? 'eager' : 'lazy'}
+              />
 
-            {/* 
-              Subtle gradient scrim applied ONLY on Slides 1, 3, and 4 (not Slide 2)
-              Ensures high contrast and flawless typographic readability
-            */}
-            {!slide.hideTextOverlay && (
-              <>
-                <div className="absolute inset-0 bg-gradient-to-r from-[#05130B]/90 via-[#05130B]/55 sm:via-[#05130B]/30 to-transparent pointer-events-none" />
-                <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#040E08]/80 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/35 to-transparent pointer-events-none" />
-              </>
-            )}
-          </motion.div>
-        </AnimatePresence>
-      </div>
+              {/* 
+                Subtle gradient scrim applied on Desktop for Slides 0, 2, and 3
+                Ensures high contrast and typographic readability on desktop without tinting mobile
+              */}
+              {!slide.hideTextOverlay && (
+                <div className="hidden md:block absolute inset-0 pointer-events-none">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#05130B]/90 via-[#05130B]/55 sm:via-[#05130B]/30 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#040E08]/80 via-transparent to-transparent" />
+                  <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/35 to-transparent" />
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-      {/* 
-        ========================================================================
-        FOREGROUND CONTENT LAYER:
-        - Slide 1, Slide 3, Slide 4: Displays identical heading, subtitle, and CTA buttons
-        - Slide 2: NO text overlay (pure authentic flyer display)
-        ========================================================================
-      */}
-      <AnimatePresence mode="wait">
-        {!slide.hideTextOverlay ? (
-          <motion.div
-            key="hero-text-overlay"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 lg:pt-14 pb-14 sm:pb-16 my-auto"
-          >
-            <div className="max-w-2xl space-y-4 sm:space-y-5 text-left">
-              <div className="space-y-3 sm:space-y-3.5">
-                {/* Gold Kicker */}
-                <div className="flex items-center gap-2.5">
-                  <span className="w-7 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C]" />
-                  <span className="text-xs sm:text-sm font-bold tracking-widest text-[#DFB76C] uppercase font-sans drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
-                    {HERO_TEXT_CONTENT.kicker}
-                  </span>
+        {/* 
+          ========================================================================
+          DESKTOP FOREGROUND CONTENT LAYER:
+          - Displayed on md: screens and above for Slides 0, 2, 3
+          - Slide 1 (Flyer) has hideTextOverlay: true so its embedded text is shown
+          - Hidden on mobile (< md) so the full image remains 100% visible and unblocked
+          ========================================================================
+        */}
+        <AnimatePresence mode="wait">
+          {!slide.hideTextOverlay && (
+            <motion.div
+              key="hero-text-overlay"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.45, ease: 'easeOut' }}
+              className="hidden md:flex relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 lg:pt-14 pb-14 sm:pb-16 my-auto pointer-events-none"
+            >
+              <div className="max-w-2xl space-y-4 sm:space-y-5 text-left pointer-events-auto">
+                <div className="space-y-3 sm:space-y-3.5">
+                  {/* Gold Kicker */}
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-7 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C]" />
+                    <span className="text-xs sm:text-sm font-bold tracking-widest text-[#DFB76C] uppercase font-sans drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
+                      {HERO_TEXT_CONTENT.kicker}
+                    </span>
+                  </div>
+
+                  {/* Dominant Headline */}
+                  <h1 className="title-page text-white leading-[1.15] tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)] break-words">
+                    {HERO_TEXT_CONTENT.title}{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#E8C680] italic font-normal">
+                      {HERO_TEXT_CONTENT.titleAccent}
+                    </span>
+                  </h1>
+
+                  {/* Descriptive Subtitle */}
+                  <p className="text-lead !text-slate-100 font-medium leading-relaxed font-sans max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]">
+                    {HERO_TEXT_CONTENT.subtitle}
+                  </p>
                 </div>
 
-                {/* Dominant Headline */}
-                <h1 className="title-page text-white leading-[1.15] tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)] break-words">
-                  {HERO_TEXT_CONTENT.title}{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#E8C680] italic font-normal">
-                    {HERO_TEXT_CONTENT.titleAccent}
-                  </span>
-                </h1>
+                {/* Action Buttons */}
+                <div className="flex flex-wrap items-center gap-3 pt-2">
+                  <button
+                    onClick={() => {
+                      if (onExploreRooms) onExploreRooms();
+                      else onOpenEnquiry('Room Enquiry');
+                    }}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_4px_20px_rgba(223,183,108,0.35)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                  >
+                    <span>{HERO_TEXT_CONTENT.primaryCta}</span>
+                    <ArrowRight className="w-4 h-4 text-[#051009]" />
+                  </button>
 
-                {/* Descriptive Subtitle */}
-                <p className="text-lead !text-slate-100 font-medium leading-relaxed font-sans max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]">
-                  {HERO_TEXT_CONTENT.subtitle}
-                </p>
+                  <button
+                    onClick={() => onOpenEnquiry('Admission Enquiry')}
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-black/60 hover:bg-[#102A1C] text-white border border-[#DFB76C]/60 hover:border-[#DFB76C] text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                  >
+                    <MessageSquare className="w-4 h-4 text-[#DFB76C]" />
+                    <span>{HERO_TEXT_CONTENT.secondaryCta}</span>
+                  </button>
+                </div>
               </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <button
-                  onClick={() => {
-                    if (onExploreRooms) onExploreRooms();
-                    else onOpenEnquiry('Room Enquiry');
-                  }}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_4px_20px_rgba(223,183,108,0.35)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
-                >
-                  <span>{HERO_TEXT_CONTENT.primaryCta}</span>
-                  <ArrowRight className="w-4 h-4 text-[#051009]" />
-                </button>
+        {/* 
+          ========================================================================
+          SYNCHRONIZED SLIDE INDICATOR DOTS (EXACTLY 4 DOTS)
+          - Positioned neatly at bottom center so they do not cover important text
+          - Compact, translucent styling
+          ========================================================================
+        */}
+        <div className="absolute bottom-1.5 sm:bottom-3 md:bottom-14 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 sm:gap-2.5 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 shadow-lg pointer-events-auto">
+          {HERO_SLIDES.map((s, idx) => {
+            const isActive = currentSlide === idx;
+            return (
+              <button
+                key={s.id}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleDotClick(idx);
+                }}
+                aria-label={`Switch to slide ${idx + 1}`}
+                className={`transition-all duration-300 cursor-pointer ${
+                  isActive
+                    ? 'w-4 sm:w-6 h-1.5 sm:h-2 rounded-full bg-[#DFB76C] shadow-[0_0_8px_#DFB76C]'
+                    : 'w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-white/60 hover:bg-white'
+                }`}
+              />
+            );
+          })}
+        </div>
 
-                <button
-                  onClick={() => onOpenEnquiry('Admission Enquiry')}
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-black/60 hover:bg-[#102A1C] text-white border border-[#DFB76C]/60 hover:border-[#DFB76C] text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
-                >
-                  <MessageSquare className="w-4 h-4 text-[#DFB76C]" />
-                  <span>{HERO_TEXT_CONTENT.secondaryCta}</span>
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        ) : (
-          /* Slide 2 (Flyer): Interactive clickable surface allowing direct enquiry */
-          <motion.div
-            key="hero-flyer-surface"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="relative z-20 w-full flex-1 cursor-pointer flex items-end justify-center pb-16"
-            onClick={() => onOpenEnquiry('Official Property Showcase')}
-            title="Click to enquire about ISHANVI Hostel"
-          />
-        )}
-      </AnimatePresence>
+        {/* 
+          ========================================================================
+          PREVIOUS & NEXT CHEVRON NAVIGATION ARROWS
+          - Sized and positioned at edges so they NEVER cover important text or logo
+          - Touch-friendly tap targets
+          ========================================================================
+        */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            handlePrev();
+          }}
+          aria-label="Previous Slide"
+          className="absolute left-1 sm:left-3 md:left-6 top-1/2 -translate-y-1/2 z-30 w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-[#0B1E13]/60 hover:bg-[#102A1C] text-white hover:text-[#DFB76C] border border-white/20 hover:border-[#DFB76C]/80 flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-lg hover:scale-110 active:scale-95 group"
+        >
+          <ChevronLeft className="w-3.5 h-3.5 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform group-hover:-translate-x-0.5" />
+        </button>
 
-      {/* 
-        ========================================================================
-        SYNCHRONIZED SLIDE INDICATOR DOTS (EXACTLY 4 DOTS)
-        Positioned neatly above the bottom ribbon
-        ========================================================================
-      */}
-      <div className="absolute bottom-13 sm:bottom-14 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/45 backdrop-blur-md border border-white/15 shadow-xl">
-        {HERO_SLIDES.map((s, idx) => {
-          const isActive = currentSlide === idx;
-          return (
-            <button
-              key={s.id}
-              onClick={() => handleDotClick(idx)}
-              aria-label={`Switch to slide ${idx + 1}`}
-              className={`transition-all duration-300 cursor-pointer ${
-                isActive
-                  ? 'w-7 h-2 rounded-full bg-[#DFB76C] shadow-[0_0_8px_#DFB76C]'
-                  : 'w-2.5 h-2 rounded-full bg-white/60 hover:bg-white'
-              }`}
-            />
-          );
-        })}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            handleNext();
+          }}
+          aria-label="Next Slide"
+          className="absolute right-1 sm:right-3 md:right-6 top-1/2 -translate-y-1/2 z-30 w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-[#0B1E13]/60 hover:bg-[#102A1C] text-white hover:text-[#DFB76C] border border-white/20 hover:border-[#DFB76C]/80 flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-lg hover:scale-110 active:scale-95 group"
+        >
+          <ChevronRight className="w-3.5 h-3.5 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform group-hover:translate-x-0.5" />
+        </button>
       </div>
 
       {/* 
         ========================================================================
-        PREVIOUS & NEXT CHEVRON NAVIGATION ARROWS
+        BOTTOM FEATURE STRIP (SEAMLESS EDGE-TO-EDGE FOUNDATION BELOW HERO IMAGE)
+        - Properly spaced and aligned for mobile (320px to 482px), tablet, and desktop
+        - Smooth horizontal touch-scroll on mobile with no cut-off
+        - Crisp gold icons, readable text, no horizontal overflow of the section
         ========================================================================
       */}
-      <button
-        onClick={handlePrev}
-        aria-label="Previous Slide"
-        className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#0B1E13]/65 hover:bg-[#102A1C] text-white hover:text-[#DFB76C] border border-white/20 hover:border-[#DFB76C]/80 flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-xl hover:scale-110 active:scale-95 group"
-      >
-        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:-translate-x-0.5" />
-      </button>
-
-      <button
-        onClick={handleNext}
-        aria-label="Next Slide"
-        className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#0B1E13]/65 hover:bg-[#102A1C] text-white hover:text-[#DFB76C] border border-white/20 hover:border-[#DFB76C]/80 flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-xl hover:scale-110 active:scale-95 group"
-      >
-        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:translate-x-0.5" />
-      </button>
-
-      {/* 
-        ========================================================================
-        AMENITIES RIBBON (SEAMLESS EDGE-TO-EDGE BOTTOM FOUNDATION)
-        ========================================================================
-      */}
-      <div className="relative z-20 w-full bg-[#FAF8F5]/96 backdrop-blur-md border-t border-[#DFB76C]/30 text-[#102A1C] py-2 sm:py-2.5 px-3 sm:px-4 shadow-xl shrink-0">
+      <div className="relative z-20 w-full bg-[#FAF8F5] border-t border-[#DFB76C]/30 text-[#102A1C] py-2 sm:py-2.5 px-2.5 sm:px-4 shadow-md shrink-0">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
-          <div className="flex-1 flex items-center justify-start sm:justify-start gap-3 sm:gap-6 text-xs sm:text-sm font-semibold text-[#102A1C] overflow-x-auto no-scrollbar py-0.5">
+          <div className="flex-1 flex items-center justify-start gap-1.5 sm:gap-3 md:gap-4 text-xs sm:text-sm font-semibold text-[#102A1C] overflow-x-auto no-scrollbar scroll-smooth touch-pan-x py-0.5">
             <button
               onClick={() => onOpenEnquiry('Comfortable Rooms')}
-              className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5 whitespace-nowrap shrink-0"
+              className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white border border-[#EFEAE1] hover:border-[#DFB76C] hover:bg-white text-[#102A1C] text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 shadow-2xs transition-all cursor-pointer"
             >
               <Bed className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
               <span>Comfortable Rooms</span>
             </button>
-            <span className="text-gray-300 hidden sm:inline">•</span>
 
             <button
               onClick={() => onOpenEnquiry('High-Speed Wi-Fi')}
-              className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5 whitespace-nowrap shrink-0"
+              className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white border border-[#EFEAE1] hover:border-[#DFB76C] hover:bg-white text-[#102A1C] text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 shadow-2xs transition-all cursor-pointer"
             >
               <Wifi className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
               <span>High-Speed Wi-Fi</span>
             </button>
-            <span className="text-gray-300 hidden sm:inline">•</span>
 
             <button
               onClick={() => onOpenEnquiry('Hygienic Meals')}
-              className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5 whitespace-nowrap shrink-0"
+              className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white border border-[#EFEAE1] hover:border-[#DFB76C] hover:bg-white text-[#102A1C] text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 shadow-2xs transition-all cursor-pointer"
             >
               <Utensils className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
               <span>4 Hygienic Meals</span>
             </button>
-            <span className="text-gray-300 hidden sm:inline">•</span>
 
             <button
               onClick={() => onOpenEnquiry('24/7 Security')}
-              className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5 whitespace-nowrap shrink-0"
+              className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white border border-[#EFEAE1] hover:border-[#DFB76C] hover:bg-white text-[#102A1C] text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 shadow-2xs transition-all cursor-pointer"
             >
               <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
               <span>24/7 Security</span>
             </button>
-            <span className="text-gray-300 hidden md:inline">•</span>
+
+            <button
+              onClick={() => onOpenEnquiry('Supportive Community')}
+              className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white border border-[#EFEAE1] hover:border-[#DFB76C] hover:bg-white text-[#102A1C] text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 shadow-2xs transition-all cursor-pointer"
+            >
+              <Users className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
+              <span>Supportive Community</span>
+            </button>
 
             <button
               onClick={() => onOpenEnquiry('Prime Location')}
-              className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5 hidden md:flex whitespace-nowrap shrink-0"
+              className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white border border-[#EFEAE1] hover:border-[#DFB76C] hover:bg-white text-[#102A1C] text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 shadow-2xs transition-all cursor-pointer"
             >
               <MapPin className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
               <span>Near ISMS Sankalp</span>
@@ -382,3 +413,4 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     </section>
   );
 };
+

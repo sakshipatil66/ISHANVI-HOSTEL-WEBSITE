@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { HOSTEL_INFO } from '../data/hostelData';
 import { Sparkles, ArrowRight } from 'lucide-react';
 
@@ -8,15 +8,21 @@ interface OpeningLogoIntroProps {
 }
 
 export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }) => {
-  // Phase: 'intro' -> 'revealing' -> 'finished'
+  // Phase: 'intro' -> 'revealing'
   const [phase, setPhase] = useState<'intro' | 'revealing'>('intro');
-  const [progress, setProgress] = useState<number>(0);
-  const [revealRadius, setRevealRadius] = useState<number>(0);
+  const [barStarted, setBarStarted] = useState(false);
+  const circleRef = useRef<SVGCircleElement | null>(null);
   const animFrameRef = useRef<number | null>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const triggerReveal = useCallback(() => {
     if (phase === 'revealing') return;
     setPhase('revealing');
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
 
     const startTime = performance.now();
     const duration = 1000; // 1s cinematic circular expansion
@@ -27,7 +33,11 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
       // Quintic ease in-out for dramatic cinematic iris feel
       const eased = t < 0.5 ? 16 * Math.pow(t, 5) : 1 - Math.pow(-2 * t + 2, 5) / 2;
       const calculatedRadius = Math.max(0, Math.min(150, eased * 105));
-      setRevealRadius(Number.isFinite(calculatedRadius) ? calculatedRadius : 0);
+
+      // Direct DOM update avoids 60 React re-renders per second
+      if (circleRef.current) {
+        circleRef.current.setAttribute('r', `${calculatedRadius}%`);
+      }
 
       if (t < 1) {
         animFrameRef.current = requestAnimationFrame(animateMask);
@@ -40,25 +50,18 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
   }, [phase, onComplete]);
 
   useEffect(() => {
-    // 2.6 seconds presentation with smooth progress bar
-    const duration = 2600;
-    const interval = 20;
-    const step = (interval / duration) * 100;
+    // Start CSS progress bar transition smoothly on mount
+    const startTimer = setTimeout(() => {
+      setBarStarted(true);
+    }, 50);
 
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(timer);
-          triggerReveal();
-          return 100;
-        }
-        return prev + step;
-      });
-    }, interval);
+    // Auto-reveal after 2.6 seconds presentation
+    timeoutRef.current = setTimeout(() => {
+      triggerReveal();
+    }, 2600);
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ') {
-        clearInterval(timer);
         triggerReveal();
       }
     };
@@ -66,15 +69,14 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      clearInterval(timer);
+      clearTimeout(startTimer);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [triggerReveal]);
 
   const isRevealing = phase === 'revealing';
-  // Ensure the SVG circle radius is strictly non-negative and finite
-  const safeRadius = Math.max(0, Number.isFinite(revealRadius) ? revealRadius : 0);
 
   return (
     <div
@@ -87,7 +89,7 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
     >
       {/* 
         ========================================================================
-        FULL-VIEWPORT SVG IRIS MASK (100% BROWSER ACCELERATED & RESPONSIVE)
+        FULL-VIEWPORT SVG IRIS MASK (DIRECT GPU ACCELERATED DOM UPDATES)
         White background = opaque intro mask
         Black expanding circle = transparent window revealing website underneath
         ========================================================================
@@ -97,9 +99,10 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
           <mask id="ishanvi-iris-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%">
             <rect x="0" y="0" width="100%" height="100%" fill="white" />
             <circle
+              ref={circleRef}
               cx="50%"
               cy="50%"
-              r={`${safeRadius}%`}
+              r="0%"
               fill="black"
             />
           </mask>
@@ -128,29 +131,24 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
         {/* Delicate Golden Grid Watermark Lines */}
         <div className="absolute inset-0 bg-[radial-gradient(#DFB76C_1px,transparent_1px)] [background-size:36px_36px] opacity-[0.06] pointer-events-none" />
 
-        {/* Floating Subtle Gold Stardust Particles */}
+        {/* Floating Golden Dust Particles (Hardware accelerated CSS animation) */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {[...Array(20)].map((_, i) => (
-            <motion.span
+          {[
+            { left: '12%', top: '25%', delay: '0s', duration: '3.2s' },
+            { left: '28%', top: '65%', delay: '0.8s', duration: '3.6s' },
+            { left: '45%', top: '35%', delay: '0.3s', duration: '3.0s' },
+            { left: '68%', top: '75%', delay: '1.2s', duration: '3.4s' },
+            { left: '82%', top: '30%', delay: '0.5s', duration: '3.8s' },
+            { left: '92%', top: '60%', delay: '1.5s', duration: '3.1s' },
+          ].map((p, i) => (
+            <span
               key={i}
-              initial={{
-                x: `${(i * 19 + 7) % 100}vw`,
-                y: `${((i * 31) % 80) + 10}vh`,
-                opacity: 0,
-                scale: 0.4,
+              style={{
+                left: p.left,
+                top: p.top,
+                animation: `pulse ${p.duration} ease-in-out infinite ${p.delay}`,
               }}
-              animate={{
-                y: [null, `${((i * 31) % 80) - 24}vh`],
-                opacity: [0, 0.85, 0],
-                scale: [0.4, 1.25, 0.4],
-              }}
-              transition={{
-                duration: 2.8 + (i % 4) * 0.4,
-                repeat: Infinity,
-                delay: (i * 0.1) % 1.6,
-                ease: 'easeInOut',
-              }}
-              className="absolute w-1.5 h-1.5 rounded-full bg-[#DFB76C] shadow-[0_0_10px_#DFB76C]"
+              className="absolute w-1.5 h-1.5 rounded-full bg-[#DFB76C] shadow-[0_0_8px_#DFB76C] pointer-events-none opacity-60"
             />
           ))}
         </div>
@@ -192,11 +190,11 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
               <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-[#DFB76C]/40 via-[#F3E3B8]/25 to-[#DFB76C]/40 blur-xl opacity-80 pointer-events-none" />
 
               {/* Logo Presentation Frame */}
-              <div className="relative p-4 sm:p-7 rounded-3xl bg-white/95 backdrop-blur-xl shadow-[0_25px_60px_rgba(0,0,0,0.65),0_0_50px_rgba(223,183,108,0.35)] border-2 border-[#DFB76C]/70 w-full max-w-md sm:max-w-lg flex items-center justify-center overflow-hidden">
+              <div className="relative p-3 sm:p-7 rounded-2xl sm:rounded-3xl bg-white/95 backdrop-blur-xl shadow-[0_25px_60px_rgba(0,0,0,0.65),0_0_50px_rgba(223,183,108,0.35)] border-2 border-[#DFB76C]/70 w-full max-w-[280px] xs:max-w-[340px] sm:max-w-lg flex items-center justify-center overflow-hidden">
                 <img
                   src={HOSTEL_INFO.logoUrl}
                   alt="ISHANVI Hostel & Accommodation Official Logo"
-                  className="w-full max-w-[340px] sm:max-w-[420px] h-auto object-contain select-none"
+                  className="w-full max-w-[260px] xs:max-w-[320px] sm:max-w-[420px] h-auto object-contain select-none"
                   fetchPriority="high"
                   loading="eager"
                 />
@@ -266,8 +264,11 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
         {/* Bottom Precision Loading Line */}
         <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/10 z-50">
           <div
-            className="h-full bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#DFB76C] shadow-[0_0_14px_#DFB76C] transition-all duration-75"
-            style={{ width: `${progress}%` }}
+            className="h-full bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#DFB76C] shadow-[0_0_14px_#DFB76C]"
+            style={{
+              width: barStarted ? '100%' : '0%',
+              transition: 'width 2.55s cubic-bezier(0.1, 0.25, 0.25, 1)',
+            }}
           />
         </div>
       </div>

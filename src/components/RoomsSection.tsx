@@ -272,6 +272,8 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                   alt="Executive Premium Room Suite with attached bath, ergonomic study desk, and wooden wardrobe at ISHANVI Hostel Ambegaon Bk Pune"
                   className={`w-full h-full object-cover ${getRoomObjectPosition(ROOMS_DATA[2].id)} transition-transform duration-500 group-hover:scale-105`}
                   referrerPolicy="no-referrer"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="flex items-center justify-between text-xs text-[#5B6676] px-1">

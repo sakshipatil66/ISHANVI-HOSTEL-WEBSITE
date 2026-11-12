@@ -96,7 +96,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             transition={{ duration: 0.55 }}
             className="lg:col-span-5 space-y-6"
           >
-            <div className="bg-white rounded-3xl p-7 sm:p-10 border border-[#EFEAE1] shadow-md space-y-6">
+            <div className="bg-white rounded-3xl p-5 sm:p-8 lg:p-10 border border-[#EFEAE1] shadow-md space-y-6">
               <h3 className="font-serif text-2xl font-bold text-[#102A1C]">
                 Campus & Enquiry Desk
               </h3>
@@ -168,7 +168,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             transition={{ duration: 0.55, delay: 0.1 }}
             className="lg:col-span-7"
           >
-            <div className="bg-white rounded-3xl p-7 sm:p-10 lg:p-12 border border-[#EFEAE1] shadow-lg">
+            <div className="bg-white rounded-3xl p-5 sm:p-8 lg:p-12 border border-[#EFEAE1] shadow-lg">
               {submitted ? (
                 <div className="text-center py-8 space-y-4 animate-in zoom-in-95">
                   <div className="w-14 h-14 rounded-full bg-[#102A1C]/10 text-[#102A1C] flex items-center justify-center mx-auto">

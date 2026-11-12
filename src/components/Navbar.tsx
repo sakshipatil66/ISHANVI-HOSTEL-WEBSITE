@@ -33,8 +33,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-50 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-[#EFEAE1] transition-all shadow-2xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-[66px] sm:h-[70px] lg:h-[74px]">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-[62px] sm:h-[70px] lg:h-[74px]">
           {/* Brand Logo with Precise Vertical Centering */}
           <a
             href="/"
@@ -48,7 +48,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <img
               src={HOSTEL_INFO.logoUrl}
               alt="ISHANVI Hostel & Accommodation"
-              className="h-10 sm:h-11 lg:h-11 xl:h-12 w-auto object-contain max-w-[150px] sm:max-w-[180px] lg:max-w-[195px] xl:max-w-[220px] mix-blend-multiply transition-transform duration-300 group-hover:scale-[1.02]"
+              className="h-8 sm:h-10 lg:h-11 xl:h-12 w-auto object-contain max-w-[130px] sm:max-w-[180px] lg:max-w-[195px] xl:max-w-[220px] mix-blend-multiply transition-transform duration-300 group-hover:scale-[1.02]"
             />
           </a>
 
@@ -108,7 +108,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Tablet & Mobile Actions: Visible on < 1024px */}
-          <div className="flex lg:hidden items-center gap-2 sm:gap-2.5 shrink-0">
+          <div className="flex lg:hidden items-center gap-1.5 sm:gap-2.5 shrink-0">
             {/* Tablet quick phone call link */}
             <a
               href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
@@ -121,14 +121,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => onOpenEnquiry()}
-              className="h-9 px-3.5 sm:px-4 inline-flex items-center justify-center gap-1 text-xs font-bold text-white bg-[#102A1C] hover:bg-[#1B3B2B] active:scale-95 rounded-full transition-all shadow-xs shrink-0 cursor-pointer"
+              className="h-8.5 sm:h-9 px-3 sm:px-4 inline-flex items-center justify-center gap-1 text-xs font-bold text-white bg-[#102A1C] hover:bg-[#1B3B2B] active:scale-95 rounded-full transition-all shadow-xs shrink-0 cursor-pointer"
             >
               <span>Enquire</span>
             </button>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="h-9 w-9 sm:h-10 sm:w-10 min-h-[44px] min-w-[44px] flex items-center justify-center text-[#102A1C] hover:bg-[#F4EFE6] rounded-full border border-transparent hover:border-[#EFEAE1] transition-colors cursor-pointer shrink-0"
+              className="h-8.5 w-8.5 sm:h-9 sm:w-9 min-h-[40px] min-w-[40px] flex items-center justify-center text-[#102A1C] hover:bg-[#F4EFE6] rounded-full border border-transparent hover:border-[#EFEAE1] transition-colors cursor-pointer shrink-0"
               aria-label="Toggle navigation menu"
               aria-expanded={mobileMenuOpen}
             >

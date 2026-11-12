@@ -13,6 +13,8 @@ export const EditorialInterlude: React.FC = () => {
           alt="ISHANVI Residence Atmosphere"
           className="w-full h-full object-cover object-center opacity-40"
           referrerPolicy="no-referrer"
+          loading="lazy"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0E2016] via-[#102A1C]/80 to-[#0E2016]/90" />
       </div>

@@ -61,9 +61,9 @@ img {
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
 }
 
-/* Touch devices: comfortable minimum tap targets (WCAG compliant 44x44px) */
+/* Touch devices: comfortable minimum tap targets (avoid distorting slider dots or round icon buttons) */
 @media (pointer: coarse) {
-  button, a.btn-primary, a.btn-secondary, input[type="button"], input[type="submit"] {
+  a.btn-primary, a.btn-secondary, .btn-primary, .btn-secondary, input[type="button"], input[type="submit"] {
     min-height: 44px;
   }
 }
