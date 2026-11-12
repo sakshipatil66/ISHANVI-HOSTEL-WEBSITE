@@ -22,11 +22,12 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
     const duration = 1000; // 1s cinematic circular expansion
 
     const animateMask = (now: number) => {
-      const elapsed = now - startTime;
-      const t = Math.min(elapsed / duration, 1);
+      const elapsed = Math.max(0, now - startTime);
+      const t = Math.max(0, Math.min(elapsed / duration, 1));
       // Quintic ease in-out for dramatic cinematic iris feel
-      const eased = t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2;
-      setRevealRadius(eased * 105);
+      const eased = t < 0.5 ? 16 * Math.pow(t, 5) : 1 - Math.pow(-2 * t + 2, 5) / 2;
+      const calculatedRadius = Math.max(0, Math.min(150, eased * 105));
+      setRevealRadius(Number.isFinite(calculatedRadius) ? calculatedRadius : 0);
 
       if (t < 1) {
         animFrameRef.current = requestAnimationFrame(animateMask);
@@ -72,6 +73,8 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
   }, [triggerReveal]);
 
   const isRevealing = phase === 'revealing';
+  // Ensure the SVG circle radius is strictly non-negative and finite
+  const safeRadius = Math.max(0, Number.isFinite(revealRadius) ? revealRadius : 0);
 
   return (
     <div
@@ -96,7 +99,7 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
             <circle
               cx="50%"
               cy="50%"
-              r={`${revealRadius}%`}
+              r={`${safeRadius}%`}
               fill="black"
             />
           </mask>

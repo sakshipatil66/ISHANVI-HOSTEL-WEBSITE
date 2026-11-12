@@ -64,7 +64,7 @@ export const TestimonialsSection: React.FC = () => {
 
         {/* 3 Review Cards with AnimatePresence & Micro-hover interactions */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="popLayout">
             {visibleReviews.map((t, idx) => {
               const initials = t.author
                 .split(' ')

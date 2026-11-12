@@ -146,7 +146,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
   return (
     <section
-      className="relative w-full h-[540px] sm:h-[600px] md:h-[640px] lg:h-[calc(100dvh-76px)] lg:min-h-[580px] lg:max-h-[860px] flex flex-col justify-between bg-[#07170E] text-white overflow-hidden select-none"
+      className="relative w-full h-[540px] sm:h-[600px] md:h-[640px] lg:h-[calc(100dvh-74px)] lg:min-h-[580px] lg:max-h-[860px] flex flex-col justify-between bg-[#07170E] text-white overflow-hidden select-none"
       aria-label="ISHANVI Luxury 4-Image Hero Slider"
     >
       {/* 
@@ -198,18 +198,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         - Slide 2: NO text overlay (pure authentic flyer display)
         ========================================================================
       */}
-      {!slide.hideTextOverlay ? (
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 lg:pt-14 pb-16 my-auto">
-          <div className="max-w-2xl space-y-4 sm:space-y-5 text-left">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`slide-text-${currentSlide}`}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-                className="space-y-3 sm:space-y-3.5"
-              >
+      <AnimatePresence mode="wait">
+        {!slide.hideTextOverlay ? (
+          <motion.div
+            key="hero-text-overlay"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+            className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 lg:pt-14 pb-14 sm:pb-16 my-auto"
+          >
+            <div className="max-w-2xl space-y-4 sm:space-y-5 text-left">
+              <div className="space-y-3 sm:space-y-3.5">
                 {/* Gold Kicker */}
                 <div className="flex items-center gap-2.5">
                   <span className="w-7 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C]" />
@@ -230,45 +230,45 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <p className="text-lead !text-slate-100 font-medium leading-relaxed font-sans max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]">
                   {HERO_TEXT_CONTENT.subtitle}
                 </p>
-              </motion.div>
-            </AnimatePresence>
+              </div>
 
-            {/* Action Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15, duration: 0.5 }}
-              className="flex flex-wrap items-center gap-3 pt-2"
-            >
-              <button
-                onClick={() => {
-                  if (onExploreRooms) onExploreRooms();
-                  else onOpenEnquiry('Room Enquiry');
-                }}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_4px_20px_rgba(223,183,108,0.35)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
-              >
-                <span>{HERO_TEXT_CONTENT.primaryCta}</span>
-                <ArrowRight className="w-4 h-4 text-[#051009]" />
-              </button>
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <button
+                  onClick={() => {
+                    if (onExploreRooms) onExploreRooms();
+                    else onOpenEnquiry('Room Enquiry');
+                  }}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_4px_20px_rgba(223,183,108,0.35)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                >
+                  <span>{HERO_TEXT_CONTENT.primaryCta}</span>
+                  <ArrowRight className="w-4 h-4 text-[#051009]" />
+                </button>
 
-              <button
-                onClick={() => onOpenEnquiry('Admission Enquiry')}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-black/60 hover:bg-[#102A1C] text-white border border-[#DFB76C]/60 hover:border-[#DFB76C] text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
-              >
-                <MessageSquare className="w-4 h-4 text-[#DFB76C]" />
-                <span>{HERO_TEXT_CONTENT.secondaryCta}</span>
-              </button>
-            </motion.div>
-          </div>
-        </div>
-      ) : (
-        /* Slide 2 (Flyer): Interactive clickable surface allowing direct enquiry */
-        <div
-          className="relative z-20 w-full flex-1 cursor-pointer flex items-end justify-center pb-16"
-          onClick={() => onOpenEnquiry('Official Property Showcase')}
-          title="Click to enquire about ISHANVI Hostel"
-        />
-      )}
+                <button
+                  onClick={() => onOpenEnquiry('Admission Enquiry')}
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-black/60 hover:bg-[#102A1C] text-white border border-[#DFB76C]/60 hover:border-[#DFB76C] text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                >
+                  <MessageSquare className="w-4 h-4 text-[#DFB76C]" />
+                  <span>{HERO_TEXT_CONTENT.secondaryCta}</span>
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        ) : (
+          /* Slide 2 (Flyer): Interactive clickable surface allowing direct enquiry */
+          <motion.div
+            key="hero-flyer-surface"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="relative z-20 w-full flex-1 cursor-pointer flex items-end justify-center pb-16"
+            onClick={() => onOpenEnquiry('Official Property Showcase')}
+            title="Click to enquire about ISHANVI Hostel"
+          />
+        )}
+      </AnimatePresence>
 
       {/* 
         ========================================================================
@@ -320,50 +320,50 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         AMENITIES RIBBON (SEAMLESS EDGE-TO-EDGE BOTTOM FOUNDATION)
         ========================================================================
       */}
-      <div className="relative z-20 w-full bg-[#FAF8F5]/96 backdrop-blur-md border-t border-[#DFB76C]/30 text-[#102A1C] py-2 sm:py-2.5 px-4 shadow-xl shrink-0">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2.5 sm:gap-3">
-          <div className="flex-1 flex flex-wrap items-center justify-around sm:justify-start gap-2 sm:gap-6 text-xs sm:text-sm font-semibold text-[#102A1C]">
+      <div className="relative z-20 w-full bg-[#FAF8F5]/96 backdrop-blur-md border-t border-[#DFB76C]/30 text-[#102A1C] py-2 sm:py-2.5 px-3 sm:px-4 shadow-xl shrink-0">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
+          <div className="flex-1 flex items-center justify-start sm:justify-start gap-3 sm:gap-6 text-xs sm:text-sm font-semibold text-[#102A1C] overflow-x-auto no-scrollbar py-0.5">
             <button
               onClick={() => onOpenEnquiry('Comfortable Rooms')}
-              className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5"
+              className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5 whitespace-nowrap shrink-0"
             >
-              <Bed className="w-3.5 h-3.5 text-[#C5A059]" />
+              <Bed className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
               <span>Comfortable Rooms</span>
             </button>
             <span className="text-gray-300 hidden sm:inline">•</span>
 
             <button
               onClick={() => onOpenEnquiry('High-Speed Wi-Fi')}
-              className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5"
+              className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5 whitespace-nowrap shrink-0"
             >
-              <Wifi className="w-3.5 h-3.5 text-[#C5A059]" />
+              <Wifi className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
               <span>High-Speed Wi-Fi</span>
             </button>
             <span className="text-gray-300 hidden sm:inline">•</span>
 
             <button
               onClick={() => onOpenEnquiry('Hygienic Meals')}
-              className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5"
+              className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5 whitespace-nowrap shrink-0"
             >
-              <Utensils className="w-3.5 h-3.5 text-[#C5A059]" />
+              <Utensils className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
               <span>4 Hygienic Meals</span>
             </button>
             <span className="text-gray-300 hidden sm:inline">•</span>
 
             <button
               onClick={() => onOpenEnquiry('24/7 Security')}
-              className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5"
+              className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5 whitespace-nowrap shrink-0"
             >
-              <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
+              <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
               <span>24/7 Security</span>
             </button>
             <span className="text-gray-300 hidden md:inline">•</span>
 
             <button
               onClick={() => onOpenEnquiry('Prime Location')}
-              className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5 hidden md:flex"
+              className="hover:text-[#C5A059] transition-colors cursor-pointer py-1 flex items-center gap-1.5 hidden md:flex whitespace-nowrap shrink-0"
             >
-              <MapPin className="w-3.5 h-3.5 text-[#C5A059]" />
+              <MapPin className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
               <span>Near ISMS Sankalp</span>
             </button>
           </div>
@@ -371,7 +371,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {/* Quick Direct Phone Call Link */}
           <a
             href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
-            className="text-xs font-bold text-[#102A1C] hover:text-[#8C6D2D] transition-colors flex items-center gap-1.5"
+            className="text-xs font-bold text-[#102A1C] hover:text-[#8C6D2D] transition-colors flex items-center gap-1.5 shrink-0 whitespace-nowrap hidden sm:flex"
+            title="Call Admissions Reception"
           >
             <span>Call Admissions:</span>
             <span className="font-mono text-[#8C6D2D]">{HOSTEL_INFO.phonePrimary}</span>
