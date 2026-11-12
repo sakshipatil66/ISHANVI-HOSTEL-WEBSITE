@@ -9,7 +9,7 @@ import {
   Utensils,
   ShieldCheck,
   MapPin,
-  Calendar,
+  MessageSquare,
 } from 'lucide-react';
 import { HOSTEL_INFO } from '../data/hostelData';
 
@@ -30,6 +30,13 @@ interface HeroSlide {
   hideTextOverlay?: boolean;
 }
 
+/**
+ * EXACT ORIGINAL FOUR HERO SLIDES
+ * Slide 0: Student Living & Reception Sanctuary
+ * Slide 1: Official ISHANVI Property Showcase Flyer
+ * Slide 2: Furnished Twin Bedroom Sanctuary
+ * Slide 3: Guarded Residence & Peaceful Campus Environment
+ */
 const HERO_SLIDES: HeroSlide[] = [
   {
     id: 0,
@@ -45,7 +52,7 @@ const HERO_SLIDES: HeroSlide[] = [
   {
     id: 1,
     kicker: '',
-    title: '',
+    title: 'Official Property Showcase',
     titleAccent: '',
     subtitle: '',
     image: '/assets/images/hero_slide_flyer.jpg',
@@ -80,6 +87,7 @@ const HERO_SLIDES: HeroSlide[] = [
 export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExploreRooms }) => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [direction, setDirection] = useState<number>(1);
+  const [isPaused, setIsPaused] = useState<boolean>(false);
 
   const nextSlide = useCallback(() => {
     setDirection(1);
@@ -91,16 +99,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
     setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
   }, []);
 
-  // Continuous automatic sliding without any pause/play UI or progress bar line
+  const goToSlide = useCallback((index: number) => {
+    setDirection(index > currentSlide ? 1 : -1);
+    setCurrentSlide(index);
+  }, [currentSlide]);
+
+  // Automatic sliding transition every 4.5 seconds with pause-on-hover support
   useEffect(() => {
+    if (isPaused) return;
+
     const timer = setInterval(() => {
       nextSlide();
-    }, 5000);
+    }, 4500);
 
     return () => clearInterval(timer);
-  }, [nextSlide]);
+  }, [nextSlide, isPaused]);
 
-  // Keyboard arrow navigation
+  // Keyboard arrow navigation support
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') nextSlide();
@@ -114,99 +129,82 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
 
   return (
     <section
-      className="relative w-full min-h-[86vh] sm:min-h-[90vh] lg:min-h-[94vh] flex flex-col justify-between bg-[#0B1E13] text-white overflow-hidden select-none"
-      aria-label="ISHANVI Luxury Full Width Hero Slider"
-      style={{ perspective: 1400 }}
+      className="relative w-full h-[540px] sm:h-[600px] md:h-[650px] lg:h-[700px] xl:h-[730px] flex flex-col justify-between bg-[#07170E] text-white overflow-hidden select-none"
+      aria-label="ISHANVI Luxury 4-Image Hero Slider"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
     >
       {/* 
         ========================================================================
-        100% EDGE-TO-EDGE FULL-WIDTH HERO SLIDER WITH 3D CINEMATIC TRANSITIONS
-        Zero boxed margins, zero side gaps, zero empty borders.
+        100% EDGE-TO-EDGE FULL-WIDTH HERO SLIDER BACKGROUND
+        Smooth cross-fade between all 4 images with zero side gaps
         ========================================================================
       */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <AnimatePresence initial={false} mode="popLayout" custom={direction}>
+        <AnimatePresence initial={false} mode="wait" custom={direction}>
           <motion.div
             key={slide.id}
             custom={direction}
-            initial={{
-              opacity: 0,
-              scale: 1.08,
-              rotateY: direction > 0 ? 3 : -3,
-              z: -70,
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              rotateY: 0,
-              z: 0,
-            }}
-            exit={{
-              opacity: 0,
-              scale: 0.96,
-              rotateY: direction > 0 ? -3 : 3,
-              z: -80,
-            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{
-              duration: 1.1,
-              ease: [0.16, 1, 0.3, 1],
+              duration: 0.65,
+              ease: 'easeInOut',
             }}
             className="absolute inset-0 w-full h-full origin-center"
-            style={{ transformStyle: 'preserve-3d' }}
           >
             {slide.hideTextOverlay ? (
-              <div className="relative w-full h-full flex flex-col items-center justify-center p-3 sm:p-6 lg:p-8 overflow-hidden bg-[#07170E]">
-                {/* Ambient luxury backdrop glow from the flyer colors */}
+              /* 
+                ================================================================
+                SLIDE 1: THE OFFICIAL ISHANVI FLYER SHOWCASE
+                Full-width ambient fill + uncropped high-resolution flyer graphic.
+                Preserves all original logo, typography, phone numbers, and badges.
+                ================================================================
+              */
+              <div
+                className="relative w-full h-full overflow-hidden flex items-center justify-center bg-[#07170E] cursor-pointer"
+                onClick={() => onOpenEnquiry('Official Property Showcase')}
+              >
+                {/* Ambient full-bleed glow from the flyer colors to seamlessly fill wide screens without dark bars */}
                 <div
-                  className="absolute inset-0 bg-cover bg-center filter blur-3xl opacity-35 scale-110 pointer-events-none"
+                  className="absolute inset-0 bg-cover bg-center filter blur-2xl opacity-40 scale-110 pointer-events-none"
                   style={{ backgroundImage: `url(${slide.image})` }}
                   aria-hidden="true"
                 />
+                <div className="absolute inset-0 bg-black/25 pointer-events-none" />
 
-                {/* Golden ambient radial light behind the flyer */}
-                <div className="absolute w-[85vw] max-w-[950px] h-[55vh] rounded-full bg-[radial-gradient(ellipse,rgba(223,183,108,0.22)_0%,transparent_70%)] pointer-events-none" />
-
-                {/* Full-resolution, 100% visible, uncropped showcase flyer */}
-                <motion.div
-                  initial={{ scale: 0.98, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative z-10 w-full max-w-6xl max-h-[76vh] flex items-center justify-center my-auto"
-                >
-                  <img
-                    src={slide.image}
-                    alt="ISHANVI Hostel & Accommodation Official Property Showcase"
-                    className="max-h-[70vh] sm:max-h-[75vh] w-auto max-w-full object-contain rounded-2xl sm:rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.65)] border border-[#DFB76C]/40 select-none cursor-pointer transition-transform duration-300 hover:scale-[1.01]"
-                    fetchPriority="high"
-                    loading="eager"
-                    onClick={() => onOpenEnquiry('Official Property Showcase')}
-                  />
-                </motion.div>
+                {/* Crisp high-resolution flyer graphic with proper aspect ratio and zero cropping */}
+                <img
+                  src={slide.image}
+                  alt="ISHANVI Hostel & Accommodation Official Property Showcase"
+                  className="relative z-10 w-full h-full object-contain object-center select-none p-1 sm:p-2"
+                  fetchPriority="high"
+                  loading="eager"
+                />
               </div>
             ) : (
+              /* 
+                ================================================================
+                SLIDES 0, 2, 3: FULL-WIDTH PHOTOGRAPHY WITH GRADIENT SCRIMS
+                - Slide 0: Student Living Reception
+                - Slide 2: Furnished Twin Bedroom Sanctuary
+                - Slide 3: Guarded Residence & Inspiring Community
+                ================================================================
+              */
               <>
-                {/* Full-bleed background photography with continuous slow Ken Burns zoom */}
-                <motion.img
+                <img
                   src={slide.image}
                   alt={slide.title}
-                  initial={{ scale: 1 }}
-                  animate={{ scale: 1.055 }}
-                  transition={{ duration: 5.4, ease: 'easeOut' }}
                   className="w-full h-full object-cover object-center select-none"
-                  style={{
-                    filter: 'contrast(1.04) brightness(1.03) saturate(1.04)',
-                  }}
                   fetchPriority="high"
                   loading="eager"
                 />
 
-                {/* 
-                  Luminous forest-green lateral ambient gradient:
-                  Rendered on slides with text overlay for maximum readability.
-                */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#06180E]/85 via-[#06180E]/45 sm:via-[#06180E]/20 to-transparent pointer-events-none" />
+                {/* Ambient gradient scrims for pristine typographic legibility */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#05130B]/92 via-[#05130B]/60 sm:via-[#05130B]/35 to-transparent pointer-events-none" />
                 <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-[#040E08]/85 via-[#040E08]/30 to-transparent pointer-events-none" />
-                <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/25 to-transparent pointer-events-none" />
+                <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/35 to-transparent pointer-events-none" />
               </>
             )}
           </motion.div>
@@ -215,85 +213,78 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
 
       {/* 
         ========================================================================
-        FOREGROUND CINEMATIC CONTENT LAYER
-        Only rendered on slides with text overlay (slides 0, 2, 3).
-        The second slide (slide 1) has NO extra website-added text overlay!
+        FOREGROUND CONTENT LAYER (Rendered for Slides 0, 2, 3 with text)
         ========================================================================
       */}
       {!slide.hideTextOverlay ? (
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-36 lg:pt-40 pb-16 my-auto">
-          <div className="max-w-2xl space-y-6 text-left">
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-28 lg:pt-32 pb-16 my-auto">
+          <div className="max-w-2xl space-y-5 text-left">
             <AnimatePresence mode="wait">
               <motion.div
                 key={slide.id}
-                initial={{ opacity: 0, y: 22 }}
+                initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16 }}
-                transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
-                className="space-y-4"
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.55, ease: 'easeOut' }}
+                className="space-y-3.5"
               >
-                {/* Subtle Gold Kicker */}
-                <div className="flex items-center gap-3">
-                  <span className="w-8 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C]" />
-                  <span className="text-xs sm:text-sm font-semibold tracking-widest text-[#DFB76C] uppercase font-sans drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
+                {/* Gold Kicker */}
+                <div className="flex items-center gap-2.5">
+                  <span className="w-7 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C]" />
+                  <span className="text-xs sm:text-sm font-bold tracking-widest text-[#DFB76C] uppercase font-sans drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
                     {slide.kicker}
                   </span>
                 </div>
 
-                {/* Dominant Headline with Balance and Contrast */}
-                <h1 className="title-page text-white leading-[1.14] tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)] break-words">
+                {/* Dominant Headline */}
+                <h1 className="title-page text-white leading-[1.15] tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)] break-words">
                   {slide.title}{' '}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#E8C680] italic font-normal">
                     {slide.titleAccent}
                   </span>
                 </h1>
 
-                {/* Refined Descriptive Subtitle */}
+                {/* Descriptive Subtitle */}
                 <p className="text-lead !text-slate-100 font-medium leading-relaxed font-sans max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]">
                   {slide.subtitle}
                 </p>
               </motion.div>
             </AnimatePresence>
 
-            {/* 
-              Visitor-Facing Action Buttons:
-              - Primary: Explore Rooms (Navigates to full room details)
-              - Secondary: Enquire for Admission (Opens admissions modal)
-            */}
+            {/* Action Buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="flex flex-wrap items-center gap-3.5 pt-2"
+              transition={{ delay: 0.15, duration: 0.5 }}
+              className="flex flex-wrap items-center gap-3 pt-2"
             >
-              {/* Primary Action */}
               <button
                 onClick={() => {
                   if (onExploreRooms) onExploreRooms();
                   else onOpenEnquiry('Room Enquiry');
                 }}
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_6px_24px_rgba(223,183,108,0.35)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_4px_20px_rgba(223,183,108,0.35)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
               >
                 <span>Explore Rooms</span>
                 <ArrowRight className="w-4 h-4 text-[#051009]" />
               </button>
 
-              {/* Secondary Action */}
               <button
                 onClick={() => onOpenEnquiry(slide.label)}
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-black/60 hover:bg-[#102A1C] text-white border border-[#DFB76C]/60 hover:border-[#DFB76C] text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-black/60 hover:bg-[#102A1C] text-white border border-[#DFB76C]/60 hover:border-[#DFB76C] text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
               >
+                <MessageSquare className="w-4 h-4 text-[#DFB76C]" />
                 <span>Enquire for Admission</span>
               </button>
             </motion.div>
           </div>
         </div>
       ) : (
-        /* On slide 1 (flyer showcase), render a subtle bottom action button */
-        <div className="relative z-20 w-full flex-1 flex items-end justify-center pb-4 pt-2">
+        /* Slide 1 (Flyer): Interactive bottom trigger allowing quick enquiry */
+        <div className="relative z-20 w-full flex-1 flex items-end justify-center pb-16 pt-2 pointer-events-none">
           <button
             onClick={() => onOpenEnquiry('Official Property Showcase')}
-            className="btn-primary !bg-[#102A1C]/90 hover:!bg-[#1B3B2B] backdrop-blur-md !border !border-[#DFB76C]/60 shadow-2xl !py-2.5 !px-6 text-xs sm:text-sm font-semibold flex items-center gap-2 group cursor-pointer transition-all hover:scale-105 active:scale-95"
+            className="btn-primary !bg-[#102A1C]/92 hover:!bg-[#1B3B2B] backdrop-blur-md !border !border-[#DFB76C]/60 shadow-2xl !py-2.5 !px-6 text-xs sm:text-sm font-semibold flex items-center gap-2 group cursor-pointer transition-all hover:scale-105 active:scale-95 pointer-events-auto"
           >
             <span>Enquire for Admissions &amp; Pricing</span>
             <ArrowRight className="w-4 h-4 text-[#DFB76C] transition-transform group-hover:translate-x-1" />
@@ -303,13 +294,37 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
 
       {/* 
         ========================================================================
-        EDGE CHEVRON NAVIGATION (LEFT & RIGHT)
+        SYNCHRONIZED SLIDE INDICATOR DOTS (EXACTLY 4 DOTS)
+        Positioned neatly above the bottom ribbon
+        ========================================================================
+      */}
+      <div className="absolute bottom-16 sm:bottom-18 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-sm border border-white/10 shadow-lg">
+        {HERO_SLIDES.map((s, idx) => {
+          const isActive = currentSlide === idx;
+          return (
+            <button
+              key={s.id}
+              onClick={() => goToSlide(idx)}
+              aria-label={`Switch to slide ${idx + 1}: ${s.label}`}
+              className={`transition-all duration-300 cursor-pointer ${
+                isActive
+                  ? 'w-7 h-2 rounded-full bg-[#DFB76C] shadow-[0_0_8px_#DFB76C]'
+                  : 'w-2.5 h-2 rounded-full bg-white/55 hover:bg-white'
+              }`}
+            />
+          );
+        })}
+      </div>
+
+      {/* 
+        ========================================================================
+        PREVIOUS & NEXT CHEVRON NAVIGATION ARROWS
         ========================================================================
       */}
       <button
         onClick={prevSlide}
         aria-label="Previous Slide"
-        className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#0B1E13]/60 hover:bg-[#102A1C] text-white hover:text-[#DFB76C] border border-white/20 hover:border-[#DFB76C]/80 flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-2xl hover:scale-110 active:scale-95 group"
+        className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0B1E13]/65 hover:bg-[#102A1C] text-white hover:text-[#DFB76C] border border-white/20 hover:border-[#DFB76C]/80 flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-xl hover:scale-110 active:scale-95 group"
       >
         <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:-translate-x-0.5" />
       </button>
@@ -317,17 +332,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenEnquiry, onExplo
       <button
         onClick={nextSlide}
         aria-label="Next Slide"
-        className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-[#0B1E13]/60 hover:bg-[#102A1C] text-white hover:text-[#DFB76C] border border-white/20 hover:border-[#DFB76C]/80 flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-2xl hover:scale-110 active:scale-95 group"
+        className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#0B1E13]/65 hover:bg-[#102A1C] text-white hover:text-[#DFB76C] border border-white/20 hover:border-[#DFB76C]/80 flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-xl hover:scale-110 active:scale-95 group"
       >
         <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 transition-transform group-hover:translate-x-0.5" />
       </button>
 
       {/* 
         ========================================================================
-        AMENITIES RIBBON (SEAMLESS EDGE-TO-EDGE FOUNDATION)
+        AMENITIES RIBBON (SEAMLESS EDGE-TO-EDGE BOTTOM FOUNDATION)
         ========================================================================
       */}
-      <div className="relative z-20 w-full bg-[#FAF8F5]/95 backdrop-blur-md border-t border-[#DFB76C]/30 text-[#102A1C] py-2.5 px-4 shadow-xl">
+      <div className="relative z-20 w-full bg-[#FAF8F5]/96 backdrop-blur-md border-t border-[#DFB76C]/30 text-[#102A1C] py-2.5 px-4 shadow-xl">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
           <div className="flex-1 flex flex-wrap items-center justify-around sm:justify-start gap-2 sm:gap-6 text-xs sm:text-sm font-semibold text-[#102A1C]">
             <button

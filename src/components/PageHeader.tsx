@@ -40,13 +40,13 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 lg:py-24 min-h-[300px] sm:min-h-[360px] lg:min-h-[400px] flex flex-col items-center justify-center text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 min-h-[320px] sm:min-h-[360px] lg:min-h-[390px] flex flex-col items-center justify-center text-center">
         {/* Animated Headline & Subhead */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="max-w-3xl space-y-4 [text-shadow:0_2px_14px_rgba(0,0,0,0.5)]"
+          transition={{ duration: 0.55, ease: 'easeOut' }}
+          className="max-w-3xl space-y-3.5 [text-shadow:0_2px_14px_rgba(0,0,0,0.5)]"
         >
           {/* Kicker Pill */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#DFB76C]/15 border border-[#DFB76C]/35 backdrop-blur-md shadow-xs">
@@ -67,7 +67,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
           </p>
 
           {/* Interactive CTAs */}
-          <div className="pt-3 flex flex-wrap items-center justify-center gap-3">
+          <div className="pt-2 sm:pt-3 flex flex-wrap items-center justify-center gap-3">
             {onOpenEnquiry && (
               <button
                 onClick={() => onOpenEnquiry(title)}
@@ -93,38 +93,38 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-8 sm:mt-12 pt-6 border-t border-white/15 w-full max-w-4xl grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 text-left"
+          transition={{ duration: 0.55, delay: 0.15 }}
+          className="mt-8 sm:mt-10 pt-5 border-t border-white/15 w-full max-w-4xl grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 text-left"
         >
-          <div className="flex items-center gap-2.5 bg-black/25 backdrop-blur-sm p-2.5 rounded-xl border border-white/10">
+          <div className="flex items-center gap-2.5 bg-black/30 backdrop-blur-sm p-2.5 sm:p-3 rounded-xl border border-white/10">
             <MapPin className="w-4 h-4 text-[#DFB76C] shrink-0" />
-            <div>
-              <p className="text-[11px] font-bold text-white leading-tight">100m to ISMS</p>
-              <p className="text-[11px] text-white/85">Ambegaon Bk, Pune</p>
+            <div className="min-w-0">
+              <p className="text-[11px] font-bold text-white leading-tight truncate">100m to ISMS</p>
+              <p className="text-[10px] sm:text-[11px] text-white/80 truncate">Ambegaon Bk, Pune</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 bg-black/25 backdrop-blur-sm p-2.5 rounded-xl border border-white/10">
+          <div className="flex items-center gap-2.5 bg-black/30 backdrop-blur-sm p-2.5 sm:p-3 rounded-xl border border-white/10">
             <ShieldCheck className="w-4 h-4 text-[#DFB76C] shrink-0" />
-            <div>
-              <p className="text-[11px] font-bold text-white leading-tight">24/7 Security</p>
-              <p className="text-[11px] text-white/85">CCTV & Wardens</p>
+            <div className="min-w-0">
+              <p className="text-[11px] font-bold text-white leading-tight truncate">24/7 Security</p>
+              <p className="text-[10px] sm:text-[11px] text-white/80 truncate">CCTV &amp; Wardens</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 bg-black/25 backdrop-blur-sm p-2.5 rounded-xl border border-white/10">
+          <div className="flex items-center gap-2.5 bg-black/30 backdrop-blur-sm p-2.5 sm:p-3 rounded-xl border border-white/10">
             <Utensils className="w-4 h-4 text-[#DFB76C] shrink-0" />
-            <div>
-              <p className="text-[11px] font-bold text-white leading-tight">4 Fresh Meals</p>
-              <p className="text-[11px] text-white/85">Hygienic Dining</p>
+            <div className="min-w-0">
+              <p className="text-[11px] font-bold text-white leading-tight truncate">4 Fresh Meals</p>
+              <p className="text-[10px] sm:text-[11px] text-white/80 truncate">Hygienic Dining</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5 bg-black/25 backdrop-blur-sm p-2.5 rounded-xl border border-white/10">
+          <div className="flex items-center gap-2.5 bg-black/30 backdrop-blur-sm p-2.5 sm:p-3 rounded-xl border border-white/10">
             <Zap className="w-4 h-4 text-[#DFB76C] shrink-0" />
-            <div>
-              <p className="text-[11px] font-bold text-white leading-tight">100% Backup</p>
-              <p className="text-[11px] text-white/85">Power & High-Speed Wi-Fi</p>
+            <div className="min-w-0">
+              <p className="text-[11px] font-bold text-white leading-tight truncate">100% Backup</p>
+              <p className="text-[10px] sm:text-[11px] text-white/80 truncate">Power &amp; Wi-Fi Uptime</p>
             </div>
           </div>
         </motion.div>
