@@ -149,7 +149,9 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                 transition={{ duration: 0.45, delay: index * 0.08 }}
                 whileHover={{ y: -6, scale: 1.02 }}
                 onClick={() => openLightbox(index)}
-                className="group relative rounded-2xl overflow-hidden aspect-[4/3] bg-black/20 border border-white/15 hover:border-[#DFB76C] shadow-lg hover:shadow-2xl cursor-pointer transition-all duration-300"
+                className={`group relative rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-[4/3] bg-black/20 border border-white/15 hover:border-[#DFB76C] shadow-lg hover:shadow-2xl cursor-pointer transition-all duration-300 ${
+                  index === 4 ? 'col-span-2 sm:col-span-1' : ''
+                }`}
                 title={photo.title}
               >
                 {/* Clean Photo - Zero Text Overlay on Image */}

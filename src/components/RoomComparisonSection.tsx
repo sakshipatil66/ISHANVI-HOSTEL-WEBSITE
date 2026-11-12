@@ -40,14 +40,14 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
           </p>
 
           {/* Interactive Room Tabs with layoutId smooth transition */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-8 p-1.5 bg-white rounded-full inline-flex border border-[#E2D9C8] shadow-sm relative">
+          <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mt-8 p-1.5 bg-white rounded-2xl sm:rounded-full inline-flex border border-[#E2D9C8] shadow-sm relative max-w-full">
             {ROOMS_DATA.map((room) => {
               const isSelected = selectedRoomId === room.id;
               return (
                 <button
                   key={room.id}
                   onClick={() => setSelectedRoomId(room.id)}
-                  className={`relative px-5 py-2.5 rounded-full text-xs font-bold transition-all cursor-pointer z-10 ${
+                  className={`relative px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-bold transition-all cursor-pointer z-10 ${
                     isSelected
                       ? 'text-[#DFB76C]'
                       : 'text-[#1F2937] hover:text-[#102A1C] hover:bg-[#FAF8F5]'

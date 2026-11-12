@@ -33,30 +33,35 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-50 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-[#EFEAE1] transition-all shadow-2xs">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-[62px] sm:h-[70px] lg:h-[74px]">
-          {/* Brand Logo with Precise Vertical Centering */}
-          <a
-            href="/"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavClick('home');
-            }}
-            className="flex items-center text-left cursor-pointer focus:outline-none group shrink-0"
-            title="ISHANVI Hostel & Accommodation - Home"
-          >
-            <img
-              src={HOSTEL_INFO.logoUrl}
-              alt="ISHANVI Hostel & Accommodation"
-              className="h-8 sm:h-10 lg:h-11 xl:h-12 w-auto object-contain max-w-[130px] sm:max-w-[180px] lg:max-w-[195px] xl:max-w-[220px] mix-blend-multiply transition-transform duration-300 group-hover:scale-[1.02]"
-            />
-          </a>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-[70px] lg:h-[76px]">
+          {/* 
+            Left Column: Brand Logo 
+            Vertically centered and aligned flush left. On desktop, flex-1 creates symmetrical balance with right column.
+          */}
+          <div className="flex items-center justify-start lg:flex-1 shrink-0">
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('home');
+              }}
+              className="inline-flex items-center text-left cursor-pointer focus:outline-none group shrink-0 py-1"
+              title="ISHANVI Hostel & Accommodation - Home"
+            >
+              <img
+                src={HOSTEL_INFO.logoUrl}
+                alt="ISHANVI Hostel & Accommodation"
+                className="h-9 sm:h-10 lg:h-11 xl:h-12 w-auto object-contain max-w-[140px] sm:max-w-[175px] lg:max-w-[195px] xl:max-w-[215px] mix-blend-multiply transition-transform duration-200 group-hover:scale-[1.01]"
+              />
+            </a>
+          </div>
 
           {/* 
-            Desktop Navigation Menu:
-            Evenly spaced navigation links with equal horizontal padding and centered alignment.
+            Center Column: Desktop Navigation Menu
+            Centered with equal spacing, crisp typography, and anchored active gold line.
           */}
-          <nav className="hidden lg:flex items-center justify-center gap-0.5 xl:gap-1.5 2xl:gap-3 h-full">
+          <nav className="hidden lg:flex items-center justify-center gap-1 xl:gap-2 h-full shrink-0">
             {navLinks.map((link) => {
               const isActive = activePage === link.id;
               return (
@@ -67,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     e.preventDefault();
                     handleNavClick(link.id);
                   }}
-                  className={`relative flex items-center h-full px-2.5 xl:px-3 py-1 text-[13px] xl:text-[14px] font-semibold transition-colors cursor-pointer whitespace-nowrap ${
+                  className={`relative flex items-center h-full px-2.5 xl:px-3 text-[13px] xl:text-[14px] font-semibold transition-colors cursor-pointer whitespace-nowrap ${
                     isActive
                       ? 'text-[#102A1C] font-bold'
                       : 'text-[#4A5568] hover:text-[#102A1C]'
@@ -77,7 +82,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   {isActive && (
                     <motion.span
                       layoutId="activeNavIndicator"
-                      className="absolute bottom-0 left-2 right-2 h-[2.5px] bg-[#C5A059] rounded-full shadow-[0_0_6px_#C5A059]"
+                      className="absolute bottom-0 left-2.5 right-2.5 h-[2.5px] bg-[#C5A059] rounded-full shadow-[0_0_6px_rgba(197,160,89,0.7)]"
                       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                     />
                   )}
@@ -86,11 +91,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             })}
           </nav>
 
-          {/* Desktop Right Action: Phone Helpline + Enquire Button in Perfect Vertical Centering */}
-          <div className="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0">
+          {/* 
+            Right Column (Desktop): Contact Phone + Enquire Button
+            Vertically centered (items-center) with equal flex-1 to guarantee centered navigation.
+          */}
+          <div className="hidden lg:flex items-center justify-end lg:flex-1 gap-2.5 xl:gap-3 shrink-0">
             <a
               href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
-              className="h-10 px-3 xl:px-3.5 rounded-full border border-[#EFEAE1] hover:border-[#C5A059] bg-white/75 hover:bg-white text-[#102A1C] text-xs xl:text-sm font-semibold transition-all inline-flex items-center justify-center gap-1.5 xl:gap-2 shadow-2xs whitespace-nowrap cursor-pointer"
+              className="h-10 px-3 xl:px-3.5 rounded-full border border-[#EFEAE1] hover:border-[#C5A059] bg-white/80 hover:bg-white text-[#102A1C] text-xs xl:text-sm font-semibold transition-all inline-flex items-center justify-center gap-1.5 xl:gap-2 shadow-2xs whitespace-nowrap cursor-pointer shrink-0"
               title="Call Admissions Reception"
             >
               <Phone className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
@@ -99,7 +107,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => onOpenEnquiry()}
-              className="h-10 px-4 xl:px-5 rounded-full bg-[#102A1C] hover:bg-[#1B3B2B] text-white text-xs xl:text-sm font-bold shadow-md hover:shadow-lg transition-all inline-flex items-center justify-center gap-2 whitespace-nowrap shrink-0 cursor-pointer hover:scale-[1.02] active:scale-95"
+              className="h-10 px-4 xl:px-5 rounded-full bg-[#102A1C] hover:bg-[#1B3B2B] text-white text-xs xl:text-sm font-bold shadow-sm hover:shadow transition-all inline-flex items-center justify-center gap-2 whitespace-nowrap shrink-0 cursor-pointer hover:scale-[1.02] active:scale-95"
             >
               <MessageSquare className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-[#DFB76C] shrink-0" />
               <span>Enquire Now</span>
@@ -107,12 +115,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </div>
 
-          {/* Tablet & Mobile Actions: Visible on < 1024px */}
-          <div className="flex lg:hidden items-center gap-1.5 sm:gap-2.5 shrink-0">
+          {/* 
+            Right Column (Tablet & Mobile): Actions Cluster
+            Uniform heights (h-9 on mobile, h-10 on tablet), perfect vertical alignment, and consistent tap targets.
+          */}
+          <div className="flex lg:hidden items-center gap-2 sm:gap-2.5 shrink-0">
             {/* Tablet quick phone call link */}
             <a
               href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
-              className="hidden sm:inline-flex items-center justify-center gap-1.5 h-9 px-3 rounded-full text-xs font-semibold text-[#102A1C] bg-white border border-[#EFEAE1] hover:border-[#102A1C] transition-colors shrink-0 shadow-2xs"
+              className="hidden sm:inline-flex items-center justify-center gap-1.5 h-9 sm:h-10 px-3 rounded-full text-xs font-semibold text-[#102A1C] bg-white border border-[#EFEAE1] hover:border-[#102A1C] transition-colors shrink-0 shadow-2xs"
               title="Call Reception"
             >
               <Phone className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
@@ -121,26 +132,26 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => onOpenEnquiry()}
-              className="h-8.5 sm:h-9 px-3 sm:px-4 inline-flex items-center justify-center gap-1 text-xs font-bold text-white bg-[#102A1C] hover:bg-[#1B3B2B] active:scale-95 rounded-full transition-all shadow-xs shrink-0 cursor-pointer"
+              className="h-9 sm:h-10 px-3.5 sm:px-4 inline-flex items-center justify-center gap-1.5 text-xs font-bold text-white bg-[#102A1C] hover:bg-[#1B3B2B] active:scale-95 rounded-full transition-all shadow-xs shrink-0 cursor-pointer"
             >
               <span>Enquire</span>
             </button>
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="h-8.5 w-8.5 sm:h-9 sm:w-9 min-h-[40px] min-w-[40px] flex items-center justify-center text-[#102A1C] hover:bg-[#F4EFE6] rounded-full border border-transparent hover:border-[#EFEAE1] transition-colors cursor-pointer shrink-0"
+              className="h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center text-[#102A1C] hover:bg-[#F4EFE6] rounded-full border border-[#EFEAE1] transition-colors cursor-pointer shrink-0"
               aria-label="Toggle navigation menu"
               aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile & Tablet Navigation Drawer */}
+      {/* Mobile & Tablet Navigation Drawer with Smooth Slide & Perfect Alignment */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#FDFBF7] border-b border-[#EFEAE1] px-4 py-4 space-y-1.5 shadow-xl animate-in slide-in-from-top-2">
+        <div className="lg:hidden bg-[#FDFBF7] border-b border-[#EFEAE1] px-4 py-4 space-y-1.5 shadow-xl animate-in slide-in-from-top-2 max-h-[calc(100dvh-70px)] overflow-y-auto no-scrollbar">
           {navLinks.map((link) => {
             const isActive = activePage === link.id;
             return (

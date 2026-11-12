@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   Users,
   MapPin,
+  Phone,
 } from 'lucide-react';
 import { HOSTEL_INFO } from '../data/hostelData';
 
@@ -23,13 +24,13 @@ interface HeroSlide {
   id: number;
   image: string;
   alt: string;
-  hideTextOverlay?: boolean;
+  objectPosition?: string;
 }
 
 /**
- * EXACT ORIGINAL FOUR HERO SLIDES (PRESERVED IN ORIGINAL ORDER)
+ * EXACT ORIGINAL FOUR HERO SLIDES (PRESERVED IN ORIGINAL SEQUENCE)
  * - Slide 1 (Index 0): Student Living & Reception Sanctuary
- * - Slide 2 (Index 1): Official ISHANVI Property Showcase Flyer (Embedded text preserved)
+ * - Slide 2 (Index 1): Official ISHANVI Property Showcase Full-Width Banner
  * - Slide 3 (Index 2): Furnished Twin Bedroom Sanctuary
  * - Slide 4 (Index 3): Guarded Residence & Campus Living
  */
@@ -38,22 +39,25 @@ const HERO_SLIDES: HeroSlide[] = [
     id: 0,
     image: '/assets/images/hero_student_clean_hd.jpg',
     alt: 'ISHANVI Hostel reception and comfortable student living in Ambegaon Pune',
+    objectPosition: 'object-center',
   },
   {
     id: 1,
-    image: '/assets/images/hero_slide_flyer.jpg',
+    image: '/assets/images/hero_slide_flyer_clean.jpg',
     alt: 'Official ISHANVI Hostel & Accommodation showcase with room photos, facilities, and contact details',
-    hideTextOverlay: true, // Slide 2: Do NOT display HTML overlay on desktop or mobile
+    objectPosition: 'object-[65%_center] md:object-center',
   },
   {
     id: 2,
     image: '/assets/images/hero_slide_room_hd.jpg',
     alt: 'Furnished twin sharing student bedroom with wooden wardrobe at ISHANVI Hostel Ambegaon Pune',
+    objectPosition: 'object-center',
   },
   {
     id: 3,
     image: '/assets/images/hero_facade_clean_hd.jpg',
     alt: 'Guarded residence building exterior with 24/7 security near ISMS Sankalp Pune',
+    objectPosition: 'object-center',
   },
 ];
 
@@ -173,7 +177,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         - On tablet & desktop: expands into full-height edge-to-edge presentation.
         ========================================================================
       */}
-      <div className="relative w-full aspect-[16/9] sm:aspect-[1.8/1] md:aspect-auto md:flex-1 md:h-full overflow-hidden bg-[#07170E]">
+      <div className="relative w-full min-h-[460px] sm:min-h-[500px] md:min-h-0 md:aspect-auto md:flex-1 md:h-full overflow-hidden bg-[#07170E] flex flex-col justify-center">
         {/* Background Slide Images with Cross-fade Transition */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <AnimatePresence initial={false}>
@@ -187,62 +191,61 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 ease: 'easeInOut',
               }}
               className="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer"
-              onClick={() => onOpenEnquiry(slide.hideTextOverlay ? 'Official Property Showcase' : 'Hero Admission Enquiry')}
+              onClick={() => onOpenEnquiry('Hero Admission Enquiry')}
               title="Click to enquire about ISHANVI Hostel"
             >
+              {/* 
+                Full-Width Edge-to-Edge Banner Image for ALL Slides (including Slide 2)
+                - 100% width and 100% height covering entire hero section
+                - object-fit: cover with fine-tuned object-position for optimal framing
+                - Zero side gaps, zero margins, zero padding, zero borders, zero empty spaces
+              */}
               <img
                 src={slide.image}
                 alt={slide.alt}
-                className="w-full h-full object-contain md:object-cover object-center select-none"
+                className={`w-full h-full object-cover ${slide.objectPosition || 'object-center'} select-none`}
                 fetchPriority={slide.id === 0 ? 'high' : 'auto'}
                 loading={slide.id === 0 ? 'eager' : 'lazy'}
               />
 
-              {/* 
-                Subtle gradient scrim applied on Desktop for Slides 0, 2, and 3
-                Ensures high contrast and typographic readability on desktop without tinting mobile
-              */}
-              {!slide.hideTextOverlay && (
-                <div className="hidden md:block absolute inset-0 pointer-events-none">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#05130B]/90 via-[#05130B]/55 sm:via-[#05130B]/30 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#040E08]/80 via-transparent to-transparent" />
-                  <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/35 to-transparent" />
-                </div>
-              )}
+              {/* Gradient Scrim for Rich Contrast & Readability across Mobile and Desktop */}
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#05130B]/95 via-[#05130B]/75 md:via-[#05130B]/55 sm:via-[#05130B]/40 to-[#05130B]/35 md:to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-36 md:h-40 bg-gradient-to-t from-[#040E08]/90 via-transparent to-transparent" />
+                <div className="absolute inset-x-0 top-0 h-20 md:h-24 bg-gradient-to-b from-black/40 to-transparent" />
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
 
         {/* 
           ========================================================================
-          DESKTOP FOREGROUND CONTENT LAYER:
-          - Displayed on md: screens and above for Slides 0, 2, 3
-          - Slide 1 (Flyer) has hideTextOverlay: true so its embedded text is shown
-          - Hidden on mobile (< md) so the full image remains 100% visible and unblocked
+          FOREGROUND CONTENT LAYER (FULL VISIBILITY ON BOTH MOBILE AND DESKTOP)
+          - Hero text (kicker, headline, description, CTAs) visible and positioned
+            neatly over the left-to-center area of the full-width banner
           ========================================================================
         */}
         <AnimatePresence mode="wait">
-          {!slide.hideTextOverlay && (
-            <motion.div
-              key="hero-text-overlay"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.45, ease: 'easeOut' }}
-              className="hidden md:flex relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 lg:pt-14 pb-14 sm:pb-16 my-auto pointer-events-none"
-            >
-              <div className="max-w-2xl space-y-4 sm:space-y-5 text-left pointer-events-auto">
-                <div className="space-y-3 sm:space-y-3.5">
+          <motion.div
+            key="hero-text-overlay"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
+            className="flex relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 lg:pt-14 pb-14 sm:pb-16 my-auto pointer-events-none"
+          >
+              <div className="max-w-2xl space-y-3 sm:space-y-4 md:space-y-5 text-left pointer-events-auto">
+                <div className="space-y-2 sm:space-y-3">
                   {/* Gold Kicker */}
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-7 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C]" />
-                    <span className="text-xs sm:text-sm font-bold tracking-widest text-[#DFB76C] uppercase font-sans drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
+                  <div className="flex items-center gap-2 sm:gap-2.5">
+                    <span className="w-5 sm:w-7 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C]" />
+                    <span className="text-[11px] sm:text-xs md:text-sm font-bold tracking-widest text-[#DFB76C] uppercase font-sans drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
                       {HERO_TEXT_CONTENT.kicker}
                     </span>
                   </div>
 
                   {/* Dominant Headline */}
-                  <h1 className="title-page text-white leading-[1.15] tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)] break-words">
+                  <h1 className="title-page text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white leading-[1.18] tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)] break-words">
                     {HERO_TEXT_CONTENT.title}{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#E8C680] italic font-normal">
                       {HERO_TEXT_CONTENT.titleAccent}
@@ -250,35 +253,34 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   </h1>
 
                   {/* Descriptive Subtitle */}
-                  <p className="text-lead !text-slate-100 font-medium leading-relaxed font-sans max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]">
+                  <p className="text-lead text-xs sm:text-sm md:text-base !text-slate-100 font-medium leading-relaxed font-sans max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]">
                     {HERO_TEXT_CONTENT.subtitle}
                   </p>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex flex-wrap items-center gap-3 pt-2">
+                <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1 sm:pt-2">
                   <button
                     onClick={() => {
                       if (onExploreRooms) onExploreRooms();
                       else onOpenEnquiry('Room Enquiry');
                     }}
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_4px_20px_rgba(223,183,108,0.35)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                    className="inline-flex items-center gap-2 px-4.5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_4px_20px_rgba(223,183,108,0.35)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
                   >
                     <span>{HERO_TEXT_CONTENT.primaryCta}</span>
-                    <ArrowRight className="w-4 h-4 text-[#051009]" />
+                    <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#051009]" />
                   </button>
 
                   <button
                     onClick={() => onOpenEnquiry('Admission Enquiry')}
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-black/60 hover:bg-[#102A1C] text-white border border-[#DFB76C]/60 hover:border-[#DFB76C] text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-black/60 hover:bg-[#102A1C] text-white border border-[#DFB76C]/60 hover:border-[#DFB76C] text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer"
                   >
-                    <MessageSquare className="w-4 h-4 text-[#DFB76C]" />
+                    <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#DFB76C]" />
                     <span>{HERO_TEXT_CONTENT.secondaryCta}</span>
                   </button>
                 </div>
               </div>
             </motion.div>
-          )}
         </AnimatePresence>
 
         {/* 

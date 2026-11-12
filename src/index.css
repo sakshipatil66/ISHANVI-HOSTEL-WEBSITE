@@ -68,6 +68,15 @@ img {
   }
 }
 
+/* Hide scrollbars for clean touch-scrolling feature strips */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* ========================================================
    UNIFIED ISHANVI TYPOGRAPHY DESIGN SYSTEM (PREMIUM & BALANCED)
    Harmonized across ALL sections of the website.
@@ -76,21 +85,25 @@ img {
 /* H1: Main Page & Hero Display Title (Unified Across Site) */
 .title-page {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(1.85rem, 3vw, 2.75rem);
+  font-size: clamp(1.5rem, 4vw, 2.75rem);
   font-weight: 700;
   line-height: 1.18;
   letter-spacing: -0.02em;
   text-wrap: balance;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* H2: Section Headings (Uniform across every single section) */
 .heading-section {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+  font-size: clamp(1.35rem, 3vw, 2.25rem);
   font-weight: 700;
   line-height: 1.22;
   letter-spacing: -0.015em;
   text-wrap: balance;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* Overline / Kicker with Gold Accent (Uniform across all sections) */
@@ -117,11 +130,13 @@ img {
 /* H3: Card & Subsection Headings (Uniform across all cards) */
 .heading-card {
   font-family: "Playfair Display", Georgia, serif;
-  font-size: 1.1875rem; /* 19px */
+  font-size: clamp(1.0625rem, 2vw, 1.25rem); /* 17-20px */
   font-weight: 700;
   line-height: 1.35;
   letter-spacing: -0.01em;
   color: #102A1C;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* Standard Body Paragraph */
