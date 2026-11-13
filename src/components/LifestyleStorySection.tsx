@@ -36,9 +36,9 @@ export const LifestyleStorySection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_CONFIG}
           transition={{ duration: 0.6, ease: LUXURY_EASE }}
-          className="text-center max-w-3xl mx-auto mb-10 sm:mb-14"
+          className="text-center max-w-3xl mx-auto mb-7 sm:mb-9"
         >
-          <div className="kicker-label justify-center mb-3">
+          <div className="kicker-label justify-center mb-2">
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
             <span>EVERYDAY LIVING AT ISHANVI</span>
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
@@ -46,15 +46,15 @@ export const LifestyleStorySection: React.FC = () => {
           <h2 className="heading-section text-[#102A1C]">
             A Day in the Life: Balanced Rhythm for Ambitious Minds
           </h2>
-          <p className="text-lead mt-3">
+          <p className="text-lead mt-2">
             Experience how our curated daily routine keeps you nourished, productive, and well-rested from morning to night.
           </p>
         </motion.div>
 
         {/* Interactive Story Container */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 items-center">
           {/* Left Column: Interactive Timeline Steps */}
-          <div className="lg:col-span-5 space-y-3">
+          <div className="lg:col-span-5 space-y-2.5">
             {DAILY_LIFESTYLE_TIMELINE.map((step, idx) => {
               const isActive = activeStep === idx;
               return (
@@ -67,7 +67,7 @@ export const LifestyleStorySection: React.FC = () => {
                   whileHover={{ x: 4 }}
                   whileTap={{ scale: 0.99 }}
                   onClick={() => setActiveStep(idx)}
-                  className={`w-full text-center p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer flex flex-col items-center gap-2.5 relative overflow-hidden ${
+                  className={`w-full text-center p-3.5 sm:p-4 rounded-2xl border transition-all cursor-pointer flex flex-col items-center gap-2 relative overflow-hidden ${
                     isActive
                       ? 'bg-white border-[#102A1C] shadow-lg ring-1 ring-[#102A1C]/15 sm:scale-[1.01]'
                       : 'bg-[#FAF8F5] border-[#EFEAE1] hover:bg-white hover:border-[#DFB76C]/60'
@@ -83,7 +83,7 @@ export const LifestyleStorySection: React.FC = () => {
                   )}
 
                   <div
-                    className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
+                    className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
                       isActive ? 'bg-[#102A1C] text-[#DFB76C] shadow-md' : 'bg-[#F4EFE6] text-[#4A5568]'
                     }`}
                   >
@@ -96,7 +96,7 @@ export const LifestyleStorySection: React.FC = () => {
                         {isActive && (
                           <span className="w-2 h-2 rounded-full bg-[#DFB76C] ring-4 ring-[#DFB76C]/20 shrink-0" />
                         )}
-                        <span className="text-xs font-bold text-[#A88238] uppercase tracking-wider tabular-nums">
+                        <span className="text-xs font-bold text-[#856626] uppercase tracking-wider tabular-nums">
                           {step.time}
                         </span>
                       </div>
@@ -104,7 +104,7 @@ export const LifestyleStorySection: React.FC = () => {
                         {step.tag}
                       </span>
                     </div>
-                    <h3 className="heading-card text-sm sm:text-base text-[#102A1C] mt-1.5">
+                    <h3 className="heading-card text-sm sm:text-base text-[#102A1C] mt-1">
                       {step.title}
                     </h3>
                     <p className="text-body-sm text-[#4B5563] mt-0.5 line-clamp-2">{step.subtitle}</p>
@@ -122,7 +122,7 @@ export const LifestyleStorySection: React.FC = () => {
             transition={{ duration: 0.6, ease: LUXURY_EASE }}
             className="lg:col-span-7"
           >
-            <div className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 border border-[#E2D9C8] shadow-2xl overflow-hidden relative">
+            <div className="bg-white rounded-3xl p-4 sm:p-6 border border-[#E2D9C8] shadow-xl overflow-hidden relative">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentItem.time}
@@ -130,35 +130,37 @@ export const LifestyleStorySection: React.FC = () => {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.98, y: -10 }}
                   transition={{ duration: 0.38, ease: LUXURY_EASE }}
-                  className="space-y-5 sm:space-y-6 text-center"
+                  className="space-y-4 sm:space-y-5 text-center"
                 >
-                  <div className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-[#FAF8F5] group">
+                  <div className="relative rounded-2xl overflow-hidden aspect-[16/10] max-h-[290px] w-full bg-[#FAF8F5] group">
                     <img
                       src={currentItem.image}
                       alt={currentItem.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       referrerPolicy="no-referrer"
+                      loading="lazy"
+                      decoding="async"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent pointer-events-none" />
                     <div className="absolute top-3 left-3 sm:top-4 sm:left-4 bg-[#102A1C]/90 backdrop-blur-md text-white text-[11px] sm:text-xs font-semibold px-3 py-1 rounded-full border border-[#DFB76C]/30 flex items-center gap-1.5 shadow-md">
                       <Sparkles className="w-3 h-3 text-[#DFB76C] shrink-0" />
                       <span>{currentItem.time} · {currentItem.tag}</span>
                     </div>
                   </div>
 
-                  <div className="space-y-2 text-center">
-                    <h3 className="heading-card text-[#102A1C] text-lg sm:text-2xl">
+                  <div className="space-y-1.5 text-center">
+                    <h3 className="heading-card text-[#102A1C] text-lg sm:text-xl">
                       {currentItem.title}
                     </h3>
-                    <p className="text-body-sm font-bold text-[#A88238]">{currentItem.subtitle}</p>
-                    <p className="text-lead text-[#2D3748] pt-1 font-normal mx-auto">
+                    <p className="text-body-sm font-bold text-[#856626]">{currentItem.subtitle}</p>
+                    <p className="text-lead text-[#2D3748] pt-0.5 font-normal mx-auto">
                       {currentItem.description}
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[#EFEAE1] flex flex-wrap items-center justify-center gap-3 text-xs text-[#4A5568]">
+                  <div className="pt-3 border-t border-[#EFEAE1] flex flex-wrap items-center justify-center gap-3 text-xs text-[#4A5568]">
                     <div className="flex items-center justify-center gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-[#A88238] shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-[#856626] shrink-0" />
                       <span className="font-medium text-[#2D3748]">Zero mundane distractions—all domestic chores managed</span>
                     </div>
                     <span className="font-bold text-[#102A1C] tabular-nums bg-[#FAF8F5] px-2.5 py-1 rounded-full border border-[#EFEAE1] shrink-0">

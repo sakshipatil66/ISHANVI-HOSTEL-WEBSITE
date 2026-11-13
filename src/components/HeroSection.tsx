@@ -166,11 +166,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
   return (
     <section
-      className="relative w-full flex flex-col justify-between bg-[#07170E] text-white overflow-hidden select-none md:h-[580px] lg:h-[calc(100dvh-76px)] lg:min-h-[540px] lg:max-h-[820px]"
+      className="hero-shell"
       aria-label="ISHANVI Luxury 4-Image Hero Slider"
     >
       {/* HERO SLIDER VIEWPORT CONTAINER */}
-      <div className="relative w-full min-h-[400px] sm:min-h-[460px] md:min-h-0 md:flex-1 md:h-full overflow-hidden bg-[#07170E] flex flex-col justify-center">
+      <div className="hero-viewport">
         {/* Background Slide Images with Cross-fade & Subtle Ken Burns Zoom */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <AnimatePresence initial={false}>
@@ -195,20 +195,20 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 loading={slide.id === 0 ? 'eager' : 'lazy'}
               />
 
-              {/* Gradient Scrim for Rich Contrast & Readability across Mobile and Desktop */}
+              {/* Strong Multi-Stop Gradient Scrim for 100% Contrast & Readability across Mobile and Desktop */}
               <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#05130B]/95 via-[#05130B]/75 md:via-[#05130B]/60 to-[#05130B]/35 md:to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 h-32 md:h-40 bg-gradient-to-t from-[#040E08]/90 via-transparent to-transparent" />
-                <div className="absolute inset-x-0 top-0 h-20 md:h-24 bg-gradient-to-b from-black/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#05130B]/95 via-[#05130B]/80 md:via-[#05130B]/70 to-[#05130B]/45 md:to-[#05130B]/25" />
+                <div className="absolute inset-x-0 bottom-0 h-28 md:h-36 bg-gradient-to-t from-[#040E08]/95 via-[#040E08]/45 to-transparent" />
+                <div className="absolute inset-x-0 top-0 h-16 md:h-20 bg-gradient-to-b from-black/50 to-transparent" />
               </div>
             </motion.div>
           </AnimatePresence>
         </div>
 
         {/* FOREGROUND CONTENT LAYER: Staggered Editorial Reveal */}
-        <div className="flex relative z-20 w-full max-w-7xl mx-auto px-10 sm:px-14 md:px-20 xl:px-16 pt-8 sm:pt-10 pb-14 sm:pb-16 my-auto pointer-events-none">
-          <div className="max-w-2xl space-y-3 sm:space-y-4 md:space-y-5 text-left pointer-events-auto">
-            <div className="space-y-2 sm:space-y-2.5">
+        <div className="flex relative z-20 w-full max-w-7xl mx-auto px-10 sm:px-14 md:px-16 pt-6 sm:pt-8 pb-11 sm:pb-12 my-auto pointer-events-none">
+          <div className="max-w-2xl space-y-2.5 sm:space-y-3.5 md:space-y-4 text-left pointer-events-auto">
+            <div className="space-y-1.5 sm:space-y-2">
               {/* Gold Kicker */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
@@ -217,7 +217,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 className="flex items-center gap-2 sm:gap-2.5"
               >
                 <span className="w-5 sm:w-7 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C] shrink-0" />
-                <span className="hero-kicker drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
+                <span className="hero-kicker">
                   {HERO_TEXT_CONTENT.kicker}
                 </span>
               </motion.div>
@@ -227,7 +227,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, delay: 0.16, ease: LUXURY_EASE }}
-                className="title-page text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]"
+                className="title-page text-white"
               >
                 {HERO_TEXT_CONTENT.title}{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#E8C680] italic font-normal">
@@ -240,7 +240,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, delay: 0.25, ease: LUXURY_EASE }}
-                className="hero-subtitle max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]"
+                className="hero-subtitle max-w-xl"
               >
                 {HERO_TEXT_CONTENT.subtitle}
               </motion.p>

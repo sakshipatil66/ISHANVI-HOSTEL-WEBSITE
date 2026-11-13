@@ -68,20 +68,20 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
   if (isStandalonePage) {
     return (
       <section className="section-space-lg bg-[#FDFBF7]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-14 lg:space-y-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 lg:space-y-10">
           {/* Room 1: Single Room (Image on Left, Rich Specs on Right) */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT_CONFIG}
             transition={{ duration: 0.6, ease: LUXURY_EASE }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center bg-white p-4 sm:p-7 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md hover:shadow-xl hover:border-[#DFB76C]/60 transition-all duration-300 w-full overflow-hidden"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 items-center bg-white p-4 sm:p-6 lg:p-8 rounded-3xl border border-[#EFEAE1] shadow-md hover:shadow-xl hover:border-[#DFB76C]/60 transition-all duration-300 w-full overflow-hidden"
           >
-            <div className="lg:col-span-5 w-full min-w-0 space-y-3">
+            <div className="lg:col-span-5 w-full min-w-0 space-y-2.5">
               {/* Spacious Proportionate Image Container - Zero Cut-off & Zero Horizontal Overlap */}
               <div
                 onClick={() => setInspectingRoom(ROOMS_DATA[0])}
-                className="relative rounded-2xl overflow-hidden shadow-lg border-2 border-[#EFEAE1] aspect-[4/3] sm:aspect-[16/11] max-h-[380px] w-full bg-[#FAF8F5] group cursor-pointer"
+                className="relative rounded-2xl overflow-hidden shadow-lg border-2 border-[#EFEAE1] aspect-[16/10] max-h-[300px] w-full bg-[#FAF8F5] group cursor-pointer"
               >
                 <img
                   src={ROOMS_DATA[0].image}
@@ -174,7 +174,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT_CONFIG}
             transition={{ duration: 0.6, ease: LUXURY_EASE }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center bg-white p-4 sm:p-7 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md hover:shadow-xl hover:border-[#DFB76C]/60 transition-all duration-300 w-full overflow-hidden"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 items-center bg-white p-4 sm:p-6 lg:p-8 rounded-3xl border border-[#EFEAE1] shadow-md hover:shadow-xl hover:border-[#DFB76C]/60 transition-all duration-300 w-full overflow-hidden"
           >
             <div className="lg:col-span-7 w-full min-w-0 order-2 lg:order-1 space-y-5 text-center">
               <div className="kicker-label justify-center">
@@ -245,11 +245,11 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               </div>
             </div>
 
-            <div className="lg:col-span-5 w-full min-w-0 order-1 lg:order-2 space-y-3">
+            <div className="lg:col-span-5 w-full min-w-0 order-1 lg:order-2 space-y-2.5">
               {/* Spacious Proportionate Image Container - Complete Twin Bed View */}
               <div
                 onClick={() => setInspectingRoom(ROOMS_DATA[1])}
-                className="relative rounded-2xl overflow-hidden shadow-lg border-2 border-[#EFEAE1] aspect-[4/3] sm:aspect-[16/11] max-h-[380px] w-full bg-[#FAF8F5] group cursor-pointer"
+                className="relative rounded-2xl overflow-hidden shadow-lg border-2 border-[#EFEAE1] aspect-[16/10] max-h-[300px] w-full bg-[#FAF8F5] group cursor-pointer"
               >
                 <img
                   src={ROOMS_DATA[1].image}
@@ -273,13 +273,13 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT_CONFIG}
             transition={{ duration: 0.6, ease: LUXURY_EASE }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center bg-white p-4 sm:p-7 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md hover:shadow-xl hover:border-[#DFB76C]/60 transition-all duration-300 w-full overflow-hidden"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 items-center bg-white p-4 sm:p-6 lg:p-8 rounded-3xl border border-[#EFEAE1] shadow-md hover:shadow-xl hover:border-[#DFB76C]/60 transition-all duration-300 w-full overflow-hidden"
           >
-            <div className="lg:col-span-5 w-full min-w-0 space-y-3">
+            <div className="lg:col-span-5 w-full min-w-0 space-y-2.5">
               {/* Spacious Proportionate Image Container - Complete Premium Room Perspective */}
               <div
                 onClick={() => setInspectingRoom(ROOMS_DATA[2])}
-                className="relative rounded-2xl overflow-hidden shadow-lg border-2 border-[#EFEAE1] aspect-[4/3] sm:aspect-[16/11] max-h-[380px] w-full bg-[#FAF8F5] group cursor-pointer"
+                className="relative rounded-2xl overflow-hidden shadow-lg border-2 border-[#EFEAE1] aspect-[16/10] max-h-[300px] w-full bg-[#FAF8F5] group cursor-pointer"
               >
                 <img
                   src={ROOMS_DATA[2].image}
@@ -371,7 +371,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT_CONFIG}
             transition={{ duration: 0.6, ease: LUXURY_EASE }}
-            className="rounded-3xl bg-[#FAF8F5] border border-[#EFEAE1] p-5 sm:p-10 lg:p-14 space-y-8 sm:space-y-10"
+            className="rounded-3xl bg-[#FAF8F5] border border-[#EFEAE1] p-5 sm:p-7 lg:p-8 space-y-6 sm:space-y-7"
           >
             <div className="text-center max-w-2xl mx-auto space-y-2">
               <div className="kicker-label justify-center mb-1">
@@ -385,7 +385,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
               {[
                 {
                   emoji: '🍽️',
@@ -507,7 +507,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_CONFIG}
           transition={{ duration: 0.6, ease: LUXURY_EASE }}
-          className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 sm:mb-12 gap-4"
+          className="flex flex-col sm:flex-row sm:items-end justify-between mb-7 sm:mb-9 gap-4"
         >
           <div>
             <div className="kicker-label mb-2">
@@ -523,7 +523,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
           {onViewAllRooms && (
             <button
               onClick={onViewAllRooms}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#102A1C] hover:text-[#C5A059] transition-colors cursor-pointer group self-start sm:self-auto"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#102A1C] hover:text-[#856626] transition-colors cursor-pointer group self-start sm:self-auto"
             >
               <span>View All Rooms</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -532,7 +532,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
         </motion.div>
 
         {/* 3 Room Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
           {ROOMS_DATA.map((room, idx) => (
             <motion.div
               key={room.id}
@@ -569,7 +569,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                   </div>
                 </div>
 
-                <div className="w-8 h-8 rounded-full bg-[#C5A059] text-white flex items-center justify-center shrink-0 shadow-xs group-hover:bg-[#102A1C] transition-colors duration-300">
+                <div className="w-8 h-8 rounded-full bg-[#8C6D2D] text-white flex items-center justify-center shrink-0 shadow-xs group-hover:bg-[#102A1C] transition-colors duration-300">
                   <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                 </div>
               </div>

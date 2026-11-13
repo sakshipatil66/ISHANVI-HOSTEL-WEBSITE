@@ -50,11 +50,11 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_CONFIG}
           transition={{ duration: 0.55, ease: LUXURY_EASE }}
-          className="text-center mb-8"
+          className="text-center mb-6 sm:mb-7"
         >
           <div className="kicker-label justify-center mb-2">
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
-            <span>ADMISSIONS & RESIDENCE FAQ</span>
+            <span>ADMISSIONS &amp; RESIDENCE FAQ</span>
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
           </div>
           <h2 className="heading-section text-[#102A1C]">
@@ -66,7 +66,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
         </motion.div>
 
         {/* Search & Category Filter Controls */}
-        <div className="space-y-4 mb-8">
+        <div className="space-y-3.5 mb-6">
           {/* Search Box */}
           <div className="relative max-w-lg mx-auto">
             <Search className="w-4 h-4 text-[#5B6676] absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -75,7 +75,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
               placeholder="Search questions (e.g. curfew, Wi-Fi, meals, deposit)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-16 py-2.5 rounded-full bg-white border border-[#EFEAE1] text-sm text-[#102A1C] placeholder:text-[#A0AEC0] shadow-2xs focus:outline-none focus:border-[#102A1C] focus:ring-2 focus:ring-[#DFB76C]/30 transition-all"
+              className="w-full pl-10 pr-16 py-2.5 rounded-full bg-white border border-[#EFEAE1] text-sm text-[#102A1C] placeholder:text-[#64748B] shadow-2xs focus:outline-none focus:border-[#102A1C] focus:ring-2 focus:ring-[#DFB76C]/30 transition-all"
             />
             {searchQuery && (
               <button
@@ -216,7 +216,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_CONFIG}
           transition={{ duration: 0.55, delay: 0.08, ease: LUXURY_EASE }}
-          className="mt-8 p-5 sm:p-6 rounded-2xl bg-[#FAF8F5] border border-[#EFEAE1] text-center space-y-2 shadow-xs"
+          className="mt-6 p-4 sm:p-5 rounded-2xl bg-[#FAF8F5] border border-[#EFEAE1] text-center space-y-2 shadow-xs"
         >
           <h3 className="heading-card text-sm sm:text-base text-[#102A1C]">
             Still have an unanswered question about admissions?
@@ -240,9 +240,9 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
               href={`https://wa.me/917767058988?text=${encodeURIComponent('Hello ISHANVI, I have a query regarding hostel admissions.')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary !py-2.5 !px-4 text-xs text-[#25D366] hover:text-[#102A1C] min-h-[44px]"
+              className="btn-secondary !py-2.5 !px-4 text-xs !text-[#102A1C] hover:!border-[#16A34A] min-h-[44px]"
             >
-              <MessageSquare className="w-3.5 h-3.5 text-[#25D366]" />
+              <MessageSquare className="w-3.5 h-3.5 text-[#16A34A]" />
               <span>Chat on WhatsApp</span>
             </motion.a>
           </div>

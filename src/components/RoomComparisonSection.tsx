@@ -26,9 +26,9 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_CONFIG}
           transition={{ duration: 0.6, ease: LUXURY_EASE }}
-          className="text-center max-w-3xl mx-auto mb-10 sm:mb-14"
+          className="text-center max-w-3xl mx-auto mb-7 sm:mb-9"
         >
-          <div className="kicker-label justify-center mb-3">
+          <div className="kicker-label justify-center mb-2">
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
             <span>A CLOSER LOOK AT YOUR STAY</span>
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
@@ -36,12 +36,12 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
           <h2 className="heading-section text-[#102A1C]">
             Transparent Comfort: Every Specification Verified
           </h2>
-          <p className="text-lead mt-3">
+          <p className="text-lead mt-2">
             Select a room category to examine its exact dimensions, furnishings, study amenities, and daylight orientation.
           </p>
 
           {/* Interactive Room Tabs with layoutId smooth transition */}
-          <div className="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8 p-1.5 bg-white rounded-2xl sm:rounded-full border border-[#E2D9C8] shadow-sm relative max-w-full">
+          <div className="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mt-5 sm:mt-6 p-1.5 bg-white rounded-2xl sm:rounded-full border border-[#E2D9C8] shadow-sm relative max-w-full">
             {ROOMS_DATA.map((room) => {
               const isSelected = selectedRoomId === room.id;
               return (
@@ -74,7 +74,7 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_CONFIG}
           transition={{ duration: 0.6, delay: 0.08, ease: LUXURY_EASE }}
-          className="bg-white rounded-3xl p-4 sm:p-8 lg:p-10 border border-[#E2D9C8] shadow-xl overflow-hidden"
+          className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 border border-[#E2D9C8] shadow-xl overflow-hidden"
         >
           <AnimatePresence mode="wait">
             <motion.div
@@ -83,13 +83,13 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.32, ease: LUXURY_EASE }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center w-full"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-7 lg:gap-9 items-center w-full"
             >
               {/* Left Column: Room Photo with Badge - bounded so it never overflows */}
               <div className="w-full min-w-0">
                 <motion.div
                   whileHover={{ scale: 1.01 }}
-                  className="relative rounded-2xl overflow-hidden shadow-lg border-4 border-[#FAF8F5] aspect-[4/3] sm:aspect-[16/11] max-h-[380px] w-full bg-[#FAF8F5] group"
+                  className="relative rounded-2xl overflow-hidden shadow-lg border-4 border-[#FAF8F5] aspect-[16/10] max-h-[300px] w-full bg-[#FAF8F5] group"
                 >
                   <img
                     src={selectedRoom.image}

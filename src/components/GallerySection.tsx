@@ -70,8 +70,8 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
           transition={{ duration: 0.6, ease: LUXURY_EASE }}
           className={
             isStandalonePage
-              ? 'text-center max-w-2xl mx-auto mb-8 sm:mb-10'
-              : 'flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4'
+              ? 'text-center max-w-2xl mx-auto mb-6 sm:mb-8'
+              : 'flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-7 gap-4'
           }
         >
           <div>
@@ -105,7 +105,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
 
         {/* Category Filters for Standalone Page */}
         {isStandalonePage && (
-          <div className="flex flex-wrap items-center justify-center gap-2 mb-8 sm:mb-10 pb-4 border-b border-[#E2D9C8]">
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-6 sm:mb-8 pb-3 border-b border-[#E2D9C8]">
             {categories.map((cat) => {
               const isSelected = selectedCategory === cat.id;
               return (
@@ -137,7 +137,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
 
         {/* Photos Grid: Clean photos with zero text overlay */}
         {isStandalonePage ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
             <AnimatePresence mode="popLayout">
               {displayPhotos.map((photo, index) => (
                 <motion.div
@@ -149,27 +149,28 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                   transition={{ duration: 0.42, delay: index * 0.04, ease: LUXURY_EASE }}
                   whileHover={{ y: -5 }}
                   onClick={() => openLightbox(index)}
-                  className="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl border border-[#E2D9C8] hover:border-[#DFB76C] transition-all duration-300 cursor-pointer flex flex-col"
+                  className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl border border-[#E2D9C8] hover:border-[#DFB76C] transition-all duration-300 cursor-pointer flex flex-col"
                 >
-                  <div className="relative aspect-[16/11] overflow-hidden bg-[#FAF8F5]">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-[#FAF8F5]">
                     <img
                       src={photo.image}
                       alt={`${photo.title} - ${photo.caption}`}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
                       referrerPolicy="no-referrer"
                       loading="lazy"
+                      decoding="async"
                     />
                   </div>
 
-                  <div className="p-5 sm:p-6 bg-white flex-1 flex flex-col justify-between border-t border-[#EFEAE1] text-center">
+                  <div className="p-4 sm:p-5 bg-white flex-1 flex flex-col justify-between border-t border-[#EFEAE1] text-center">
                     <div>
-                      <span className="text-[11px] font-bold text-[#A88238] uppercase tracking-wider block mb-1">
+                      <span className="text-[11px] font-bold text-[#856626] uppercase tracking-wider block mb-1">
                         {photo.category.toUpperCase()}
                       </span>
-                      <h3 className="heading-card text-base text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">
+                      <h3 className="heading-card text-sm sm:text-base text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">
                         {photo.title}
                       </h3>
-                      <p className="text-body-sm text-[#5B6676] mt-1.5">
+                      <p className="text-body-sm text-[#5B6676] mt-1">
                         {photo.caption}
                       </p>
                     </div>

@@ -14,24 +14,24 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({
   centered = false,
 }) => {
   return (
-    <section className="py-8 sm:py-12 bg-[#FDFBF7] relative overflow-hidden">
+    <section className="py-6 sm:py-9 bg-[#FDFBF7] relative overflow-hidden">
       {/* Background ambient decorative glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none animate-float-ambient" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[620px] h-[280px] bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none animate-float-ambient" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Exact Bottom Card from Reference Screenshot with Motion Animation */}
+        {/* Bottom CTA Card */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_CONFIG}
           transition={{ duration: 0.65, ease: LUXURY_EASE }}
-          className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#FAF6ED] via-[#F4EFE6] to-[#EAE3D2] border border-[#EFEAE1] shadow-xl p-5 sm:p-8 lg:p-10"
+          className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#FAF6ED] via-[#F4EFE6] to-[#EAE3D2] border border-[#EFEAE1] shadow-xl p-5 sm:p-7 lg:p-8"
         >
           {/* Subtle spinning gold accent in corner */}
           <div className="absolute -top-24 -right-24 w-60 h-60 rounded-full border border-[#DFB76C]/30 animate-aura-slow pointer-events-none" />
           <div className="absolute -bottom-24 -left-24 w-60 h-60 rounded-full border border-[#DFB76C]/20 pointer-events-none" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center relative z-10">
             {/* Left Column: Heading, Subtitle, Enquire Button */}
             <div className={`lg:col-span-7 space-y-4 ${centered ? 'text-center' : ''}`}>
               <div className={`kicker-label ${centered ? 'justify-center' : ''}`}>
@@ -89,7 +89,7 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({
             {/* Right Column: Room Photo with Floating Badge & Hover Lift */}
             <div className="lg:col-span-5 relative">
               {/* Floating Admissions Open Badge */}
-              <div className="absolute top-2.5 left-2.5 sm:-top-3.5 sm:-left-4 z-20 animate-float-slow">
+              <div className="absolute top-2.5 left-2.5 z-20 animate-float-slow">
                 <div className="bg-[#102A1C] text-white text-[11px] font-bold px-3.5 py-1.5 rounded-full shadow-lg border border-[#DFB76C]/40 flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-[#DFB76C]" />
                   <span>Admissions Open · New Term</span>
@@ -102,7 +102,7 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({
                 viewport={VIEWPORT_CONFIG}
                 whileHover={{ y: -4, scale: 1.02 }}
                 transition={{ duration: 0.55, ease: LUXURY_EASE }}
-                className="rounded-2xl overflow-hidden shadow-xl border-4 border-white aspect-[4/3] bg-white group cursor-pointer"
+                className="rounded-2xl overflow-hidden shadow-xl border-4 border-white aspect-[16/10] max-h-[250px] bg-white group cursor-pointer"
               >
                 <img
                   src="/assets/ref/cta_room.jpg"
@@ -123,7 +123,7 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_CONFIG}
           transition={{ duration: 0.6, delay: 0.12, ease: LUXURY_EASE }}
-          className={`mt-6 sm:mt-8 bg-[#102A1C] rounded-2xl p-5 sm:p-8 text-white flex flex-col md:flex-row gap-5 sm:gap-6 shadow-xl border border-[#DFB76C]/30 relative overflow-hidden ${
+          className={`mt-5 bg-[#102A1C] rounded-2xl p-4 sm:p-6 text-white flex flex-col md:flex-row gap-4 sm:gap-5 shadow-xl border border-[#DFB76C]/30 relative overflow-hidden ${
             centered
               ? 'items-center justify-center md:justify-around text-center'
               : 'items-start md:items-center justify-between'

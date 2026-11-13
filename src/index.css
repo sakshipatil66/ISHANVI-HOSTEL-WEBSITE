@@ -57,9 +57,9 @@ img {
   backface-visibility: hidden;
 }
 
-/* Soft shadow for text laid over photographs (keeps copy readable on any crop) */
+/* Crisp contrast shadow for text laid over photographs */
 .text-on-photo {
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.78), 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 /* Touch devices: comfortable minimum tap targets (avoid distorting slider dots or compact nav controls) */
@@ -83,6 +83,15 @@ img {
    Layered in @layer components so Tailwind utilities compose cleanly.
    ======================================================== */
 @layer components {
+  /* Master Hero Section Height & Viewport System (Shared Across All 7 Pages) */
+  .hero-shell {
+    @apply relative w-full flex flex-col justify-between bg-[#07170E] text-white overflow-hidden select-none md:h-[490px] lg:h-[530px] xl:h-[560px];
+  }
+
+  .hero-viewport {
+    @apply relative w-full min-h-[360px] sm:min-h-[410px] md:min-h-0 md:flex-1 md:h-full overflow-hidden bg-[#07170E] flex flex-col justify-center;
+  }
+
   /* H1: Main Page & Hero Display Title (Unified Across ALL 7 Pages) */
   .title-page {
     font-family: "Playfair Display", Georgia, serif;
@@ -135,7 +144,7 @@ img {
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #C5A059;
+    color: #856626;
   }
 
   /* Section Subtitle / Lead Paragraph (Uniform across all sections) */
@@ -239,15 +248,15 @@ img {
     transform: scale(0.97);
   }
 
-  /* Standardized Balanced Section Vertical Spacing */
+  /* Standardized Compact & Balanced Section Vertical Spacing */
   .section-space {
-    padding-top: clamp(2.75rem, 4.8vw, 5.25rem);
-    padding-bottom: clamp(2.75rem, 4.8vw, 5.25rem);
+    padding-top: clamp(2rem, 3.4vw, 3.5rem);
+    padding-bottom: clamp(2rem, 3.4vw, 3.5rem);
   }
 
   .section-space-lg {
-    padding-top: clamp(3rem, 5.5vw, 6rem);
-    padding-bottom: clamp(3rem, 5.5vw, 6rem);
+    padding-top: clamp(2.25rem, 3.8vw, 4rem);
+    padding-bottom: clamp(2.25rem, 3.8vw, 4rem);
   }
 
   /* Subtle Golden Divider Accent */

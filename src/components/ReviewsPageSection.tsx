@@ -89,17 +89,17 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
 
   return (
     <section className="section-space bg-[#FDFBF7] text-[#102A1C]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-7 sm:space-y-9">
         <h2 className="sr-only">Verified Resident Ratings &amp; Reviews</h2>
         {/* Scorecard & Highlights Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch">
           {/* Main Rating Summary Card */}
           <motion.div
             initial={{ opacity: 0, y: 22 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT_CONFIG}
             transition={{ duration: 0.6, ease: LUXURY_EASE }}
-            className="lg:col-span-5 bg-gradient-to-br from-[#102A1C] to-[#1B3B2B] text-white p-6 sm:p-9 rounded-3xl border border-[#DFB76C]/30 shadow-xl flex flex-col justify-between text-center items-center"
+            className="lg:col-span-5 bg-gradient-to-br from-[#102A1C] to-[#1B3B2B] text-white p-5 sm:p-7 rounded-3xl border border-[#DFB76C]/30 shadow-xl flex flex-col justify-between text-center items-center"
           >
             <div className="w-full">
               <div className="flex items-center justify-center gap-2 text-[#DFB76C] text-xs font-bold uppercase tracking-widest mb-3">
@@ -145,7 +145,7 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
               viewport={VIEWPORT_CONFIG}
               transition={{ duration: 0.5, delay: 0.05, ease: LUXURY_EASE }}
               whileHover={{ y: -3 }}
-              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2.5 flex flex-col justify-between text-center items-center"
+              className="p-4 sm:p-5 rounded-2xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2 flex flex-col justify-between text-center items-center"
             >
               <div className="w-full">
                 <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2 mx-auto">
@@ -177,7 +177,7 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
               viewport={VIEWPORT_CONFIG}
               transition={{ duration: 0.5, delay: 0.12, ease: LUXURY_EASE }}
               whileHover={{ y: -3 }}
-              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2.5 flex flex-col justify-between text-center items-center"
+              className="p-4 sm:p-5 rounded-2xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2 flex flex-col justify-between text-center items-center"
             >
               <div className="w-full">
                 <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2 mx-auto">
@@ -209,7 +209,7 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
               viewport={VIEWPORT_CONFIG}
               transition={{ duration: 0.5, delay: 0.19, ease: LUXURY_EASE }}
               whileHover={{ y: -3 }}
-              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2.5 flex flex-col justify-between text-center items-center"
+              className="p-4 sm:p-5 rounded-2xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2 flex flex-col justify-between text-center items-center"
             >
               <div className="w-full">
                 <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2 mx-auto">
@@ -241,7 +241,7 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
               viewport={VIEWPORT_CONFIG}
               transition={{ duration: 0.5, delay: 0.26, ease: LUXURY_EASE }}
               whileHover={{ y: -3 }}
-              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2.5 flex flex-col justify-between text-center items-center"
+              className="p-4 sm:p-5 rounded-2xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2 flex flex-col justify-between text-center items-center"
             >
               <div className="w-full">
                 <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2 mx-auto">
@@ -308,7 +308,7 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
         </div>
 
         {/* Reviews Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
           <AnimatePresence mode="popLayout">
             {displayedReviews.map((item, idx) => {
               const initials = item.author
@@ -324,8 +324,8 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.42, delay: idx * 0.04, ease: LUXURY_EASE }}
-                  whileHover={{ y: -5 }}
-                  className="bg-white rounded-3xl p-5 sm:p-7 border border-[#EFEAE1] shadow-xs hover:shadow-xl hover:border-[#DFB76C]/60 transition-all flex flex-col justify-between space-y-5 sm:space-y-6 group text-center items-center"
+                  whileHover={{ y: -4 }}
+                  className="bg-white rounded-2xl p-5 sm:p-6 border border-[#EFEAE1] shadow-xs hover:shadow-xl hover:border-[#DFB76C]/60 transition-all flex flex-col justify-between space-y-4 group text-center items-center"
                 >
                   <div className="space-y-3 sm:space-y-4 w-full">
                     <div className="flex flex-col items-center justify-center gap-2">
@@ -438,7 +438,7 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                     value={formName}
                     onChange={(e) => setFormName(e.target.value)}
                     placeholder="e.g. Aditi Sharma"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#EFEAE1] text-sm focus:outline-none focus:border-[#102A1C] bg-[#FAF8F5]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#EFEAE1] text-sm text-[#102A1C] placeholder:text-[#64748B] focus:outline-none focus:border-[#102A1C] bg-[#FAF8F5]"
                   />
                 </div>
 
@@ -448,7 +448,7 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                     <select
                       value={formRole}
                       onChange={(e) => setFormRole(e.target.value as any)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-[#EFEAE1] text-sm focus:outline-none focus:border-[#102A1C] bg-[#FAF8F5]"
+                      className="w-full px-3 py-2.5 rounded-xl border border-[#EFEAE1] text-sm text-[#102A1C] focus:outline-none focus:border-[#102A1C] bg-[#FAF8F5]"
                     >
                       <option value="Student">Student</option>
                       <option value="Parent">Parent</option>
@@ -487,7 +487,7 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                     value={formInstitution}
                     onChange={(e) => setFormInstitution(e.target.value)}
                     placeholder="e.g. ISMS Sankalp Business School"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#EFEAE1] text-sm focus:outline-none focus:border-[#102A1C] bg-[#FAF8F5]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#EFEAE1] text-sm text-[#102A1C] placeholder:text-[#64748B] focus:outline-none focus:border-[#102A1C] bg-[#FAF8F5]"
                   />
                 </div>
 
@@ -499,7 +499,7 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                     value={formQuote}
                     onChange={(e) => setFormQuote(e.target.value)}
                     placeholder="Describe your stay, food quality, safety, study environment, and staff friendliness..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#EFEAE1] text-sm focus:outline-none focus:border-[#102A1C] bg-[#FAF8F5]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#EFEAE1] text-sm text-[#102A1C] placeholder:text-[#64748B] focus:outline-none focus:border-[#102A1C] bg-[#FAF8F5]"
                   />
                 </div>
 

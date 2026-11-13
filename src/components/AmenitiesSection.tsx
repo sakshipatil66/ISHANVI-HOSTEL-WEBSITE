@@ -51,7 +51,7 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_CONFIG}
           transition={{ duration: 0.6, ease: LUXURY_EASE }}
-          className="text-center max-w-2xl mx-auto mb-12"
+          className="text-center max-w-2xl mx-auto mb-7 sm:mb-9"
         >
           <div className="kicker-label justify-center mb-2">
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
@@ -93,17 +93,17 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
 
         {/* Visual Storytelling Showcase of Key Facilities (Dedicated Page Only) */}
         {isStandalonePage && (
-          <div className="mt-12 sm:mt-14 pt-10 sm:pt-12 border-t border-[#EFEAE1]/80">
+          <div className="mt-8 sm:mt-10 pt-8 sm:pt-10 border-t border-[#EFEAE1]/80">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT_CONFIG}
               transition={{ duration: 0.6, ease: LUXURY_EASE }}
-              className="text-center mb-8 sm:mb-10"
+              className="text-center mb-6 sm:mb-8"
             >
               <div className="inline-flex items-center gap-2 mb-2">
                 <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
-                <span className="text-xs font-bold text-[#A88238] uppercase tracking-[0.18em]">
+                <span className="text-xs font-bold text-[#856626] uppercase tracking-[0.18em]">
                   AUTHENTIC RESIDENCE FACILITIES
                 </span>
               </div>
@@ -112,16 +112,16 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
               </h2>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
               <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={VIEWPORT_CONFIG}
                 transition={{ duration: 0.55, delay: 0.02, ease: LUXURY_EASE }}
                 whileHover={{ y: -5 }}
-                className="group rounded-3xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl hover:border-[#DFB76C]/80 transition-all duration-300 flex flex-col"
+                className="group rounded-2xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl hover:border-[#DFB76C]/80 transition-all duration-300 flex flex-col"
               >
-                <div className="aspect-[4/3] overflow-hidden relative bg-[#FAF8F5]">
+                <div className="aspect-[16/10] overflow-hidden relative bg-[#FAF8F5]">
                   <img
                     src="/assets/images/amenity_dining_hall_1793879543322.jpg"
                     alt="Hygienic Dining Hall at ISHANVI Hostel"
@@ -133,8 +133,8 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
                     4 Chef Meals Daily
                   </div>
                 </div>
-                <div className="p-5 space-y-1.5 flex-1 text-center">
-                  <span className="text-[11px] font-bold text-[#A88238] uppercase tracking-wider block">
+                <div className="p-4 sm:p-5 space-y-1.5 flex-1 text-center">
+                  <span className="text-[11px] font-bold text-[#856626] uppercase tracking-wider block">
                     Hygienic Dining
                   </span>
                   <h3 className="heading-card text-base text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">
@@ -152,9 +152,9 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
                 viewport={VIEWPORT_CONFIG}
                 transition={{ duration: 0.55, delay: 0.09, ease: LUXURY_EASE }}
                 whileHover={{ y: -5 }}
-                className="group rounded-3xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl hover:border-[#DFB76C]/80 transition-all duration-300 flex flex-col"
+                className="group rounded-2xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl hover:border-[#DFB76C]/80 transition-all duration-300 flex flex-col"
               >
-                <div className="aspect-[4/3] overflow-hidden relative bg-[#FAF8F5]">
+                <div className="aspect-[16/10] overflow-hidden relative bg-[#FAF8F5]">
                   <img
                     src="/assets/images/amenity_study_lounge_1793879542441.jpg"
                     alt="Silent Study Lounge at ISHANVI Hostel"
@@ -163,8 +163,8 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
                     decoding="async"
                   />
                 </div>
-                <div className="p-5 space-y-1.5 flex-1 text-center">
-                  <span className="text-[11px] font-bold text-[#A88238] uppercase tracking-wider block">
+                <div className="p-4 sm:p-5 space-y-1.5 flex-1 text-center">
+                  <span className="text-[11px] font-bold text-[#856626] uppercase tracking-wider block">
                     Study &amp; Focus
                   </span>
                   <h3 className="heading-card text-base text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">
@@ -182,9 +182,9 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
                 viewport={VIEWPORT_CONFIG}
                 transition={{ duration: 0.55, delay: 0.16, ease: LUXURY_EASE }}
                 whileHover={{ y: -5 }}
-                className="group rounded-3xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl hover:border-[#DFB76C]/80 transition-all duration-300 flex flex-col"
+                className="group rounded-2xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl hover:border-[#DFB76C]/80 transition-all duration-300 flex flex-col"
               >
-                <div className="aspect-[4/3] overflow-hidden relative bg-[#FAF8F5]">
+                <div className="aspect-[16/10] overflow-hidden relative bg-[#FAF8F5]">
                   <img
                     src="/assets/images/amenity_security_lobby_1793879543609.jpg"
                     alt="24x7 Security Lobby at ISHANVI Hostel"
@@ -193,8 +193,8 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
                     decoding="async"
                   />
                 </div>
-                <div className="p-5 space-y-1.5 flex-1 text-center">
-                  <span className="text-[11px] font-bold text-[#A88238] uppercase tracking-wider block">
+                <div className="p-4 sm:p-5 space-y-1.5 flex-1 text-center">
+                  <span className="text-[11px] font-bold text-[#856626] uppercase tracking-wider block">
                     24×7 Safety
                   </span>
                   <h3 className="heading-card text-base text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">
@@ -212,9 +212,9 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
                 viewport={VIEWPORT_CONFIG}
                 transition={{ duration: 0.55, delay: 0.23, ease: LUXURY_EASE }}
                 whileHover={{ y: -5 }}
-                className="group rounded-3xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl hover:border-[#DFB76C]/80 transition-all duration-300 flex flex-col"
+                className="group rounded-2xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl hover:border-[#DFB76C]/80 transition-all duration-300 flex flex-col"
               >
-                <div className="aspect-[4/3] overflow-hidden relative bg-[#FAF8F5]">
+                <div className="aspect-[16/10] overflow-hidden relative bg-[#FAF8F5]">
                   <img
                     src="/assets/images/amenity_fitness_hd_1793946898388.jpg"
                     alt="Resident Fitness Hub at ISHANVI Hostel"
@@ -223,8 +223,8 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
                     decoding="async"
                   />
                 </div>
-                <div className="p-5 space-y-1.5 flex-1 text-center">
-                  <span className="text-[11px] font-bold text-[#A88238] uppercase tracking-wider block">
+                <div className="p-4 sm:p-5 space-y-1.5 flex-1 text-center">
+                  <span className="text-[11px] font-bold text-[#856626] uppercase tracking-wider block">
                     Wellness Hub
                   </span>
                   <h3 className="heading-card text-base text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">

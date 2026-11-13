@@ -25,7 +25,7 @@ export const TestimonialsSection: React.FC = () => {
     <section id="testimonials" className="section-space bg-[#FDFBF7] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-12 gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 sm:mb-8 gap-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -68,7 +68,7 @@ export const TestimonialsSection: React.FC = () => {
         </div>
 
         {/* 3 Review Cards with AnimatePresence & Micro-hover interactions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
           <AnimatePresence mode="popLayout">
             {visibleReviews.map((t, idx) => {
               const initials = t.author
@@ -83,12 +83,12 @@ export const TestimonialsSection: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.38, delay: idx * 0.06, ease: LUXURY_EASE }}
-                  whileHover={{ y: -5 }}
-                  className="bg-white rounded-3xl p-5 sm:p-7 lg:p-8 border border-[#EFEAE1] shadow-xs hover:shadow-xl hover:border-[#DFB76C]/60 transition-all flex flex-col justify-between space-y-5 sm:space-y-6 group"
+                  whileHover={{ y: -4 }}
+                  className="bg-white rounded-2xl p-5 sm:p-6 border border-[#EFEAE1] shadow-xs hover:shadow-xl hover:border-[#DFB76C]/60 transition-all flex flex-col justify-between space-y-4 sm:space-y-5 group"
                 >
-                  <div className="space-y-3 sm:space-y-4">
-                    <Quote className="w-7 h-7 sm:w-8 sm:h-8 text-[#DFB76C]/40 group-hover:text-[#DFB76C] transition-colors" />
-                    <p className="text-body text-[#4A5568] leading-relaxed italic md:min-h-[110px]">
+                  <div className="space-y-2.5 sm:space-y-3">
+                    <Quote className="w-6 h-6 sm:w-7 sm:h-7 text-[#DFB76C]/40 group-hover:text-[#DFB76C] transition-colors" />
+                    <p className="text-body text-[#4A5568] leading-relaxed italic md:min-h-[84px]">
                       "{t.quote}"
                     </p>
                   </div>

@@ -25,7 +25,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#102A1C]/5 rounded-full blur-3xl pointer-events-none -z-10 animate-float-slow" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center">
           {/* Left Room Image with Arched Framing and Smooth Reveal */}
           <motion.div
             initial={{ opacity: 0, x: -28, scale: 0.98 }}
@@ -34,7 +34,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             transition={{ duration: 0.7, ease: LUXURY_EASE }}
             className="lg:col-span-6 relative"
           >
-            <div className="relative rounded-tl-3xl rounded-tr-[5.5rem] rounded-bl-3xl rounded-br-3xl overflow-hidden shadow-2xl border-4 border-white aspect-[4/3] group bg-[#FAF8F5]">
+            <div className="relative rounded-tl-3xl rounded-tr-[4.5rem] rounded-bl-3xl rounded-br-3xl overflow-hidden shadow-xl border-4 border-white aspect-[16/10] sm:aspect-[4/3] max-h-[340px] group bg-[#FAF8F5]">
               <img
                 src="/assets/ref/about_room.jpg"
                 alt="Comfortable living room at ISHANVI"
@@ -56,7 +56,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             whileInView={{ opacity: 1, x: 0 }}
             viewport={VIEWPORT_CONFIG}
             transition={{ duration: 0.65, delay: 0.08, ease: LUXURY_EASE }}
-            className={`lg:col-span-6 space-y-4 ${isStandalonePage ? 'text-center' : ''}`}
+            className={`lg:col-span-6 space-y-3.5 ${isStandalonePage ? 'text-center' : ''}`}
           >
             <div className={`kicker-label ${isStandalonePage ? 'justify-center' : ''}`}>
               <span className="w-5 h-[1.5px] bg-[#C5A059]" />

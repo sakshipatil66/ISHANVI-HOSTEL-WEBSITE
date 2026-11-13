@@ -44,16 +44,16 @@ export const HomeSafetySection: React.FC<HomeSafetySectionProps> = ({ onOpenEnqu
       <div className="absolute top-12 -left-24 w-80 h-80 bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none animate-float-ambient" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-9 items-center">
           {/* Left: Verified Lobby Visual + KYC Checklist */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={VIEWPORT_CONFIG}
             transition={{ duration: 0.65, ease: LUXURY_EASE }}
-            className="lg:col-span-5 space-y-5"
+            className="lg:col-span-5 space-y-4"
           >
-            <div className="relative rounded-3xl overflow-hidden aspect-[4/3] border-4 border-white shadow-xl bg-[#FAF8F5] group">
+            <div className="relative rounded-2xl overflow-hidden aspect-[16/10] max-h-[245px] border-4 border-white shadow-lg bg-[#0E2016] group">
               <img
                 src="/assets/images/amenity_security_lobby_1793879543609.jpg"
                 alt="24/7 supervised security reception lobby at ISHANVI Hostel Pune"
@@ -62,24 +62,24 @@ export const HomeSafetySection: React.FC<HomeSafetySectionProps> = ({ onOpenEnqu
                 loading="lazy"
                 decoding="async"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
-              <div className="absolute bottom-4 left-5 right-5 text-white">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/15 pointer-events-none" />
+              <div className="absolute bottom-3.5 left-4 right-4 text-white z-10 text-on-photo">
                 <p className="text-[11px] font-bold uppercase tracking-widest text-[#DFB76C]">
                   Supervised Reception Desk
                 </p>
-                <p className="font-serif text-lg font-bold mt-0.5">
+                <p className="font-serif text-base sm:text-lg font-bold mt-0.5 leading-snug">
                   On-Duty Resident Warden &amp; Visitor Log
                 </p>
               </div>
             </div>
 
             {/* Verified Onboarding KYC Card */}
-            <div className="bg-[#FAF8F5] rounded-2xl p-5 sm:p-6 border border-[#EFEAE1] space-y-3">
+            <div className="bg-[#FAF8F5] rounded-2xl p-4 sm:p-5 border border-[#EFEAE1] space-y-2.5">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#102A1C]">
                 <FileCheck2 className="w-4 h-4 text-[#C5A059] shrink-0" />
                 <span>Verified Resident Onboarding (KYC)</span>
               </div>
-              <ul className="space-y-2">
+              <ul className="space-y-1.5">
                 {ADMISSION_KYC.map((item) => (
                   <li key={item} className="text-xs sm:text-[13px] text-[#4A5568] flex items-start gap-2">
                     <span className="text-[#C5A059] font-bold">·</span>
@@ -91,13 +91,13 @@ export const HomeSafetySection: React.FC<HomeSafetySectionProps> = ({ onOpenEnqu
           </motion.div>
 
           {/* Right: Security Narrative & 4 Protocol Cards */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 space-y-4 sm:space-y-5">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT_CONFIG}
               transition={{ duration: 0.6, ease: LUXURY_EASE }}
-              className="space-y-3"
+              className="space-y-2.5"
             >
               <div className="kicker-label">
                 <span className="w-5 h-[1.5px] bg-[#C5A059]" />
@@ -111,7 +111,7 @@ export const HomeSafetySection: React.FC<HomeSafetySectionProps> = ({ onOpenEnqu
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
               {SECURITY_MEASURES.map(({ Icon, title, desc }, idx) => (
                 <motion.div
                   key={title}
@@ -119,13 +119,13 @@ export const HomeSafetySection: React.FC<HomeSafetySectionProps> = ({ onOpenEnqu
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={VIEWPORT_CONFIG}
                   transition={{ duration: 0.48, delay: idx * 0.06, ease: LUXURY_EASE }}
-                  whileHover={{ y: -4 }}
-                  className="bg-white rounded-2xl p-5 border border-[#EFEAE1] hover:border-[#DFB76C] hover:shadow-md transition-all space-y-2.5"
+                  whileHover={{ y: -3 }}
+                  className="bg-white rounded-2xl p-4 sm:p-5 border border-[#EFEAE1] hover:border-[#DFB76C] hover:shadow-md transition-all space-y-2"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center text-[#102A1C]">
-                    <Icon className="w-5 h-5 text-[#C5A059]" />
+                  <div className="w-9 h-9 rounded-xl bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center text-[#102A1C]">
+                    <Icon className="w-4 h-4 text-[#C5A059]" />
                   </div>
-                  <h3 className="heading-card text-base text-[#102A1C]">{title}</h3>
+                  <h3 className="heading-card text-sm sm:text-base text-[#102A1C]">{title}</h3>
                   <p className="text-body-sm text-[#4A5568] leading-relaxed">{desc}</p>
                 </motion.div>
               ))}

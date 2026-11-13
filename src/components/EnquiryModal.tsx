@@ -122,7 +122,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
           <h3 className="heading-card text-xl sm:text-2xl font-bold !text-white pr-8">
             Enquire for {formData.room || 'Accommodation'}
           </h3>
-          <p className="text-xs text-[#EAE3D2]/80 mt-1">
+          <p className="text-xs text-[#EAE3D2] mt-1">
             {HOSTEL_INFO.address}
           </p>
         </div>
@@ -203,12 +203,12 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Resident or Parent Name"
-                    className={`w-full pl-9 pr-3 py-2.5 text-sm rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-white ${
+                    className={`w-full pl-9 pr-3 py-2.5 text-sm text-[#102A1C] placeholder:text-[#64748B] rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-white ${
                       errors.name ? 'border-red-400 bg-red-50' : 'border-[#CBD5E1]'
                     }`}
                   />
                 </div>
-                {errors.name && <p className="text-[11px] text-red-500 mt-0.5">{errors.name}</p>}
+                {errors.name && <p className="text-[11px] text-red-600 font-medium mt-0.5">{errors.name}</p>}
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -223,12 +223,12 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="+91 77670 58988"
-                      className={`w-full pl-9 pr-3 py-2.5 text-sm rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-white ${
+                      className={`w-full pl-9 pr-3 py-2.5 text-sm text-[#102A1C] placeholder:text-[#64748B] rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-white ${
                         errors.phone ? 'border-red-400 bg-red-50' : 'border-[#CBD5E1]'
                       }`}
                     />
                   </div>
-                  {errors.phone && <p className="text-[11px] text-red-500 mt-0.5">{errors.phone}</p>}
+                  {errors.phone && <p className="text-[11px] text-red-600 font-medium mt-0.5">{errors.phone}</p>}
                 </div>
 
                 <div>
@@ -242,12 +242,12 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="name@email.com"
-                      className={`w-full pl-9 pr-3 py-2.5 text-sm rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
+                      className={`w-full pl-9 pr-3 py-2.5 text-sm text-[#102A1C] placeholder:text-[#64748B] rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
                         errors.email ? 'border-red-400 bg-red-50' : 'border-[#EFEAE1]'
                       }`}
                     />
                   </div>
-                  {errors.email && <p className="text-[11px] text-red-500 mt-0.5">{errors.email}</p>}
+                  {errors.email && <p className="text-[11px] text-red-600 font-medium mt-0.5">{errors.email}</p>}
                 </div>
               </div>
 
@@ -259,7 +259,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                   <select
                     value={formData.room}
                     onChange={(e) => setFormData({ ...formData, room: e.target.value })}
-                    className="w-full px-3 py-2.5 text-sm rounded-lg border border-[#EFEAE1] bg-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#102A1C]"
+                    className="w-full px-3 py-2.5 text-sm text-[#102A1C] rounded-lg border border-[#EFEAE1] bg-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#102A1C]"
                   >
                     {ROOMS_DATA.map((r) => (
                       <option key={r.id} value={r.name}>
@@ -279,13 +279,13 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                       type="date"
                       value={formData.moveInDate}
                       onChange={(e) => setFormData({ ...formData, moveInDate: e.target.value })}
-                      className={`w-full pl-9 pr-3 py-2.5 text-sm rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
+                      className={`w-full pl-9 pr-3 py-2.5 text-sm text-[#102A1C] rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
                         errors.moveInDate ? 'border-red-400 bg-red-50' : 'border-[#EFEAE1]'
                       }`}
                     />
                   </div>
                   {errors.moveInDate && (
-                    <p className="text-[11px] text-red-500 mt-0.5">{errors.moveInDate}</p>
+                    <p className="text-[11px] text-red-600 font-medium mt-0.5">{errors.moveInDate}</p>
                   )}
                 </div>
               </div>

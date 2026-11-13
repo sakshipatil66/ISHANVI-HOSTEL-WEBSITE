@@ -28,6 +28,27 @@ const LIVING_HIGHLIGHTS = [
   },
 ];
 
+const SPACE_PHOTOS = [
+  {
+    src: '/assets/images/community_terrace_hd_1793946912508.jpg',
+    alt: 'Open rooftop community terrace at ISHANVI Hostel Pune',
+    label: 'Rooftop Terrace',
+    caption: 'Breezy open space to relax after evening hours',
+  },
+  {
+    src: '/assets/images/hero_room_clean_hd.jpg',
+    alt: 'Clean sunlit bedroom interior at ISHANVI Hostel',
+    label: 'Spotless Upkeep',
+    caption: 'Orthopaedic beds, natural daylight & daily cleaning',
+  },
+  {
+    src: '/assets/images/amenity_dining_hall_1793879543322.jpg',
+    alt: 'Sanitized pure-vegetarian dining hall at ISHANVI Hostel',
+    label: 'Hygienic Dining Hall',
+    caption: 'Sanitized kitchen serving 4 fresh homestyle meals daily',
+  },
+];
+
 export const HomeLivingExperienceSection: React.FC = () => {
   return (
     <section className="section-space bg-[#F4EFE6]/65 border-y border-[#EFEAE1] relative overflow-hidden">
@@ -38,7 +59,7 @@ export const HomeLivingExperienceSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_CONFIG}
           transition={{ duration: 0.6, ease: LUXURY_EASE }}
-          className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-2.5"
+          className="text-center max-w-2xl mx-auto mb-7 sm:mb-9 space-y-2"
         >
           <div className="kicker-label justify-center">
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
@@ -53,85 +74,60 @@ export const HomeLivingExperienceSection: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Visual Showcase + Highlights */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-stretch mb-8">
-          {/* Left: 2 Authentic Living Photos */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+        {/* Balanced 3-Card Photo Showcase */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 mb-5 sm:mb-6">
+          {SPACE_PHOTOS.map((photo, idx) => (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              key={photo.label}
+              initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT_CONFIG}
-              transition={{ duration: 0.55, ease: LUXURY_EASE }}
-              className="relative rounded-3xl overflow-hidden aspect-[4/3] sm:aspect-auto sm:min-h-[300px] border-4 border-white shadow-lg bg-white group"
+              transition={{ duration: 0.5, delay: idx * 0.06, ease: LUXURY_EASE }}
+              whileHover={{ y: -4 }}
+              className="relative rounded-2xl overflow-hidden aspect-[16/10] max-h-[210px] border-4 border-white shadow-md bg-[#0E2016] group"
             >
               <img
-                src="/assets/images/community_terrace_hd_1793946912508.jpg"
-                alt="Open rooftop community terrace at ISHANVI Hostel Pune"
+                src={photo.src}
+                alt={photo.alt}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 referrerPolicy="no-referrer"
                 loading="lazy"
                 decoding="async"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 text-white">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/15 pointer-events-none" />
+              <div className="absolute bottom-3.5 left-4 right-4 text-white z-10 text-on-photo">
                 <p className="text-[11px] font-bold uppercase tracking-wider text-[#DFB76C]">
-                  Rooftop Terrace
+                  {photo.label}
                 </p>
-                <p className="font-serif text-base font-bold mt-0.5">
-                  Breezy open space to relax after evening hours
+                <p className="font-serif text-sm sm:text-base font-bold mt-0.5 leading-snug">
+                  {photo.caption}
                 </p>
               </div>
             </motion.div>
+          ))}
+        </div>
 
+        {/* 3 Compact Equal Upkeep Highlight Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 mb-5 sm:mb-6">
+          {LIVING_HIGHLIGHTS.map(({ Icon, title, desc }, idx) => (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              key={title}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT_CONFIG}
-              transition={{ duration: 0.55, delay: 0.08, ease: LUXURY_EASE }}
-              className="relative rounded-3xl overflow-hidden aspect-[4/3] sm:aspect-auto sm:min-h-[300px] border-4 border-white shadow-lg bg-white group"
+              transition={{ duration: 0.48, delay: idx * 0.07, ease: LUXURY_EASE }}
+              whileHover={{ y: -3 }}
+              className="bg-white rounded-2xl p-4 sm:p-5 border border-[#EFEAE1] hover:border-[#DFB76C]/80 hover:shadow-sm transition-all flex items-start gap-3.5"
             >
-              <img
-                src="/assets/images/hero_room_clean_hd.jpg"
-                alt="Clean sunlit bedroom interior at ISHANVI Hostel"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                referrerPolicy="no-referrer"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 text-white">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-[#DFB76C]">
-                  Spotless Upkeep
-                </p>
-                <p className="font-serif text-base font-bold mt-0.5">
-                  Orthopaedic beds, natural daylight &amp; daily cleaning
-                </p>
+              <div className="w-10 h-10 rounded-xl bg-[#FAF8F5] border border-[#EFEAE1] text-[#8C6D2D] flex items-center justify-center shrink-0">
+                <Icon className="w-5 h-5" />
+              </div>
+              <div className="space-y-1 min-w-0">
+                <h3 className="heading-card text-sm sm:text-base text-[#102A1C]">{title}</h3>
+                <p className="text-body-sm text-[#4A5568] leading-relaxed">{desc}</p>
               </div>
             </motion.div>
-          </div>
-
-          {/* Right: 3 Compact Upkeep Pillars */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-4">
-            {LIVING_HIGHLIGHTS.map(({ Icon, title, desc }, idx) => (
-              <motion.div
-                key={title}
-                initial={{ opacity: 0, x: 18 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={VIEWPORT_CONFIG}
-                transition={{ duration: 0.48, delay: idx * 0.07, ease: LUXURY_EASE }}
-                whileHover={{ x: 4 }}
-                className="flex-1 bg-white rounded-2xl p-5 border border-[#EFEAE1] hover:border-[#DFB76C]/80 hover:shadow-sm transition-all flex items-start gap-4"
-              >
-                <div className="w-10 h-10 rounded-xl bg-[#FAF8F5] border border-[#EFEAE1] text-[#8C6D2D] flex items-center justify-center shrink-0">
-                  <Icon className="w-5 h-5" />
-                </div>
-                <div className="space-y-1">
-                  <h3 className="heading-card text-base text-[#102A1C]">{title}</h3>
-                  <p className="text-body-sm text-[#4A5568] leading-relaxed">{desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          ))}
         </div>
 
         {/* Verified Pure-Veg Meal Schedule Strip */}
@@ -140,28 +136,28 @@ export const HomeLivingExperienceSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_CONFIG}
           transition={{ duration: 0.55, delay: 0.08, ease: LUXURY_EASE }}
-          className="bg-[#102A1C] text-white rounded-3xl p-5 sm:p-7 border border-[#DFB76C]/30 shadow-lg"
+          className="bg-[#102A1C] text-white rounded-2xl p-4 sm:p-5 border border-[#DFB76C]/30 shadow-lg"
         >
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
-            <div className="flex items-center gap-3.5 shrink-0">
-              <div className="w-11 h-11 rounded-2xl bg-[#DFB76C]/15 border border-[#DFB76C]/40 text-[#DFB76C] flex items-center justify-center shrink-0">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div className="flex items-center gap-3 shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-[#DFB76C]/15 border border-[#DFB76C]/40 text-[#DFB76C] flex items-center justify-center shrink-0">
                 <UtensilsCrossed className="w-5 h-5" />
               </div>
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-widest text-[#DFB76C]">
                   Daily Pure-Veg Kitchen
                 </p>
-                <p className="font-serif text-lg font-bold text-white">
+                <p className="font-serif text-base sm:text-lg font-bold text-white">
                   4 Fresh Meals Served Daily
                 </p>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 flex-1">
+            <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 flex-1">
               {MEAL_TIMINGS.map((item) => (
                 <div
                   key={item.meal}
-                  className="bg-white/5 border border-white/10 rounded-2xl px-4 py-3 space-y-0.5"
+                  className="bg-white/5 border border-white/10 rounded-xl px-3.5 py-2.5 space-y-0.5"
                 >
                   <p className="text-xs font-semibold text-[#EAE3D2]">{item.meal}</p>
                   <p className="text-xs font-mono font-bold text-[#DFB76C] tabular-nums">

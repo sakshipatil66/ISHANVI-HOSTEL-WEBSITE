@@ -160,7 +160,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenEnquiry }) => 
                 </a>
               </p>
               <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
-                <p className="text-xs text-[#A0AEC0] leading-relaxed">
+                <p className="text-xs text-[#CBD5E0] leading-relaxed">
                   Visiting Hours: {HOSTEL_INFO.visitingHours}
                 </p>
                 <button
@@ -180,7 +180,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenEnquiry }) => 
           whileInView={{ opacity: 1 }}
           viewport={VIEWPORT_CONFIG}
           transition={{ duration: 0.55, delay: 0.2, ease: LUXURY_EASE }}
-          className="pt-4 sm:pt-5 lg:pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-[11px] sm:text-xs text-[#A0AEC0] text-center sm:text-left"
+          className="pt-4 sm:pt-5 lg:pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-[11px] sm:text-xs text-[#CBD5E0] text-center sm:text-left"
         >
           <p className="leading-relaxed break-words">
             © {new Date().getFullYear()} ISHANVI HOSTEL &amp; ACCOMMODATION. All Rights Reserved.

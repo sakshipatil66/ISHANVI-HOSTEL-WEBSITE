@@ -73,7 +73,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_CONFIG}
           transition={{ duration: 0.6, ease: LUXURY_EASE }}
-          className="text-center max-w-2xl mx-auto mb-10 sm:mb-14"
+          className="text-center max-w-2xl mx-auto mb-7 sm:mb-9"
         >
           <div className="kicker-label justify-center mb-2">
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
@@ -83,26 +83,26 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           <h2 className="heading-section text-[#102A1C]">
             Get In Touch With Ishanvi
           </h2>
-          <p className="mt-3 text-lead max-w-xl mx-auto">
+          <p className="mt-2 text-lead max-w-xl mx-auto">
             We are here to answer questions, share room pricing, and schedule your campus tour.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-7 lg:gap-8 items-start">
           {/* Left: Contact Info matching official banner */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={VIEWPORT_CONFIG}
             transition={{ duration: 0.6, ease: LUXURY_EASE }}
-            className="lg:col-span-5 space-y-6"
+            className="lg:col-span-5 space-y-4"
           >
-            <div className="bg-white rounded-3xl p-5 sm:p-8 lg:p-10 border border-[#EFEAE1] shadow-md space-y-6 text-center">
-              <h3 className="heading-card !text-xl sm:!text-2xl text-[#102A1C]">
+            <div className="bg-white rounded-3xl p-5 sm:p-7 border border-[#EFEAE1] shadow-md space-y-5 text-center">
+              <h3 className="heading-card !text-xl text-[#102A1C]">
                 Campus &amp; Enquiry Desk
               </h3>
 
-              <div className="space-y-4 pt-1">
+              <div className="space-y-3 pt-0.5">
                 <motion.a
                   initial={{ opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -185,7 +185,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             transition={{ duration: 0.6, delay: 0.08, ease: LUXURY_EASE }}
             className="lg:col-span-7"
           >
-            <div className="bg-white rounded-3xl p-5 sm:p-8 lg:p-10 border border-[#EFEAE1] shadow-lg">
+            <div className="bg-white rounded-3xl p-5 sm:p-7 border border-[#EFEAE1] shadow-lg">
               <AnimatePresence mode="wait">
                 {submitted ? (
                   <motion.div
@@ -264,11 +264,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="Your Name"
-                        className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-[#102A1C] text-center focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
+                        className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-[#102A1C] placeholder:text-[#64748B] text-center focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
                           errors.name ? 'border-red-400 bg-red-50' : 'border-[#EFEAE1]'
                         }`}
                       />
-                      {errors.name && <p className="text-[11px] text-red-500 mt-0.5 text-center">{errors.name}</p>}
+                      {errors.name && <p className="text-[11px] text-red-600 font-medium mt-0.5 text-center">{errors.name}</p>}
                     </div>
 
                     <div>
@@ -280,11 +280,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="+91 77670 58988"
-                        className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-[#102A1C] text-center focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
+                        className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-[#102A1C] placeholder:text-[#64748B] text-center focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
                           errors.phone ? 'border-red-400 bg-red-50' : 'border-[#EFEAE1]'
                         }`}
                       />
-                      {errors.phone && <p className="text-[11px] text-red-500 mt-0.5 text-center">{errors.phone}</p>}
+                      {errors.phone && <p className="text-[11px] text-red-600 font-medium mt-0.5 text-center">{errors.phone}</p>}
                     </div>
                   </div>
 
@@ -298,11 +298,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="you@example.com"
-                        className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-[#102A1C] text-center focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
+                        className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-[#102A1C] placeholder:text-[#64748B] text-center focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
                           errors.email ? 'border-red-400 bg-red-50' : 'border-[#EFEAE1]'
                         }`}
                       />
-                      {errors.email && <p className="text-[11px] text-red-500 mt-0.5 text-center">{errors.email}</p>}
+                      {errors.email && <p className="text-[11px] text-red-600 font-medium mt-0.5 text-center">{errors.email}</p>}
                     </div>
 
                     <div>
@@ -330,7 +330,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Ask about move-in date, food timings, or fee structure..."
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-[#EFEAE1] text-sm text-[#102A1C] text-center focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5]"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-[#EFEAE1] text-sm text-[#102A1C] placeholder:text-[#64748B] text-center focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5]"
                     />
                   </div>
 

@@ -38,12 +38,12 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 }) => {
   return (
     <section
-      className="relative w-full flex flex-col justify-between bg-[#07170E] text-white overflow-hidden select-none"
+      className="hero-shell"
       aria-label={`${breadcrumb} Hero Header`}
     >
-      {/* HERO VIEWPORT CONTAINER — Matches Home Hero Proportions & Scrim */}
-      <div className="relative w-full min-h-[340px] sm:min-h-[390px] lg:min-h-[430px] overflow-hidden bg-[#07170E] flex flex-col justify-center">
-        {/* Background Photo with Ken Burns Settle & Directional Contrast Scrim */}
+      {/* HERO VIEWPORT CONTAINER — Unified Height Matching Home Hero Reference */}
+      <div className="hero-viewport">
+        {/* Background Photo with Ken Burns Settle & Strong Directional Contrast Scrim */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <motion.img
             initial={{ scale: 1.05, opacity: 0.2 }}
@@ -56,14 +56,14 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             loading="eager"
           />
           <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-[#05130B]/70" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#040E08]/90 via-[#05130B]/40 to-[#040E08]/60" />
+            <div className="absolute inset-0 bg-[#05130B]/75" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#040E08]/92 via-[#05130B]/55 to-[#040E08]/75" />
           </div>
         </div>
 
         {/* FOREGROUND EDITORIAL CONTENT LAYER — Center-Aligned Across All Subpages */}
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-14 my-auto">
-          <div className="max-w-3xl mx-auto space-y-3 sm:space-y-4 text-center">
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 my-auto">
+          <div className="max-w-3xl mx-auto space-y-2.5 sm:space-y-3 text-center">
             {/* Breadcrumb Trail */}
             <motion.nav
               initial={{ opacity: 0, y: 8 }}
@@ -97,7 +97,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 className="flex items-center justify-center gap-2 sm:gap-2.5"
               >
                 <span className="w-5 sm:w-7 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C] shrink-0" />
-                <span className="hero-kicker drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
+                <span className="hero-kicker">
                   {kicker}
                 </span>
                 <span className="w-5 sm:w-7 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C] shrink-0" />
@@ -108,7 +108,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, delay: 0.16, ease: LUXURY_EASE }}
-                className="title-page text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]"
+                className="title-page text-white"
               >
                 {title}
                 {titleAccent && (
@@ -126,7 +126,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, delay: 0.25, ease: LUXURY_EASE }}
-                className="hero-subtitle max-w-2xl mx-auto drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]"
+                className="hero-subtitle max-w-2xl mx-auto"
               >
                 {subtitle}
               </motion.p>
