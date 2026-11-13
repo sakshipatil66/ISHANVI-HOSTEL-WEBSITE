@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
@@ -27,13 +28,6 @@ interface HeroSlide {
   objectPosition?: string;
 }
 
-/**
- * EXACT ORIGINAL FOUR HERO SLIDES (PRESERVED IN ORIGINAL SEQUENCE)
- * - Slide 1 (Index 0): Student Living & Reception Sanctuary
- * - Slide 2 (Index 1): Official ISHANVI Property Showcase Full-Width Banner
- * - Slide 3 (Index 2): Furnished Twin Bedroom Sanctuary
- * - Slide 4 (Index 3): Guarded Residence & Campus Living
- */
 const HERO_SLIDES: HeroSlide[] = [
   {
     id: 0,
@@ -44,26 +38,23 @@ const HERO_SLIDES: HeroSlide[] = [
   {
     id: 1,
     image: '/assets/images/hero_slide_flyer_clean.jpg',
-    alt: 'Official ISHANVI Hostel & Accommodation showcase with room photos, facilities, and contact details',
+    alt: 'Official ISHANVI Hostel and Accommodation showcase',
     objectPosition: 'object-[65%_center] md:object-center',
   },
   {
     id: 2,
     image: '/assets/images/hero_slide_room_hd.jpg',
-    alt: 'Furnished twin sharing student bedroom with wooden wardrobe at ISHANVI Hostel Ambegaon Pune',
+    alt: 'Furnished twin sharing student bedroom at ISHANVI Hostel',
     objectPosition: 'object-center',
   },
   {
     id: 3,
     image: '/assets/images/hero_facade_clean_hd.jpg',
-    alt: 'Guarded residence building exterior with 24/7 security near ISMS Sankalp Pune',
+    alt: 'ISHANVI Hostel guarded residence building exterior',
     objectPosition: 'object-center',
   },
 ];
 
-/**
- * UNIFIED TEXT CONTENT (SLIDES 1, 3, AND 4 ON DESKTOP)
- */
 const HERO_TEXT_CONTENT = {
   kicker: 'SAFE STAY · BETTER LIVING · BRIGHTER TOMORROW',
   title: 'A Comfortable Stay',
@@ -81,32 +72,30 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Transitions to the next slide smoothly
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
   }, []);
 
-  // Transitions to the previous slide smoothly
   const prevSlide = useCallback(() => {
-    setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+    setCurrentSlide(
+      (prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length
+    );
   }, []);
 
-  // Transitions to a specific slide by index
   const goToSlide = useCallback((index: number) => {
     setCurrentSlide(index);
   }, []);
 
-  // Starts or resets the automatic 5-second interval timer (5000ms)
   const startTimer = useCallback(() => {
     if (timerRef.current) {
       clearInterval(timerRef.current);
     }
+
     timerRef.current = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
     }, 5000);
   }, []);
 
-  // Initialize continuous 5-second automatic sliding on mount & pause when hidden
   useEffect(() => {
     startTimer();
 
@@ -127,11 +116,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       if (timerRef.current) {
         clearInterval(timerRef.current);
       }
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+
+      document.removeEventListener(
+        'visibilitychange',
+        handleVisibilityChange
+      );
     };
   }, [startTimer]);
 
-  // Manual navigation handlers that immediately navigate and reset the 5-second countdown timer
   const handleNext = () => {
     nextSlide();
     startTimer();
@@ -147,7 +139,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     startTimer();
   };
 
-  // Keyboard navigation support with timer reset
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') {
@@ -158,7 +149,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         startTimer();
       }
     };
+
     window.addEventListener('keydown', handleKeyDown);
+
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [nextSlide, prevSlide, startTimer]);
 
@@ -169,9 +162,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       className="hero-shell"
       aria-label="ISHANVI Luxury 4-Image Hero Slider"
     >
-      {/* HERO SLIDER VIEWPORT CONTAINER */}
+      {/* HERO SLIDER VIEWPORT */}
       <div className="hero-viewport">
-        {/* Background Slide Images with Cross-fade & Subtle Ken Burns Zoom */}
+        {/* BACKGROUND SLIDES */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <AnimatePresence initial={false}>
             <motion.div
@@ -190,44 +183,57 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <img
                 src={slide.image}
                 alt={slide.alt}
-                className={`w-full h-full object-cover ${slide.objectPosition || 'object-center'} select-none`}
+                className={`w-full h-full object-cover ${
+                  slide.objectPosition || 'object-center'
+                } select-none`}
                 fetchPriority={slide.id === 0 ? 'high' : 'auto'}
                 loading={slide.id === 0 ? 'eager' : 'lazy'}
               />
 
-              {/* Strong Multi-Stop Gradient Scrim for 100% Contrast & Readability across Mobile and Desktop */}
+              {/* IMAGE GRADIENT OVERLAY */}
               <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#05130B]/95 via-[#05130B]/80 md:via-[#05130B]/70 to-[#05130B]/45 md:to-[#05130B]/25" />
+
                 <div className="absolute inset-x-0 bottom-0 h-28 md:h-36 bg-gradient-to-t from-[#040E08]/95 via-[#040E08]/45 to-transparent" />
+
                 <div className="absolute inset-x-0 top-0 h-16 md:h-20 bg-gradient-to-b from-black/50 to-transparent" />
               </div>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* FOREGROUND CONTENT LAYER: Staggered Editorial Reveal */}
-        <div className="flex relative z-20 w-full max-w-7xl mx-auto px-10 sm:px-14 md:px-16 pt-6 sm:pt-8 pb-11 sm:pb-12 my-auto pointer-events-none">
-          <div className="max-w-2xl space-y-2.5 sm:space-y-3.5 md:space-y-4 text-left pointer-events-auto">
-            <div className="space-y-1.5 sm:space-y-2">
-              {/* Gold Kicker */}
+        {/* RESPONSIVE HERO CONTENT */}
+        <div className="flex relative z-20 w-full max-w-7xl mx-auto px-9 min-[360px]:px-10 sm:px-14 md:px-16 pt-6 sm:pt-8 pb-14 sm:pb-12 my-auto pointer-events-none">
+          <div className="w-full min-w-0 max-w-2xl space-y-2.5 sm:space-y-3.5 md:space-y-4 text-left pointer-events-auto">
+            <div className="min-w-0 space-y-1.5 sm:space-y-2">
+              {/* GOLD KICKER */}
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.08, ease: LUXURY_EASE }}
-                className="flex items-center gap-2 sm:gap-2.5"
+                transition={{
+                  duration: 0.55,
+                  delay: 0.08,
+                  ease: LUXURY_EASE,
+                }}
+                className="flex min-w-0 items-center gap-2 sm:gap-2.5"
               >
                 <span className="w-5 sm:w-7 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C] shrink-0" />
-                <span className="hero-kicker">
+
+                <span className="hero-kicker min-w-0">
                   {HERO_TEXT_CONTENT.kicker}
                 </span>
               </motion.div>
 
-              {/* Dominant Headline */}
+              {/* MAIN HEADING */}
               <motion.h1
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, delay: 0.16, ease: LUXURY_EASE }}
-                className="title-page text-white"
+                transition={{
+                  duration: 0.65,
+                  delay: 0.16,
+                  ease: LUXURY_EASE,
+                }}
+                className="title-page text-white max-w-full break-words"
               >
                 {HERO_TEXT_CONTENT.title}{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#E8C680] italic font-normal">
@@ -235,30 +241,41 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </span>
               </motion.h1>
 
-              {/* Descriptive Subtitle */}
+              {/* DESCRIPTION */}
               <motion.p
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, delay: 0.25, ease: LUXURY_EASE }}
+                transition={{
+                  duration: 0.65,
+                  delay: 0.25,
+                  ease: LUXURY_EASE,
+                }}
                 className="hero-subtitle max-w-xl"
               >
                 {HERO_TEXT_CONTENT.subtitle}
               </motion.p>
             </div>
 
-            {/* Action Buttons */}
+            {/* CALL TO ACTION BUTTONS */}
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.34, ease: LUXURY_EASE }}
+              transition={{
+                duration: 0.6,
+                delay: 0.34,
+                ease: LUXURY_EASE,
+              }}
               className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1"
             >
               <motion.button
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => {
-                  if (onExploreRooms) onExploreRooms();
-                  else onOpenEnquiry('Room Enquiry');
+                  if (onExploreRooms) {
+                    onExploreRooms();
+                  } else {
+                    onOpenEnquiry('Room Enquiry');
+                  }
                 }}
                 className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_4px_20px_rgba(223,183,108,0.35)] hover:shadow-[0_8px_28px_rgba(223,183,108,0.45)] transition-shadow cursor-pointer min-h-[44px] group"
               >
@@ -272,17 +289,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 onClick={() => onOpenEnquiry('Admission Enquiry')}
                 className="inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-black/60 hover:bg-[#102A1C] text-white border border-[#DFB76C]/60 hover:border-[#DFB76C] text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md transition-colors cursor-pointer min-h-[44px]"
               >
-                <MessageSquare className="w-4 h-4 text-[#DFB76C]" />
+                <MessageSquare className="w-4 h-4 text-[#DFB76C] shrink-0" />
                 <span>{HERO_TEXT_CONTENT.secondaryCta}</span>
               </motion.button>
             </motion.div>
           </div>
         </div>
 
-        {/* SYNCHRONIZED SLIDE INDICATOR DOTS */}
+        {/* SLIDE INDICATOR DOTS */}
         <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 sm:gap-2.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 shadow-lg pointer-events-auto">
           {HERO_SLIDES.map((s, idx) => {
             const isActive = currentSlide === idx;
+
             return (
               <button
                 key={s.id}
@@ -291,6 +309,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   handleDotClick(idx);
                 }}
                 aria-label={`Switch to slide ${idx + 1}`}
+                aria-current={isActive ? 'true' : undefined}
                 className={`transition-all duration-300 cursor-pointer ${
                   isActive
                     ? 'w-5 sm:w-6 h-1.5 sm:h-2 rounded-full bg-[#DFB76C] shadow-[0_0_8px_#DFB76C]'
@@ -301,25 +320,26 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           })}
         </div>
 
-        {/* PREVIOUS & NEXT CHEVRON NAVIGATION ARROWS */}
+        {/* PREVIOUS SLIDE BUTTON - DESKTOP AND TABLET */}
         <button
           onClick={(e) => {
             e.stopPropagation();
             handlePrev();
           }}
           aria-label="Previous Slide"
-          className="absolute left-1.5 sm:left-3 md:left-5 top-1/2 -translate-y-1/2 z-30 w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-[#0B1E13]/65 hover:bg-[#102A1C] text-white hover:text-[#DFB76C] border border-white/20 hover:border-[#DFB76C]/80 flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-lg hover:scale-110 active:scale-95 group"
+          className="absolute left-1.5 sm:left-3 md:left-5 top-1/2 -translate-y-1/2 z-30 w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-[#0B1E13]/65 hover:bg-[#102A1C] text-white hover:text-[#DFB76C] border border-white/20 hover:border-[#DFB76C]/80 hidden sm:flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-lg hover:scale-110 active:scale-95 group"
         >
           <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform group-hover:-translate-x-0.5" />
         </button>
 
+        {/* NEXT SLIDE BUTTON - DESKTOP AND TABLET */}
         <button
           onClick={(e) => {
             e.stopPropagation();
             handleNext();
           }}
           aria-label="Next Slide"
-          className="absolute right-1.5 sm:right-3 md:right-5 top-1/2 -translate-y-1/2 z-30 w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-[#0B1E13]/65 hover:bg-[#102A1C] text-white hover:text-[#DFB76C] border border-white/20 hover:border-[#DFB76C]/80 flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-lg hover:scale-110 active:scale-95 group"
+          className="absolute right-1.5 sm:right-3 md:right-5 top-1/2 -translate-y-1/2 z-30 w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 rounded-full bg-[#0B1E13]/65 hover:bg-[#102A1C] text-white hover:text-[#DFB76C] border border-white/20 hover:border-[#DFB76C]/80 hidden sm:flex items-center justify-center transition-all cursor-pointer backdrop-blur-md shadow-lg hover:scale-110 active:scale-95 group"
         >
           <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-transform group-hover:translate-x-0.5" />
         </button>
@@ -329,18 +349,46 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.55, delay: 0.4, ease: LUXURY_EASE }}
+        transition={{
+          duration: 0.55,
+          delay: 0.4,
+          ease: LUXURY_EASE,
+        }}
         className="relative z-20 w-full bg-[#FAF8F5] border-t border-[#DFB76C]/30 text-[#102A1C] py-2 sm:py-2.5 px-3 sm:px-6 lg:px-8 shadow-md shrink-0"
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
-          <div className="flex-1 flex items-center justify-start gap-1.5 sm:gap-3 md:gap-4 text-xs sm:text-sm font-semibold text-[#102A1C] overflow-x-auto no-scrollbar scroll-smooth touch-pan-x py-0.5">
+          <div className="flex-1 min-w-0 flex items-center justify-start gap-1.5 sm:gap-3 md:gap-4 text-xs sm:text-sm font-semibold text-[#102A1C] overflow-x-auto no-scrollbar scroll-smooth touch-pan-x py-0.5">
             {[
-              { label: 'Comfortable Rooms', query: 'Comfortable Rooms', Icon: Bed },
-              { label: 'High-Speed Wi-Fi', query: 'High-Speed Wi-Fi', Icon: Wifi },
-              { label: '4 Hygienic Meals', query: 'Hygienic Meals', Icon: Utensils },
-              { label: '24/7 Security', query: '24/7 Security', Icon: ShieldCheck },
-              { label: 'Supportive Community', query: 'Supportive Community', Icon: Users },
-              { label: 'Near ISMS Sankalp', query: 'Prime Location', Icon: MapPin },
+              {
+                label: 'Comfortable Rooms',
+                query: 'Comfortable Rooms',
+                Icon: Bed,
+              },
+              {
+                label: 'High-Speed Wi-Fi',
+                query: 'High-Speed Wi-Fi',
+                Icon: Wifi,
+              },
+              {
+                label: '4 Hygienic Meals',
+                query: 'Hygienic Meals',
+                Icon: Utensils,
+              },
+              {
+                label: '24/7 Security',
+                query: '24/7 Security',
+                Icon: ShieldCheck,
+              },
+              {
+                label: 'Supportive Community',
+                query: 'Supportive Community',
+                Icon: Users,
+              },
+              {
+                label: 'Near ISMS Sankalp',
+                query: 'Prime Location',
+                Icon: MapPin,
+              },
             ].map(({ label, query, Icon }) => (
               <motion.button
                 key={label}
@@ -355,18 +403,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             ))}
           </div>
 
-          {/* Quick Direct Phone Call Link */}
+          {/* DIRECT PHONE CALL LINK */}
           <a
             href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
-            className="text-xs font-bold text-[#102A1C] hover:text-[#8C6D2D] transition-colors flex items-center gap-1.5 shrink-0 whitespace-nowrap hidden sm:flex"
+            className="text-xs font-bold text-[#102A1C] hover:text-[#8C6D2D] transition-colors items-center gap-1.5 shrink-0 whitespace-nowrap hidden sm:flex"
             title="Call Admissions Reception"
           >
             <span>Call Admissions:</span>
-            <span className="font-mono text-[#8C6D2D]">{HOSTEL_INFO.phonePrimary}</span>
+            <span className="font-mono text-[#8C6D2D]">
+              {HOSTEL_INFO.phonePrimary}
+            </span>
           </a>
         </div>
       </motion.div>
     </section>
   );
 };
-
