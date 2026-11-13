@@ -33,7 +33,7 @@ export const LocationSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-10 sm:mb-14"
         >
           <div className="kicker-label justify-center mb-3">
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
@@ -49,13 +49,13 @@ export const LocationSection: React.FC = () => {
         </motion.div>
 
         {/* 2-Column Location Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-stretch">
           {/* Left Column: Proximity Metrics with Hover Slide */}
           <div className="lg:col-span-6 space-y-4 flex flex-col justify-between">
             <div className="space-y-3">
-              <h3 className="heading-card text-[#102A1C] mb-2 flex items-center justify-between">
+              <h3 className="heading-card text-[#102A1C] mb-2 flex flex-wrap items-center justify-between gap-2">
                 <span>Nearby Colleges & Transit Nodes</span>
-                <span className="text-xs font-semibold text-[#8C6D2D]">Walk & Auto Times</span>
+                <span className="text-xs font-semibold text-[#8C6D2D] shrink-0">Walk & Auto Times</span>
               </h3>
 
               {NEARBY_CONNECTIVITY.map((item, idx) => (
@@ -66,22 +66,22 @@ export const LocationSection: React.FC = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: idx * 0.08 }}
                   whileHover={{ x: 6, borderColor: '#102A1C' }}
-                  className="p-4 rounded-2xl bg-white border border-[#EFEAE1] shadow-xs flex items-center justify-between gap-4 transition-all cursor-pointer group"
+                  className="p-3.5 sm:p-4 rounded-2xl bg-white border border-[#EFEAE1] shadow-xs flex items-center justify-between gap-3 transition-all group"
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 min-w-0">
                     <div className="w-10 h-10 rounded-xl bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center shrink-0 group-hover:bg-[#102A1C] group-hover:text-white transition-colors">
                       {getIcon(item.type)}
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <h4 className="text-sm font-semibold text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">{item.name}</h4>
                       <p className="text-xs text-[#5B6676] flex items-center gap-1 mt-0.5">
-                        <Clock className="w-3 h-3 text-[#C5A059]" />
+                        <Clock className="w-3 h-3 text-[#C5A059] shrink-0" />
                         <span>{item.time}</span>
                       </p>
                     </div>
                   </div>
 
-                  <span className="text-xs font-bold text-[#102A1C] bg-[#FAF8F5] group-hover:bg-[#102A1C] group-hover:text-[#DFB76C] px-3 py-1.5 rounded-full border border-[#EFEAE1] whitespace-nowrap tabular-nums transition-colors">
+                  <span className="text-xs font-bold text-[#102A1C] bg-[#FAF8F5] group-hover:bg-[#102A1C] group-hover:text-[#DFB76C] px-3 py-1.5 rounded-full border border-[#EFEAE1] whitespace-nowrap tabular-nums transition-colors shrink-0">
                     {item.distance}
                   </span>
                 </motion.div>
@@ -101,14 +101,14 @@ export const LocationSection: React.FC = () => {
 
           {/* Right Column: Visual Location Showcase & Contact */}
           <div className="lg:col-span-6 flex flex-col">
-            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#EFEAE1] shadow-lg flex-1 flex flex-col justify-between space-y-6">
+            <div className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 border border-[#EFEAE1] shadow-lg flex-1 flex flex-col justify-between space-y-6">
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-[#C5A059]" />
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <MapPin className="w-5 h-5 text-[#C5A059] shrink-0" />
                     <h3 className="heading-card text-[#102A1C]">Campus Address</h3>
                   </div>
-                  <span className="text-[11px] font-semibold text-[#102A1C] bg-[#DFB76C]/30 px-3 py-1 rounded-full border border-[#DFB76C]/40 flex items-center gap-1">
+                  <span className="text-[11px] font-semibold text-[#102A1C] bg-[#DFB76C]/30 px-3 py-1 rounded-full border border-[#DFB76C]/40 flex items-center gap-1 shrink-0">
                     <Sparkles className="w-3 h-3 text-[#102A1C]" />
                     <span>Near ISMS Sankalp (100m)</span>
                   </span>
@@ -125,6 +125,8 @@ export const LocationSection: React.FC = () => {
                     alt="ISHANVI Hostel Banner"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     referrerPolicy="no-referrer"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
                   <div className="absolute bottom-3.5 left-4 right-4 text-white text-xs">
@@ -148,11 +150,11 @@ export const LocationSection: React.FC = () => {
                 </div>
 
                 <div className="space-y-2 text-xs text-[#5A655F]">
-                  <div className="flex justify-between py-1.5 border-b border-[#EFEAE1]">
+                  <div className="flex flex-wrap justify-between gap-2 py-1.5 border-b border-[#EFEAE1]">
                     <span className="text-[#5B6676]">Standard Gate Hours:</span>
                     <span className="font-semibold text-[#102A1C]">{HOSTEL_INFO.gateCurfew}</span>
                   </div>
-                  <div className="flex justify-between py-1.5 border-b border-[#EFEAE1]">
+                  <div className="flex flex-wrap justify-between gap-2 py-1.5 border-b border-[#EFEAE1]">
                     <span className="text-[#5B6676]">Admissions Helpline:</span>
                     <span className="font-semibold text-[#102A1C]">{HOSTEL_INFO.phonePrimary}</span>
                   </div>

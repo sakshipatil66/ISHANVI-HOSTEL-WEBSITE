@@ -14,9 +14,9 @@ export const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ onOpenEnquir
       <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Heading & Value Proposition */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-5 sm:space-y-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -40,21 +40,21 @@ export const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ onOpenEnquir
             <motion.div
               whileHover={{ y: -4, scale: 1.01 }}
               transition={{ duration: 0.25 }}
-              className="p-5 rounded-2xl bg-white border border-[#EFEAE1] shadow-sm hover:shadow-md hover:border-[#DFB76C]/80 transition-all flex items-start gap-4 cursor-pointer relative overflow-hidden"
+              className="p-4 sm:p-5 rounded-2xl bg-white border border-[#EFEAE1] shadow-sm hover:shadow-md hover:border-[#DFB76C]/80 transition-all flex items-start gap-3.5 sm:gap-4 cursor-pointer relative overflow-hidden"
             >
               <div className="w-11 h-11 rounded-xl bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0 shadow-md">
                 <HeartHandshake className="w-5 h-5" />
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h4 className="heading-card text-base text-[#102A1C]">
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h3 className="heading-card text-base text-[#102A1C]">
                     Direct Parent Transparency
-                  </h4>
-                  <span className="text-[11px] font-bold text-[#8C6D2D] uppercase tracking-wider bg-[#FAF6ED] px-2 py-0.5 rounded-full border border-[#DFB76C]/30">
+                  </h3>
+                  <span className="text-[11px] font-bold text-[#8C6D2D] uppercase tracking-wider bg-[#FAF6ED] px-2 py-0.5 rounded-full border border-[#DFB76C]/30 whitespace-nowrap">
                     24/7 Verified
                   </span>
                 </div>
-                <p className="text-body-sm mt-0.5">
+                <p className="text-body-sm mt-1">
                   Parents receive direct 24x7 phone access to the resident warden and verified student attendance tracking.
                 </p>
               </div>

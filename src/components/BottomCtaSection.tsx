@@ -20,7 +20,7 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({ onOpenEnquir
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.65 }}
-          className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#FAF6ED] via-[#F4EFE6] to-[#EAE3D2] border border-[#EFEAE1] shadow-xl p-6 sm:p-8 lg:p-10"
+          className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#FAF6ED] via-[#F4EFE6] to-[#EAE3D2] border border-[#EFEAE1] shadow-xl p-5 sm:p-8 lg:p-10"
         >
           {/* Subtle spinning gold accent in corner */}
           <div className="absolute -top-24 -right-24 w-60 h-60 rounded-full border border-[#DFB76C]/30 animate-aura-slow pointer-events-none" />
@@ -56,12 +56,12 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({ onOpenEnquir
                 </span>
               </div>
 
-              <div className="pt-2 flex flex-wrap items-center gap-3">
+              <div className="pt-2 flex flex-wrap items-center gap-2.5 sm:gap-3">
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => onOpenEnquiry('Final CTA Booking')}
-                  className="btn-primary group cursor-pointer"
+                  className="btn-primary group cursor-pointer w-full xs:w-auto"
                 >
                   <MessageSquare className="w-4 h-4 text-[#DFB76C]" />
                   <span>Enquire Now</span>
@@ -72,7 +72,7 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({ onOpenEnquir
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
-                  className="btn-secondary"
+                  className="btn-secondary w-full xs:w-auto"
                 >
                   <Phone className="w-4 h-4 text-[#A88238]" />
                   <span>Call {HOSTEL_INFO.phonePrimary}</span>
@@ -83,7 +83,7 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({ onOpenEnquir
             {/* Right Column: Room Photo with Floating Badge & Hover Lift */}
             <div className="lg:col-span-5 relative">
               {/* Floating Admissions Open Badge */}
-              <div className="absolute -top-3.5 -left-3.5 sm:-left-4 z-20 animate-float-slow">
+              <div className="absolute top-2.5 left-2.5 sm:-top-3.5 sm:-left-4 z-20 animate-float-slow">
                 <div className="bg-[#102A1C] text-white text-[11px] font-bold px-3.5 py-1.5 rounded-full shadow-lg border border-[#DFB76C]/40 flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-[#DFB76C]" />
                   <span>Admissions Open · New Term</span>
@@ -114,7 +114,7 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({ onOpenEnquir
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-6 sm:mt-8 bg-[#102A1C] rounded-2xl p-6 sm:p-8 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl border border-[#DFB76C]/30 relative overflow-hidden"
+          className="mt-6 sm:mt-8 bg-[#102A1C] rounded-2xl p-5 sm:p-8 text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-5 sm:gap-6 shadow-xl border border-[#DFB76C]/30 relative overflow-hidden"
         >
           {/* Subtle pulse background aura */}
           <div className="absolute right-0 top-0 w-48 h-48 bg-[#DFB76C]/10 rounded-full blur-2xl pointer-events-none" />

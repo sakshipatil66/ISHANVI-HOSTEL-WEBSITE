@@ -413,13 +413,14 @@ export default function App() {
       />
 
       {/* Floating WhatsApp Action Widget (matching reference) */}
-      <div className="fixed bottom-6 right-6 z-40">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40">
         <a
           href={`https://wa.me/917767058988?text=${encodeURIComponent(
             'Hello ISHANVI Hostel, I would like to inquire about room availability.'
           )}`}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Chat on WhatsApp"
           className="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-transform"
           title="Chat on WhatsApp (+91 77670 58988)"
         >

@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  --breakpoint-xs: 24rem;
   --font-serif: "Playfair Display", Georgia, serif;
   --font-sans: "Inter", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
   --color-cream-50: #FDFBF7;
@@ -30,7 +31,7 @@
 }
 
 /* ========================================================
-   QUALITY & RESPONSIVENESS BASE (added)
+   QUALITY & RESPONSIVENESS BASE
    ======================================================== */
 html {
   -webkit-text-size-adjust: 100%;
@@ -61,7 +62,7 @@ img {
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55);
 }
 
-/* Touch devices: comfortable minimum tap targets (avoid distorting slider dots or round icon buttons) */
+/* Touch devices: comfortable minimum tap targets (avoid distorting slider dots or compact nav controls) */
 @media (pointer: coarse) {
   a.btn-primary, a.btn-secondary, .btn-primary, .btn-secondary, input[type="button"], input[type="submit"] {
     min-height: 44px;
@@ -79,162 +80,160 @@ img {
 
 /* ========================================================
    UNIFIED ISHANVI TYPOGRAPHY DESIGN SYSTEM (PREMIUM & BALANCED)
-   Harmonized across ALL sections of the website.
+   Layered in @layer components so Tailwind utilities compose cleanly.
    ======================================================== */
+@layer components {
+  /* H1: Main Page & Hero Display Title (Unified Across Site) */
+  .title-page {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(1.625rem, 3.8vw, 2.85rem);
+    font-weight: 700;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    overflow-wrap: break-word;
+  }
 
-/* H1: Main Page & Hero Display Title (Unified Across Site) */
-.title-page {
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(1.5rem, 4vw, 2.75rem);
-  font-weight: 700;
-  line-height: 1.18;
-  letter-spacing: -0.02em;
-  text-wrap: balance;
-  overflow-wrap: break-word;
-  word-break: break-word;
-}
+  /* H2: Section Headings (Uniform across every single section) */
+  .heading-section {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(1.375rem, 2.8vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.22;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    overflow-wrap: break-word;
+  }
 
-/* H2: Section Headings (Uniform across every single section) */
-.heading-section {
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(1.35rem, 3vw, 2.25rem);
-  font-weight: 700;
-  line-height: 1.22;
-  letter-spacing: -0.015em;
-  text-wrap: balance;
-  overflow-wrap: break-word;
-  word-break: break-word;
-}
+  /* Overline / Kicker with Gold Accent (Uniform across all sections) */
+  .kicker-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    font-size: 0.75rem; /* 12px */
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #C5A059;
+  }
 
-/* Overline / Kicker with Gold Accent (Uniform across all sections) */
-.kicker-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  font-size: 0.75rem; /* 12px */
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #C5A059;
-}
+  /* Section Subtitle / Lead Paragraph (Uniform across all sections) */
+  .text-lead {
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1rem); /* 15-16px */
+    line-height: 1.65;
+    color: #2D3748;
+  }
 
-/* Section Subtitle / Lead Paragraph (Uniform across all sections) */
-.text-lead {
-  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1rem); /* 15-16px */
-  line-height: 1.65;
-  color: #2D3748;
-}
+  /* H3: Card & Subsection Headings (Uniform across all cards) */
+  .heading-card {
+    font-family: "Playfair Display", Georgia, serif;
+    font-size: clamp(1.0625rem, 1.8vw, 1.25rem); /* 17-20px */
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: #102A1C;
+    overflow-wrap: break-word;
+  }
 
-/* H3: Card & Subsection Headings (Uniform across all cards) */
-.heading-card {
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: clamp(1.0625rem, 2vw, 1.25rem); /* 17-20px */
-  font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
-  color: #102A1C;
-  overflow-wrap: break-word;
-  word-break: break-word;
-}
+  /* Standard Body Paragraph */
+  .text-body {
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.6;
+    color: #374151;
+  }
 
-/* Standard Body Paragraph */
-.text-body {
-  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  font-size: 0.875rem; /* 14px */
-  line-height: 1.6;
-  color: #374151;
-}
+  /* Compact Body Text */
+  .text-body-sm {
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    font-size: 0.8125rem; /* 13px */
+    line-height: 1.55;
+    color: #4B5563;
+  }
 
-/* Compact Body Text */
-.text-body-sm {
-  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  font-size: 0.8125rem; /* 13px */
-  line-height: 1.55;
-  color: #4B5563;
-}
+  /* Micro Caption / Label / Status */
+  .text-caption {
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    font-size: 0.75rem; /* 12px */
+    line-height: 1.45;
+    color: #5B6676;
+    font-weight: 500;
+  }
 
-/* Micro Caption / Label / Status */
-.text-caption {
-  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  font-size: 0.75rem; /* 12px (raised from 11px for legibility) */
-  line-height: 1.45;
-  color: #5B6676;
-  font-weight: 500;
-}
+  /* Unified Buttons */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6875rem 1.5rem;
+    border-radius: 9999px;
+    background-color: #102A1C;
+    color: #FFFFFF;
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    box-shadow: 0 3px 12px rgba(16, 42, 28, 0.18);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+  }
+  .btn-primary:hover {
+    background-color: #1B3B2B;
+    box-shadow: 0 6px 18px rgba(16, 42, 28, 0.24);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active {
+    transform: scale(0.97);
+  }
 
-/* Unified Buttons */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.6875rem 1.5rem;
-  border-radius: 9999px;
-  background-color: #102A1C;
-  color: #FFFFFF;
-  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  box-shadow: 0 3px 12px rgba(16, 42, 28, 0.18);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-}
-.btn-primary:hover {
-  background-color: #1B3B2B;
-  box-shadow: 0 6px 18px rgba(16, 42, 28, 0.24);
-  transform: translateY(-1px);
-}
-.btn-primary:active {
-  transform: scale(0.97);
-}
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: 9999px;
+    background-color: #FFFFFF;
+    border: 1px solid #EFEAE1;
+    color: #102A1C;
+    font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+  }
+  .btn-secondary:hover {
+    border-color: #102A1C;
+    background-color: #FAF8F5;
+  }
+  .btn-secondary:active {
+    transform: scale(0.97);
+  }
 
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.625rem 1.25rem;
-  border-radius: 9999px;
-  background-color: #FFFFFF;
-  border: 1px solid #EFEAE1;
-  color: #102A1C;
-  font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
-}
-.btn-secondary:hover {
-  border-color: #102A1C;
-  background-color: #FAF8F5;
-}
-.btn-secondary:active {
-  transform: scale(0.97);
-}
+  /* Standardized Balanced Section Vertical Spacing */
+  .section-space {
+    padding-top: clamp(2.75rem, 4.8vw, 5.25rem);
+    padding-bottom: clamp(2.75rem, 4.8vw, 5.25rem);
+  }
 
-/* Standardized Spacious Section Vertical Spacing (Generous Breathing Room) */
-.section-space {
-  padding-top: clamp(3.75rem, 5.5vw, 6rem);
-  padding-bottom: clamp(3.75rem, 5.5vw, 6rem);
-}
+  .section-space-lg {
+    padding-top: clamp(3rem, 5.5vw, 6rem);
+    padding-bottom: clamp(3rem, 5.5vw, 6rem);
+  }
 
-.section-space-lg {
-  padding-top: clamp(4.5rem, 7vw, 7.5rem);
-  padding-bottom: clamp(4.5rem, 7vw, 7.5rem);
-}
-
-/* Subtle Golden Divider Accent */
-.gold-divider {
-  height: 1px;
-  width: 100%;
-  background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.35), transparent);
+  /* Subtle Golden Divider Accent */
+  .gold-divider {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.35), transparent);
+  }
 }
 
 /* ========================================================

@@ -72,6 +72,19 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
     onClose();
   };
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSubmitted(false);
+        setErrors({});
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isOpen, onClose]);
+
   return (
     <div
       role="dialog"
@@ -96,7 +109,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
             <MessageSquare className="w-3.5 h-3.5" />
             <span>Admissions & Enquiry</span>
           </div>
-          <h3 className="heading-card text-xl sm:text-2xl font-bold !text-white">
+          <h3 className="heading-card text-xl sm:text-2xl font-bold !text-white pr-8">
             Enquire for {formData.room || 'Accommodation'}
           </h3>
           <p className="text-xs text-[#EAE3D2]/80 mt-1">
@@ -164,7 +177,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Resident or Parent Name"
-                    className={`w-full pl-9 pr-3 py-2 text-xs rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-white ${
+                    className={`w-full pl-9 pr-3 py-2.5 text-sm rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-white ${
                       errors.name ? 'border-red-400 bg-red-50' : 'border-[#CBD5E1]'
                     }`}
                   />
@@ -184,7 +197,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="+91 77670 58988"
-                      className={`w-full pl-9 pr-3 py-2 text-xs rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-white ${
+                      className={`w-full pl-9 pr-3 py-2.5 text-sm rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-white ${
                         errors.phone ? 'border-red-400 bg-red-50' : 'border-[#CBD5E1]'
                       }`}
                     />
@@ -203,7 +216,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="name@email.com"
-                      className={`w-full pl-9 pr-3 py-2 text-xs rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
+                      className={`w-full pl-9 pr-3 py-2.5 text-sm rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
                         errors.email ? 'border-red-400 bg-red-50' : 'border-[#EFEAE1]'
                       }`}
                     />
@@ -220,7 +233,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                   <select
                     value={formData.room}
                     onChange={(e) => setFormData({ ...formData, room: e.target.value })}
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#EFEAE1] bg-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#102A1C]"
+                    className="w-full px-3 py-2.5 text-sm rounded-lg border border-[#EFEAE1] bg-[#FAF8F5] focus:outline-none focus:ring-2 focus:ring-[#102A1C]"
                   >
                     {ROOMS_DATA.map((r) => (
                       <option key={r.id} value={r.name}>
@@ -240,7 +253,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                       type="date"
                       value={formData.moveInDate}
                       onChange={(e) => setFormData({ ...formData, moveInDate: e.target.value })}
-                      className={`w-full pl-9 pr-3 py-2 text-xs rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
+                      className={`w-full pl-9 pr-3 py-2.5 text-sm rounded-lg border focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
                         errors.moveInDate ? 'border-red-400 bg-red-50' : 'border-[#EFEAE1]'
                       }`}
                     />

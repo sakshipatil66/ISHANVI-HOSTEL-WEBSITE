@@ -72,7 +72,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-2xl mx-auto mb-14"
+          className="text-center max-w-2xl mx-auto mb-10 sm:mb-14"
         >
           <div className="kicker-label justify-center mb-2">
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
@@ -87,7 +87,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-start">
           {/* Left: Contact Info matching official banner */}
           <motion.div
             initial={{ opacity: 0, x: -25 }}
@@ -110,7 +110,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <div className="w-10 h-10 rounded-full bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0 shadow-xs">
                     <Phone className="w-4 h-4" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-xs font-semibold text-[#4B5563]">Call Now for Enquiry</p>
                     <p className="text-sm font-bold text-[#102A1C]">
                       {HOSTEL_INFO.phonePrimary}
@@ -122,9 +122,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <div className="w-10 h-10 rounded-full bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0 shadow-xs">
                     <MapPin className="w-4 h-4" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-xs font-semibold text-[#4B5563]">Hostel Location</p>
-                    <p className="text-xs font-bold text-[#102A1C] leading-snug">
+                    <p className="text-xs sm:text-[13px] font-bold text-[#102A1C] leading-snug">
                       {HOSTEL_INFO.address}
                     </p>
                   </div>
@@ -134,9 +134,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <div className="w-10 h-10 rounded-full bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0 shadow-xs">
                     <Clock className="w-4 h-4" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-xs font-semibold text-[#4B5563]">Visiting Hours</p>
-                    <p className="text-xs font-bold text-[#102A1C]">
+                    <p className="text-xs sm:text-[13px] font-bold text-[#102A1C]">
                       {HOSTEL_INFO.visitingHours}
                     </p>
                   </div>
@@ -168,7 +168,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             transition={{ duration: 0.55, delay: 0.1 }}
             className="lg:col-span-7"
           >
-            <div className="bg-white rounded-3xl p-5 sm:p-8 lg:p-12 border border-[#EFEAE1] shadow-lg">
+            <div className="bg-white rounded-3xl p-5 sm:p-8 lg:p-10 border border-[#EFEAE1] shadow-lg">
               {submitted ? (
                 <div className="text-center py-8 space-y-4 animate-in zoom-in-95">
                   <div className="w-14 h-14 rounded-full bg-[#102A1C]/10 text-[#102A1C] flex items-center justify-center mx-auto">
@@ -231,7 +231,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="Your Name"
-                        className={`w-full px-3.5 py-2.5 rounded-lg border text-xs text-[#102A1C] focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
+                        className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-[#102A1C] focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
                           errors.name ? 'border-red-400 bg-red-50' : 'border-[#EFEAE1]'
                         }`}
                       />
@@ -247,7 +247,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="+91 77670 58988"
-                        className={`w-full px-3.5 py-2.5 rounded-lg border text-xs text-[#102A1C] focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
+                        className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-[#102A1C] focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
                           errors.phone ? 'border-red-400 bg-red-50' : 'border-[#EFEAE1]'
                         }`}
                       />
@@ -265,7 +265,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="you@example.com"
-                        className={`w-full px-3.5 py-2.5 rounded-lg border text-xs text-[#102A1C] focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
+                        className={`w-full px-3.5 py-2.5 rounded-lg border text-sm text-[#102A1C] focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5] ${
                           errors.email ? 'border-red-400 bg-red-50' : 'border-[#EFEAE1]'
                         }`}
                       />
@@ -279,7 +279,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       <select
                         value={formData.preferredRoom}
                         onChange={(e) => setFormData({ ...formData, preferredRoom: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg border border-[#EFEAE1] text-xs text-[#102A1C] focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5]"
+                        className="w-full px-3.5 py-2.5 rounded-lg border border-[#EFEAE1] text-sm text-[#102A1C] focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5]"
                       >
                         <option value="Single Room">Single Room (Privacy & Peace)</option>
                         <option value="Double / Sharing Room">Double / Sharing Room</option>
@@ -297,7 +297,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Ask about move-in date, food timings, or fee structure..."
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-[#EFEAE1] text-xs text-[#102A1C] focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5]"
+                      className="w-full px-3.5 py-2.5 rounded-lg border border-[#EFEAE1] text-sm text-[#102A1C] focus:ring-2 focus:ring-[#102A1C] focus:outline-none bg-[#FAF8F5]"
                     />
                   </div>
 

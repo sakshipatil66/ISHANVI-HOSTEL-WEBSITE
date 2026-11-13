@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Bed,
@@ -26,6 +26,15 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
   isStandalonePage = false,
 }) => {
   const [inspectingRoom, setInspectingRoom] = useState<RoomItem | null>(null);
+
+  useEffect(() => {
+    if (!inspectingRoom) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setInspectingRoom(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [inspectingRoom]);
 
   const getRoomIcon = (type: string) => {
     switch (type) {
@@ -57,15 +66,15 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
   // DEDICATED ROOMS PAGE WITH EXPANDED SPECS & FULL-VISIBILITY PHOTOGRAPHS
   if (isStandalonePage) {
     return (
-      <section className="py-14 sm:py-20 lg:py-24 bg-[#FDFBF7]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 lg:space-y-20">
+      <section className="section-space-lg bg-[#FDFBF7]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-14 lg:space-y-16">
           {/* Room 1: Single Room (Image on Left, Rich Specs on Right) */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center bg-white p-6 sm:p-8 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center bg-white p-4 sm:p-7 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
           >
             <div className="lg:col-span-5 w-full min-w-0 space-y-3">
               {/* Spacious Proportionate Image Container - Zero Cut-off & Zero Horizontal Overlap */}
@@ -102,7 +111,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               </div>
 
               {/* Key Specs Pills */}
-              <div className="grid grid-cols-3 gap-2.5 pt-1">
+              <div className="grid grid-cols-1 xs:grid-cols-3 gap-2.5 pt-1">
                 <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#EFEAE1] text-center">
                   <p className="text-[11px] text-[#5B6676] uppercase font-bold">Area</p>
                   <p className="text-xs sm:text-sm font-bold text-[#102A1C] mt-0.5">{ROOMS_DATA[0].dimensions}</p>
@@ -162,7 +171,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center bg-white p-6 sm:p-8 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center bg-white p-4 sm:p-7 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
           >
             <div className="lg:col-span-7 w-full min-w-0 order-2 lg:order-1 space-y-5">
               <div className="kicker-label">
@@ -179,7 +188,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               </div>
 
               {/* Key Specs Pills */}
-              <div className="grid grid-cols-3 gap-2.5 pt-1">
+              <div className="grid grid-cols-1 xs:grid-cols-3 gap-2.5 pt-1">
                 <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#EFEAE1] text-center">
                   <p className="text-[11px] text-[#5B6676] uppercase font-bold">Area</p>
                   <p className="text-xs sm:text-sm font-bold text-[#102A1C] mt-0.5">{ROOMS_DATA[1].dimensions}</p>
@@ -259,7 +268,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center bg-white p-6 sm:p-8 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center bg-white p-4 sm:p-7 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
           >
             <div className="lg:col-span-5 w-full min-w-0 space-y-3">
               {/* Spacious Proportionate Image Container - Complete Premium Room Perspective */}
@@ -296,7 +305,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               </div>
 
               {/* Key Specs Pills */}
-              <div className="grid grid-cols-3 gap-2.5 pt-1">
+              <div className="grid grid-cols-1 xs:grid-cols-3 gap-2.5 pt-1">
                 <div className="p-3 rounded-xl bg-[#FAF8F5] border border-[#EFEAE1] text-center">
                   <p className="text-[11px] text-[#5B6676] uppercase font-bold">Area</p>
                   <p className="text-xs sm:text-sm font-bold text-[#102A1C] mt-0.5">{ROOMS_DATA[2].dimensions}</p>
@@ -351,31 +360,31 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
           </motion.div>
 
           {/* Informational Section: What is Included with Every Room */}
-          <div className="rounded-3xl bg-[#FAF8F5] border border-[#EFEAE1] p-8 sm:p-14 lg:p-16 space-y-10">
+          <div className="rounded-3xl bg-[#FAF8F5] border border-[#EFEAE1] p-5 sm:p-10 lg:p-14 space-y-8 sm:space-y-10">
             <div className="text-center max-w-2xl mx-auto space-y-2">
               <div className="kicker-label justify-center mb-1">
                 <span className="w-5 h-[1.5px] bg-[#C5A059]" />
                 <span>TRANSPARENT AMENITIES</span>
                 <span className="w-5 h-[1.5px] bg-[#C5A059]" />
               </div>
-              <h3 className="heading-section text-[#102A1C]">What's Included In Every Room Stay</h3>
-              <p className="text-xs sm:text-sm text-[#5B6676]">
+              <h2 className="heading-section text-[#102A1C]">What's Included In Every Room Stay</h2>
+              <p className="text-lead text-sm sm:text-base text-[#5B6676]">
                 All our rooms come with an all-inclusive package so scholars and parents face zero hidden expenses.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
               <div className="p-5 bg-white rounded-2xl border border-[#EFEAE1] shadow-2xs space-y-2">
                 <div className="w-9 h-9 rounded-full bg-[#FAF8F5] text-[#C5A059] flex items-center justify-center font-bold text-sm">🍽️</div>
-                <h4 className="heading-card !text-sm text-[#102A1C]">4 Homestyle Meals</h4>
+                <h3 className="heading-card text-sm sm:text-base text-[#102A1C]">4 Homestyle Meals</h3>
                 <p className="text-xs text-[#5B6676] leading-relaxed">
-                  Breakfast with tea, wholesome lunch, evening snacks & high-tea, and hot balanced dinner prepared fresh daily.
+                  Breakfast with tea, wholesome lunch, evening snacks &amp; high-tea, and hot balanced dinner prepared fresh daily.
                 </p>
               </div>
 
               <div className="p-5 bg-white rounded-2xl border border-[#EFEAE1] shadow-2xs space-y-2">
                 <div className="w-9 h-9 rounded-full bg-[#FAF8F5] text-[#C5A059] flex items-center justify-center font-bold text-sm">⚡</div>
-                <h4 className="heading-card !text-sm text-[#102A1C]">Power & Wi-Fi Backup</h4>
+                <h3 className="heading-card text-sm sm:text-base text-[#102A1C]">Power &amp; Wi-Fi Backup</h3>
                 <p className="text-xs text-[#5B6676] leading-relaxed">
                   High-speed optical fiber internet across all rooms, supported by 100% generator power backup for study lamps and fans.
                 </p>
@@ -383,7 +392,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
 
               <div className="p-5 bg-white rounded-2xl border border-[#EFEAE1] shadow-2xs space-y-2">
                 <div className="w-9 h-9 rounded-full bg-[#FAF8F5] text-[#C5A059] flex items-center justify-center font-bold text-sm">🧹</div>
-                <h4 className="heading-card !text-sm text-[#102A1C]">Daily Housekeeping</h4>
+                <h3 className="heading-card text-sm sm:text-base text-[#102A1C]">Daily Housekeeping</h3>
                 <p className="text-xs text-[#5B6676] leading-relaxed">
                   Regular room sweeping, mopping, trash clearance, and washroom sanitation handled diligently by professional staff.
                 </p>
@@ -391,7 +400,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
 
               <div className="p-5 bg-white rounded-2xl border border-[#EFEAE1] shadow-2xs space-y-2">
                 <div className="w-9 h-9 rounded-full bg-[#FAF8F5] text-[#C5A059] flex items-center justify-center font-bold text-sm">🛡️</div>
-                <h4 className="heading-card !text-sm text-[#102A1C]">24/7 Security & Warden</h4>
+                <h3 className="heading-card text-sm sm:text-base text-[#102A1C]">24/7 Security &amp; Warden</h3>
                 <p className="text-xs text-[#5B6676] leading-relaxed">
                   Round-the-clock security guards at gates, continuous CCTV monitoring in corridors, and on-premise caring wardens.
                 </p>
@@ -415,21 +424,21 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               <button
                 onClick={() => setInspectingRoom(null)}
                 aria-label="Close image inspection"
-                className="absolute -top-10 right-0 sm:top-2 sm:right-2 z-10 w-9 h-9 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center transition-colors cursor-pointer"
+                className="absolute top-3 right-3 z-20 w-10 h-10 rounded-full bg-black/70 hover:bg-black text-white border border-white/25 flex items-center justify-center transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-black max-h-[78vh] flex items-center justify-center">
+              <div className="rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-black max-h-[75vh] flex items-center justify-center">
                 <img
                   src={inspectingRoom.image}
                   alt={inspectingRoom.name}
-                  className="max-w-full max-h-[78vh] object-contain rounded-2xl select-none"
+                  className="max-w-full max-h-[75vh] object-contain rounded-2xl select-none"
                   referrerPolicy="no-referrer"
                 />
               </div>
 
-              <div className="mt-4 w-full flex flex-col sm:flex-row items-center justify-between gap-3 text-white px-2">
+              <div className="mt-4 w-full flex flex-col sm:flex-row items-center justify-between gap-3 text-white px-2 text-center sm:text-left">
                 <div>
                   <h3 className="font-serif text-base sm:text-lg font-bold text-[#DFB76C]">
                     {inspectingRoom.name} — Authentic High-Resolution Photography
@@ -444,7 +453,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                     setInspectingRoom(null);
                     onOpenEnquiry(name);
                   }}
-                  className="px-5 py-2 rounded-full bg-[#DFB76C] text-[#0E2016] text-xs font-bold transition-colors cursor-pointer flex items-center gap-2"
+                  className="px-5 py-2.5 rounded-full bg-[#DFB76C] text-[#0E2016] text-xs font-bold transition-colors cursor-pointer flex items-center gap-2 min-h-[42px] shrink-0"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
                   <span>Enquire for this Room</span>
@@ -518,17 +527,17 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                 />
               </div>
 
-              {/* Card Footer Bar matching reference */}
-              <div className="p-4 sm:p-5 flex items-center justify-between bg-white border-t border-[#EFEAE1]/60">
-                <div className="flex items-center gap-3">
+              {/* Card Footer Bar */}
+              <div className="p-4 sm:p-5 flex items-center justify-between gap-3 bg-white border-t border-[#EFEAE1]/60">
+                <div className="flex items-center gap-3 min-w-0">
                   <div className="w-10 h-10 rounded-full bg-[#FAF8F5] flex items-center justify-center shrink-0 group-hover:bg-[#102A1C] group-hover:text-white transition-colors">
                     {getRoomIcon(room.iconType)}
                   </div>
-                  <div>
-                    <h3 className="heading-card text-[#102A1C] group-hover:text-[#1B3B2B] transition-colors">
+                  <div className="min-w-0">
+                    <h3 className="heading-card text-[#102A1C] group-hover:text-[#1B3B2B] transition-colors truncate">
                       {room.name}
                     </h3>
-                    <p className="text-caption mt-0.5">{room.tagline}</p>
+                    <p className="text-caption mt-0.5 truncate">{room.tagline}</p>
                   </div>
                 </div>
 
@@ -556,21 +565,21 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
             <button
               onClick={() => setInspectingRoom(null)}
               aria-label="Close image inspection"
-              className="absolute -top-10 right-0 sm:top-2 sm:right-2 z-10 w-9 h-9 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center transition-colors cursor-pointer"
+              className="absolute top-3 right-3 z-20 w-10 h-10 rounded-full bg-black/70 hover:bg-black text-white border border-white/25 flex items-center justify-center transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-black max-h-[78vh] flex items-center justify-center">
+            <div className="rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-black max-h-[75vh] flex items-center justify-center">
               <img
                 src={inspectingRoom.image}
                 alt={inspectingRoom.name}
-                className="max-w-full max-h-[78vh] object-contain rounded-2xl select-none"
+                className="max-w-full max-h-[75vh] object-contain rounded-2xl select-none"
                 referrerPolicy="no-referrer"
               />
             </div>
 
-            <div className="mt-4 w-full flex flex-col sm:flex-row items-center justify-between gap-3 text-white px-2">
+            <div className="mt-4 w-full flex flex-col sm:flex-row items-center justify-between gap-3 text-white px-2 text-center sm:text-left">
               <div>
                 <h3 className="font-serif text-base sm:text-lg font-bold text-[#DFB76C]">
                   {inspectingRoom.name} — Authentic High-Resolution Photography
@@ -585,7 +594,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                   setInspectingRoom(null);
                   onOpenEnquiry(name);
                 }}
-                className="px-5 py-2 rounded-full bg-[#DFB76C] text-[#0E2016] text-xs font-bold transition-colors cursor-pointer flex items-center gap-2"
+                className="px-5 py-2.5 rounded-full bg-[#DFB76C] text-[#0E2016] text-xs font-bold transition-colors cursor-pointer flex items-center gap-2 min-h-[42px] shrink-0"
               >
                 <MessageSquare className="w-3.5 h-3.5" />
                 <span>Enquire for this Room</span>

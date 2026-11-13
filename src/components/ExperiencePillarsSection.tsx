@@ -28,7 +28,7 @@ export const ExperiencePillarsSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-10 sm:mb-14"
         >
           <div className="kicker-label justify-center mb-3">
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
@@ -36,7 +36,7 @@ export const ExperiencePillarsSection: React.FC = () => {
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
           </div>
           <h2 className="heading-section text-[#102A1C]">
-            Designed for Scholars & Professionals: What Sets Us Apart
+            Designed for Scholars &amp; Professionals: What Sets Us Apart
           </h2>
           <p className="text-lead mt-3">
             At ISHANVI, every detail—from noise damping and meal schedules to security—is intentionally curated so you can focus entirely on achieving your goals.
@@ -44,7 +44,7 @@ export const ExperiencePillarsSection: React.FC = () => {
         </motion.div>
 
         {/* 4 Pillars Editorial Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {ISHANVI_EXPERIENCE_PILLARS.map((pillar, idx) => (
             <motion.div
               key={pillar.number}
@@ -53,7 +53,7 @@ export const ExperiencePillarsSection: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               whileHover={{ y: -7, scale: 1.01 }}
-              className="bg-white rounded-3xl p-7 sm:p-8 border border-[#EFEAE1] shadow-sm hover:shadow-2xl hover:border-[#DFB76C]/80 transition-all flex flex-col justify-between space-y-6 group cursor-default relative overflow-hidden"
+              className="bg-white rounded-3xl p-5 sm:p-7 border border-[#EFEAE1] shadow-sm hover:shadow-2xl hover:border-[#DFB76C]/80 transition-all flex flex-col justify-between space-y-5 group cursor-default relative overflow-hidden"
             >
               {/* Subtle gold corner highlight */}
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#DFB76C]/15 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity" />

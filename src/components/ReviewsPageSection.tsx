@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Star,
@@ -32,6 +32,15 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
   const [formQuote, setFormQuote] = useState('');
   const [formRating, setFormRating] = useState(5);
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (!isSubmitModalOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsSubmitModalOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isSubmitModalOpen]);
 
   const filterReviews = () => {
     if (selectedCategory === 'all') return reviewsList;
@@ -78,15 +87,16 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
   const displayedReviews = filterReviews();
 
   return (
-    <section className="py-14 sm:py-20 lg:py-24 bg-[#FDFBF7] text-[#102A1C]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
+    <section className="section-space bg-[#FDFBF7] text-[#102A1C]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-14">
+        <h2 className="sr-only">Verified Resident Ratings &amp; Reviews</h2>
         {/* Scorecard & Highlights Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
           {/* Main Rating Summary Card */}
-          <div className="lg:col-span-5 bg-gradient-to-br from-[#102A1C] to-[#1B3B2B] text-white p-7 sm:p-9 rounded-3xl border border-[#DFB76C]/30 shadow-xl flex flex-col justify-between">
+          <div className="lg:col-span-5 bg-gradient-to-br from-[#102A1C] to-[#1B3B2B] text-white p-6 sm:p-9 rounded-3xl border border-[#DFB76C]/30 shadow-xl flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 text-[#DFB76C] text-xs font-bold uppercase tracking-widest mb-3">
-                <ShieldCheck className="w-4 h-4 text-[#DFB76C]" />
+                <ShieldCheck className="w-4 h-4 text-[#DFB76C] shrink-0" />
                 <span>VERIFIED RESIDENCY REVIEWS</span>
               </div>
               <div className="flex items-baseline gap-3">
@@ -103,14 +113,14 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
               </p>
             </div>
 
-            <div className="pt-6 mt-6 border-t border-white/15 flex items-center justify-between">
-              <div className="text-left">
+            <div className="pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-white/15 flex flex-wrap items-center justify-between gap-3">
+              <div className="text-left min-w-0">
                 <p className="text-xs text-slate-300">Total Resident Trust</p>
                 <p className="font-bold text-sm text-[#DFB76C]">100% Parent Endorsement</p>
               </div>
               <button
                 onClick={() => setIsSubmitModalOpen(true)}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#DFB76C] hover:bg-[#EAC885] text-[#102A1C] text-xs font-bold transition-all shadow-md cursor-pointer hover:scale-105 active:scale-95"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-[#DFB76C] hover:bg-[#EAC885] text-[#102A1C] text-xs font-bold transition-all shadow-md cursor-pointer hover:scale-105 active:scale-95 shrink-0"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Write a Review</span>
@@ -120,16 +130,16 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
 
           {/* 4 Trust Metrics */}
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs space-y-2.5 flex flex-col justify-between">
+            <div className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs space-y-2.5 flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2">
                   <ShieldCheck className="w-5 h-5 text-[#8C6D2D]" />
                 </div>
-                <div className="flex items-center justify-between">
-                  <h4 className="font-serif text-base font-bold text-[#102A1C]">Safety & Security</h4>
-                  <span className="font-mono text-sm font-bold text-[#8C6D2D]">5.0 / 5.0</span>
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="font-serif text-base font-bold text-[#102A1C]">Safety & Security</h3>
+                  <span className="font-mono text-sm font-bold text-[#8C6D2D] shrink-0">5.0 / 5.0</span>
                 </div>
-                <p className="text-xs text-[#5B6676] leading-relaxed mt-1">
+                <p className="text-xs sm:text-[13px] text-[#5B6676] leading-relaxed mt-1">
                   24/7 guarded gates, CCTV monitoring across corridors, biometric visitor registers, and caring resident wardens.
                 </p>
               </div>
@@ -138,16 +148,16 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs space-y-2.5 flex flex-col justify-between">
+            <div className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs space-y-2.5 flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2">
                   <Heart className="w-5 h-5 text-[#8C6D2D]" />
                 </div>
-                <div className="flex items-center justify-between">
-                  <h4 className="font-serif text-base font-bold text-[#102A1C]">Hygienic Homestyle Meals</h4>
-                  <span className="font-mono text-sm font-bold text-[#8C6D2D]">4.9 / 5.0</span>
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="font-serif text-base font-bold text-[#102A1C]">Hygienic Homestyle Meals</h3>
+                  <span className="font-mono text-sm font-bold text-[#8C6D2D] shrink-0">4.9 / 5.0</span>
                 </div>
-                <p className="text-xs text-[#5B6676] leading-relaxed mt-1">
+                <p className="text-xs sm:text-[13px] text-[#5B6676] leading-relaxed mt-1">
                   4 fresh vegetarian chef-prepared meals daily: breakfast with chai, wholesome lunch, evening snacks, and hot dinner.
                 </p>
               </div>
@@ -156,16 +166,16 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs space-y-2.5 flex flex-col justify-between">
+            <div className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs space-y-2.5 flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2">
                   <GraduationCap className="w-5 h-5 text-[#8C6D2D]" />
                 </div>
-                <div className="flex items-center justify-between">
-                  <h4 className="font-serif text-base font-bold text-[#102A1C]">Study Environment</h4>
-                  <span className="font-mono text-sm font-bold text-[#8C6D2D]">4.9 / 5.0</span>
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="font-serif text-base font-bold text-[#102A1C]">Study Environment</h3>
+                  <span className="font-mono text-sm font-bold text-[#8C6D2D] shrink-0">4.9 / 5.0</span>
                 </div>
-                <p className="text-xs text-[#5B6676] leading-relaxed mt-1">
+                <p className="text-xs sm:text-[13px] text-[#5B6676] leading-relaxed mt-1">
                   Enforced silent hours, dedicated quiet study library, high-speed fiber internet, and 100% power generator backup.
                 </p>
               </div>
@@ -174,16 +184,16 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs space-y-2.5 flex flex-col justify-between">
+            <div className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs space-y-2.5 flex flex-col justify-between">
               <div>
                 <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2">
                   <Building className="w-5 h-5 text-[#8C6D2D]" />
                 </div>
-                <div className="flex items-center justify-between">
-                  <h4 className="font-serif text-base font-bold text-[#102A1C]">Daily Housekeeping</h4>
-                  <span className="font-mono text-sm font-bold text-[#8C6D2D]">4.8 / 5.0</span>
+                <div className="flex items-center justify-between gap-2">
+                  <h3 className="font-serif text-base font-bold text-[#102A1C]">Daily Housekeeping</h3>
+                  <span className="font-mono text-sm font-bold text-[#8C6D2D] shrink-0">4.8 / 5.0</span>
                 </div>
-                <p className="text-xs text-[#5B6676] leading-relaxed mt-1">
+                <p className="text-xs sm:text-[13px] text-[#5B6676] leading-relaxed mt-1">
                   Spotless daily floor sweeping, mopping, sanitized washrooms, prompt electrical support, and on-site laundry.
                 </p>
               </div>
@@ -240,9 +250,9 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
                   whileHover={{ y: -6, scale: 1.01 }}
-                  className="bg-white rounded-3xl p-7 sm:p-8 border border-[#EFEAE1] shadow-xs hover:shadow-xl hover:border-[#DFB76C]/60 transition-all flex flex-col justify-between space-y-6 group cursor-pointer"
+                  className="bg-white rounded-3xl p-5 sm:p-7 border border-[#EFEAE1] shadow-xs hover:shadow-xl hover:border-[#DFB76C]/60 transition-all flex flex-col justify-between space-y-5 sm:space-y-6 group"
                 >
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     <div className="flex items-center justify-between">
                       <Quote className="w-7 h-7 text-[#DFB76C]/40 group-hover:text-[#DFB76C] transition-colors" />
                       <div className="flex items-center gap-1">
@@ -257,18 +267,18 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                     </p>
                   </div>
 
-                  <div className="pt-5 border-t border-[#EFEAE1]/70 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-11 h-11 rounded-full bg-[#102A1C] text-[#DFB76C] font-serif font-bold text-sm flex items-center justify-center border-2 border-[#DFB76C]/40 shrink-0 shadow-xs">
+                  <div className="pt-4 sm:pt-5 border-t border-[#EFEAE1]/70 flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#102A1C] text-[#DFB76C] font-serif font-bold text-sm flex items-center justify-center border-2 border-[#DFB76C]/40 shrink-0 shadow-xs">
                         {initials}
                       </div>
-                      <div>
-                        <h4 className="heading-card text-sm text-[#102A1C]">{item.author}</h4>
+                      <div className="min-w-0">
+                        <h3 className="heading-card text-sm text-[#102A1C]">{item.author}</h3>
                         <p className="text-caption text-[#5B6676]">{item.institution || item.role}</p>
                       </div>
                     </div>
 
-                    <div className="text-right">
+                    <div className="text-right shrink-0">
                       <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#8C6D2D] bg-[#FAF8F5] border border-[#EFEAE1] px-2.5 py-0.5 rounded-full">
                         <CheckCircle2 className="w-3 h-3 text-[#8C6D2D]" />
                         <span>Verified</span>
@@ -333,17 +343,17 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                     value={formName}
                     onChange={(e) => setFormName(e.target.value)}
                     placeholder="e.g. Aditi Sharma"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#EFEAE1] text-xs focus:outline-none focus:border-[#102A1C] bg-[#FAF8F5]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#EFEAE1] text-sm focus:outline-none focus:border-[#102A1C] bg-[#FAF8F5]"
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-bold text-[#102A1C] mb-1">You Are A *</label>
                     <select
                       value={formRole}
                       onChange={(e) => setFormRole(e.target.value as any)}
-                      className="w-full px-3 py-2.5 rounded-xl border border-[#EFEAE1] text-xs focus:outline-none focus:border-[#102A1C] bg-[#FAF8F5]"
+                      className="w-full px-3 py-2.5 rounded-xl border border-[#EFEAE1] text-sm focus:outline-none focus:border-[#102A1C] bg-[#FAF8F5]"
                     >
                       <option value="Student">Student</option>
                       <option value="Parent">Parent</option>
@@ -359,7 +369,8 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                           key={star}
                           type="button"
                           onClick={() => setFormRating(star)}
-                          className="cursor-pointer focus:outline-none"
+                          className="cursor-pointer focus:outline-none p-0.5"
+                          aria-label={`Rate ${star} stars`}
                         >
                           <Star
                             className={`w-5 h-5 ${
@@ -381,7 +392,7 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                     value={formInstitution}
                     onChange={(e) => setFormInstitution(e.target.value)}
                     placeholder="e.g. ISMS Sankalp Business School"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#EFEAE1] text-xs focus:outline-none focus:border-[#102A1C] bg-[#FAF8F5]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#EFEAE1] text-sm focus:outline-none focus:border-[#102A1C] bg-[#FAF8F5]"
                   />
                 </div>
 
@@ -393,7 +404,7 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                     value={formQuote}
                     onChange={(e) => setFormQuote(e.target.value)}
                     placeholder="Describe your stay, food quality, safety, study environment, and staff friendliness..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#EFEAE1] text-xs focus:outline-none focus:border-[#102A1C] bg-[#FAF8F5]"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-[#EFEAE1] text-sm focus:outline-none focus:border-[#102A1C] bg-[#FAF8F5]"
                   />
                 </div>
 

@@ -74,7 +74,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
               placeholder="Search questions (e.g. curfew, Wi-Fi, meals, deposit)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-full bg-white border border-[#EFEAE1] text-xs text-[#102A1C] placeholder:text-[#A0AEC0] shadow-2xs focus:outline-none focus:border-[#102A1C] focus:ring-2 focus:ring-[#DFB76C]/30 transition-all"
+              className="w-full pl-10 pr-16 py-2.5 rounded-full bg-white border border-[#EFEAE1] text-sm text-[#102A1C] placeholder:text-[#A0AEC0] shadow-2xs focus:outline-none focus:border-[#102A1C] focus:ring-2 focus:ring-[#DFB76C]/30 transition-all"
             />
             {searchQuery && (
               <button
@@ -150,20 +150,20 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
                 >
                   <button
                     onClick={() => toggleFaq(index)}
-                    className="w-full p-4 sm:p-5 text-left flex items-center justify-between gap-4 cursor-pointer hover:bg-[#FAF8F5]/60 transition-colors"
+                    className="w-full p-4 sm:p-5 text-left flex items-start sm:items-center justify-between gap-3 sm:gap-4 cursor-pointer hover:bg-[#FAF8F5]/60 transition-colors"
                     aria-expanded={isOpen}
                   >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <span className="w-6 h-6 rounded-full bg-[#FAF8F5] border border-[#EFEAE1] text-[#8C6D2D] text-[11px] font-bold flex items-center justify-center shrink-0">
+                    <div className="flex items-start sm:items-center gap-3 min-w-0">
+                      <span className="w-6 h-6 rounded-full bg-[#FAF8F5] border border-[#EFEAE1] text-[#8C6D2D] text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
                         {String(index + 1).padStart(2, '0')}
                       </span>
-                      <span className="font-serif text-sm sm:text-base font-bold text-[#102A1C] truncate">
+                      <span className="font-serif text-sm sm:text-base font-bold text-[#102A1C] leading-snug">
                         {faq.question}
                       </span>
                     </div>
 
                     <div
-                      className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 ${
+                      className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 mt-0.5 sm:mt-0 ${
                         isOpen ? 'bg-[#102A1C] text-white rotate-180' : 'bg-[#FAF8F5] text-[#102A1C]'
                       }`}
                     >
@@ -180,9 +180,9 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
                         transition={{ duration: 0.28, ease: 'easeOut' }}
                         className="overflow-hidden"
                       >
-                        <div className="px-5 pb-5 pt-3 sm:px-6 text-xs sm:text-sm text-[#4A5568] leading-relaxed border-t border-[#EFEAE1]/60 bg-[#FAF8F5]/40 space-y-3">
+                        <div className="px-4 pb-4 pt-3 sm:px-6 sm:pb-5 text-xs sm:text-sm text-[#4A5568] leading-relaxed border-t border-[#EFEAE1]/60 bg-[#FAF8F5]/40 space-y-3">
                           <p>{faq.answer}</p>
-                          <div className="flex items-center justify-between pt-2 border-t border-[#EFEAE1]/40 text-[11px] text-[#5B6676]">
+                          <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-[#EFEAE1]/40 text-[11px] text-[#5B6676]">
                             <span className="flex items-center gap-1">
                               <Sparkles className="w-3 h-3 text-[#C5A059]" />
                               Category: {faq.category || 'General Residence'}

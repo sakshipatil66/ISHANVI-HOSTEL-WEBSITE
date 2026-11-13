@@ -33,21 +33,21 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenEnquiry }) => 
               />
             </a>
 
-            <p className="text-xs text-[#CBD5E0] leading-relaxed max-w-sm">
+            <p className="text-xs sm:text-sm text-[#CBD5E0] leading-relaxed max-w-sm">
               Safe, secure and well-managed accommodation for students & working professionals in Ambegaon Bk, Pune.
             </p>
 
-            <p className="text-xs text-[#DFB76C] font-semibold tracking-wider">
+            <p className="text-xs sm:text-sm text-[#DFB76C] font-semibold tracking-wider">
               {HOSTEL_INFO.tagline}
             </p>
           </div>
 
           {/* Column 2: Navigation Links */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="font-serif text-sm font-bold uppercase tracking-wider text-white">
+            <h2 className="font-serif text-sm font-bold uppercase tracking-wider text-white">
               Navigation
-            </h4>
-            <ul className="space-y-2 text-xs text-[#CBD5E0]">
+            </h2>
+            <ul className="space-y-2 text-xs sm:text-sm text-[#CBD5E0]">
               {[
                 { id: 'home', label: 'Home', path: '/' },
                 { id: 'about', label: 'About Us', path: '/about' },
@@ -64,7 +64,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenEnquiry }) => 
                       e.preventDefault();
                       onNavClick(link.id);
                     }}
-                    className="hover:text-[#DFB76C] transition-colors cursor-pointer text-left block"
+                    className="hover:text-[#DFB76C] transition-colors cursor-pointer text-left block py-0.5"
                   >
                     {link.label}
                   </a>
@@ -75,10 +75,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenEnquiry }) => 
 
           {/* Column 3: Contact & Visiting Hours */}
           <div className="lg:col-span-4 space-y-3">
-            <h4 className="font-serif text-sm font-bold uppercase tracking-wider text-white">
+            <h2 className="font-serif text-sm font-bold uppercase tracking-wider text-white">
               Contact & Address
-            </h4>
-            <div className="space-y-2.5 text-xs text-[#CBD5E0]">
+            </h2>
+            <div className="space-y-2.5 text-xs sm:text-sm text-[#CBD5E0]">
               <p className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-[#DFB76C] shrink-0 mt-0.5" />
                 <span>{HOSTEL_INFO.address}</span>
@@ -87,12 +87,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenEnquiry }) => 
                 <Phone className="w-4 h-4 text-[#DFB76C] shrink-0" />
                 <a
                   href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
-                  className="hover:text-white font-semibold text-white"
+                  className="hover:text-[#DFB76C] font-semibold text-white transition-colors"
                 >
                   {HOSTEL_INFO.phonePrimary}
                 </a>
               </p>
-              <p className="text-[11px] text-[#A0AEC0] pt-1">
+              <p className="text-xs text-[#A0AEC0] pt-1">
                 Visiting Hours: {HOSTEL_INFO.visitingHours}
               </p>
             </div>
@@ -100,7 +100,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenEnquiry }) => 
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#A0AEC0]">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#A0AEC0] text-center sm:text-left">
           <p>© {new Date().getFullYear()} ISHANVI HOSTEL & ACCOMMODATION. All Rights Reserved.</p>
           <button
             onClick={scrollToTop}

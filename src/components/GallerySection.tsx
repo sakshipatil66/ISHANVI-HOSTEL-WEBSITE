@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { GALLERY_PHOTOS } from '../data/hostelData';
@@ -30,19 +30,33 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
     : GALLERY_PHOTOS.slice(0, 5);
 
   const openLightbox = (idx: number) => setLightboxIndex(idx);
-  const closeLightbox = () => setLightboxIndex(null);
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
 
-  const nextPhoto = () => {
-    if (lightboxIndex !== null) {
-      setLightboxIndex((lightboxIndex + 1) % displayPhotos.length);
-    }
-  };
+  const nextPhoto = useCallback(() => {
+    setLightboxIndex((prev) => (prev !== null ? (prev + 1) % displayPhotos.length : null));
+  }, [displayPhotos.length]);
 
-  const prevPhoto = () => {
-    if (lightboxIndex !== null) {
-      setLightboxIndex((lightboxIndex - 1 + displayPhotos.length) % displayPhotos.length);
-    }
-  };
+  const prevPhoto = useCallback(() => {
+    setLightboxIndex((prev) =>
+      prev !== null ? (prev - 1 + displayPhotos.length) % displayPhotos.length : null
+    );
+  }, [displayPhotos.length]);
+
+  useEffect(() => {
+    if (lightboxIndex === null) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowRight') nextPhoto();
+      else if (e.key === 'ArrowLeft') prevPhoto();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxIndex, closeLightbox, nextPhoto, prevPhoto]);
+
+  const activePhoto =
+    lightboxIndex !== null && displayPhotos[lightboxIndex]
+      ? displayPhotos[lightboxIndex]
+      : null;
 
   return (
     <section id="gallery" className={`${isStandalonePage ? 'section-space-lg bg-[#FDFBF7] text-[#102A1C]' : 'section-space bg-[#102A1C] text-white'} overflow-hidden`}>
@@ -77,12 +91,15 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
 
         {/* Category Filters for Standalone Page */}
         {isStandalonePage && (
-          <div className="flex flex-wrap items-center gap-2 mb-10 pb-4 border-b border-[#E2D9C8]">
+          <div className="flex flex-wrap items-center gap-2 mb-8 sm:mb-10 pb-4 border-b border-[#E2D9C8]">
             {categories.map((cat) => (
               <button
                 key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
-                className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                onClick={() => {
+                  setSelectedCategory(cat.id);
+                  setLightboxIndex(null);
+                }}
+                className={`px-3.5 sm:px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
                   selectedCategory === cat.id
                     ? 'bg-[#102A1C] text-[#DFB76C] shadow-md border border-[#DFB76C]/40'
                     : 'bg-white text-[#1F2937] hover:text-[#102A1C] hover:bg-[#FAF8F5] border border-[#E2D9C8]'
@@ -94,10 +111,9 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
           </div>
         )}
 
-        {/* Photos Grid: Clean photos with zero text overlay to match Ma'am's reference screenshot */}
+        {/* Photos Grid: Clean photos with zero text overlay */}
         {isStandalonePage ? (
-          /* Standalone Page: Clean cards with image on top and descriptive text cleanly below */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
             {displayPhotos.map((photo, index) => (
               <motion.div
                 key={photo.id}
@@ -109,27 +125,25 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                 onClick={() => openLightbox(index)}
                 className="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl border border-[#E2D9C8] hover:border-[#DFB76C] transition-all duration-300 cursor-pointer flex flex-col"
               >
-                {/* 100% Clean Image Container with Zero Text Overlay */}
                 <div className="relative aspect-[16/11] overflow-hidden bg-[#FAF8F5]">
                   <img
                     src={photo.image}
-                    alt={photo.title}
+                    alt={`${photo.title} - ${photo.caption}`}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
                     referrerPolicy="no-referrer"
                     loading="lazy"
                   />
                 </div>
 
-                {/* Clean Descriptive Content Area BELOW the Photo */}
                 <div className="p-5 sm:p-6 bg-white flex-1 flex flex-col justify-between border-t border-[#EFEAE1]">
                   <div>
-                    <span className="text-[10px] font-bold text-[#A88238] uppercase tracking-wider block mb-1">
+                    <span className="text-[11px] font-bold text-[#A88238] uppercase tracking-wider block mb-1">
                       {photo.category.toUpperCase()}
                     </span>
-                    <h3 className="heading-card !text-base text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">
+                    <h3 className="heading-card text-base text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">
                       {photo.title}
                     </h3>
-                    <p className="text-xs text-[#5B6676] mt-1.5 leading-relaxed">
+                    <p className="text-body-sm text-[#5B6676] mt-1.5">
                       {photo.caption}
                     </p>
                   </div>
@@ -138,8 +152,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
             ))}
           </div>
         ) : (
-          /* Homepage: 5 clean, un-overlayed rounded photo cards matching Screenshot exactly */
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
             {displayPhotos.map((photo, index) => (
               <motion.div
                 key={photo.id}
@@ -149,12 +162,11 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                 transition={{ duration: 0.45, delay: index * 0.08 }}
                 whileHover={{ y: -6, scale: 1.02 }}
                 onClick={() => openLightbox(index)}
-                className={`group relative rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-[4/3] bg-black/20 border border-white/15 hover:border-[#DFB76C] shadow-lg hover:shadow-2xl cursor-pointer transition-all duration-300 ${
+                className={`group relative rounded-2xl overflow-hidden aspect-[4/3] bg-black/20 border border-white/15 hover:border-[#DFB76C] shadow-lg hover:shadow-2xl cursor-pointer transition-all duration-300 ${
                   index === 4 ? 'col-span-2 sm:col-span-1' : ''
                 }`}
                 title={photo.title}
               >
-                {/* Clean Photo - Zero Text Overlay on Image */}
                 <img
                   src={photo.image}
                   alt={photo.title}
@@ -169,19 +181,19 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
       </div>
 
       {/* Lightbox Modal */}
-      {lightboxIndex !== null && (
+      {activePhoto && lightboxIndex !== null && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
           onClick={closeLightbox}
         >
           <button
             onClick={closeLightbox}
-            className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer z-50"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-white flex items-center justify-center transition-colors cursor-pointer z-50"
             aria-label="Close photo"
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5" />
           </button>
 
           <button
@@ -189,10 +201,10 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
               e.stopPropagation();
               prevPhoto();
             }}
-            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer z-50"
+            className="absolute left-3 sm:left-8 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-white/20 text-white border border-white/20 flex items-center justify-center transition-colors cursor-pointer z-50"
             aria-label="Previous photo"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           <button
@@ -200,31 +212,31 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
               e.stopPropagation();
               nextPhoto();
             }}
-            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer z-50"
+            className="absolute right-3 sm:right-8 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-white/20 text-white border border-white/20 flex items-center justify-center transition-colors cursor-pointer z-50"
             aria-label="Next photo"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           <div
-            className="max-w-4xl max-h-[85vh] flex flex-col items-center justify-center"
+            className="max-w-4xl w-full max-h-[85vh] flex flex-col items-center justify-center px-8 sm:px-14"
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={GALLERY_PHOTOS[lightboxIndex].image}
-              alt={GALLERY_PHOTOS[lightboxIndex].title}
-              className="max-w-full max-h-[70vh] rounded-lg object-contain shadow-2xl border border-white/10"
+              src={activePhoto.image}
+              alt={activePhoto.title}
+              className="max-w-full max-h-[68vh] rounded-lg object-contain shadow-2xl border border-white/10"
               referrerPolicy="no-referrer"
             />
             <div className="text-center mt-4 text-white space-y-1">
-              <h3 className="font-serif text-xl font-bold text-[#DFB76C]">
-                {GALLERY_PHOTOS[lightboxIndex].title}
+              <h3 className="font-serif text-lg sm:text-xl font-bold text-[#DFB76C]">
+                {activePhoto.title}
               </h3>
               <p className="text-xs sm:text-sm text-slate-300">
-                {GALLERY_PHOTOS[lightboxIndex].caption}
+                {activePhoto.caption}
               </p>
               <p className="text-[11px] text-slate-400 tabular-nums">
-                {lightboxIndex + 1} of {GALLERY_PHOTOS.length}
+                {lightboxIndex + 1} of {displayPhotos.length}
               </p>
             </div>
           </div>

@@ -41,13 +41,13 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 min-h-[320px] sm:min-h-[360px] lg:min-h-[390px] flex flex-col items-center justify-center text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16 min-h-[260px] sm:min-h-[320px] lg:min-h-[360px] flex flex-col items-center justify-center text-center">
         {/* Animated Headline & Subhead */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: 'easeOut' }}
-          className="max-w-3xl space-y-3.5 [text-shadow:0_2px_14px_rgba(0,0,0,0.5)]"
+          className="max-w-3xl space-y-3 [text-shadow:0_2px_14px_rgba(0,0,0,0.5)]"
         >
           {/* Kicker Pill */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#DFB76C]/15 border border-[#DFB76C]/35 backdrop-blur-md shadow-xs">
@@ -63,16 +63,16 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
           </h1>
 
           {/* High-Contrast Clear Description */}
-          <p className="text-lead !text-white/95 max-w-2xl mx-auto font-sans font-normal">
+          <p className="text-lead text-white/95 max-w-2xl mx-auto font-sans font-normal">
             {subtitle}
           </p>
 
           {/* Interactive CTAs */}
-          <div className="pt-2 sm:pt-3 flex flex-wrap items-center justify-center gap-3">
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
             {onOpenEnquiry && (
               <button
                 onClick={() => onOpenEnquiry(title)}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#DFB76C] hover:bg-[#EAC885] text-[#08170E] text-xs sm:text-sm font-bold shadow-lg transition-all active:scale-95 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#DFB76C] hover:bg-[#EAC885] text-[#08170E] text-xs sm:text-sm font-bold shadow-lg transition-all active:scale-95 cursor-pointer min-h-[42px]"
               >
                 <MessageSquare className="w-3.5 h-3.5 text-[#08170E]" />
                 <span>Enquire Now</span>
@@ -82,7 +82,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
             <a
               href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/35 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold border border-white/25 backdrop-blur-md transition-all active:scale-95"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-black/35 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold border border-white/25 backdrop-blur-md transition-all active:scale-95 min-h-[42px]"
             >
               <Phone className="w-3.5 h-3.5 text-[#DFB76C]" />
               <span>Call: {HOSTEL_INFO.phonePrimary}</span>
@@ -95,7 +95,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, delay: 0.15 }}
-          className="mt-8 sm:mt-10 pt-5 border-t border-white/15 w-full max-w-4xl grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 text-left"
+          className="mt-7 sm:mt-9 pt-5 border-t border-white/15 w-full max-w-4xl grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 text-left"
         >
           <div className="flex items-center gap-2.5 bg-black/30 backdrop-blur-sm p-2.5 sm:p-3 rounded-xl border border-white/10">
             <MapPin className="w-4 h-4 text-[#DFB76C] shrink-0" />

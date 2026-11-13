@@ -190,11 +190,11 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
               <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-[#DFB76C]/40 via-[#F3E3B8]/25 to-[#DFB76C]/40 blur-xl opacity-80 pointer-events-none" />
 
               {/* Logo Presentation Frame */}
-              <div className="relative p-3 sm:p-7 rounded-2xl sm:rounded-3xl bg-white/95 backdrop-blur-xl shadow-[0_25px_60px_rgba(0,0,0,0.65),0_0_50px_rgba(223,183,108,0.35)] border-2 border-[#DFB76C]/70 w-full max-w-[280px] xs:max-w-[340px] sm:max-w-lg flex items-center justify-center overflow-hidden">
+              <div className="relative p-3 sm:p-7 rounded-2xl sm:rounded-3xl bg-white/95 backdrop-blur-xl shadow-[0_25px_60px_rgba(0,0,0,0.65),0_0_50px_rgba(223,183,108,0.35)] border-2 border-[#DFB76C]/70 w-full max-w-[290px] xs:max-w-[340px] sm:max-w-lg flex items-center justify-center overflow-hidden mx-auto">
                 <img
                   src={HOSTEL_INFO.logoUrl}
                   alt="ISHANVI Hostel & Accommodation Official Logo"
-                  className="w-full max-w-[260px] xs:max-w-[320px] sm:max-w-[420px] h-auto object-contain select-none"
+                  className="w-full max-w-[260px] xs:max-w-[310px] sm:max-w-[420px] h-auto object-contain select-none"
                   fetchPriority="high"
                   loading="eager"
                 />
@@ -214,7 +214,7 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
               initial={{ scaleX: 0, opacity: 0 }}
               animate={{ scaleX: 1, opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.35, ease: 'easeOut' }}
-              className="w-56 sm:w-80 h-[1.5px] bg-gradient-to-r from-transparent via-[#DFB76C] to-transparent my-5"
+              className="w-48 sm:w-80 h-[1.5px] bg-gradient-to-r from-transparent via-[#DFB76C] to-transparent my-5"
             />
 
             {/* Philosophy Tagline */}
@@ -222,7 +222,7 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.45 }}
-              className="font-serif text-sm sm:text-base font-semibold text-[#FAF8F5] tracking-[0.2em] uppercase"
+              className="font-serif text-xs sm:text-base font-semibold text-[#FAF8F5] tracking-[0.12em] sm:tracking-[0.2em] uppercase"
             >
               Safe Stay &nbsp;·&nbsp; Better Living &nbsp;·&nbsp; Brighter Tomorrow
             </motion.p>

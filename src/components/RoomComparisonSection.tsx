@@ -25,7 +25,7 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-14"
+          className="text-center max-w-3xl mx-auto mb-10 sm:mb-14"
         >
           <div className="kicker-label justify-center mb-3">
             <span className="w-5 h-[1.5px] bg-[#C5A059]" />
@@ -40,7 +40,7 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
           </p>
 
           {/* Interactive Room Tabs with layoutId smooth transition */}
-          <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mt-8 p-1.5 bg-white rounded-2xl sm:rounded-full inline-flex border border-[#E2D9C8] shadow-sm relative max-w-full">
+          <div className="inline-flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8 p-1.5 bg-white rounded-2xl sm:rounded-full border border-[#E2D9C8] shadow-sm relative max-w-full">
             {ROOMS_DATA.map((room) => {
               const isSelected = selectedRoomId === room.id;
               return (
@@ -68,7 +68,7 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
         </motion.div>
 
         {/* Selected Room Interactive Showcase */}
-        <div className="bg-white rounded-3xl p-6 sm:p-10 lg:p-12 border border-[#E2D9C8] shadow-xl overflow-hidden">
+        <div className="bg-white rounded-3xl p-4 sm:p-8 lg:p-10 border border-[#E2D9C8] shadow-xl overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedRoom.id}
@@ -76,7 +76,7 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.35 }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center w-full"
             >
               {/* Left Column: Room Photo with Badge - bounded so it never overflows */}
               <div className="w-full min-w-0">
@@ -90,8 +90,8 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
                     className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute top-3.5 left-3.5 bg-[#102A1C]/90 backdrop-blur-md px-3.5 py-1.5 rounded-full text-white text-xs font-semibold border border-[#DFB76C]/30 flex items-center gap-1.5 shadow-md">
-                    <Sparkles className="w-3.5 h-3.5 text-[#DFB76C]" />
+                  <div className="absolute top-3 left-3 bg-[#102A1C]/90 backdrop-blur-md px-3 py-1 rounded-full text-white text-[11px] sm:text-xs font-semibold border border-[#DFB76C]/30 flex items-center gap-1.5 shadow-md">
+                    <Sparkles className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
                     <span>{selectedRoom.tagline}</span>
                   </div>
                 </motion.div>
@@ -103,7 +103,7 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
                   <div className="kicker-label mb-1">
                     <span>{selectedRoom.kicker}</span>
                   </div>
-                  <h3 className="heading-card !text-2xl text-[#102A1C]">
+                  <h3 className="heading-card text-xl sm:text-2xl text-[#102A1C]">
                     {selectedRoom.name}
                   </h3>
                   <p className="text-lead mt-1.5">
@@ -112,24 +112,24 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
                 </div>
 
                 {/* Specs Matrix */}
-                <div className="grid grid-cols-3 gap-3 py-3.5 border-y border-[#EFEAE1] text-xs text-[#2C3530]">
-                  <motion.div whileHover={{ y: -2 }} className="flex items-center gap-2 p-2 rounded-xl bg-[#FAF8F5]/60">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 py-3.5 border-y border-[#EFEAE1] text-xs text-[#2C3530]">
+                  <motion.div whileHover={{ y: -2 }} className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#FAF8F5]/70">
                     <Maximize2 className="w-4 h-4 text-[#C5A059] shrink-0" />
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-caption">Room Size</p>
                       <p className="font-semibold text-xs sm:text-sm text-[#102A1C]">{selectedRoom.dimensions}</p>
                     </div>
                   </motion.div>
-                  <motion.div whileHover={{ y: -2 }} className="flex items-center gap-2 p-2 rounded-xl bg-[#FAF8F5]/60">
+                  <motion.div whileHover={{ y: -2 }} className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#FAF8F5]/70">
                     <Users className="w-4 h-4 text-[#C5A059] shrink-0" />
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-caption">Occupancy</p>
                       <p className="font-semibold text-xs sm:text-sm text-[#102A1C]">{selectedRoom.occupancy}</p>
                     </div>
                   </motion.div>
-                  <motion.div whileHover={{ y: -2 }} className="flex items-center gap-2 p-2 rounded-xl bg-[#FAF8F5]/60">
+                  <motion.div whileHover={{ y: -2 }} className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#FAF8F5]/70">
                     <Bath className="w-4 h-4 text-[#C5A059] shrink-0" />
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-caption">Bathroom</p>
                       <p className="font-semibold text-xs sm:text-sm text-[#102A1C]">Attached Sanitized</p>
                     </div>
@@ -143,8 +143,8 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-0.5">
                     {selectedRoom.furnishings.map((f, i) => (
-                      <div key={i} className="flex items-center gap-2 text-xs font-medium text-[#2D3748]">
-                        <Check className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
+                      <div key={i} className="flex items-start gap-2 text-xs font-medium text-[#2D3748]">
+                        <Check className="w-3.5 h-3.5 text-[#C5A059] shrink-0 mt-0.5" />
                         <span>{f}</span>
                       </div>
                     ))}
@@ -152,12 +152,12 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
                 </div>
 
                 {/* Action Trigger */}
-                <div className="pt-2 flex flex-wrap items-center gap-3">
+                <div className="pt-2 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3">
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => onOpenEnquiry(selectedRoom.name)}
-                    className="btn-primary group cursor-pointer"
+                    className="btn-primary group cursor-pointer w-full sm:w-auto justify-center"
                   >
                     <MessageSquare className="w-4 h-4 text-[#DFB76C]" />
                     <span>Enquire for {selectedRoom.name}</span>
@@ -167,7 +167,7 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     href="tel:+917767058988"
-                    className="btn-secondary"
+                    className="btn-secondary w-full sm:w-auto justify-center"
                   >
                     <span>Call Warden: +91 77670 58988</span>
                   </motion.a>
