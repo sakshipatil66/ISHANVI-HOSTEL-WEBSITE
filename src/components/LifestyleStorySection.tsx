@@ -67,7 +67,7 @@ export const LifestyleStorySection: React.FC = () => {
                   whileHover={{ x: 4 }}
                   whileTap={{ scale: 0.99 }}
                   onClick={() => setActiveStep(idx)}
-                  className={`w-full text-left p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer flex items-start gap-3.5 sm:gap-4 relative overflow-hidden ${
+                  className={`w-full text-center p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer flex flex-col items-center gap-2.5 relative overflow-hidden ${
                     isActive
                       ? 'bg-white border-[#102A1C] shadow-lg ring-1 ring-[#102A1C]/15 sm:scale-[1.01]'
                       : 'bg-[#FAF8F5] border-[#EFEAE1] hover:bg-white hover:border-[#DFB76C]/60'
@@ -78,7 +78,7 @@ export const LifestyleStorySection: React.FC = () => {
                     <motion.div
                       layoutId="activeTimelineBar"
                       transition={{ duration: 0.35, ease: LUXURY_EASE }}
-                      className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#102A1C]"
+                      className="absolute inset-x-0 top-0 h-1 bg-[#102A1C]"
                     />
                   )}
 
@@ -90,8 +90,8 @@ export const LifestyleStorySection: React.FC = () => {
                     {getStepIcon(idx)}
                   </div>
 
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center justify-between gap-1.5">
+                  <div className="w-full min-w-0">
+                    <div className="flex flex-wrap items-center justify-center gap-2">
                       <div className="flex items-center gap-1.5">
                         {isActive && (
                           <span className="w-2 h-2 rounded-full bg-[#DFB76C] ring-4 ring-[#DFB76C]/20 shrink-0" />
@@ -104,7 +104,7 @@ export const LifestyleStorySection: React.FC = () => {
                         {step.tag}
                       </span>
                     </div>
-                    <h3 className="heading-card text-sm sm:text-base text-[#102A1C] mt-1">
+                    <h3 className="heading-card text-sm sm:text-base text-[#102A1C] mt-1.5">
                       {step.title}
                     </h3>
                     <p className="text-body-sm text-[#4B5563] mt-0.5 line-clamp-2">{step.subtitle}</p>
@@ -130,7 +130,7 @@ export const LifestyleStorySection: React.FC = () => {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.98, y: -10 }}
                   transition={{ duration: 0.38, ease: LUXURY_EASE }}
-                  className="space-y-5 sm:space-y-6"
+                  className="space-y-5 sm:space-y-6 text-center"
                 >
                   <div className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-[#FAF8F5] group">
                     <img
@@ -146,18 +146,18 @@ export const LifestyleStorySection: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-2 text-center">
                     <h3 className="heading-card text-[#102A1C] text-lg sm:text-2xl">
                       {currentItem.title}
                     </h3>
                     <p className="text-body-sm font-bold text-[#A88238]">{currentItem.subtitle}</p>
-                    <p className="text-lead text-[#2D3748] pt-1 font-normal">
+                    <p className="text-lead text-[#2D3748] pt-1 font-normal mx-auto">
                       {currentItem.description}
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[#EFEAE1] flex flex-wrap items-center justify-between gap-2 text-xs text-[#4A5568]">
-                    <div className="flex items-center gap-2">
+                  <div className="pt-4 border-t border-[#EFEAE1] flex flex-wrap items-center justify-center gap-3 text-xs text-[#4A5568]">
+                    <div className="flex items-center justify-center gap-2">
                       <CheckCircle2 className="w-4 h-4 text-[#A88238] shrink-0" />
                       <span className="font-medium text-[#2D3748]">Zero mundane distractions—all domestic chores managed</span>
                     </div>

@@ -89,24 +89,26 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                   className={`w-full h-full object-cover ${getRoomObjectPosition(ROOMS_DATA[0].id)} transition-transform duration-500 group-hover:scale-105`}
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
-              <div className="flex items-center justify-between text-xs text-[#5B6676] px-1">
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-[#5B6676] px-1 text-center">
                 <span>Natural Daylight &amp; Private Study Desk</span>
                 <span className="font-semibold text-[#102A1C]">Private Lock &amp; Wardrobe</span>
               </div>
             </div>
 
-            <div className="lg:col-span-7 w-full min-w-0 space-y-5">
-              <div className="kicker-label">
+            <div className="lg:col-span-7 w-full min-w-0 space-y-5 text-center">
+              <div className="kicker-label justify-center">
                 <span className="w-5 h-[1.5px] bg-[#C5A059]" />
                 <span>{ROOMS_DATA[0].kicker}</span>
+                <span className="w-5 h-[1.5px] bg-[#C5A059]" />
               </div>
               <div>
                 <h2 className="heading-section text-[#102A1C]">
                   {ROOMS_DATA[0].name}
                 </h2>
-                <p className="text-lead text-[#4A5568] mt-2">
+                <p className="text-lead text-[#4A5568] mt-2 mx-auto">
                   {ROOMS_DATA[0].description}
                 </p>
               </div>
@@ -128,23 +130,23 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               </div>
 
               {/* Room Furnishings List */}
-              <div className="space-y-2 pt-1">
-                <p className="text-xs font-bold text-[#102A1C] uppercase tracking-wider">Room Furnishings & Features:</p>
+              <div className="space-y-2.5 pt-1">
+                <p className="text-xs font-bold text-[#102A1C] uppercase tracking-wider text-center">Room Furnishings &amp; Features:</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {ROOMS_DATA[0].highlights.map((h, i) => (
-                    <div key={i} className="flex items-start gap-2 text-xs text-[#4A5568]">
-                      <Check className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
+                    <div key={i} className="flex items-center justify-center gap-1.5 text-xs text-[#4A5568] text-center">
+                      <Check className="w-4 h-4 text-[#C5A059] shrink-0" />
                       <span>{h}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-[#EFEAE1] flex flex-wrap items-center justify-between gap-4">
+              <div className="pt-3 border-t border-[#EFEAE1] flex flex-col items-center justify-center gap-3 text-center">
                 <p className="text-xs italic text-[#5B6676]">
                   {ROOMS_DATA[0].priceNote}
                 </p>
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 w-full sm:w-auto">
                   <button
                     onClick={() => onOpenEnquiry(ROOMS_DATA[0].name)}
                     className="btn-primary !py-2.5 !px-5 text-xs text-center justify-center min-h-[44px]"
@@ -174,16 +176,17 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
             transition={{ duration: 0.6, ease: LUXURY_EASE }}
             className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center bg-white p-4 sm:p-7 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md hover:shadow-xl hover:border-[#DFB76C]/60 transition-all duration-300 w-full overflow-hidden"
           >
-            <div className="lg:col-span-7 w-full min-w-0 order-2 lg:order-1 space-y-5">
-              <div className="kicker-label">
+            <div className="lg:col-span-7 w-full min-w-0 order-2 lg:order-1 space-y-5 text-center">
+              <div className="kicker-label justify-center">
                 <span className="w-5 h-[1.5px] bg-[#C5A059]" />
                 <span>{ROOMS_DATA[1].kicker}</span>
+                <span className="w-5 h-[1.5px] bg-[#C5A059]" />
               </div>
               <div>
                 <h2 className="heading-section text-[#102A1C]">
                   {ROOMS_DATA[1].name}
                 </h2>
-                <p className="text-lead text-[#4A5568] mt-2">
+                <p className="text-lead text-[#4A5568] mt-2 mx-auto">
                   {ROOMS_DATA[1].description}
                 </p>
               </div>
@@ -205,23 +208,23 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               </div>
 
               {/* Room Furnishings List */}
-              <div className="space-y-2 pt-1">
-                <p className="text-xs font-bold text-[#102A1C] uppercase tracking-wider">Room Furnishings &amp; Features:</p>
+              <div className="space-y-2.5 pt-1">
+                <p className="text-xs font-bold text-[#102A1C] uppercase tracking-wider text-center">Room Furnishings &amp; Features:</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {ROOMS_DATA[1].highlights.map((h, i) => (
-                    <div key={i} className="flex items-start gap-2 text-xs text-[#4A5568]">
-                      <Check className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
+                    <div key={i} className="flex items-center justify-center gap-1.5 text-xs text-[#4A5568] text-center">
+                      <Check className="w-4 h-4 text-[#C5A059] shrink-0" />
                       <span>{h}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-[#EFEAE1] flex flex-wrap items-center justify-between gap-4">
+              <div className="pt-3 border-t border-[#EFEAE1] flex flex-col items-center justify-center gap-3 text-center">
                 <p className="text-xs italic text-[#5B6676]">
                   {ROOMS_DATA[1].priceNote}
                 </p>
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 w-full sm:w-auto">
                   <button
                     onClick={() => onOpenEnquiry(ROOMS_DATA[1].name)}
                     className="btn-primary !py-2.5 !px-5 text-xs text-center justify-center min-h-[44px]"
@@ -254,9 +257,10 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                   className={`w-full h-full object-cover ${getRoomObjectPosition(ROOMS_DATA[1].id)} transition-transform duration-500 group-hover:scale-105`}
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
-              <div className="flex items-center justify-between text-xs text-[#5B6676] px-1">
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-[#5B6676] px-1 text-center">
                 <span>Both Beds, Headboards &amp; Wardrobes Fully Visible</span>
                 <span className="font-semibold text-[#102A1C]">Separate Wooden Units</span>
               </div>
@@ -286,21 +290,22 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                   decoding="async"
                 />
               </div>
-              <div className="flex items-center justify-between text-xs text-[#5B6676] px-1">
+              <div className="flex items-center justify-center text-xs text-[#5B6676] px-1 text-center">
                 <span className="font-semibold text-[#102A1C]">Extra Space &amp; Ventilation</span>
               </div>
             </div>
 
-            <div className="lg:col-span-7 w-full min-w-0 space-y-5">
-              <div className="kicker-label">
+            <div className="lg:col-span-7 w-full min-w-0 space-y-5 text-center">
+              <div className="kicker-label justify-center">
                 <span className="w-5 h-[1.5px] bg-[#C5A059]" />
                 <span>{ROOMS_DATA[2].kicker}</span>
+                <span className="w-5 h-[1.5px] bg-[#C5A059]" />
               </div>
               <div>
                 <h2 className="heading-section text-[#102A1C]">
                   {ROOMS_DATA[2].name}
                 </h2>
-                <p className="text-lead text-[#4A5568] mt-2">
+                <p className="text-lead text-[#4A5568] mt-2 mx-auto">
                   {ROOMS_DATA[2].description}
                 </p>
               </div>
@@ -322,23 +327,23 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
               </div>
 
               {/* Room Furnishings List */}
-              <div className="space-y-2 pt-1">
-                <p className="text-xs font-bold text-[#102A1C] uppercase tracking-wider">Room Furnishings & Features:</p>
+              <div className="space-y-2.5 pt-1">
+                <p className="text-xs font-bold text-[#102A1C] uppercase tracking-wider text-center">Room Furnishings &amp; Features:</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {ROOMS_DATA[2].highlights.map((h, i) => (
-                    <div key={i} className="flex items-start gap-2 text-xs text-[#4A5568]">
-                      <Check className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
+                    <div key={i} className="flex items-center justify-center gap-1.5 text-xs text-[#4A5568] text-center">
+                      <Check className="w-4 h-4 text-[#C5A059] shrink-0" />
                       <span>{h}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-[#EFEAE1] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+              <div className="pt-3 border-t border-[#EFEAE1] flex flex-col items-center justify-center gap-3 text-center">
                 <p className="text-xs italic text-[#5B6676]">
                   {ROOMS_DATA[2].priceNote}
                 </p>
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 w-full sm:w-auto">
                   <button
                     onClick={() => onOpenEnquiry(ROOMS_DATA[2].name)}
                     className="btn-primary !py-2.5 !px-5 text-xs justify-center min-h-[44px]"
@@ -375,7 +380,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                 <span className="w-5 h-[1.5px] bg-[#C5A059]" />
               </div>
               <h2 className="heading-section text-[#102A1C]">What's Included In Every Room Stay</h2>
-              <p className="text-lead text-sm sm:text-base text-[#5B6676]">
+              <p className="text-lead text-sm sm:text-base text-[#5B6676] mx-auto">
                 All our rooms come with an all-inclusive package so scholars and parents face zero hidden expenses.
               </p>
             </div>
@@ -410,9 +415,9 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                   viewport={VIEWPORT_CONFIG}
                   transition={{ duration: 0.48, delay: idx * 0.08, ease: LUXURY_EASE }}
                   whileHover={{ y: -4 }}
-                  className="p-5 bg-white rounded-2xl border border-[#EFEAE1] hover:border-[#DFB76C]/80 hover:shadow-md transition-all duration-300 shadow-2xs space-y-2"
+                  className="p-5 bg-white rounded-2xl border border-[#EFEAE1] hover:border-[#DFB76C]/80 hover:shadow-md transition-all duration-300 shadow-2xs space-y-2 text-center flex flex-col items-center"
                 >
-                  <div className="w-9 h-9 rounded-full bg-[#FAF8F5] text-[#C5A059] flex items-center justify-center font-bold text-sm">
+                  <div className="w-9 h-9 rounded-full bg-[#FAF8F5] text-[#C5A059] flex items-center justify-center font-bold text-sm mx-auto">
                     {inc.emoji}
                   </div>
                   <h3 className="heading-card text-sm sm:text-base text-[#102A1C]">{inc.title}</h3>
@@ -546,6 +551,7 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                   className={`w-full h-full object-cover ${getRoomObjectPosition(room.id)} transition-transform duration-700 ease-out group-hover:scale-105`}
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
 

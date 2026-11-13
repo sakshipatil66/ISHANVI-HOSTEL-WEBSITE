@@ -108,7 +108,7 @@ export const HomeResidentProfilesSection: React.FC<HomeResidentProfilesSectionPr
 
                   <div className="p-6 sm:p-8 space-y-4">
                     <div>
-                      <h3 className="font-serif text-xl sm:text-2xl font-bold text-white">
+                      <h3 className="heading-card !text-white sm:!text-2xl">
                         {track.title}
                       </h3>
                       <p className="text-xs sm:text-sm text-[#CBD5E0] mt-1.5 leading-relaxed">
@@ -135,7 +135,7 @@ export const HomeResidentProfilesSection: React.FC<HomeResidentProfilesSectionPr
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.97 }}
                     onClick={() => onOpenEnquiry(track.ctaTarget)}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#DFB76C] hover:bg-[#EAC885] text-[#102A1C] text-xs font-bold transition-colors cursor-pointer group/btn"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#DFB76C] hover:bg-[#EAC885] text-[#102A1C] text-xs font-bold transition-colors cursor-pointer min-h-[44px] group/btn"
                   >
                     <span>{track.ctaLabel}</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover/btn:translate-x-1" />

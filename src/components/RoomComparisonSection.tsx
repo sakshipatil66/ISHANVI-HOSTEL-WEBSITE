@@ -105,36 +105,38 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
               </div>
 
               {/* Right Column: In-Depth Specs */}
-              <div className="w-full min-w-0 space-y-5">
+              <div className="w-full min-w-0 space-y-5 text-center">
                 <div>
-                  <div className="kicker-label mb-1">
+                  <div className="kicker-label justify-center mb-1">
+                    <span className="w-4 h-[1.5px] bg-[#C5A059]" />
                     <span>{selectedRoom.kicker}</span>
+                    <span className="w-4 h-[1.5px] bg-[#C5A059]" />
                   </div>
                   <h3 className="heading-card text-xl sm:text-2xl text-[#102A1C]">
                     {selectedRoom.name}
                   </h3>
-                  <p className="text-lead mt-1.5">
+                  <p className="text-lead mt-1.5 mx-auto">
                     {selectedRoom.description}
                   </p>
                 </div>
 
                 {/* Specs Matrix */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 py-3.5 border-y border-[#EFEAE1] text-xs text-[#2C3530]">
-                  <motion.div whileHover={{ y: -2 }} className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#FAF8F5]/70">
+                  <motion.div whileHover={{ y: -2 }} className="flex flex-col items-center justify-center text-center gap-1.5 p-3 rounded-xl bg-[#FAF8F5]/70">
                     <Maximize2 className="w-4 h-4 text-[#C5A059] shrink-0" />
                     <div className="min-w-0">
                       <p className="text-caption">Room Size</p>
                       <p className="font-semibold text-xs sm:text-sm text-[#102A1C]">{selectedRoom.dimensions}</p>
                     </div>
                   </motion.div>
-                  <motion.div whileHover={{ y: -2 }} className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#FAF8F5]/70">
+                  <motion.div whileHover={{ y: -2 }} className="flex flex-col items-center justify-center text-center gap-1.5 p-3 rounded-xl bg-[#FAF8F5]/70">
                     <Users className="w-4 h-4 text-[#C5A059] shrink-0" />
                     <div className="min-w-0">
                       <p className="text-caption">Occupancy</p>
                       <p className="font-semibold text-xs sm:text-sm text-[#102A1C]">{selectedRoom.occupancy}</p>
                     </div>
                   </motion.div>
-                  <motion.div whileHover={{ y: -2 }} className="flex items-center gap-2.5 p-2.5 rounded-xl bg-[#FAF8F5]/70">
+                  <motion.div whileHover={{ y: -2 }} className="flex flex-col items-center justify-center text-center gap-1.5 p-3 rounded-xl bg-[#FAF8F5]/70">
                     <Bath className="w-4 h-4 text-[#C5A059] shrink-0" />
                     <div className="min-w-0">
                       <p className="text-caption">Bathroom</p>
@@ -144,14 +146,14 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
                 </div>
 
                 {/* In-Room Inclusions Checklist */}
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   <h4 className="text-xs font-bold uppercase tracking-wider text-[#102A1C]">
                     Included In-Room Furnishings &amp; Features:
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-0.5">
                     {selectedRoom.furnishings.map((f, i) => (
-                      <div key={i} className="flex items-start gap-2 text-xs font-medium text-[#2D3748]">
-                        <Check className="w-3.5 h-3.5 text-[#C5A059] shrink-0 mt-0.5" />
+                      <div key={i} className="flex items-center justify-center gap-1.5 text-xs font-medium text-[#2D3748] text-center">
+                        <Check className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
                         <span>{f}</span>
                       </div>
                     ))}
@@ -159,7 +161,7 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
                 </div>
 
                 {/* Action Trigger */}
-                <div className="pt-2 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-2.5 sm:gap-3">
+                <div className="pt-2 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-2.5 sm:gap-3">
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}

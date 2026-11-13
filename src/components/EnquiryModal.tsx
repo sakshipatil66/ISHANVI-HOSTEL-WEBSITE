@@ -110,7 +110,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
         <div className="bg-[#102A1C] text-white p-5 sm:p-6 relative shrink-0">
           <button
             onClick={handleClose}
-            className="absolute top-5 right-5 p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
+            className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer flex items-center justify-center"
             aria-label="Close dialog"
           >
             <X className="w-5 h-5" />
@@ -142,7 +142,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
               <div className="w-14 h-14 rounded-full bg-[#102A1C]/10 text-[#102A1C] flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-8 h-8 text-[#102A1C]" />
               </div>
-              <h4 className="font-serif text-xl font-bold text-[#102A1C]">
+              <h4 className="heading-card text-xl text-[#102A1C]">
                 Enquiry Details Ready
               </h4>
               <p className="text-xs text-[#5B6676] max-w-xs mx-auto">
@@ -176,7 +176,7 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
               <div className="pt-2">
                 <button
                   onClick={handleClose}
-                  className="px-6 py-2 text-xs font-semibold text-[#102A1C] bg-[#F4EFE6] hover:bg-[#EAE3D2] rounded-full transition-colors cursor-pointer"
+                  className="px-6 py-2.5 min-h-[44px] text-xs font-semibold text-[#102A1C] bg-[#F4EFE6] hover:bg-[#EAE3D2] rounded-full transition-colors cursor-pointer"
                 >
                   Close
                 </button>

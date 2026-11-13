@@ -133,7 +133,7 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
                     4 Chef Meals Daily
                   </div>
                 </div>
-                <div className="p-5 space-y-1.5 flex-1">
+                <div className="p-5 space-y-1.5 flex-1 text-center">
                   <span className="text-[11px] font-bold text-[#A88238] uppercase tracking-wider block">
                     Hygienic Dining
                   </span>
@@ -163,7 +163,7 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
                     decoding="async"
                   />
                 </div>
-                <div className="p-5 space-y-1.5 flex-1">
+                <div className="p-5 space-y-1.5 flex-1 text-center">
                   <span className="text-[11px] font-bold text-[#A88238] uppercase tracking-wider block">
                     Study &amp; Focus
                   </span>
@@ -193,7 +193,7 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
                     decoding="async"
                   />
                 </div>
-                <div className="p-5 space-y-1.5 flex-1">
+                <div className="p-5 space-y-1.5 flex-1 text-center">
                   <span className="text-[11px] font-bold text-[#A88238] uppercase tracking-wider block">
                     24×7 Safety
                   </span>
@@ -223,7 +223,7 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
                     decoding="async"
                   />
                 </div>
-                <div className="p-5 space-y-1.5 flex-1">
+                <div className="p-5 space-y-1.5 flex-1 text-center">
                   <span className="text-[11px] font-bold text-[#A88238] uppercase tracking-wider block">
                     Wellness Hub
                   </span>

@@ -17,7 +17,7 @@ export const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ onOpenEnquir
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Heading & Value Proposition */}
-          <div className="lg:col-span-5 space-y-5 sm:space-y-6">
+          <div className="lg:col-span-5 space-y-5 sm:space-y-6 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -25,14 +25,15 @@ export const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ onOpenEnquir
               transition={{ duration: 0.6, ease: LUXURY_EASE }}
               className="space-y-4"
             >
-              <div className="kicker-label">
+              <div className="kicker-label justify-center">
                 <span className="w-5 h-[1.5px] bg-[#C5A059]" />
                 <span>WHY CHOOSE ISHANVI</span>
+                <span className="w-5 h-[1.5px] bg-[#C5A059]" />
               </div>
               <h2 className="heading-section text-[#102A1C]">
                 Where Every Detail is Built to Support Your Success.
               </h2>
-              <p className="text-lead">
+              <p className="text-lead mx-auto">
                 Finding the right hostel can make or break your academic year. We eliminate mundane chores, chaotic dining, and safety anxieties so you can devote 100% of your energy to your studies and career.
               </p>
             </motion.div>
@@ -45,13 +46,13 @@ export const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ onOpenEnquir
               transition={{ duration: 0.55, delay: 0.1, ease: LUXURY_EASE }}
               whileHover={{ y: -4 }}
               onClick={onOpenEnquiry}
-              className="p-4 sm:p-5 rounded-2xl bg-white border border-[#EFEAE1] shadow-sm hover:shadow-md hover:border-[#DFB76C]/80 transition-all flex items-start gap-3.5 sm:gap-4 cursor-pointer relative overflow-hidden group"
+              className="p-4 sm:p-5 rounded-2xl bg-white border border-[#EFEAE1] shadow-sm hover:shadow-md hover:border-[#DFB76C]/80 transition-all flex flex-col items-center text-center gap-3 cursor-pointer relative overflow-hidden group"
             >
               <div className="w-11 h-11 rounded-xl bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0 shadow-md transition-transform duration-300 group-hover:scale-105">
                 <HeartHandshake className="w-5 h-5" />
               </div>
-              <div className="min-w-0 flex-1">
-                <div className="flex flex-wrap items-center gap-2">
+              <div className="min-w-0 flex-1 space-y-1">
+                <div className="flex flex-wrap items-center justify-center gap-2">
                   <h3 className="heading-card text-base text-[#102A1C]">
                     Direct Parent Transparency
                   </h3>
@@ -70,7 +71,7 @@ export const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ onOpenEnquir
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT_CONFIG}
               transition={{ duration: 0.5, delay: 0.16, ease: LUXURY_EASE }}
-              className="pt-2"
+              className="pt-2 flex justify-center"
             >
               <motion.button
                 whileHover={{ y: -2 }}
@@ -95,17 +96,17 @@ export const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ onOpenEnquir
                   viewport={VIEWPORT_CONFIG}
                   transition={{ duration: 0.48, delay: idx * 0.06, ease: LUXURY_EASE }}
                   whileHover={{ y: -4 }}
-                  className="bg-white rounded-2xl p-5 sm:p-6 border border-[#EFEAE1] shadow-xs hover:shadow-xl hover:border-[#DFB76C] transition-all duration-300 space-y-2.5 group cursor-default"
+                  className="bg-white rounded-2xl p-5 sm:p-6 border border-[#EFEAE1] shadow-xs hover:shadow-xl hover:border-[#DFB76C] transition-all duration-300 space-y-2.5 group cursor-default text-center flex flex-col items-center"
                 >
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-full bg-[#FAF6ED] text-[#C5A059] flex items-center justify-center shrink-0 group-hover:bg-[#102A1C] group-hover:text-[#DFB76C] transition-all duration-300 shadow-2xs group-hover:scale-110">
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-[#FAF6ED] text-[#C5A059] flex items-center justify-center shrink-0 group-hover:bg-[#102A1C] group-hover:text-[#DFB76C] transition-all duration-300 shadow-2xs group-hover:scale-110">
                       <CheckCircle2 className="w-4 h-4" />
                     </div>
                     <h3 className="heading-card text-base text-[#102A1C] transition-colors">
                       {item.title}
                     </h3>
                   </div>
-                  <p className="text-body-sm pl-9">
+                  <p className="text-body-sm">
                     {item.desc}
                   </p>
                 </motion.div>

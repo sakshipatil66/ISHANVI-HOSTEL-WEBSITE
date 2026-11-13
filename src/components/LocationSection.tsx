@@ -53,10 +53,10 @@ export const LocationSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-stretch">
           {/* Left Column: Proximity Metrics with Hover Slide */}
           <div className="lg:col-span-6 space-y-4 flex flex-col justify-between">
-            <div className="space-y-3">
-              <h3 className="heading-card text-[#102A1C] mb-2 flex flex-wrap items-center justify-between gap-2">
-                <span>Nearby Colleges & Transit Nodes</span>
-                <span className="text-xs font-semibold text-[#8C6D2D] shrink-0">Walk & Auto Times</span>
+            <div className="space-y-3 text-center">
+              <h3 className="heading-card text-[#102A1C] mb-2 flex flex-col items-center justify-center gap-1 text-center">
+                <span>Nearby Colleges &amp; Transit Nodes</span>
+                <span className="text-xs font-semibold text-[#8C6D2D] shrink-0">Walk &amp; Auto Times</span>
               </h3>
 
               {NEARBY_CONNECTIVITY.map((item, idx) => (
@@ -66,23 +66,21 @@ export const LocationSection: React.FC = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={VIEWPORT_CONFIG}
                   transition={{ duration: 0.45, delay: idx * 0.07, ease: LUXURY_EASE }}
-                  whileHover={{ x: 6, borderColor: '#102A1C' }}
-                  className="p-3.5 sm:p-4 rounded-2xl bg-white border border-[#EFEAE1] shadow-xs flex items-center justify-between gap-3 transition-all group"
+                  whileHover={{ y: -2, borderColor: '#102A1C' }}
+                  className="p-4 rounded-2xl bg-white border border-[#EFEAE1] shadow-xs flex flex-col items-center text-center gap-2 transition-all group"
                 >
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-10 h-10 rounded-xl bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center shrink-0 group-hover:bg-[#102A1C] group-hover:text-white transition-colors">
-                      {getIcon(item.type)}
-                    </div>
-                    <div className="min-w-0">
-                      <h4 className="text-sm font-semibold text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">{item.name}</h4>
-                      <p className="text-xs text-[#5B6676] flex items-center gap-1 mt-0.5">
-                        <Clock className="w-3 h-3 text-[#C5A059] shrink-0" />
-                        <span>{item.time}</span>
-                      </p>
-                    </div>
+                  <div className="w-10 h-10 rounded-xl bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center shrink-0 group-hover:bg-[#102A1C] group-hover:text-white transition-colors">
+                    {getIcon(item.type)}
+                  </div>
+                  <div className="min-w-0">
+                    <h4 className="text-sm font-semibold text-[#102A1C] group-hover:text-[#8C6D2D] transition-colors">{item.name}</h4>
+                    <p className="text-xs text-[#5B6676] flex items-center justify-center gap-1 mt-0.5">
+                      <Clock className="w-3 h-3 text-[#C5A059] shrink-0" />
+                      <span>{item.time}</span>
+                    </p>
                   </div>
 
-                  <span className="text-xs font-bold text-[#102A1C] bg-[#FAF8F5] group-hover:bg-[#102A1C] group-hover:text-[#DFB76C] px-3 py-1.5 rounded-full border border-[#EFEAE1] whitespace-nowrap tabular-nums transition-colors shrink-0">
+                  <span className="text-xs font-bold text-[#102A1C] bg-[#FAF8F5] group-hover:bg-[#102A1C] group-hover:text-[#DFB76C] px-3 py-1 rounded-full border border-[#EFEAE1] whitespace-nowrap tabular-nums transition-colors shrink-0">
                     {item.distance}
                   </span>
                 </motion.div>
@@ -95,7 +93,7 @@ export const LocationSection: React.FC = () => {
               viewport={VIEWPORT_CONFIG}
               transition={{ duration: 0.5, delay: 0.25, ease: LUXURY_EASE }}
               whileHover={{ y: -2 }}
-              className="p-4 rounded-2xl bg-white border border-[#EFEAE1] text-xs text-[#5A655F] flex items-center gap-3 shadow-2xs"
+              className="p-4 rounded-2xl bg-white border border-[#EFEAE1] text-xs text-[#5A655F] flex flex-col items-center text-center gap-2 shadow-2xs"
             >
               <div className="w-2.5 h-2.5 rounded-full bg-emerald-600 ring-4 ring-emerald-500/20 shrink-0" />
               <div>
@@ -112,10 +110,10 @@ export const LocationSection: React.FC = () => {
             transition={{ duration: 0.6, ease: LUXURY_EASE }}
             className="lg:col-span-6 flex flex-col"
           >
-            <div className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 border border-[#EFEAE1] shadow-lg flex-1 flex flex-col justify-between space-y-6">
+            <div className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 border border-[#EFEAE1] shadow-lg flex-1 flex flex-col justify-between space-y-6 text-center">
               <div>
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-                  <div className="flex items-center gap-2 min-w-0">
+                <div className="flex flex-col items-center justify-center gap-2 mb-4">
+                  <div className="flex items-center justify-center gap-2 min-w-0">
                     <MapPin className="w-5 h-5 text-[#C5A059] shrink-0" />
                     <h3 className="heading-card text-[#102A1C]">Campus Address</h3>
                   </div>
@@ -125,7 +123,7 @@ export const LocationSection: React.FC = () => {
                   </span>
                 </div>
 
-                <p className="text-sm text-[#5A655F] leading-relaxed mb-5">
+                <p className="text-sm text-[#5A655F] leading-relaxed mb-5 text-center max-w-md mx-auto">
                   {HOSTEL_INFO.address}
                 </p>
 
@@ -140,7 +138,7 @@ export const LocationSection: React.FC = () => {
                     decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent" />
-                  <div className="absolute bottom-3.5 left-4 right-4 text-white text-xs">
+                  <div className="absolute bottom-3.5 left-4 right-4 text-white text-xs text-center">
                     <p className="font-serif font-bold text-sm text-[#DFB76C]">Ambegaon Bk, Pune</p>
                     <p className="text-[11px] text-slate-200">Visiting Hours: {HOSTEL_INFO.visitingHours}</p>
                   </div>
@@ -160,12 +158,12 @@ export const LocationSection: React.FC = () => {
                   />
                 </div>
 
-                <div className="space-y-2 text-xs text-[#5A655F]">
-                  <div className="flex flex-wrap justify-between gap-2 py-1.5 border-b border-[#EFEAE1]">
+                <div className="space-y-2 text-xs text-[#5A655F] text-center">
+                  <div className="flex flex-col items-center justify-center gap-0.5 py-1.5 border-b border-[#EFEAE1]">
                     <span className="text-[#5B6676]">Standard Gate Hours:</span>
                     <span className="font-semibold text-[#102A1C]">{HOSTEL_INFO.gateCurfew}</span>
                   </div>
-                  <div className="flex flex-wrap justify-between gap-2 py-1.5 border-b border-[#EFEAE1]">
+                  <div className="flex flex-col items-center justify-center gap-0.5 py-1.5 border-b border-[#EFEAE1]">
                     <span className="text-[#5B6676]">Admissions Helpline:</span>
                     <span className="font-semibold text-[#102A1C]">{HOSTEL_INFO.phonePrimary}</span>
                   </div>

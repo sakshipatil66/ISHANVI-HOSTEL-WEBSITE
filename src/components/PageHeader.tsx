@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import {
-  Sparkles,
   MapPin,
   ShieldCheck,
   Utensils,
@@ -9,6 +8,7 @@ import {
   Phone,
   MessageSquare,
   ArrowRight,
+  ChevronRight,
 } from 'lucide-react';
 import { HOSTEL_INFO } from '../data/hostelData';
 import { LUXURY_EASE } from '../lib/motion';
@@ -16,116 +16,191 @@ import { LUXURY_EASE } from '../lib/motion';
 interface PageHeaderProps {
   kicker: string;
   title: string;
+  titleAccent?: string;
   subtitle: string;
+  breadcrumb: string;
+  imageSrc: string;
+  imageAlt: string;
+  onNavigateHome?: () => void;
   onOpenEnquiry?: (roomName?: string) => void;
 }
 
 export const PageHeader: React.FC<PageHeaderProps> = ({
   kicker,
   title,
+  titleAccent,
   subtitle,
+  breadcrumb,
+  imageSrc,
+  imageAlt,
+  onNavigateHome,
   onOpenEnquiry,
 }) => {
   return (
-    <div className="relative w-full bg-[#08170E] text-white overflow-hidden select-none border-b border-white/10">
-      {/* Cinematic Ambient Background Layer */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.img
-          initial={{ scale: 1.06, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.45 }}
-          transition={{ duration: 0.9, ease: LUXURY_EASE }}
-          src="/assets/images/hero_ishanvi_facade_1793879538556.jpg"
-          alt=""
-          aria-hidden="true"
-          className="w-full h-full object-cover object-center"
-          decoding="async"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#08170E] via-[#08170E]/80 to-[#08170E]/55" />
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#DFB76C]/12 rounded-full blur-3xl pointer-events-none animate-float-ambient" />
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-16 min-h-[260px] sm:min-h-[320px] lg:min-h-[360px] flex flex-col items-center justify-center text-center">
-        {/* Animated Headline & Subhead */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: LUXURY_EASE }}
-          className="max-w-3xl space-y-3 [text-shadow:0_2px_14px_rgba(0,0,0,0.5)]"
-        >
-          {/* Kicker Pill */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#DFB76C]/15 border border-[#DFB76C]/35 backdrop-blur-md shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#DFB76C]" />
-            <span className="text-[11px] sm:text-xs font-bold text-[#E8C47E] tracking-[0.12em] sm:tracking-[0.16em] uppercase font-sans">
-              {kicker}
-            </span>
+    <section
+      className="relative w-full flex flex-col justify-between bg-[#07170E] text-white overflow-hidden select-none"
+      aria-label={`${breadcrumb} Hero Header`}
+    >
+      {/* HERO VIEWPORT CONTAINER — Matches Home Hero Proportions & Scrim */}
+      <div className="relative w-full min-h-[340px] sm:min-h-[390px] lg:min-h-[430px] overflow-hidden bg-[#07170E] flex flex-col justify-center">
+        {/* Background Photo with Ken Burns Settle & Directional Contrast Scrim */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <motion.img
+            initial={{ scale: 1.05, opacity: 0.2 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 1.1, ease: LUXURY_EASE }}
+            src={imageSrc}
+            alt={imageAlt}
+            className="w-full h-full object-cover object-center select-none"
+            fetchPriority="high"
+            loading="eager"
+          />
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 bg-[#05130B]/70" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#040E08]/90 via-[#05130B]/40 to-[#040E08]/60" />
           </div>
+        </div>
 
-          {/* Page Display Title - Harmonized with site heading scale */}
-          <h1 className="title-page text-white drop-shadow-md">
-            {title}
-          </h1>
+        {/* FOREGROUND EDITORIAL CONTENT LAYER — Center-Aligned Across All Subpages */}
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-14 my-auto">
+          <div className="max-w-3xl mx-auto space-y-3 sm:space-y-4 text-center">
+            {/* Breadcrumb Trail */}
+            <motion.nav
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.04, ease: LUXURY_EASE }}
+              aria-label="Breadcrumb"
+              className="flex items-center justify-center gap-1.5 text-xs font-medium text-slate-300"
+            >
+              <a
+                href="/"
+                onClick={(e) => {
+                  if (onNavigateHome) {
+                    e.preventDefault();
+                    onNavigateHome();
+                  }
+                }}
+                className="hover:text-[#DFB76C] transition-colors"
+              >
+                Home
+              </a>
+              <ChevronRight className="w-3.5 h-3.5 text-[#DFB76C]/80 shrink-0" />
+              <span className="text-[#DFB76C] font-semibold">{breadcrumb}</span>
+            </motion.nav>
 
-          {/* High-Contrast Clear Description */}
-          <p className="text-lead text-white/95 max-w-2xl mx-auto font-sans font-normal">
-            {subtitle}
-          </p>
+            <div className="space-y-2 sm:space-y-2.5">
+              {/* Hairline Gold Kicker */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 0.08, ease: LUXURY_EASE }}
+                className="flex items-center justify-center gap-2 sm:gap-2.5"
+              >
+                <span className="w-5 sm:w-7 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C] shrink-0" />
+                <span className="hero-kicker drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
+                  {kicker}
+                </span>
+                <span className="w-5 sm:w-7 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C] shrink-0" />
+              </motion.div>
 
-          {/* Interactive CTAs */}
-          <div className="pt-2 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
-            {onOpenEnquiry && (
-              <motion.button
+              {/* Unified H1 Display Title */}
+              <motion.h1
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, delay: 0.16, ease: LUXURY_EASE }}
+                className="title-page text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]"
+              >
+                {title}
+                {titleAccent && (
+                  <>
+                    {' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#E8C680] italic font-normal">
+                      {titleAccent}
+                    </span>
+                  </>
+                )}
+              </motion.h1>
+
+              {/* Unified Subtitle Typography */}
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, delay: 0.25, ease: LUXURY_EASE }}
+                className="hero-subtitle max-w-2xl mx-auto drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]"
+              >
+                {subtitle}
+              </motion.p>
+            </div>
+
+            {/* Unified Action Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.34, ease: LUXURY_EASE }}
+              className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 pt-1"
+            >
+              {onOpenEnquiry && (
+                <motion.button
+                  whileHover={{ y: -2, scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => onOpenEnquiry(`${breadcrumb} Enquiry`)}
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_4px_20px_rgba(223,183,108,0.35)] hover:shadow-[0_8px_28px_rgba(223,183,108,0.45)] transition-shadow cursor-pointer min-h-[44px] group"
+                >
+                  <MessageSquare className="w-4 h-4 text-[#051009]" />
+                  <span>Enquire Now</span>
+                  <ArrowRight className="w-4 h-4 text-[#051009] transition-transform duration-200 group-hover:translate-x-1" />
+                </motion.button>
+              )}
+
+              <motion.a
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
-                onClick={() => onOpenEnquiry(title)}
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#DFB76C] hover:bg-[#EAC885] text-[#08170E] text-xs sm:text-sm font-bold shadow-lg transition-colors cursor-pointer min-h-[42px] group"
+                href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-black/60 hover:bg-[#102A1C] text-white border border-[#DFB76C]/60 hover:border-[#DFB76C] text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md transition-colors cursor-pointer min-h-[44px]"
               >
-                <MessageSquare className="w-3.5 h-3.5 text-[#08170E]" />
-                <span>Enquire Now</span>
-                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
-              </motion.button>
-            )}
-
-            <motion.a
-              whileHover={{ y: -2, scale: 1.02 }}
-              whileTap={{ scale: 0.97 }}
-              href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-black/35 hover:bg-white/15 text-white text-xs sm:text-sm font-semibold border border-white/25 hover:border-[#DFB76C]/60 backdrop-blur-md transition-colors min-h-[42px]"
-            >
-              <Phone className="w-3.5 h-3.5 text-[#DFB76C]" />
-              <span>Call: {HOSTEL_INFO.phonePrimary}</span>
-            </motion.a>
-          </div>
-        </motion.div>
-
-        {/* 4 Feature Badges at Bottom of Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.14, ease: LUXURY_EASE }}
-          className="mt-7 sm:mt-9 pt-5 border-t border-white/15 w-full max-w-4xl grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4 text-left"
-        >
-          {[
-            { Icon: MapPin, title: '100m to ISMS', sub: 'Ambegaon Bk, Pune' },
-            { Icon: ShieldCheck, title: '24/7 Security', sub: 'CCTV & Wardens' },
-            { Icon: Utensils, title: '4 Fresh Meals', sub: 'Hygienic Dining' },
-            { Icon: Zap, title: '100% Backup', sub: 'Power & Wi-Fi Uptime' },
-          ].map(({ Icon, title: itemTitle, sub }) => (
-            <motion.div
-              key={itemTitle}
-              whileHover={{ y: -2, borderColor: 'rgba(223,183,108,0.45)' }}
-              transition={{ duration: 0.2 }}
-              className="flex items-center gap-2.5 bg-black/30 backdrop-blur-sm p-2.5 sm:p-3 rounded-xl border border-white/10 transition-colors"
-            >
-              <Icon className="w-4 h-4 text-[#DFB76C] shrink-0" />
-              <div className="min-w-0">
-                <p className="text-[11px] font-bold text-white leading-tight truncate">{itemTitle}</p>
-                <p className="text-[10px] sm:text-[11px] text-white/80 truncate">{sub}</p>
-              </div>
+                <Phone className="w-4 h-4 text-[#DFB76C]" />
+                <span>Call: {HOSTEL_INFO.phonePrimary}</span>
+              </motion.a>
             </motion.div>
-          ))}
-        </motion.div>
+          </div>
+        </div>
       </div>
-    </div>
+
+      {/* UNIFIED BOTTOM CREAM STRIP matching Home Hero */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.55, delay: 0.36, ease: LUXURY_EASE }}
+        className="relative z-20 w-full bg-[#FAF8F5] border-t border-[#DFB76C]/30 text-[#102A1C] py-2 sm:py-2.5 px-3 sm:px-6 lg:px-8 shadow-md shrink-0"
+      >
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
+          <div className="flex-1 flex items-center justify-start md:justify-center lg:justify-start gap-1.5 sm:gap-3 md:gap-4 text-xs sm:text-sm font-semibold text-[#102A1C] overflow-x-auto no-scrollbar scroll-smooth touch-pan-x py-0.5">
+            {[
+              { Icon: MapPin, label: '100m to ISMS Sankalp' },
+              { Icon: ShieldCheck, label: '24/7 Guarded Security' },
+              { Icon: Utensils, label: '4 Fresh Daily Meals' },
+              { Icon: Zap, label: '100% Power & Wi-Fi' },
+            ].map(({ Icon, label }) => (
+              <div
+                key={label}
+                className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white border border-[#EFEAE1] text-[#102A1C] text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 shadow-2xs"
+              >
+                <Icon className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
+                <span>{label}</span>
+              </div>
+            ))}
+          </div>
+
+          <a
+            href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
+            className="text-xs font-bold text-[#102A1C] hover:text-[#8C6D2D] transition-colors flex items-center gap-1.5 shrink-0 whitespace-nowrap hidden sm:flex"
+            title="Call Admissions Reception"
+          >
+            <span>Call Admissions:</span>
+            <span className="font-mono text-[#8C6D2D]">{HOSTEL_INFO.phonePrimary}</span>
+          </a>
+        </div>
+      </motion.div>
+    </section>
   );
 };

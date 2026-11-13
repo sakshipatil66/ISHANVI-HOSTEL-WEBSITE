@@ -6,9 +6,13 @@ import { LUXURY_EASE, VIEWPORT_CONFIG } from '../lib/motion';
 
 interface BottomCtaSectionProps {
   onOpenEnquiry: (roomName?: string) => void;
+  centered?: boolean;
 }
 
-export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({ onOpenEnquiry }) => {
+export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({
+  onOpenEnquiry,
+  centered = false,
+}) => {
   return (
     <section className="py-8 sm:py-12 bg-[#FDFBF7] relative overflow-hidden">
       {/* Background ambient decorative glow */}
@@ -29,10 +33,11 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({ onOpenEnquir
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
             {/* Left Column: Heading, Subtitle, Enquire Button */}
-            <div className="lg:col-span-7 space-y-4">
-              <div className="kicker-label">
+            <div className={`lg:col-span-7 space-y-4 ${centered ? 'text-center' : ''}`}>
+              <div className={`kicker-label ${centered ? 'justify-center' : ''}`}>
                 <span className="w-5 h-[1.5px] bg-[#C5A059]" />
                 <span>RESERVE YOUR SANCTUARY</span>
+                {centered && <span className="w-5 h-[1.5px] bg-[#C5A059]" />}
               </div>
 
               <h2 className="heading-section text-[#102A1C]">
@@ -40,12 +45,12 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({ onOpenEnquir
                 Tomorrow With ISHANVI
               </h2>
 
-              <p className="text-lead">
+              <p className={`text-lead ${centered ? 'mx-auto' : ''}`}>
                 {HOSTEL_INFO.tagline} — Secure, serene and well-managed student accommodation walking distance from ISMS Sankalp Business School, Ambegaon Bk, Pune.
               </p>
 
               {/* Verified Trust Badges */}
-              <div className="flex flex-wrap items-center gap-3 pt-1 text-xs text-[#102A1C] font-semibold">
+              <div className={`flex flex-wrap items-center gap-3 pt-1 text-xs text-[#102A1C] font-semibold ${centered ? 'justify-center' : ''}`}>
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/80 border border-[#E2D9C8] shadow-2xs">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#C5A059]" /> 24x7 In-House Warden
                 </span>
@@ -57,7 +62,7 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({ onOpenEnquir
                 </span>
               </div>
 
-              <div className="pt-2 flex flex-wrap items-center gap-2.5 sm:gap-3">
+              <div className={`pt-2 flex flex-wrap items-center gap-2.5 sm:gap-3 ${centered ? 'justify-center' : ''}`}>
                 <motion.button
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
@@ -118,12 +123,16 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({ onOpenEnquir
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_CONFIG}
           transition={{ duration: 0.6, delay: 0.12, ease: LUXURY_EASE }}
-          className="mt-6 sm:mt-8 bg-[#102A1C] rounded-2xl p-5 sm:p-8 text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-5 sm:gap-6 shadow-xl border border-[#DFB76C]/30 relative overflow-hidden"
+          className={`mt-6 sm:mt-8 bg-[#102A1C] rounded-2xl p-5 sm:p-8 text-white flex flex-col md:flex-row gap-5 sm:gap-6 shadow-xl border border-[#DFB76C]/30 relative overflow-hidden ${
+            centered
+              ? 'items-center justify-center md:justify-around text-center'
+              : 'items-start md:items-center justify-between'
+          }`}
         >
           {/* Subtle pulse background aura */}
           <div className="absolute right-0 top-0 w-48 h-48 bg-[#DFB76C]/10 rounded-full blur-2xl pointer-events-none" />
 
-          <div className="flex items-center gap-4 relative z-10">
+          <div className={`flex items-center gap-4 relative z-10 ${centered ? 'flex-col sm:flex-row text-center sm:text-left md:flex-col md:text-center lg:flex-row lg:text-center' : ''}`}>
             <div className="w-12 h-12 rounded-full bg-[#DFB76C] text-[#102A1C] flex items-center justify-center shrink-0 shadow-md animate-pulse-glow">
               <Phone className="w-6 h-6" />
             </div>
@@ -140,7 +149,7 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({ onOpenEnquir
             </div>
           </div>
 
-          <div className="flex items-center gap-3 text-left relative z-10">
+          <div className={`flex items-center gap-3 relative z-10 ${centered ? 'flex-col text-center' : 'text-left'}`}>
             <MapPin className="w-5 h-5 text-[#DFB76C] shrink-0" />
             <div className="text-xs text-slate-200">
               <p className="font-semibold text-white">Campus Location</p>

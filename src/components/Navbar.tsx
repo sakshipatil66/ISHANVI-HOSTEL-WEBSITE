@@ -108,11 +108,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="hidden lg:flex items-center justify-end xl:flex-1 gap-2 xl:gap-3 shrink-0">
             <a
               href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
-              className="h-10 px-2.5 xl:px-3.5 rounded-full border border-[#EFEAE1] hover:border-[#C5A059] bg-white/80 hover:bg-white text-[#102A1C] text-xs xl:text-[13px] font-semibold transition-all inline-flex items-center justify-center gap-1.5 shadow-2xs whitespace-nowrap cursor-pointer shrink-0"
-              title="Call Admissions Reception"
+              className="h-10 w-10 xl:w-auto px-0 xl:px-3.5 rounded-full border border-[#EFEAE1] hover:border-[#C5A059] bg-white/80 hover:bg-white text-[#102A1C] text-xs xl:text-[13px] font-semibold transition-all inline-flex items-center justify-center gap-1.5 shadow-2xs whitespace-nowrap cursor-pointer shrink-0"
+              title={`Call Admissions Reception: ${HOSTEL_INFO.phonePrimary}`}
+              aria-label={`Call Admissions Reception: ${HOSTEL_INFO.phonePrimary}`}
             >
               <Phone className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
-              <span className="tabular-nums">{HOSTEL_INFO.phonePrimary}</span>
+              <span className="hidden xl:inline tabular-nums">{HOSTEL_INFO.phonePrimary}</span>
             </a>
 
             <button

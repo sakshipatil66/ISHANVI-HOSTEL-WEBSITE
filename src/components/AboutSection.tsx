@@ -5,9 +5,13 @@ import { LUXURY_EASE, VIEWPORT_CONFIG } from '../lib/motion';
 
 interface AboutSectionProps {
   onLearnMore?: () => void;
+  isStandalonePage?: boolean;
 }
 
-export const AboutSection: React.FC<AboutSectionProps> = ({ onLearnMore }) => {
+export const AboutSection: React.FC<AboutSectionProps> = ({
+  onLearnMore,
+  isStandalonePage = false,
+}) => {
   const pillars = [
     { Icon: Sprout, title: 'Comfortable Living' },
     { Icon: Heart, title: 'Safe & Supportive' },
@@ -52,11 +56,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onLearnMore }) => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={VIEWPORT_CONFIG}
             transition={{ duration: 0.65, delay: 0.08, ease: LUXURY_EASE }}
-            className="lg:col-span-6 space-y-4"
+            className={`lg:col-span-6 space-y-4 ${isStandalonePage ? 'text-center' : ''}`}
           >
-            <div className="kicker-label">
+            <div className={`kicker-label ${isStandalonePage ? 'justify-center' : ''}`}>
               <span className="w-5 h-[1.5px] bg-[#C5A059]" />
               <span>ABOUT ISHANVI</span>
+              {isStandalonePage && <span className="w-5 h-[1.5px] bg-[#C5A059]" />}
             </div>
 
             <h2 className="heading-section text-[#102A1C]">
@@ -64,7 +69,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onLearnMore }) => {
               A Stay – A Better Tomorrow
             </h2>
 
-            <p className="text-lead">
+            <p className={`text-lead ${isStandalonePage ? 'mx-auto' : ''}`}>
               At Ishanvi Hostel & Accommodation, we provide a safe, comfortable and homely environment for students and working professionals. Our focus is on creating a supportive community where you can live, learn and grow with confidence.
             </p>
 
@@ -78,7 +83,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onLearnMore }) => {
                   viewport={VIEWPORT_CONFIG}
                   transition={{ duration: 0.48, delay: 0.14 + idx * 0.08, ease: LUXURY_EASE }}
                   whileHover={{ y: -4 }}
-                  className="flex xs:flex-col items-center xs:items-center sm:items-start gap-3 xs:gap-2 text-left xs:text-center sm:text-left p-3 xs:p-2.5 sm:p-3 rounded-2xl bg-white/80 border border-[#EFEAE1] hover:border-[#DFB76C] hover:shadow-md transition-all cursor-default group"
+                  className={`flex transition-all cursor-default group rounded-2xl bg-white/80 border border-[#EFEAE1] hover:border-[#DFB76C] hover:shadow-md ${
+                    isStandalonePage
+                      ? 'flex-col items-center justify-center text-center gap-2 p-3 sm:p-3.5'
+                      : 'xs:flex-col items-center xs:items-center sm:items-start gap-3 xs:gap-2 text-left xs:text-center sm:text-left p-3 xs:p-2.5 sm:p-3'
+                  }`}
                 >
                   <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#FAF8F5] border border-[#EFEAE1] flex items-center justify-center text-[#C5A059] group-hover:bg-[#102A1C] group-hover:text-[#DFB76C] shrink-0 shadow-2xs transition-colors duration-300">
                     <Icon className="w-5 h-5 stroke-[1.75] transition-transform duration-300 group-hover:scale-110" />
@@ -91,7 +100,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onLearnMore }) => {
             </div>
 
             {/* Action button */}
-            <div className="pt-2">
+            <div className={`pt-2 ${isStandalonePage ? 'flex justify-center' : ''}`}>
               <motion.button
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.97 }}

@@ -158,20 +158,18 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
                 >
                   <button
                     onClick={() => toggleFaq(index)}
-                    className="w-full p-4 sm:p-5 text-left flex items-start sm:items-center justify-between gap-3 sm:gap-4 cursor-pointer hover:bg-[#FAF8F5]/60 transition-colors"
+                    className="relative w-full p-4 sm:p-5 sm:px-12 text-center flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-[#FAF8F5]/60 transition-colors"
                     aria-expanded={isOpen}
                   >
-                    <div className="flex items-start sm:items-center gap-3 min-w-0">
-                      <span className="w-6 h-6 rounded-full bg-[#FAF8F5] border border-[#EFEAE1] text-[#8C6D2D] text-[11px] font-bold flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                      <span className="font-serif text-sm sm:text-base font-bold text-[#102A1C] leading-snug">
-                        {faq.question}
-                      </span>
-                    </div>
+                    <span className="w-6 h-6 rounded-full bg-[#FAF8F5] border border-[#EFEAE1] text-[#8C6D2D] text-[11px] font-bold flex items-center justify-center shrink-0">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="font-serif text-sm sm:text-base font-bold text-[#102A1C] leading-snug text-center">
+                      {faq.question}
+                    </span>
 
                     <div
-                      className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 mt-0.5 sm:mt-0 ${
+                      className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 sm:absolute sm:right-5 sm:top-1/2 sm:-translate-y-1/2 ${
                         isOpen ? 'bg-[#102A1C] text-white rotate-180' : 'bg-[#FAF8F5] text-[#102A1C]'
                       }`}
                     >
@@ -188,9 +186,9 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
                         transition={{ duration: 0.3, ease: LUXURY_EASE }}
                         className="overflow-hidden"
                       >
-                        <div className="px-4 pb-4 pt-3 sm:px-6 sm:pb-5 text-xs sm:text-sm text-[#4A5568] leading-relaxed border-t border-[#EFEAE1]/60 bg-[#FAF8F5]/40 space-y-3">
-                          <p>{faq.answer}</p>
-                          <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-[#EFEAE1]/40 text-[11px] text-[#5B6676]">
+                        <div className="px-4 pb-4 pt-3 sm:px-8 sm:pb-5 text-xs sm:text-sm text-[#4A5568] leading-relaxed border-t border-[#EFEAE1]/60 bg-[#FAF8F5]/40 space-y-3 text-center">
+                          <p className="max-w-3xl mx-auto">{faq.answer}</p>
+                          <div className="flex flex-wrap items-center justify-center gap-4 pt-2 border-t border-[#EFEAE1]/40 text-[11px] text-[#5B6676]">
                             <span className="flex items-center gap-1">
                               <Sparkles className="w-3 h-3 text-[#C5A059]" />
                               Category: {faq.category || 'General Residence'}
@@ -220,7 +218,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
           transition={{ duration: 0.55, delay: 0.08, ease: LUXURY_EASE }}
           className="mt-8 p-5 sm:p-6 rounded-2xl bg-[#FAF8F5] border border-[#EFEAE1] text-center space-y-2 shadow-xs"
         >
-          <h3 className="font-serif text-sm sm:text-base font-bold text-[#102A1C]">
+          <h3 className="heading-card text-sm sm:text-base text-[#102A1C]">
             Still have an unanswered question about admissions?
           </h3>
           <p className="text-xs text-[#5B6676] max-w-md mx-auto">
@@ -231,7 +229,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
-              className="btn-primary !py-2 !px-4 text-xs"
+              className="btn-primary !py-2.5 !px-4 text-xs min-h-[44px]"
             >
               <Phone className="w-3.5 h-3.5 text-[#DFB76C]" />
               <span>Call: {HOSTEL_INFO.phonePrimary}</span>
@@ -242,7 +240,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
               href={`https://wa.me/917767058988?text=${encodeURIComponent('Hello ISHANVI, I have a query regarding hostel admissions.')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-secondary !py-2 !px-4 text-xs text-[#25D366] hover:text-[#102A1C]"
+              className="btn-secondary !py-2.5 !px-4 text-xs text-[#25D366] hover:text-[#102A1C] min-h-[44px]"
             >
               <MessageSquare className="w-3.5 h-3.5 text-[#25D366]" />
               <span>Chat on WhatsApp</span>

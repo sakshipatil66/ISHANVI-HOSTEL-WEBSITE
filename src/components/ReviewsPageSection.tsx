@@ -99,29 +99,29 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEWPORT_CONFIG}
             transition={{ duration: 0.6, ease: LUXURY_EASE }}
-            className="lg:col-span-5 bg-gradient-to-br from-[#102A1C] to-[#1B3B2B] text-white p-6 sm:p-9 rounded-3xl border border-[#DFB76C]/30 shadow-xl flex flex-col justify-between"
+            className="lg:col-span-5 bg-gradient-to-br from-[#102A1C] to-[#1B3B2B] text-white p-6 sm:p-9 rounded-3xl border border-[#DFB76C]/30 shadow-xl flex flex-col justify-between text-center items-center"
           >
-            <div>
-              <div className="flex items-center gap-2 text-[#DFB76C] text-xs font-bold uppercase tracking-widest mb-3">
+            <div className="w-full">
+              <div className="flex items-center justify-center gap-2 text-[#DFB76C] text-xs font-bold uppercase tracking-widest mb-3">
                 <ShieldCheck className="w-4 h-4 text-[#DFB76C] shrink-0" />
                 <span>VERIFIED RESIDENCY REVIEWS</span>
               </div>
-              <div className="flex items-baseline gap-3">
+              <div className="flex items-baseline justify-center gap-3">
                 <span className="font-serif text-5xl sm:text-6xl font-bold text-white tracking-tight">4.9</span>
                 <span className="text-xl sm:text-2xl text-[#DFB76C] font-semibold">/ 5.0</span>
               </div>
-              <div className="flex items-center gap-1 mt-2">
+              <div className="flex items-center justify-center gap-1 mt-2">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-[#DFB76C] text-[#DFB76C]" />
                 ))}
               </div>
-              <p className="text-xs sm:text-sm text-slate-200 mt-3 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-200 mt-3 leading-relaxed max-w-md mx-auto">
                 Based on reviews from verified residents, parents, and scholars attending ISMS Sankalp Business School & Ambegaon institutions.
               </p>
             </div>
 
-            <div className="pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-white/15 flex flex-wrap items-center justify-between gap-3">
-              <div className="text-left min-w-0">
+            <div className="w-full pt-5 sm:pt-6 mt-5 sm:mt-6 border-t border-white/15 flex flex-col items-center justify-center gap-3 text-center">
+              <div className="text-center min-w-0">
                 <p className="text-xs text-slate-300">Total Resident Trust</p>
                 <p className="font-bold text-sm text-[#DFB76C]">100% Parent Endorsement</p>
               </div>
@@ -129,7 +129,7 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
                 onClick={() => setIsSubmitModalOpen(true)}
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-[#DFB76C] hover:bg-[#EAC885] text-[#102A1C] text-xs font-bold transition-colors shadow-md cursor-pointer shrink-0"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full bg-[#DFB76C] hover:bg-[#EAC885] text-[#102A1C] text-xs font-bold transition-colors shadow-md cursor-pointer shrink-0"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Write a Review</span>
@@ -145,17 +145,17 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
               viewport={VIEWPORT_CONFIG}
               transition={{ duration: 0.5, delay: 0.05, ease: LUXURY_EASE }}
               whileHover={{ y: -3 }}
-              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2.5 flex flex-col justify-between"
+              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2.5 flex flex-col justify-between text-center items-center"
             >
-              <div>
-                <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2">
+              <div className="w-full">
+                <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2 mx-auto">
                   <ShieldCheck className="w-5 h-5 text-[#8C6D2D]" />
                 </div>
-                <div className="flex items-center justify-between gap-2">
-                  <h3 className="font-serif text-base font-bold text-[#102A1C]">Safety & Security</h3>
-                  <span className="font-mono text-sm font-bold text-[#8C6D2D] shrink-0">5.0 / 5.0</span>
+                <div className="flex flex-col items-center justify-center gap-0.5">
+                  <h3 className="heading-card text-base text-[#102A1C]">Safety &amp; Security</h3>
+                  <span className="font-mono text-xs font-bold text-[#8C6D2D] shrink-0">5.0 / 5.0</span>
                 </div>
-                <p className="text-xs sm:text-[13px] text-[#5B6676] leading-relaxed mt-1">
+                <p className="text-xs sm:text-[13px] text-[#5B6676] leading-relaxed mt-1.5">
                   24/7 guarded gates, CCTV monitoring across corridors, biometric visitor registers, and caring resident wardens.
                 </p>
               </div>
@@ -177,17 +177,17 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
               viewport={VIEWPORT_CONFIG}
               transition={{ duration: 0.5, delay: 0.12, ease: LUXURY_EASE }}
               whileHover={{ y: -3 }}
-              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2.5 flex flex-col justify-between"
+              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2.5 flex flex-col justify-between text-center items-center"
             >
-              <div>
-                <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2">
+              <div className="w-full">
+                <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2 mx-auto">
                   <Heart className="w-5 h-5 text-[#8C6D2D]" />
                 </div>
-                <div className="flex items-center justify-between gap-2">
-                  <h3 className="font-serif text-base font-bold text-[#102A1C]">Hygienic Homestyle Meals</h3>
-                  <span className="font-mono text-sm font-bold text-[#8C6D2D] shrink-0">4.9 / 5.0</span>
+                <div className="flex flex-col items-center justify-center gap-0.5">
+                  <h3 className="heading-card text-base text-[#102A1C]">Hygienic Homestyle Meals</h3>
+                  <span className="font-mono text-xs font-bold text-[#8C6D2D] shrink-0">4.9 / 5.0</span>
                 </div>
-                <p className="text-xs sm:text-[13px] text-[#5B6676] leading-relaxed mt-1">
+                <p className="text-xs sm:text-[13px] text-[#5B6676] leading-relaxed mt-1.5">
                   4 fresh vegetarian chef-prepared meals daily: breakfast with chai, wholesome lunch, evening snacks, and hot dinner.
                 </p>
               </div>
@@ -209,17 +209,17 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
               viewport={VIEWPORT_CONFIG}
               transition={{ duration: 0.5, delay: 0.19, ease: LUXURY_EASE }}
               whileHover={{ y: -3 }}
-              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2.5 flex flex-col justify-between"
+              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2.5 flex flex-col justify-between text-center items-center"
             >
-              <div>
-                <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2">
+              <div className="w-full">
+                <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2 mx-auto">
                   <GraduationCap className="w-5 h-5 text-[#8C6D2D]" />
                 </div>
-                <div className="flex items-center justify-between gap-2">
-                  <h3 className="font-serif text-base font-bold text-[#102A1C]">Study Environment</h3>
-                  <span className="font-mono text-sm font-bold text-[#8C6D2D] shrink-0">4.9 / 5.0</span>
+                <div className="flex flex-col items-center justify-center gap-0.5">
+                  <h3 className="heading-card text-base text-[#102A1C]">Study Environment</h3>
+                  <span className="font-mono text-xs font-bold text-[#8C6D2D] shrink-0">4.9 / 5.0</span>
                 </div>
-                <p className="text-xs sm:text-[13px] text-[#5B6676] leading-relaxed mt-1">
+                <p className="text-xs sm:text-[13px] text-[#5B6676] leading-relaxed mt-1.5">
                   Enforced silent hours, dedicated quiet study library, high-speed fiber internet, and 100% power generator backup.
                 </p>
               </div>
@@ -241,17 +241,17 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
               viewport={VIEWPORT_CONFIG}
               transition={{ duration: 0.5, delay: 0.26, ease: LUXURY_EASE }}
               whileHover={{ y: -3 }}
-              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2.5 flex flex-col justify-between"
+              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2.5 flex flex-col justify-between text-center items-center"
             >
-              <div>
-                <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2">
+              <div className="w-full">
+                <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2 mx-auto">
                   <Building className="w-5 h-5 text-[#8C6D2D]" />
                 </div>
-                <div className="flex items-center justify-between gap-2">
-                  <h3 className="font-serif text-base font-bold text-[#102A1C]">Daily Housekeeping</h3>
-                  <span className="font-mono text-sm font-bold text-[#8C6D2D] shrink-0">4.8 / 5.0</span>
+                <div className="flex flex-col items-center justify-center gap-0.5">
+                  <h3 className="heading-card text-base text-[#102A1C]">Daily Housekeeping</h3>
+                  <span className="font-mono text-xs font-bold text-[#8C6D2D] shrink-0">4.8 / 5.0</span>
                 </div>
-                <p className="text-xs sm:text-[13px] text-[#5B6676] leading-relaxed mt-1">
+                <p className="text-xs sm:text-[13px] text-[#5B6676] leading-relaxed mt-1.5">
                   Spotless daily floor sweeping, mopping, sanitized washrooms, prompt electrical support, and on-site laundry.
                 </p>
               </div>
@@ -270,8 +270,8 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
         </div>
 
         {/* Category Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-b border-[#EFEAE1] pb-4">
-          <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-col items-center justify-center gap-3 pt-4 border-b border-[#EFEAE1] pb-5 text-center">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             {[
               { id: 'all', label: 'All Reviews' },
               { id: 'students', label: 'Student Scholars' },
@@ -325,40 +325,35 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.42, delay: idx * 0.04, ease: LUXURY_EASE }}
                   whileHover={{ y: -5 }}
-                  className="bg-white rounded-3xl p-5 sm:p-7 border border-[#EFEAE1] shadow-xs hover:shadow-xl hover:border-[#DFB76C]/60 transition-all flex flex-col justify-between space-y-5 sm:space-y-6 group"
+                  className="bg-white rounded-3xl p-5 sm:p-7 border border-[#EFEAE1] shadow-xs hover:shadow-xl hover:border-[#DFB76C]/60 transition-all flex flex-col justify-between space-y-5 sm:space-y-6 group text-center items-center"
                 >
-                  <div className="space-y-3 sm:space-y-4">
-                    <div className="flex items-center justify-between">
+                  <div className="space-y-3 sm:space-y-4 w-full">
+                    <div className="flex flex-col items-center justify-center gap-2">
                       <Quote className="w-7 h-7 text-[#DFB76C]/40 group-hover:text-[#DFB76C] transition-colors" />
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center justify-center gap-1">
                         {[...Array(item.rating)].map((_, i) => (
                           <Star key={i} className="w-3.5 h-3.5 fill-[#DFB76C] text-[#DFB76C]" />
                         ))}
                       </div>
                     </div>
 
-                    <p className="text-body text-[#4A5568] leading-relaxed italic">
+                    <p className="text-body text-[#4A5568] leading-relaxed italic text-center">
                       "{item.quote}"
                     </p>
                   </div>
 
-                  <div className="pt-4 sm:pt-5 border-t border-[#EFEAE1]/70 flex flex-wrap items-center justify-between gap-3">
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#102A1C] text-[#DFB76C] font-serif font-bold text-sm flex items-center justify-center border-2 border-[#DFB76C]/40 shrink-0 shadow-xs">
-                        {initials}
-                      </div>
-                      <div className="min-w-0">
-                        <h3 className="heading-card text-sm text-[#102A1C]">{item.author}</h3>
-                        <p className="text-caption text-[#5B6676]">{item.institution || item.role}</p>
-                      </div>
+                  <div className="w-full pt-4 sm:pt-5 border-t border-[#EFEAE1]/70 flex flex-col items-center justify-center gap-2.5 text-center">
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#102A1C] text-[#DFB76C] font-serif font-bold text-sm flex items-center justify-center border-2 border-[#DFB76C]/40 shrink-0 shadow-xs mx-auto">
+                      {initials}
                     </div>
-
-                    <div className="text-right shrink-0">
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#8C6D2D] bg-[#FAF8F5] border border-[#EFEAE1] px-2.5 py-0.5 rounded-full">
-                        <CheckCircle2 className="w-3 h-3 text-[#8C6D2D]" />
-                        <span>Verified</span>
-                      </span>
+                    <div className="min-w-0">
+                      <h3 className="heading-card text-sm text-[#102A1C]">{item.author}</h3>
+                      <p className="text-caption text-[#5B6676]">{item.institution || item.role}</p>
                     </div>
+                    <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#8C6D2D] bg-[#FAF8F5] border border-[#EFEAE1] px-2.5 py-0.5 rounded-full">
+                      <CheckCircle2 className="w-3 h-3 text-[#8C6D2D]" />
+                      <span>Verified</span>
+                    </span>
                   </div>
                 </motion.div>
               );

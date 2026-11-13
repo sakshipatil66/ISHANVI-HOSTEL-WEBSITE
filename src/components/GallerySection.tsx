@@ -68,18 +68,23 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_CONFIG}
           transition={{ duration: 0.6, ease: LUXURY_EASE }}
-          className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4"
+          className={
+            isStandalonePage
+              ? 'text-center max-w-2xl mx-auto mb-8 sm:mb-10'
+              : 'flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4'
+          }
         >
           <div>
-            <div className={`kicker-label ${isStandalonePage ? 'text-[#C5A059]' : 'text-[#DFB76C]'} mb-2`}>
+            <div className={`kicker-label ${isStandalonePage ? 'justify-center text-[#C5A059]' : 'text-[#DFB76C]'} mb-2`}>
               <span className={`w-5 h-[1.5px] ${isStandalonePage ? 'bg-[#C5A059]' : 'bg-[#DFB76C]'}`} />
               <span>GALLERY</span>
+              {isStandalonePage && <span className="w-5 h-[1.5px] bg-[#C5A059]" />}
             </div>
             <h2 className={`heading-section ${isStandalonePage ? 'text-[#102A1C]' : 'text-white'}`}>
               A Glimpse Of Our Spaces
             </h2>
             {isStandalonePage && (
-              <p className="text-lead mt-2 max-w-xl">
+              <p className="text-lead mt-2 max-w-xl mx-auto">
                 Explore real, verified photographs of ISHANVI property, sanitized rooms, quiet study library, and hygienic dining amenities in Ambegaon Bk, Pune.
               </p>
             )}
@@ -90,7 +95,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
               whileHover={{ x: 2 }}
               whileTap={{ scale: 0.97 }}
               onClick={onViewAllGallery}
-              className={`inline-flex items-center gap-1.5 text-xs font-semibold ${isStandalonePage ? 'text-[#102A1C] hover:text-[#C5A059]' : 'text-[#DFB76C] hover:text-white'} transition-colors cursor-pointer group self-start sm:self-auto`}
+              className={`inline-flex items-center gap-1.5 text-xs font-semibold ${isStandalonePage ? 'text-[#102A1C] hover:text-[#C5A059]' : 'text-[#DFB76C] hover:text-white'} transition-colors cursor-pointer group ${isStandalonePage ? 'mt-3' : 'self-start sm:self-auto'}`}
             >
               <span>View Gallery</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -100,7 +105,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
 
         {/* Category Filters for Standalone Page */}
         {isStandalonePage && (
-          <div className="flex flex-wrap items-center gap-2 mb-8 sm:mb-10 pb-4 border-b border-[#E2D9C8]">
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-8 sm:mb-10 pb-4 border-b border-[#E2D9C8]">
             {categories.map((cat) => {
               const isSelected = selectedCategory === cat.id;
               return (
@@ -156,7 +161,7 @@ export const GallerySection: React.FC<GallerySectionProps> = ({
                     />
                   </div>
 
-                  <div className="p-5 sm:p-6 bg-white flex-1 flex flex-col justify-between border-t border-[#EFEAE1]">
+                  <div className="p-5 sm:p-6 bg-white flex-1 flex flex-col justify-between border-t border-[#EFEAE1] text-center">
                     <div>
                       <span className="text-[11px] font-bold text-[#A88238] uppercase tracking-wider block mb-1">
                         {photo.category.toUpperCase()}

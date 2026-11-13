@@ -217,7 +217,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 className="flex items-center gap-2 sm:gap-2.5"
               >
                 <span className="w-5 sm:w-7 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C] shrink-0" />
-                <span className="text-[11px] sm:text-xs font-bold tracking-[0.12em] sm:tracking-[0.16em] text-[#DFB76C] uppercase font-sans drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
+                <span className="hero-kicker drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
                   {HERO_TEXT_CONTENT.kicker}
                 </span>
               </motion.div>
@@ -227,7 +227,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, delay: 0.16, ease: LUXURY_EASE }}
-                className="title-page text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white leading-[1.18] tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]"
+                className="title-page text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]"
               >
                 {HERO_TEXT_CONTENT.title}{' '}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#E8C680] italic font-normal">
@@ -240,7 +240,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, delay: 0.25, ease: LUXURY_EASE }}
-                className="text-lead text-sm sm:text-base text-slate-100 font-medium leading-relaxed max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]"
+                className="hero-subtitle max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]"
               >
                 {HERO_TEXT_CONTENT.subtitle}
               </motion.p>
@@ -260,7 +260,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   if (onExploreRooms) onExploreRooms();
                   else onOpenEnquiry('Room Enquiry');
                 }}
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_4px_20px_rgba(223,183,108,0.35)] hover:shadow-[0_8px_28px_rgba(223,183,108,0.45)] transition-shadow cursor-pointer min-h-[42px] group"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_4px_20px_rgba(223,183,108,0.35)] hover:shadow-[0_8px_28px_rgba(223,183,108,0.45)] transition-shadow cursor-pointer min-h-[44px] group"
               >
                 <span>{HERO_TEXT_CONTENT.primaryCta}</span>
                 <ArrowRight className="w-4 h-4 text-[#051009] transition-transform duration-200 group-hover:translate-x-1" />
@@ -270,7 +270,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => onOpenEnquiry('Admission Enquiry')}
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-black/60 hover:bg-[#102A1C] text-white border border-[#DFB76C]/60 hover:border-[#DFB76C] text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md transition-colors cursor-pointer min-h-[42px]"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-black/60 hover:bg-[#102A1C] text-white border border-[#DFB76C]/60 hover:border-[#DFB76C] text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md transition-colors cursor-pointer min-h-[44px]"
               >
                 <MessageSquare className="w-4 h-4 text-[#DFB76C]" />
                 <span>{HERO_TEXT_CONTENT.secondaryCta}</span>
