@@ -27,6 +27,9 @@ import { EnquiryModal } from './components/EnquiryModal';
 import { PageHeader } from './components/PageHeader';
 import { OpeningLogoIntro } from './components/OpeningLogoIntro';
 import { ReviewsPageSection } from './components/ReviewsPageSection';
+import { HomeResidentProfilesSection } from './components/HomeResidentProfilesSection';
+import { HomeLivingExperienceSection } from './components/HomeLivingExperienceSection';
+import { HomeSafetySection } from './components/HomeSafetySection';
 import { MessageCircle } from 'lucide-react';
 
 export type PageRoute = 'home' | 'about' | 'rooms' | 'amenities' | 'gallery' | 'reviews' | 'contact';
@@ -279,6 +282,8 @@ export default function App() {
 
             <AboutSection onLearnMore={() => handlePageChange('about')} />
 
+            <HomeResidentProfilesSection onOpenEnquiry={handleOpenEnquiry} />
+
             <RoomsSection
               onOpenEnquiry={handleOpenEnquiry}
               onViewAllRooms={() => handlePageChange('rooms')}
@@ -286,6 +291,10 @@ export default function App() {
             />
 
             <AmenitiesSection isStandalonePage={false} />
+
+            <HomeLivingExperienceSection />
+
+            <HomeSafetySection onOpenEnquiry={handleOpenEnquiry} />
 
             <GallerySection
               onViewAllGallery={() => handlePageChange('gallery')}
