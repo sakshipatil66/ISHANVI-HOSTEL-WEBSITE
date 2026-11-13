@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { CheckCircle2, HeartHandshake, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import { CheckCircle2, HeartHandshake, ArrowRight } from 'lucide-react';
 import { WHY_CHOOSE_ISHANVI } from '../data/hostelData';
+import { LUXURY_EASE, VIEWPORT_CONFIG } from '../lib/motion';
 
 interface WhyChooseSectionProps {
   onOpenEnquiry: () => void;
@@ -11,7 +12,7 @@ export const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ onOpenEnquir
   return (
     <section className="section-space bg-[#F4EFE6]/60 border-y border-[#EFEAE1] relative overflow-hidden">
       {/* Background ambient light */}
-      <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-[#DFB76C]/12 rounded-full blur-3xl pointer-events-none animate-float-ambient" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -20,8 +21,8 @@ export const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ onOpenEnquir
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: 0.6, ease: LUXURY_EASE }}
               className="space-y-4"
             >
               <div className="kicker-label">
@@ -36,13 +37,17 @@ export const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ onOpenEnquir
               </p>
             </motion.div>
 
-            {/* Parent Hotline Card with Hover Lift */}
+            {/* Parent Hotline Card with Reveal & Hover Lift */}
             <motion.div
-              whileHover={{ y: -4, scale: 1.01 }}
-              transition={{ duration: 0.25 }}
-              className="p-4 sm:p-5 rounded-2xl bg-white border border-[#EFEAE1] shadow-sm hover:shadow-md hover:border-[#DFB76C]/80 transition-all flex items-start gap-3.5 sm:gap-4 cursor-pointer relative overflow-hidden"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: 0.55, delay: 0.1, ease: LUXURY_EASE }}
+              whileHover={{ y: -4 }}
+              onClick={onOpenEnquiry}
+              className="p-4 sm:p-5 rounded-2xl bg-white border border-[#EFEAE1] shadow-sm hover:shadow-md hover:border-[#DFB76C]/80 transition-all flex items-start gap-3.5 sm:gap-4 cursor-pointer relative overflow-hidden group"
             >
-              <div className="w-11 h-11 rounded-xl bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0 shadow-md">
+              <div className="w-11 h-11 rounded-xl bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0 shadow-md transition-transform duration-300 group-hover:scale-105">
                 <HeartHandshake className="w-5 h-5" />
               </div>
               <div className="min-w-0 flex-1">
@@ -60,37 +65,43 @@ export const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ onOpenEnquir
               </div>
             </motion.div>
 
-            <div className="pt-2">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: 0.5, delay: 0.16, ease: LUXURY_EASE }}
+              className="pt-2"
+            >
               <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.97 }}
                 onClick={onOpenEnquiry}
                 className="btn-primary group cursor-pointer"
               >
                 <span>Schedule a Free Campus Visit</span>
-                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
               </motion.button>
-            </div>
+            </motion.div>
           </div>
 
-          {/* Right Column: 6 Distinctive Benefits Grid with Stagger & Glow */}
+          {/* Right Column: 6 Distinctive Benefits Grid with Stagger */}
           <div className="lg:col-span-7">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {WHY_CHOOSE_ISHANVI.map((item, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, y: 25 }}
+                  initial={{ opacity: 0, y: 22 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.45, delay: idx * 0.07 }}
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  className="bg-white rounded-2xl p-5 sm:p-6 border border-[#EFEAE1] shadow-xs hover:shadow-xl hover:border-[#DFB76C] transition-all space-y-2.5 group cursor-pointer"
+                  viewport={VIEWPORT_CONFIG}
+                  transition={{ duration: 0.48, delay: idx * 0.06, ease: LUXURY_EASE }}
+                  whileHover={{ y: -4 }}
+                  className="bg-white rounded-2xl p-5 sm:p-6 border border-[#EFEAE1] shadow-xs hover:shadow-xl hover:border-[#DFB76C] transition-all duration-300 space-y-2.5 group cursor-default"
                 >
                   <div className="flex items-center gap-2.5">
-                    <div className="w-7 h-7 rounded-full bg-[#FAF6ED] text-[#C5A059] flex items-center justify-center shrink-0 group-hover:bg-[#102A1C] group-hover:text-[#DFB76C] transition-all duration-300 shadow-2xs">
+                    <div className="w-7 h-7 rounded-full bg-[#FAF6ED] text-[#C5A059] flex items-center justify-center shrink-0 group-hover:bg-[#102A1C] group-hover:text-[#DFB76C] transition-all duration-300 shadow-2xs group-hover:scale-110">
                       <CheckCircle2 className="w-4 h-4" />
                     </div>
-                    <h3 className="heading-card text-base text-[#102A1C] group-hover:text-[#102A1C] transition-colors">
+                    <h3 className="heading-card text-base text-[#102A1C] transition-colors">
                       {item.title}
                     </h3>
                   </div>

@@ -11,9 +11,9 @@ import {
   ShieldCheck,
   Users,
   MapPin,
-  Phone,
 } from 'lucide-react';
 import { HOSTEL_INFO } from '../data/hostelData';
+import { LUXURY_EASE } from '../lib/motion';
 
 interface HeroSectionProps {
   onOpenEnquiry: (roomName?: string) => void;
@@ -171,17 +171,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
     >
       {/* HERO SLIDER VIEWPORT CONTAINER */}
       <div className="relative w-full min-h-[400px] sm:min-h-[460px] md:min-h-0 md:flex-1 md:h-full overflow-hidden bg-[#07170E] flex flex-col justify-center">
-        {/* Background Slide Images with Cross-fade Transition */}
+        {/* Background Slide Images with Cross-fade & Subtle Ken Burns Zoom */}
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <AnimatePresence initial={false}>
             <motion.div
               key={slide.id}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
               transition={{
-                duration: 0.65,
-                ease: 'easeInOut',
+                opacity: { duration: 0.75, ease: 'easeInOut' },
+                scale: { duration: 5.5, ease: 'easeOut' },
               }}
               className="absolute inset-0 w-full h-full flex items-center justify-center cursor-pointer"
               onClick={() => onOpenEnquiry('Hero Admission Enquiry')}
@@ -205,64 +205,79 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </AnimatePresence>
         </div>
 
-        {/* FOREGROUND CONTENT LAYER: Horizontal padding ensures slider arrows never overlap text */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key="hero-text-overlay"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.45, ease: 'easeOut' }}
-            className="flex relative z-20 w-full max-w-7xl mx-auto px-10 sm:px-14 md:px-20 xl:px-16 pt-8 sm:pt-10 pb-14 sm:pb-16 my-auto pointer-events-none"
-          >
-            <div className="max-w-2xl space-y-3 sm:space-y-4 md:space-y-5 text-left pointer-events-auto">
-              <div className="space-y-2 sm:space-y-2.5">
-                {/* Gold Kicker */}
-                <div className="flex items-center gap-2 sm:gap-2.5">
-                  <span className="w-5 sm:w-7 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C] shrink-0" />
-                  <span className="text-[11px] sm:text-xs font-bold tracking-[0.12em] sm:tracking-[0.16em] text-[#DFB76C] uppercase font-sans drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
-                    {HERO_TEXT_CONTENT.kicker}
-                  </span>
-                </div>
+        {/* FOREGROUND CONTENT LAYER: Staggered Editorial Reveal */}
+        <div className="flex relative z-20 w-full max-w-7xl mx-auto px-10 sm:px-14 md:px-20 xl:px-16 pt-8 sm:pt-10 pb-14 sm:pb-16 my-auto pointer-events-none">
+          <div className="max-w-2xl space-y-3 sm:space-y-4 md:space-y-5 text-left pointer-events-auto">
+            <div className="space-y-2 sm:space-y-2.5">
+              {/* Gold Kicker */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: 0.08, ease: LUXURY_EASE }}
+                className="flex items-center gap-2 sm:gap-2.5"
+              >
+                <span className="w-5 sm:w-7 h-[1.5px] bg-[#DFB76C] shadow-[0_0_8px_#DFB76C] shrink-0" />
+                <span className="text-[11px] sm:text-xs font-bold tracking-[0.12em] sm:tracking-[0.16em] text-[#DFB76C] uppercase font-sans drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
+                  {HERO_TEXT_CONTENT.kicker}
+                </span>
+              </motion.div>
 
-                {/* Dominant Headline */}
-                <h1 className="title-page text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white leading-[1.18] tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
-                  {HERO_TEXT_CONTENT.title}{' '}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#E8C680] italic font-normal">
-                    {HERO_TEXT_CONTENT.titleAccent}
-                  </span>
-                </h1>
+              {/* Dominant Headline */}
+              <motion.h1
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, delay: 0.16, ease: LUXURY_EASE }}
+                className="title-page text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white leading-[1.18] tracking-tight drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]"
+              >
+                {HERO_TEXT_CONTENT.title}{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#DFB76C] via-[#FFF3D6] to-[#E8C680] italic font-normal">
+                  {HERO_TEXT_CONTENT.titleAccent}
+                </span>
+              </motion.h1>
 
-                {/* Descriptive Subtitle */}
-                <p className="text-lead text-sm sm:text-base text-slate-100 font-medium leading-relaxed max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]">
-                  {HERO_TEXT_CONTENT.subtitle}
-                </p>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1">
-                <button
-                  onClick={() => {
-                    if (onExploreRooms) onExploreRooms();
-                    else onOpenEnquiry('Room Enquiry');
-                  }}
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_4px_20px_rgba(223,183,108,0.35)] hover:scale-105 active:scale-95 transition-all cursor-pointer min-h-[42px]"
-                >
-                  <span>{HERO_TEXT_CONTENT.primaryCta}</span>
-                  <ArrowRight className="w-4 h-4 text-[#051009]" />
-                </button>
-
-                <button
-                  onClick={() => onOpenEnquiry('Admission Enquiry')}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-black/60 hover:bg-[#102A1C] text-white border border-[#DFB76C]/60 hover:border-[#DFB76C] text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md hover:scale-105 active:scale-95 transition-all cursor-pointer min-h-[42px]"
-                >
-                  <MessageSquare className="w-4 h-4 text-[#DFB76C]" />
-                  <span>{HERO_TEXT_CONTENT.secondaryCta}</span>
-                </button>
-              </div>
+              {/* Descriptive Subtitle */}
+              <motion.p
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, delay: 0.25, ease: LUXURY_EASE }}
+                className="text-lead text-sm sm:text-base text-slate-100 font-medium leading-relaxed max-w-xl drop-shadow-[0_1px_8px_rgba(0,0,0,0.85)]"
+              >
+                {HERO_TEXT_CONTENT.subtitle}
+              </motion.p>
             </div>
-          </motion.div>
-        </AnimatePresence>
+
+            {/* Action Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.34, ease: LUXURY_EASE }}
+              className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-1"
+            >
+              <motion.button
+                whileHover={{ y: -2, scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => {
+                  if (onExploreRooms) onExploreRooms();
+                  else onOpenEnquiry('Room Enquiry');
+                }}
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-[#DFB76C] via-[#E8C680] to-[#DFB76C] text-[#051009] text-xs sm:text-sm font-bold shadow-[0_4px_20px_rgba(223,183,108,0.35)] hover:shadow-[0_8px_28px_rgba(223,183,108,0.45)] transition-shadow cursor-pointer min-h-[42px] group"
+              >
+                <span>{HERO_TEXT_CONTENT.primaryCta}</span>
+                <ArrowRight className="w-4 h-4 text-[#051009] transition-transform duration-200 group-hover:translate-x-1" />
+              </motion.button>
+
+              <motion.button
+                whileHover={{ y: -2, scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => onOpenEnquiry('Admission Enquiry')}
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-black/60 hover:bg-[#102A1C] text-white border border-[#DFB76C]/60 hover:border-[#DFB76C] text-xs sm:text-sm font-semibold backdrop-blur-md shadow-md transition-colors cursor-pointer min-h-[42px]"
+              >
+                <MessageSquare className="w-4 h-4 text-[#DFB76C]" />
+                <span>{HERO_TEXT_CONTENT.secondaryCta}</span>
+              </motion.button>
+            </motion.div>
+          </div>
+        </div>
 
         {/* SYNCHRONIZED SLIDE INDICATOR DOTS */}
         <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 sm:gap-2.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 shadow-lg pointer-events-auto">
@@ -311,56 +326,33 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </div>
 
       {/* BOTTOM FEATURE STRIP */}
-      <div className="relative z-20 w-full bg-[#FAF8F5] border-t border-[#DFB76C]/30 text-[#102A1C] py-2 sm:py-2.5 px-3 sm:px-6 lg:px-8 shadow-md shrink-0">
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.55, delay: 0.4, ease: LUXURY_EASE }}
+        className="relative z-20 w-full bg-[#FAF8F5] border-t border-[#DFB76C]/30 text-[#102A1C] py-2 sm:py-2.5 px-3 sm:px-6 lg:px-8 shadow-md shrink-0"
+      >
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
           <div className="flex-1 flex items-center justify-start gap-1.5 sm:gap-3 md:gap-4 text-xs sm:text-sm font-semibold text-[#102A1C] overflow-x-auto no-scrollbar scroll-smooth touch-pan-x py-0.5">
-            <button
-              onClick={() => onOpenEnquiry('Comfortable Rooms')}
-              className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white border border-[#EFEAE1] hover:border-[#DFB76C] hover:bg-white text-[#102A1C] text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 shadow-2xs transition-all cursor-pointer"
-            >
-              <Bed className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
-              <span>Comfortable Rooms</span>
-            </button>
-
-            <button
-              onClick={() => onOpenEnquiry('High-Speed Wi-Fi')}
-              className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white border border-[#EFEAE1] hover:border-[#DFB76C] hover:bg-white text-[#102A1C] text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 shadow-2xs transition-all cursor-pointer"
-            >
-              <Wifi className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
-              <span>High-Speed Wi-Fi</span>
-            </button>
-
-            <button
-              onClick={() => onOpenEnquiry('Hygienic Meals')}
-              className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white border border-[#EFEAE1] hover:border-[#DFB76C] hover:bg-white text-[#102A1C] text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 shadow-2xs transition-all cursor-pointer"
-            >
-              <Utensils className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
-              <span>4 Hygienic Meals</span>
-            </button>
-
-            <button
-              onClick={() => onOpenEnquiry('24/7 Security')}
-              className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white border border-[#EFEAE1] hover:border-[#DFB76C] hover:bg-white text-[#102A1C] text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 shadow-2xs transition-all cursor-pointer"
-            >
-              <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
-              <span>24/7 Security</span>
-            </button>
-
-            <button
-              onClick={() => onOpenEnquiry('Supportive Community')}
-              className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white border border-[#EFEAE1] hover:border-[#DFB76C] hover:bg-white text-[#102A1C] text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 shadow-2xs transition-all cursor-pointer"
-            >
-              <Users className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
-              <span>Supportive Community</span>
-            </button>
-
-            <button
-              onClick={() => onOpenEnquiry('Prime Location')}
-              className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white border border-[#EFEAE1] hover:border-[#DFB76C] hover:bg-white text-[#102A1C] text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 shadow-2xs transition-all cursor-pointer"
-            >
-              <MapPin className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
-              <span>Near ISMS Sankalp</span>
-            </button>
+            {[
+              { label: 'Comfortable Rooms', query: 'Comfortable Rooms', Icon: Bed },
+              { label: 'High-Speed Wi-Fi', query: 'High-Speed Wi-Fi', Icon: Wifi },
+              { label: '4 Hygienic Meals', query: 'Hygienic Meals', Icon: Utensils },
+              { label: '24/7 Security', query: '24/7 Security', Icon: ShieldCheck },
+              { label: 'Supportive Community', query: 'Supportive Community', Icon: Users },
+              { label: 'Near ISMS Sankalp', query: 'Prime Location', Icon: MapPin },
+            ].map(({ label, query, Icon }) => (
+              <motion.button
+                key={label}
+                whileHover={{ y: -1 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() => onOpenEnquiry(query)}
+                className="flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white border border-[#EFEAE1] hover:border-[#DFB76C] hover:shadow-xs text-[#102A1C] text-[11px] sm:text-xs font-semibold whitespace-nowrap shrink-0 shadow-2xs transition-colors cursor-pointer"
+              >
+                <Icon className="w-3.5 h-3.5 text-[#C5A059] shrink-0" />
+                <span>{label}</span>
+              </motion.button>
+            ))}
           </div>
 
           {/* Quick Direct Phone Call Link */}
@@ -373,7 +365,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             <span className="font-mono text-[#8C6D2D]">{HOSTEL_INFO.phonePrimary}</span>
           </a>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

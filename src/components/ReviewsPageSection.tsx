@@ -15,6 +15,7 @@ import {
   Building,
 } from 'lucide-react';
 import { TESTIMONIALS_LIST, TestimonialItem } from '../data/hostelData';
+import { LUXURY_EASE, VIEWPORT_CONFIG } from '../lib/motion';
 
 interface ReviewsPageSectionProps {
   onOpenEnquiry: (roomName?: string) => void;
@@ -93,7 +94,13 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
         {/* Scorecard & Highlights Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
           {/* Main Rating Summary Card */}
-          <div className="lg:col-span-5 bg-gradient-to-br from-[#102A1C] to-[#1B3B2B] text-white p-6 sm:p-9 rounded-3xl border border-[#DFB76C]/30 shadow-xl flex flex-col justify-between">
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEWPORT_CONFIG}
+            transition={{ duration: 0.6, ease: LUXURY_EASE }}
+            className="lg:col-span-5 bg-gradient-to-br from-[#102A1C] to-[#1B3B2B] text-white p-6 sm:p-9 rounded-3xl border border-[#DFB76C]/30 shadow-xl flex flex-col justify-between"
+          >
             <div>
               <div className="flex items-center gap-2 text-[#DFB76C] text-xs font-bold uppercase tracking-widest mb-3">
                 <ShieldCheck className="w-4 h-4 text-[#DFB76C] shrink-0" />
@@ -118,19 +125,28 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                 <p className="text-xs text-slate-300">Total Resident Trust</p>
                 <p className="font-bold text-sm text-[#DFB76C]">100% Parent Endorsement</p>
               </div>
-              <button
+              <motion.button
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
                 onClick={() => setIsSubmitModalOpen(true)}
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-[#DFB76C] hover:bg-[#EAC885] text-[#102A1C] text-xs font-bold transition-all shadow-md cursor-pointer hover:scale-105 active:scale-95 shrink-0"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-[#DFB76C] hover:bg-[#EAC885] text-[#102A1C] text-xs font-bold transition-colors shadow-md cursor-pointer shrink-0"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Write a Review</span>
-              </button>
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
 
           {/* 4 Trust Metrics */}
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs space-y-2.5 flex flex-col justify-between">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: 0.5, delay: 0.05, ease: LUXURY_EASE }}
+              whileHover={{ y: -3 }}
+              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2.5 flex flex-col justify-between"
+            >
               <div>
                 <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2">
                   <ShieldCheck className="w-5 h-5 text-[#8C6D2D]" />
@@ -144,11 +160,25 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                 </p>
               </div>
               <div className="w-full bg-[#F3EFE6] h-1.5 rounded-full overflow-hidden">
-                <div className="bg-[#8C6D2D] h-full w-[100%]" />
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={VIEWPORT_CONFIG}
+                  transition={{ duration: 0.9, delay: 0.15, ease: LUXURY_EASE }}
+                  style={{ transformOrigin: 'left' }}
+                  className="bg-[#8C6D2D] h-full w-[100%]"
+                />
               </div>
-            </div>
+            </motion.div>
 
-            <div className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs space-y-2.5 flex flex-col justify-between">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: 0.5, delay: 0.12, ease: LUXURY_EASE }}
+              whileHover={{ y: -3 }}
+              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2.5 flex flex-col justify-between"
+            >
               <div>
                 <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2">
                   <Heart className="w-5 h-5 text-[#8C6D2D]" />
@@ -162,11 +192,25 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                 </p>
               </div>
               <div className="w-full bg-[#F3EFE6] h-1.5 rounded-full overflow-hidden">
-                <div className="bg-[#8C6D2D] h-full w-[98%]" />
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={VIEWPORT_CONFIG}
+                  transition={{ duration: 0.9, delay: 0.22, ease: LUXURY_EASE }}
+                  style={{ transformOrigin: 'left' }}
+                  className="bg-[#8C6D2D] h-full w-[98%]"
+                />
               </div>
-            </div>
+            </motion.div>
 
-            <div className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs space-y-2.5 flex flex-col justify-between">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: 0.5, delay: 0.19, ease: LUXURY_EASE }}
+              whileHover={{ y: -3 }}
+              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2.5 flex flex-col justify-between"
+            >
               <div>
                 <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2">
                   <GraduationCap className="w-5 h-5 text-[#8C6D2D]" />
@@ -180,11 +224,25 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                 </p>
               </div>
               <div className="w-full bg-[#F3EFE6] h-1.5 rounded-full overflow-hidden">
-                <div className="bg-[#8C6D2D] h-full w-[98%]" />
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={VIEWPORT_CONFIG}
+                  transition={{ duration: 0.9, delay: 0.29, ease: LUXURY_EASE }}
+                  style={{ transformOrigin: 'left' }}
+                  className="bg-[#8C6D2D] h-full w-[98%]"
+                />
               </div>
-            </div>
+            </motion.div>
 
-            <div className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs space-y-2.5 flex flex-col justify-between">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: 0.5, delay: 0.26, ease: LUXURY_EASE }}
+              whileHover={{ y: -3 }}
+              className="p-5 sm:p-6 rounded-3xl bg-white border border-[#EFEAE1] shadow-2xs hover:shadow-md hover:border-[#DFB76C]/60 transition-all space-y-2.5 flex flex-col justify-between"
+            >
               <div>
                 <div className="w-10 h-10 rounded-full bg-[#FAF8F5] text-[#8C6D2D] border border-[#EFEAE1] flex items-center justify-center mb-2">
                   <Building className="w-5 h-5 text-[#8C6D2D]" />
@@ -198,9 +256,16 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                 </p>
               </div>
               <div className="w-full bg-[#F3EFE6] h-1.5 rounded-full overflow-hidden">
-                <div className="bg-[#8C6D2D] h-full w-[96%]" />
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={VIEWPORT_CONFIG}
+                  transition={{ duration: 0.9, delay: 0.36, ease: LUXURY_EASE }}
+                  style={{ transformOrigin: 'left' }}
+                  className="bg-[#8C6D2D] h-full w-[96%]"
+                />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 
@@ -212,19 +277,29 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
               { id: 'students', label: 'Student Scholars' },
               { id: 'parents', label: 'Parents & Families' },
               { id: 'professionals', label: 'Working Professionals' },
-            ].map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCategory(cat.id as any)}
-                className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                  selectedCategory === cat.id
-                    ? 'bg-[#102A1C] text-[#DFB76C] shadow-md border border-[#DFB76C]/40'
-                    : 'bg-white text-[#4A5568] hover:text-[#102A1C] hover:bg-[#FAF8F5] border border-[#EFEAE1]'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
+            ].map((cat) => {
+              const isSelected = selectedCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id as any)}
+                  className={`relative px-4 py-2 rounded-full text-xs font-bold transition-colors cursor-pointer ${
+                    isSelected
+                      ? 'text-[#DFB76C]'
+                      : 'bg-white text-[#4A5568] hover:text-[#102A1C] hover:bg-[#FAF8F5] border border-[#EFEAE1]'
+                  }`}
+                >
+                  {isSelected && (
+                    <motion.span
+                      layoutId="activeReviewTab"
+                      transition={{ duration: 0.35, ease: LUXURY_EASE }}
+                      className="absolute inset-0 rounded-full bg-[#102A1C] shadow-md border border-[#DFB76C]/40"
+                    />
+                  )}
+                  <span className="relative z-10">{cat.label}</span>
+                </button>
+              );
+            })}
           </div>
 
           <span className="text-xs text-[#5B6676]">
@@ -245,11 +320,11 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                 <motion.div
                   key={item.id}
                   layout
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  whileHover={{ y: -6, scale: 1.01 }}
+                  transition={{ duration: 0.42, delay: idx * 0.04, ease: LUXURY_EASE }}
+                  whileHover={{ y: -5 }}
                   className="bg-white rounded-3xl p-5 sm:p-7 border border-[#EFEAE1] shadow-xs hover:shadow-xl hover:border-[#DFB76C]/60 transition-all flex flex-col justify-between space-y-5 sm:space-y-6 group"
                 >
                   <div className="space-y-3 sm:space-y-4">
@@ -293,37 +368,62 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
       </div>
 
       {/* Review Submission Modal */}
-      {isSubmitModalOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
-          onClick={() => setIsSubmitModalOpen(false)}
-        >
-          <div
-            className="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-8 border border-[#EFEAE1] shadow-2xl relative max-h-[92vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
+      <AnimatePresence>
+        {isSubmitModalOpen && (
+          <motion.div
+            role="dialog"
+            aria-modal="true"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: LUXURY_EASE }}
+            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+            onClick={() => setIsSubmitModalOpen(false)}
           >
-            <button
-              onClick={() => setIsSubmitModalOpen(false)}
-              className="absolute top-5 right-5 p-2 rounded-full text-[#5B6676] hover:bg-[#FAF8F5] transition-colors cursor-pointer"
-              aria-label="Close modal"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ duration: 0.3, ease: LUXURY_EASE }}
+              className="bg-white rounded-3xl max-w-lg w-full p-5 sm:p-8 border border-[#EFEAE1] shadow-2xl relative max-h-[92vh] overflow-y-auto"
+              onClick={(e) => e.stopPropagation()}
             >
-              <X className="w-5 h-5" />
-            </button>
+              <button
+                onClick={() => setIsSubmitModalOpen(false)}
+                className="absolute top-5 right-5 p-2 rounded-full text-[#5B6676] hover:bg-[#FAF8F5] transition-colors cursor-pointer"
+                aria-label="Close modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
 
-            {formSubmitted ? (
-              <div className="text-center py-8 space-y-3">
-                <div className="w-14 h-14 rounded-full bg-[#102A1C] text-[#DFB76C] flex items-center justify-center mx-auto shadow-md">
-                  <CheckCircle2 className="w-7 h-7" />
-                </div>
-                <h3 className="heading-card text-xl text-[#102A1C]">Thank You for Your Feedback!</h3>
-                <p className="text-xs sm:text-sm text-[#5B6676]">
-                  Your review has been successfully submitted and verified.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleReviewSubmit} className="space-y-4">
+              <AnimatePresence mode="wait">
+                {formSubmitted ? (
+                  <motion.div
+                    key="submitted"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3, ease: LUXURY_EASE }}
+                    className="text-center py-8 space-y-3"
+                  >
+                    <div className="w-14 h-14 rounded-full bg-[#102A1C] text-[#DFB76C] flex items-center justify-center mx-auto shadow-md">
+                      <CheckCircle2 className="w-7 h-7" />
+                    </div>
+                    <h3 className="heading-card text-xl text-[#102A1C]">Thank You for Your Feedback!</h3>
+                    <p className="text-xs sm:text-sm text-[#5B6676]">
+                      Your review has been successfully submitted and verified.
+                    </p>
+                  </motion.div>
+                ) : (
+                  <motion.form
+                    key="form"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.25 }}
+                    onSubmit={handleReviewSubmit}
+                    className="space-y-4"
+                  >
                 <div className="space-y-1">
                   <div className="kicker-label">
                     <span className="w-4 h-[1.5px] bg-[#C5A059]" />
@@ -408,18 +508,22 @@ export const ReviewsPageSection: React.FC<ReviewsPageSectionProps> = ({ onOpenEn
                   />
                 </div>
 
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   type="submit"
                   className="w-full py-3 rounded-full bg-[#102A1C] text-white text-xs font-bold hover:bg-[#1B3B2B] transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5 text-[#DFB76C]" />
                   <span>Submit Verified Review</span>
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
-      )}
+                </motion.button>
+              </motion.form>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

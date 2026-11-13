@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Check, Maximize2, Users, Bath, Sparkles, MessageSquare, ArrowRight, ShieldCheck } from 'lucide-react';
-import { ROOMS_DATA, RoomItem } from '../data/hostelData';
+import { Check, Maximize2, Users, Bath, Sparkles, MessageSquare, ArrowRight } from 'lucide-react';
+import { ROOMS_DATA } from '../data/hostelData';
+import { LUXURY_EASE, VIEWPORT_CONFIG } from '../lib/motion';
 
 interface RoomComparisonSectionProps {
   onOpenEnquiry: (roomName?: string) => void;
@@ -16,15 +17,15 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
   return (
     <section className="section-space-lg bg-[#FDFBF7] relative overflow-hidden">
       {/* Decorative ambient aura */}
-      <div className="absolute top-1/2 left-0 w-80 h-80 bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-80 h-80 bg-[#DFB76C]/12 rounded-full blur-3xl pointer-events-none animate-float-ambient" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={VIEWPORT_CONFIG}
+          transition={{ duration: 0.6, ease: LUXURY_EASE }}
           className="text-center max-w-3xl mx-auto mb-10 sm:mb-14"
         >
           <div className="kicker-label justify-center mb-3">
@@ -68,14 +69,20 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
         </motion.div>
 
         {/* Selected Room Interactive Showcase */}
-        <div className="bg-white rounded-3xl p-4 sm:p-8 lg:p-10 border border-[#E2D9C8] shadow-xl overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 22 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT_CONFIG}
+          transition={{ duration: 0.6, delay: 0.08, ease: LUXURY_EASE }}
+          className="bg-white rounded-3xl p-4 sm:p-8 lg:p-10 border border-[#E2D9C8] shadow-xl overflow-hidden"
+        >
           <AnimatePresence mode="wait">
             <motion.div
               key={selectedRoom.id}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.35 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.32, ease: LUXURY_EASE }}
               className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center w-full"
             >
               {/* Left Column: Room Photo with Badge - bounded so it never overflows */}
@@ -175,7 +182,7 @@ export const RoomComparisonSection: React.FC<RoomComparisonSectionProps> = ({ on
               </div>
             </motion.div>
           </AnimatePresence>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

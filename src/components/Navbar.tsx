@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { MessageSquare, ArrowRight, Menu, X, Phone } from 'lucide-react';
 import { HOSTEL_INFO } from '../data/hostelData';
+import { LUXURY_EASE } from '../lib/motion';
 
 interface NavbarProps {
   activePage: string;
@@ -41,7 +42,12 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-[#EFEAE1] transition-all shadow-2xs">
+    <motion.header
+      initial={{ y: -12, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.45, ease: LUXURY_EASE }}
+      className="sticky top-0 z-50 bg-[#FDFBF7]/95 backdrop-blur-md border-b border-[#EFEAE1] transition-shadow shadow-2xs"
+    >
       <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-2 lg:gap-4 h-16 sm:h-[70px] lg:h-[76px]">
           {/* Left Column: Brand Logo */}
@@ -111,11 +117,11 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => onOpenEnquiry()}
-              className="h-10 px-3.5 xl:px-5 rounded-full bg-[#102A1C] hover:bg-[#1B3B2B] text-white text-xs xl:text-[13px] font-bold shadow-sm hover:shadow transition-all inline-flex items-center justify-center gap-1.5 xl:gap-2 whitespace-nowrap shrink-0 cursor-pointer hover:scale-[1.02] active:scale-95"
+              className="h-10 px-3.5 xl:px-5 rounded-full bg-[#102A1C] hover:bg-[#1B3B2B] text-white text-xs xl:text-[13px] font-bold shadow-sm hover:shadow-md transition-all inline-flex items-center justify-center gap-1.5 xl:gap-2 whitespace-nowrap shrink-0 cursor-pointer hover:-translate-y-0.5 active:scale-95 group"
             >
               <MessageSquare className="w-3.5 h-3.5 xl:w-4 xl:h-4 text-[#DFB76C] shrink-0" />
               <span>Enquire Now</span>
-              <ArrowRight className="w-3.5 h-3.5 shrink-0 text-[#DFB76C]" />
+              <ArrowRight className="w-3.5 h-3.5 shrink-0 text-[#DFB76C] transition-transform duration-200 group-hover:translate-x-0.5" />
             </button>
           </div>
 
@@ -140,69 +146,109 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="h-9 w-9 sm:h-10 sm:w-10 inline-flex items-center justify-center text-[#102A1C] bg-white/80 hover:bg-[#F4EFE6] rounded-full border border-[#EFEAE1] transition-colors cursor-pointer shrink-0"
+              className="h-9 w-9 sm:h-10 sm:w-10 inline-flex items-center justify-center text-[#102A1C] bg-white/80 hover:bg-[#F4EFE6] rounded-full border border-[#EFEAE1] transition-colors cursor-pointer shrink-0 active:scale-95"
               aria-label="Toggle navigation menu"
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation-drawer"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              <AnimatePresence mode="wait" initial={false}>
+                {mobileMenuOpen ? (
+                  <motion.span
+                    key="close-icon"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.16, ease: LUXURY_EASE }}
+                    className="inline-flex"
+                  >
+                    <X className="w-5 h-5" />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="menu-icon"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.16, ease: LUXURY_EASE }}
+                    className="inline-flex"
+                  >
+                    <Menu className="w-5 h-5" />
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile & Tablet Navigation Drawer */}
-      {mobileMenuOpen && (
-        <nav
-          id="mobile-navigation-drawer"
-          aria-label="Mobile Navigation"
-          className="lg:hidden bg-[#FDFBF7] border-b border-[#EFEAE1] px-4 py-4 space-y-1.5 shadow-xl max-h-[calc(100dvh-64px)] overflow-y-auto no-scrollbar"
-        >
-          {navLinks.map((link) => {
-            const isActive = activePage === link.id;
-            return (
-              <a
-                key={link.id}
-                href={link.path}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(link.id);
-                }}
-                aria-current={isActive ? 'page' : undefined}
-                className={`w-full text-left py-3 px-3.5 rounded-xl text-sm font-semibold transition-colors min-h-[44px] flex items-center justify-between ${
-                  isActive
-                    ? 'text-[#102A1C] bg-[#FAF6ED] border-l-4 border-[#C5A059] font-bold'
-                    : 'text-[#4A5568] hover:text-[#102A1C] hover:bg-white/70'
-                }`}
-              >
-                <span>{link.label}</span>
-                {isActive && <span className="w-2 h-2 rounded-full bg-[#C5A059]" />}
-              </a>
-            );
-          })}
+      {/* Animated Mobile & Tablet Navigation Drawer */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.nav
+            id="mobile-navigation-drawer"
+            aria-label="Mobile Navigation"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.28, ease: LUXURY_EASE }}
+            className="lg:hidden bg-[#FDFBF7] border-b border-[#EFEAE1] overflow-hidden shadow-xl"
+          >
+            <div className="px-4 py-4 space-y-1.5 max-h-[calc(100dvh-64px)] overflow-y-auto no-scrollbar">
+              {navLinks.map((link, idx) => {
+                const isActive = activePage === link.id;
+                return (
+                  <motion.a
+                    key={link.id}
+                    href={link.path}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.22, delay: idx * 0.03, ease: LUXURY_EASE }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(link.id);
+                    }}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={`w-full text-left py-3 px-3.5 rounded-xl text-sm font-semibold transition-colors min-h-[44px] flex items-center justify-between ${
+                      isActive
+                        ? 'text-[#102A1C] bg-[#FAF6ED] border border-[#DFB76C]/45 font-bold'
+                        : 'text-[#4A5568] hover:text-[#102A1C] hover:bg-white/80'
+                    }`}
+                  >
+                    <span>{link.label}</span>
+                    {isActive && <span className="w-2 h-2 rounded-full bg-[#C5A059]" />}
+                  </motion.a>
+                );
+              })}
 
-          <div className="pt-3 border-t border-[#EFEAE1] space-y-2.5">
-            <a
-              href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
-              className="flex items-center justify-center gap-2 w-full py-3 px-4 text-xs font-bold text-[#102A1C] bg-white border border-[#EFEAE1] hover:border-[#102A1C] rounded-full shadow-2xs transition-colors min-h-[44px]"
-            >
-              <Phone className="w-4 h-4 text-[#C5A059]" />
-              <span>Call: {HOSTEL_INFO.phonePrimary}</span>
-            </a>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenEnquiry();
-              }}
-              className="flex items-center justify-center gap-2 w-full py-3 px-4 text-xs font-bold text-white bg-[#102A1C] hover:bg-[#1B3B2B] active:scale-95 rounded-full shadow-md transition-all min-h-[44px] cursor-pointer"
-            >
-              <MessageSquare className="w-4 h-4 text-[#DFB76C]" />
-              <span>Enquire for Room</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        </nav>
-      )}
-    </header>
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.24, delay: 0.18, ease: LUXURY_EASE }}
+                className="pt-3 border-t border-[#EFEAE1] space-y-2.5"
+              >
+                <a
+                  href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
+                  className="flex items-center justify-center gap-2 w-full py-3 px-4 text-xs font-bold text-[#102A1C] bg-white border border-[#EFEAE1] hover:border-[#C5A059] rounded-full shadow-2xs transition-colors min-h-[44px]"
+                >
+                  <Phone className="w-4 h-4 text-[#C5A059]" />
+                  <span>Call: {HOSTEL_INFO.phonePrimary}</span>
+                </a>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenEnquiry();
+                  }}
+                  className="flex items-center justify-center gap-2 w-full py-3 px-4 text-xs font-bold text-white bg-[#102A1C] hover:bg-[#1B3B2B] active:scale-95 rounded-full shadow-md transition-all min-h-[44px] cursor-pointer group"
+                >
+                  <MessageSquare className="w-4 h-4 text-[#DFB76C]" />
+                  <span>Enquire for Room</span>
+                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                </button>
+              </motion.div>
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </motion.header>
   );
 };

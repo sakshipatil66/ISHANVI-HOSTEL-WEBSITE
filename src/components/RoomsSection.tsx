@@ -12,7 +12,8 @@ import {
   X,
   Phone,
 } from 'lucide-react';
-import { ROOMS_DATA, RoomItem, HOSTEL_INFO } from '../data/hostelData';
+import { ROOMS_DATA, RoomItem } from '../data/hostelData';
+import { LUXURY_EASE, VIEWPORT_CONFIG } from '../lib/motion';
 
 interface RoomsSectionProps {
   onOpenEnquiry: (roomName?: string) => void;
@@ -70,11 +71,11 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10 sm:space-y-14 lg:space-y-16">
           {/* Room 1: Single Room (Image on Left, Rich Specs on Right) */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center bg-white p-4 sm:p-7 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
+            viewport={VIEWPORT_CONFIG}
+            transition={{ duration: 0.6, ease: LUXURY_EASE }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center bg-white p-4 sm:p-7 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md hover:shadow-xl hover:border-[#DFB76C]/60 transition-all duration-300 w-full overflow-hidden"
           >
             <div className="lg:col-span-5 w-full min-w-0 space-y-3">
               {/* Spacious Proportionate Image Container - Zero Cut-off & Zero Horizontal Overlap */}
@@ -167,11 +168,11 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
 
           {/* Room 2: Double / Sharing Room (Specs on Left, Image on Right) */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center bg-white p-4 sm:p-7 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
+            viewport={VIEWPORT_CONFIG}
+            transition={{ duration: 0.6, ease: LUXURY_EASE }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center bg-white p-4 sm:p-7 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md hover:shadow-xl hover:border-[#DFB76C]/60 transition-all duration-300 w-full overflow-hidden"
           >
             <div className="lg:col-span-7 w-full min-w-0 order-2 lg:order-1 space-y-5">
               <div className="kicker-label">
@@ -264,11 +265,11 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
 
           {/* Room 3: Premium Room (Image on Left, Specs on Right) */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center bg-white p-4 sm:p-7 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md w-full overflow-hidden"
+            viewport={VIEWPORT_CONFIG}
+            transition={{ duration: 0.6, ease: LUXURY_EASE }}
+            className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center bg-white p-4 sm:p-7 lg:p-10 rounded-3xl border border-[#EFEAE1] shadow-md hover:shadow-xl hover:border-[#DFB76C]/60 transition-all duration-300 w-full overflow-hidden"
           >
             <div className="lg:col-span-5 w-full min-w-0 space-y-3">
               {/* Spacious Proportionate Image Container - Complete Premium Room Perspective */}
@@ -360,7 +361,13 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
           </motion.div>
 
           {/* Informational Section: What is Included with Every Room */}
-          <div className="rounded-3xl bg-[#FAF8F5] border border-[#EFEAE1] p-5 sm:p-10 lg:p-14 space-y-8 sm:space-y-10">
+          <motion.div
+            initial={{ opacity: 0, y: 22 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEWPORT_CONFIG}
+            transition={{ duration: 0.6, ease: LUXURY_EASE }}
+            className="rounded-3xl bg-[#FAF8F5] border border-[#EFEAE1] p-5 sm:p-10 lg:p-14 space-y-8 sm:space-y-10"
+          >
             <div className="text-center max-w-2xl mx-auto space-y-2">
               <div className="kicker-label justify-center mb-1">
                 <span className="w-5 h-[1.5px] bg-[#C5A059]" />
@@ -374,50 +381,215 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-              <div className="p-5 bg-white rounded-2xl border border-[#EFEAE1] shadow-2xs space-y-2">
-                <div className="w-9 h-9 rounded-full bg-[#FAF8F5] text-[#C5A059] flex items-center justify-center font-bold text-sm">🍽️</div>
-                <h3 className="heading-card text-sm sm:text-base text-[#102A1C]">4 Homestyle Meals</h3>
-                <p className="text-xs text-[#5B6676] leading-relaxed">
-                  Breakfast with tea, wholesome lunch, evening snacks &amp; high-tea, and hot balanced dinner prepared fresh daily.
-                </p>
-              </div>
-
-              <div className="p-5 bg-white rounded-2xl border border-[#EFEAE1] shadow-2xs space-y-2">
-                <div className="w-9 h-9 rounded-full bg-[#FAF8F5] text-[#C5A059] flex items-center justify-center font-bold text-sm">⚡</div>
-                <h3 className="heading-card text-sm sm:text-base text-[#102A1C]">Power &amp; Wi-Fi Backup</h3>
-                <p className="text-xs text-[#5B6676] leading-relaxed">
-                  High-speed optical fiber internet across all rooms, supported by 100% generator power backup for study lamps and fans.
-                </p>
-              </div>
-
-              <div className="p-5 bg-white rounded-2xl border border-[#EFEAE1] shadow-2xs space-y-2">
-                <div className="w-9 h-9 rounded-full bg-[#FAF8F5] text-[#C5A059] flex items-center justify-center font-bold text-sm">🧹</div>
-                <h3 className="heading-card text-sm sm:text-base text-[#102A1C]">Daily Housekeeping</h3>
-                <p className="text-xs text-[#5B6676] leading-relaxed">
-                  Regular room sweeping, mopping, trash clearance, and washroom sanitation handled diligently by professional staff.
-                </p>
-              </div>
-
-              <div className="p-5 bg-white rounded-2xl border border-[#EFEAE1] shadow-2xs space-y-2">
-                <div className="w-9 h-9 rounded-full bg-[#FAF8F5] text-[#C5A059] flex items-center justify-center font-bold text-sm">🛡️</div>
-                <h3 className="heading-card text-sm sm:text-base text-[#102A1C]">24/7 Security &amp; Warden</h3>
-                <p className="text-xs text-[#5B6676] leading-relaxed">
-                  Round-the-clock security guards at gates, continuous CCTV monitoring in corridors, and on-premise caring wardens.
-                </p>
-              </div>
+              {[
+                {
+                  emoji: '🍽️',
+                  title: '4 Homestyle Meals',
+                  desc: 'Breakfast with tea, wholesome lunch, evening snacks & high-tea, and hot balanced dinner prepared fresh daily.',
+                },
+                {
+                  emoji: '⚡',
+                  title: 'Power & Wi-Fi Backup',
+                  desc: 'High-speed optical fiber internet across all rooms, supported by 100% generator power backup for study lamps and fans.',
+                },
+                {
+                  emoji: '🧹',
+                  title: 'Daily Housekeeping',
+                  desc: 'Regular room sweeping, mopping, trash clearance, and washroom sanitation handled diligently by professional staff.',
+                },
+                {
+                  emoji: '🛡️',
+                  title: '24/7 Security & Warden',
+                  desc: 'Round-the-clock security guards at gates, continuous CCTV monitoring in corridors, and on-premise caring wardens.',
+                },
+              ].map((inc, idx) => (
+                <motion.div
+                  key={inc.title}
+                  initial={{ opacity: 0, y: 18 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={VIEWPORT_CONFIG}
+                  transition={{ duration: 0.48, delay: idx * 0.08, ease: LUXURY_EASE }}
+                  whileHover={{ y: -4 }}
+                  className="p-5 bg-white rounded-2xl border border-[#EFEAE1] hover:border-[#DFB76C]/80 hover:shadow-md transition-all duration-300 shadow-2xs space-y-2"
+                >
+                  <div className="w-9 h-9 rounded-full bg-[#FAF8F5] text-[#C5A059] flex items-center justify-center font-bold text-sm">
+                    {inc.emoji}
+                  </div>
+                  <h3 className="heading-card text-sm sm:text-base text-[#102A1C]">{inc.title}</h3>
+                  <p className="text-xs text-[#5B6676] leading-relaxed">{inc.desc}</p>
+                </motion.div>
+              ))}
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* FULL IMAGE INSPECTION LIGHTBOX MODAL */}
+        <AnimatePresence>
+          {inspectingRoom && (
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.22 }}
+              className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
+              onClick={() => setInspectingRoom(null)}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.94, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.94, y: 10 }}
+                transition={{ duration: 0.28, ease: LUXURY_EASE }}
+                className="max-w-5xl w-full max-h-[92vh] flex flex-col items-center justify-center relative"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  onClick={() => setInspectingRoom(null)}
+                  aria-label="Close image inspection"
+                  className="absolute top-3 right-3 z-20 w-10 h-10 rounded-full bg-black/70 hover:bg-black text-white border border-white/25 flex items-center justify-center transition-colors cursor-pointer"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
+                <div className="rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-black max-h-[75vh] flex items-center justify-center">
+                  <img
+                    src={inspectingRoom.image}
+                    alt={inspectingRoom.name}
+                    className="max-w-full max-h-[75vh] object-contain rounded-2xl select-none"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+
+                <div className="mt-4 w-full flex flex-col sm:flex-row items-center justify-between gap-3 text-white px-2 text-center sm:text-left">
+                  <div>
+                    <h3 className="font-serif text-base sm:text-lg font-bold text-[#DFB76C]">
+                      {inspectingRoom.name} — Authentic High-Resolution Photography
+                    </h3>
+                    <p className="text-white/75 text-xs font-sans">
+                      {inspectingRoom.dimensions} · {inspectingRoom.tagline} · Ambegaon Bk, Pune
+                    </p>
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => {
+                      const name = inspectingRoom.name;
+                      setInspectingRoom(null);
+                      onOpenEnquiry(name);
+                    }}
+                    className="px-5 py-2.5 rounded-full bg-[#DFB76C] text-[#0E2016] text-xs font-bold transition-colors cursor-pointer flex items-center gap-2 min-h-[42px] shrink-0"
+                  >
+                    <MessageSquare className="w-3.5 h-3.5" />
+                    <span>Enquire for this Room</span>
+                  </motion.button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </section>
+    );
+  }
+
+  // HOMEPAGE 3-CARD LAYOUT (MATCHING SCREENSHOT WITH FIXED PROPORTIONS & ZERO CUT-OFF)
+  return (
+    <section id="rooms" className="section-space bg-[#FDFBF7]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT_CONFIG}
+          transition={{ duration: 0.6, ease: LUXURY_EASE }}
+          className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 sm:mb-12 gap-4"
+        >
+          <div>
+            <div className="kicker-label mb-2">
+              <span className="w-5 h-[1.5px] bg-[#C5A059]" />
+              <span>OUR ROOMS</span>
+            </div>
+            <h2 className="heading-section text-[#102A1C]">
+              Rooms Designed <br className="hidden sm:block" />
+              For Your Comfort
+            </h2>
+          </div>
+
+          {onViewAllRooms && (
+            <button
+              onClick={onViewAllRooms}
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#102A1C] hover:text-[#C5A059] transition-colors cursor-pointer group self-start sm:self-auto"
+            >
+              <span>View All Rooms</span>
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </button>
+          )}
+        </motion.div>
+
+        {/* 3 Room Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          {ROOMS_DATA.map((room, idx) => (
+            <motion.div
+              key={room.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: 0.55, delay: idx * 0.09, ease: LUXURY_EASE }}
+              whileHover={{ y: -6 }}
+              onClick={() => onOpenEnquiry(room.name)}
+              className="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl hover:border-[#DFB76C]/80 transition-all duration-300 border border-[#EFEAE1] group cursor-pointer flex flex-col"
+            >
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#FAF8F5]">
+                <img
+                  src={room.image}
+                  alt={`${room.name} fully furnished accommodation with bed, study desk and wooden wardrobe at ISHANVI Hostel Ambegaon Pune`}
+                  className={`w-full h-full object-cover ${getRoomObjectPosition(room.id)} transition-transform duration-700 ease-out group-hover:scale-105`}
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                />
+              </div>
+
+              {/* Card Footer Bar */}
+              <div className="p-4 sm:p-5 flex items-center justify-between gap-3 bg-white border-t border-[#EFEAE1]/60">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-10 h-10 rounded-full bg-[#FAF8F5] flex items-center justify-center shrink-0 group-hover:bg-[#102A1C] group-hover:text-white transition-colors duration-300">
+                    {getRoomIcon(room.iconType)}
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="heading-card text-[#102A1C] group-hover:text-[#1B3B2B] transition-colors truncate">
+                      {room.name}
+                    </h3>
+                    <p className="text-caption mt-0.5 truncate">{room.tagline}</p>
+                  </div>
+                </div>
+
+                <div className="w-8 h-8 rounded-full bg-[#C5A059] text-white flex items-center justify-center shrink-0 shadow-xs group-hover:bg-[#102A1C] transition-colors duration-300">
+                  <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* FULL IMAGE INSPECTION LIGHTBOX MODAL */}
+      <AnimatePresence>
         {inspectingRoom && (
-          <div
+          <motion.div
             role="dialog"
             aria-modal="true"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
             className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
             onClick={() => setInspectingRoom(null)}
           >
-            <div
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.94, y: 10 }}
+              transition={{ duration: 0.28, ease: LUXURY_EASE }}
               className="max-w-5xl w-full max-h-[92vh] flex flex-col items-center justify-center relative"
               onClick={(e) => e.stopPropagation()}
             >
@@ -447,7 +619,9 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                     {inspectingRoom.dimensions} · {inspectingRoom.tagline} · Ambegaon Bk, Pune
                   </p>
                 </div>
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
                   onClick={() => {
                     const name = inspectingRoom.name;
                     setInspectingRoom(null);
@@ -457,152 +631,12 @@ export const RoomsSection: React.FC<RoomsSectionProps> = ({
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
                   <span>Enquire for this Room</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </section>
-    );
-  }
-
-  // HOMEPAGE 3-CARD LAYOUT (MATCHING SCREENSHOT WITH FIXED PROPORTIONS & ZERO CUT-OFF)
-  return (
-    <section id="rooms" className="section-space bg-[#FDFBF7]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 sm:mb-12 gap-4"
-        >
-          <div>
-            <div className="kicker-label mb-2">
-              <span className="w-5 h-[1.5px] bg-[#C5A059]" />
-              <span>OUR ROOMS</span>
-            </div>
-            <h2 className="heading-section text-[#102A1C]">
-              Rooms Designed <br className="hidden sm:block" />
-              For Your Comfort
-            </h2>
-          </div>
-
-          {onViewAllRooms && (
-            <button
-              onClick={onViewAllRooms}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#102A1C] hover:text-[#C5A059] transition-colors cursor-pointer group self-start sm:self-auto"
-            >
-              <span>View All Rooms</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </button>
-          )}
-        </motion.div>
-
-        {/* 3 Room Cards Grid: 4:3 Proportionate Height to Keep Entire Beds, Windows & Wardrobes Visible */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {ROOMS_DATA.map((room, idx) => (
-            <motion.div
-              key={room.id}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55, delay: idx * 0.1 }}
-              whileHover={{ y: -5 }}
-              onClick={() => onOpenEnquiry(room.name)}
-              className="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-[#EFEAE1] group cursor-pointer flex flex-col"
-            >
-              {/* 
-                4:3 Aspect Ratio Container:
-                Ensures the entire bed, floor, wardrobe, window, and curtains are visible without unwanted vertical clipping.
-              */}
-              <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#FAF8F5]">
-                <img
-                  src={room.image}
-                  alt={`${room.name} fully furnished accommodation with bed, study desk and wooden wardrobe at ISHANVI Hostel Ambegaon Pune`}
-                  className={`w-full h-full object-cover ${getRoomObjectPosition(room.id)} transition-transform duration-500 group-hover:scale-[1.02]`}
-                  referrerPolicy="no-referrer"
-                  loading="lazy"
-                />
-              </div>
-
-              {/* Card Footer Bar */}
-              <div className="p-4 sm:p-5 flex items-center justify-between gap-3 bg-white border-t border-[#EFEAE1]/60">
-                <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-10 h-10 rounded-full bg-[#FAF8F5] flex items-center justify-center shrink-0 group-hover:bg-[#102A1C] group-hover:text-white transition-colors">
-                    {getRoomIcon(room.iconType)}
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="heading-card text-[#102A1C] group-hover:text-[#1B3B2B] transition-colors truncate">
-                      {room.name}
-                    </h3>
-                    <p className="text-caption mt-0.5 truncate">{room.tagline}</p>
-                  </div>
-                </div>
-
-                <div className="w-8 h-8 rounded-full bg-[#C5A059] text-white flex items-center justify-center shrink-0 shadow-xs group-hover:bg-[#102A1C] transition-colors">
-                  <ArrowRight className="w-4 h-4" />
-                </div>
+                </motion.button>
               </div>
             </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* FULL IMAGE INSPECTION LIGHTBOX MODAL */}
-      {inspectingRoom && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
-          onClick={() => setInspectingRoom(null)}
-        >
-          <div
-            className="max-w-5xl w-full max-h-[92vh] flex flex-col items-center justify-center relative"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setInspectingRoom(null)}
-              aria-label="Close image inspection"
-              className="absolute top-3 right-3 z-20 w-10 h-10 rounded-full bg-black/70 hover:bg-black text-white border border-white/25 flex items-center justify-center transition-colors cursor-pointer"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
-            <div className="rounded-2xl overflow-hidden border border-white/20 shadow-2xl bg-black max-h-[75vh] flex items-center justify-center">
-              <img
-                src={inspectingRoom.image}
-                alt={inspectingRoom.name}
-                className="max-w-full max-h-[75vh] object-contain rounded-2xl select-none"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-
-            <div className="mt-4 w-full flex flex-col sm:flex-row items-center justify-between gap-3 text-white px-2 text-center sm:text-left">
-              <div>
-                <h3 className="font-serif text-base sm:text-lg font-bold text-[#DFB76C]">
-                  {inspectingRoom.name} — Authentic High-Resolution Photography
-                </h3>
-                <p className="text-white/75 text-xs font-sans">
-                  {inspectingRoom.dimensions} · {inspectingRoom.tagline} · Ambegaon Bk, Pune
-                </p>
-              </div>
-              <button
-                onClick={() => {
-                  const name = inspectingRoom.name;
-                  setInspectingRoom(null);
-                  onOpenEnquiry(name);
-                }}
-                className="px-5 py-2.5 rounded-full bg-[#DFB76C] text-[#0E2016] text-xs font-bold transition-colors cursor-pointer flex items-center gap-2 min-h-[42px] shrink-0"
-              >
-                <MessageSquare className="w-3.5 h-3.5" />
-                <span>Enquire for this Room</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

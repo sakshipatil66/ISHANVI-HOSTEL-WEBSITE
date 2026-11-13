@@ -1,6 +1,8 @@
 import React from 'react';
-import { Phone, Mail, MapPin, ArrowUp } from 'lucide-react';
-import { HOSTEL_INFO, ROOMS_DATA } from '../data/hostelData';
+import { motion } from 'motion/react';
+import { Phone, MapPin, ArrowUp } from 'lucide-react';
+import { HOSTEL_INFO } from '../data/hostelData';
+import { LUXURY_EASE, VIEWPORT_CONFIG } from '../lib/motion';
 
 interface FooterProps {
   onNavClick: (id: string) => void;
@@ -17,7 +19,13 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenEnquiry }) => 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-10 border-b border-[#1B3B2B]">
           {/* Column 1: Logo & Tagline */}
-          <div className="lg:col-span-5 space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEWPORT_CONFIG}
+            transition={{ duration: 0.55, delay: 0.02, ease: LUXURY_EASE }}
+            className="lg:col-span-5 space-y-4"
+          >
             <a
               href="/"
               onClick={(e) => {
@@ -40,10 +48,16 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenEnquiry }) => 
             <p className="text-xs sm:text-sm text-[#DFB76C] font-semibold tracking-wider">
               {HOSTEL_INFO.tagline}
             </p>
-          </div>
+          </motion.div>
 
           {/* Column 2: Navigation Links */}
-          <div className="lg:col-span-3 space-y-3">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEWPORT_CONFIG}
+            transition={{ duration: 0.55, delay: 0.1, ease: LUXURY_EASE }}
+            className="lg:col-span-3 space-y-3"
+          >
             <h2 className="font-serif text-sm font-bold uppercase tracking-wider text-white">
               Navigation
             </h2>
@@ -64,17 +78,23 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenEnquiry }) => 
                       e.preventDefault();
                       onNavClick(link.id);
                     }}
-                    className="hover:text-[#DFB76C] transition-colors cursor-pointer text-left block py-0.5"
+                    className="hover:text-[#DFB76C] hover:translate-x-1 transition-all cursor-pointer text-left inline-block py-0.5"
                   >
                     {link.label}
                   </a>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Column 3: Contact & Visiting Hours */}
-          <div className="lg:col-span-4 space-y-3">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEWPORT_CONFIG}
+            transition={{ duration: 0.55, delay: 0.18, ease: LUXURY_EASE }}
+            className="lg:col-span-4 space-y-3"
+          >
             <h2 className="font-serif text-sm font-bold uppercase tracking-wider text-white">
               Contact & Address
             </h2>
@@ -96,21 +116,29 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenEnquiry }) => 
                 Visiting Hours: {HOSTEL_INFO.visitingHours}
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#A0AEC0] text-center sm:text-left">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={VIEWPORT_CONFIG}
+          transition={{ duration: 0.55, delay: 0.2, ease: LUXURY_EASE }}
+          className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#A0AEC0] text-center sm:text-left"
+        >
           <p>© {new Date().getFullYear()} ISHANVI HOSTEL & ACCOMMODATION. All Rights Reserved.</p>
-          <button
+          <motion.button
+            whileHover={{ y: -2, scale: 1.03 }}
+            whileTap={{ scale: 0.96 }}
             onClick={scrollToTop}
-            className="flex items-center gap-1.5 p-2 rounded-lg bg-[#142E20] hover:bg-[#1B3B2B] text-white transition-colors cursor-pointer"
+            className="flex items-center gap-1.5 p-2 px-3 rounded-lg bg-[#142E20] hover:bg-[#1B3B2B] text-white transition-colors cursor-pointer"
             title="Back to Top"
           >
             <ArrowUp className="w-3.5 h-3.5 text-[#DFB76C]" />
             <span>Top</span>
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </div>
     </footer>
   );

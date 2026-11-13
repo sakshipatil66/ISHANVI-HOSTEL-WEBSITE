@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { MapPin, Navigation, Clock, Building, Train, BookOpen, Stethoscope, ShoppingBag, ExternalLink, Sparkles } from 'lucide-react';
 import { HOSTEL_INFO, NEARBY_CONNECTIVITY } from '../data/hostelData';
+import { LUXURY_EASE, VIEWPORT_CONFIG } from '../lib/motion';
 
 export const LocationSection: React.FC = () => {
   const getIcon = (type: string) => {
@@ -24,15 +25,15 @@ export const LocationSection: React.FC = () => {
   return (
     <section className="section-space bg-[#F4EFE6]/70 border-y border-[#EFEAE1] relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/3 -right-24 w-80 h-80 bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 -right-24 w-80 h-80 bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none animate-float-ambient" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={VIEWPORT_CONFIG}
+          transition={{ duration: 0.6, ease: LUXURY_EASE }}
           className="text-center max-w-3xl mx-auto mb-10 sm:mb-14"
         >
           <div className="kicker-label justify-center mb-3">
@@ -63,8 +64,8 @@ export const LocationSection: React.FC = () => {
                   key={idx}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: idx * 0.08 }}
+                  viewport={VIEWPORT_CONFIG}
+                  transition={{ duration: 0.45, delay: idx * 0.07, ease: LUXURY_EASE }}
                   whileHover={{ x: 6, borderColor: '#102A1C' }}
                   className="p-3.5 sm:p-4 rounded-2xl bg-white border border-[#EFEAE1] shadow-xs flex items-center justify-between gap-3 transition-all group"
                 >
@@ -89,10 +90,14 @@ export const LocationSection: React.FC = () => {
             </div>
 
             <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: 0.5, delay: 0.25, ease: LUXURY_EASE }}
               whileHover={{ y: -2 }}
               className="p-4 rounded-2xl bg-white border border-[#EFEAE1] text-xs text-[#5A655F] flex items-center gap-3 shadow-2xs"
             >
-              <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping shrink-0" />
+              <div className="w-2.5 h-2.5 rounded-full bg-emerald-600 ring-4 ring-emerald-500/20 shrink-0" />
               <div>
                 <strong className="text-[#102A1C]">Safe Walking Corridor:</strong> Well-lit streets, regular auto-rickshaw stands, and peaceful residential student neighborhood.
               </div>
@@ -100,7 +105,13 @@ export const LocationSection: React.FC = () => {
           </div>
 
           {/* Right Column: Visual Location Showcase & Contact */}
-          <div className="lg:col-span-6 flex flex-col">
+          <motion.div
+            initial={{ opacity: 0, x: 22 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={VIEWPORT_CONFIG}
+            transition={{ duration: 0.6, ease: LUXURY_EASE }}
+            className="lg:col-span-6 flex flex-col"
+          >
             <div className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 border border-[#EFEAE1] shadow-lg flex-1 flex flex-col justify-between space-y-6">
               <div>
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
@@ -176,7 +187,7 @@ export const LocationSection: React.FC = () => {
                 </motion.a>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

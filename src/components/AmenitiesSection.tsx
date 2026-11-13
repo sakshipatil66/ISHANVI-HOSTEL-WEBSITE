@@ -12,6 +12,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { AMENITIES_LIST } from '../data/hostelData';
+import { LUXURY_EASE, VIEWPORT_CONFIG } from '../lib/motion';
 
 interface AmenitiesSectionProps {
   isStandalonePage?: boolean;
@@ -48,8 +49,8 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={VIEWPORT_CONFIG}
+          transition={{ duration: 0.6, ease: LUXURY_EASE }}
           className="text-center max-w-2xl mx-auto mb-12"
         >
           <div className="kicker-label justify-center mb-2">
@@ -73,14 +74,14 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
           {AMENITIES_LIST.map((item, idx) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 22 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.05 }}
-              whileHover={{ y: -6, scale: 1.05 }}
-              className="flex flex-col items-center text-center justify-center space-y-2.5 sm:space-y-3 group cursor-pointer p-2.5 rounded-2xl hover:bg-white/60 transition-colors"
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: 0.5, delay: idx * 0.05, ease: LUXURY_EASE }}
+              whileHover={{ y: -5, scale: 1.03 }}
+              className="flex flex-col items-center text-center justify-center space-y-2.5 sm:space-y-3 group cursor-pointer p-2.5 rounded-2xl hover:bg-white/70 transition-colors"
             >
-              <div className="w-14 h-14 sm:w-15 sm:h-15 rounded-2xl bg-white border border-[#EFEAE1] shadow-2xs flex items-center justify-center group-hover:scale-110 group-hover:bg-[#102A1C] group-hover:border-[#102A1C] group-hover:text-[#DFB76C] transition-all duration-300 group-hover:shadow-lg">
+              <div className="w-14 h-14 sm:w-15 sm:h-15 rounded-2xl bg-white border border-[#EFEAE1] shadow-2xs flex items-center justify-center group-hover:scale-108 group-hover:-rotate-3 group-hover:bg-[#102A1C] group-hover:border-[#102A1C] group-hover:text-[#DFB76C] transition-all duration-300 group-hover:shadow-lg">
                 {getAmenityIcon(item.iconName)}
               </div>
               <h3 className="heading-card text-xs sm:text-sm text-[#102A1C] leading-snug group-hover:text-[#8C6D2D] transition-colors">
@@ -96,14 +97,12 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: 0.6, ease: LUXURY_EASE }}
               className="text-center mb-8 sm:mb-10"
             >
               <div className="inline-flex items-center gap-2 mb-2">
-                <span className="w-4 h-4 rounded-full bg-[#DFB76C]/30 flex items-center justify-center animate-ping">
-                  <span className="w-2 h-2 rounded-full bg-[#DFB76C]" />
-                </span>
+                <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
                 <span className="text-xs font-bold text-[#A88238] uppercase tracking-[0.18em]">
                   AUTHENTIC RESIDENCE FACILITIES
                 </span>
@@ -115,11 +114,11 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55 }}
-                whileHover={{ y: -6 }}
+                viewport={VIEWPORT_CONFIG}
+                transition={{ duration: 0.55, delay: 0.02, ease: LUXURY_EASE }}
+                whileHover={{ y: -5 }}
                 className="group rounded-3xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl hover:border-[#DFB76C]/80 transition-all duration-300 flex flex-col"
               >
                 <div className="aspect-[4/3] overflow-hidden relative bg-[#FAF8F5]">
@@ -148,11 +147,11 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 25 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                whileHover={{ y: -6 }}
+                viewport={VIEWPORT_CONFIG}
+                transition={{ duration: 0.55, delay: 0.09, ease: LUXURY_EASE }}
+                whileHover={{ y: -5 }}
                 className="group rounded-3xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl hover:border-[#DFB76C]/80 transition-all duration-300 flex flex-col"
               >
                 <div className="aspect-[4/3] overflow-hidden relative bg-[#FAF8F5]">
@@ -178,11 +177,11 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 25 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                whileHover={{ y: -6 }}
+                viewport={VIEWPORT_CONFIG}
+                transition={{ duration: 0.55, delay: 0.16, ease: LUXURY_EASE }}
+                whileHover={{ y: -5 }}
                 className="group rounded-3xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl hover:border-[#DFB76C]/80 transition-all duration-300 flex flex-col"
               >
                 <div className="aspect-[4/3] overflow-hidden relative bg-[#FAF8F5]">
@@ -208,11 +207,11 @@ export const AmenitiesSection: React.FC<AmenitiesSectionProps> = ({ isStandalone
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, y: 25 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                whileHover={{ y: -6 }}
+                viewport={VIEWPORT_CONFIG}
+                transition={{ duration: 0.55, delay: 0.23, ease: LUXURY_EASE }}
+                whileHover={{ y: -5 }}
                 className="group rounded-3xl overflow-hidden bg-white border border-[#EFEAE1] shadow-sm hover:shadow-xl hover:border-[#DFB76C]/80 transition-all duration-300 flex flex-col"
               >
                 <div className="aspect-[4/3] overflow-hidden relative bg-[#FAF8F5]">

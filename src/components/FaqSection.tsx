@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown, Search, MessageSquare, Phone, HelpCircle, Sparkles } from 'lucide-react';
 import { FAQS_DATA, HOSTEL_INFO, FaqItem } from '../data/hostelData';
+import { LUXURY_EASE, VIEWPORT_CONFIG } from '../lib/motion';
 
 interface FaqSectionProps {
   onOpenEnquiry: (roomName?: string) => void;
@@ -40,15 +41,15 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
   return (
     <section id="faq" className="section-space bg-[#FDFBF7] relative overflow-hidden">
       {/* Decorative ambient light */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-20 left-10 w-72 h-72 bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none animate-float-ambient" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          viewport={VIEWPORT_CONFIG}
+          transition={{ duration: 0.55, ease: LUXURY_EASE }}
           className="text-center mb-8"
         >
           <div className="kicker-label justify-center mb-2">
@@ -93,19 +94,26 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
               return (
                 <motion.button
                   key={cat.id}
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.96 }}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
                   onClick={() => {
                     setSelectedCategory(cat.id);
                     setOpenIndex(0);
                   }}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold transition-all cursor-pointer relative ${
+                  className={`relative px-4 py-2 rounded-full text-xs font-semibold transition-colors cursor-pointer ${
                     isSelected
-                      ? 'bg-[#102A1C] text-[#DFB76C] shadow-md border border-[#DFB76C]/40'
+                      ? 'text-[#DFB76C]'
                       : 'bg-white text-[#4A5568] hover:text-[#102A1C] border border-[#EFEAE1] hover:border-[#DFB76C]/60'
                   }`}
                 >
-                  {cat.label}
+                  {isSelected && (
+                    <motion.span
+                      layoutId="activeFaqCategory"
+                      transition={{ duration: 0.35, ease: LUXURY_EASE }}
+                      className="absolute inset-0 rounded-full bg-[#102A1C] shadow-md border border-[#DFB76C]/40"
+                    />
+                  )}
+                  <span className="relative z-10">{cat.label}</span>
                 </motion.button>
               );
             })}
@@ -141,10 +149,10 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
               return (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.04 }}
+                  viewport={VIEWPORT_CONFIG}
+                  transition={{ duration: 0.4, delay: index * 0.04, ease: LUXURY_EASE }}
                   whileHover={{ y: -2 }}
                   className="bg-white rounded-2xl border border-[#EFEAE1] overflow-hidden shadow-2xs hover:border-[#DFB76C]/70 hover:shadow-md transition-all"
                 >
@@ -177,7 +185,7 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.28, ease: 'easeOut' }}
+                        transition={{ duration: 0.3, ease: LUXURY_EASE }}
                         className="overflow-hidden"
                       >
                         <div className="px-4 pb-4 pt-3 sm:px-6 sm:pb-5 text-xs sm:text-sm text-[#4A5568] leading-relaxed border-t border-[#EFEAE1]/60 bg-[#FAF8F5]/40 space-y-3">
@@ -206,10 +214,10 @@ export const FaqSection: React.FC<FaqSectionProps> = ({ onOpenEnquiry }) => {
 
         {/* Direct Contact Assistance Strip */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={VIEWPORT_CONFIG}
+          transition={{ duration: 0.55, delay: 0.08, ease: LUXURY_EASE }}
           className="mt-8 p-5 sm:p-6 rounded-2xl bg-[#FAF8F5] border border-[#EFEAE1] text-center space-y-2 shadow-xs"
         >
           <h3 className="font-serif text-sm sm:text-base font-bold text-[#102A1C]">

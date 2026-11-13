@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect, useCallback } from 'react';
+import { MotionConfig, AnimatePresence, motion } from 'motion/react';
 import { Navbar } from './components/Navbar';
 import { ScrollProgress } from './components/ScrollProgress';
 import { HeroSection } from './components/HeroSection';
@@ -240,35 +241,36 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FDFBF7] text-[#222B25] font-sans selection:bg-[#102A1C] selection:text-[#DFB76C] overflow-x-hidden">
-      {/* Cinematic Logo Intro Animation (Initial session entry only) */}
-      {showLogoIntro && (
-        <OpeningLogoIntro onComplete={handleLogoIntroComplete} />
-      )}
+    <MotionConfig reducedMotion="user">
+      <div className="min-h-screen flex flex-col bg-[#FDFBF7] text-[#222B25] font-sans selection:bg-[#102A1C] selection:text-[#DFB76C] overflow-x-hidden">
+        {/* Cinematic Logo Intro Animation (Initial session entry only) */}
+        {showLogoIntro && (
+          <OpeningLogoIntro onComplete={handleLogoIntroComplete} />
+        )}
 
-      {/* Hairline Scroll Progress Bar */}
-      <ScrollProgress />
+        {/* Hairline Scroll Progress Bar */}
+        <ScrollProgress />
 
-      {/* Top Navigation Bar with Official ISHANVI Logo & Multi-page Links */}
-      <Navbar
-        activePage={activePage}
-        setActivePage={handlePageChange}
-        onOpenEnquiry={handleOpenEnquiry}
-      />
+        {/* Top Navigation Bar with Official ISHANVI Logo & Multi-page Links */}
+        <Navbar
+          activePage={activePage}
+          setActivePage={handlePageChange}
+          onOpenEnquiry={handleOpenEnquiry}
+        />
 
-      <main className="flex-1">
-        {/* =========================================================================
-            PAGE 1: HOME (EXACT SAME-TO-SAME REPLICA OF MA'AM'S REFERENCE SCREENSHOT)
-            Section Order:
-            1. HeroSection (Carousel with flyer & student reception)
-            2. AboutSection ("More Than Just A Stay - A Better Tomorrow")
-            3. RoomsSection (3-Card Layout with "View All Rooms ->")
-            4. AmenitiesSection ("Everything You Need For A Hassle-Free Stay")
-            5. GallerySection (5-Photo Showcase with "View Gallery ->")
-            6. TestimonialsSection ("What Our Residents Say")
-            7. BottomCtaSection ("Start Your Better Tomorrow With Ishanvi")
-            ========================================================================= */}
-        {activePage === 'home' && (
+        <main className="flex-1">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activePage}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {/* =========================================================================
+                  PAGE 1: HOME
+                  ========================================================================= */}
+              {activePage === 'home' && (
           <>
             <HeroSection
               onOpenEnquiry={handleOpenEnquiry}
@@ -384,56 +386,66 @@ export default function App() {
           </div>
         )}
 
-        {/* =========================================================================
-            PAGE 7: CONTACT US & ADMISSIONS (DEDICATED MULTI-PAGE VIEW)
-            ========================================================================= */}
-        {activePage === 'contact' && (
-          <div className="w-full">
-            <PageHeader
-              kicker="REACH OUT DIRECTLY"
-              title="Contact & Admissions Desk"
-              subtitle="We welcome prospective residents and parents for room tours, pricing details, and admissions assistance near ISMS Sankalp."
-              onOpenEnquiry={handleOpenEnquiry}
-            />
-            <ContactSection
-              initialRoom={selectedRoomForEnquiry}
-              isStandalonePage={true}
-            />
-            <LocationSection />
-            <FaqSection onOpenEnquiry={handleOpenEnquiry} />
-            <BottomCtaSection onOpenEnquiry={handleOpenEnquiry} />
-          </div>
-        )}
-      </main>
+              {/* =========================================================================
+                  PAGE 7: CONTACT US & ADMISSIONS (DEDICATED MULTI-PAGE VIEW)
+                  ========================================================================= */}
+              {activePage === 'contact' && (
+                <div className="w-full">
+                  <PageHeader
+                    kicker="REACH OUT DIRECTLY"
+                    title="Contact & Admissions Desk"
+                    subtitle="We welcome prospective residents and parents for room tours, pricing details, and admissions assistance near ISMS Sankalp."
+                    onOpenEnquiry={handleOpenEnquiry}
+                  />
+                  <ContactSection
+                    initialRoom={selectedRoomForEnquiry}
+                    isStandalonePage={true}
+                  />
+                  <LocationSection />
+                  <FaqSection onOpenEnquiry={handleOpenEnquiry} />
+                  <BottomCtaSection onOpenEnquiry={handleOpenEnquiry} />
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </main>
 
-      {/* Global Footer */}
-      <Footer
-        onNavClick={handlePageChange}
-        onOpenEnquiry={handleOpenEnquiry}
-      />
+        {/* Global Footer */}
+        <Footer
+          onNavClick={handlePageChange}
+          onOpenEnquiry={handleOpenEnquiry}
+        />
 
-      {/* Floating WhatsApp Action Widget (matching reference) */}
-      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40">
-        <a
-          href={`https://wa.me/917767058988?text=${encodeURIComponent(
-            'Hello ISHANVI Hostel, I would like to inquire about room availability.'
-          )}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Chat on WhatsApp"
-          className="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-transform"
-          title="Chat on WhatsApp (+91 77670 58988)"
+        {/* Floating WhatsApp Action Widget */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85, y: 12 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40"
         >
-          <MessageCircle className="w-6 h-6 fill-white text-[#25D366]" />
-        </a>
-      </div>
+          <motion.a
+            whileHover={{ scale: 1.08, y: -2 }}
+            whileTap={{ scale: 0.94 }}
+            href={`https://wa.me/917767058988?text=${encodeURIComponent(
+              'Hello ISHANVI Hostel, I would like to inquire about room availability.'
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat on WhatsApp"
+            className="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl transition-shadow hover:shadow-[0_10px_28px_rgba(37,211,102,0.45)]"
+            title="Chat on WhatsApp (+91 77670 58988)"
+          >
+            <MessageCircle className="w-6 h-6 fill-white text-[#25D366]" />
+          </motion.a>
+        </motion.div>
 
-      {/* Booking & Enquiry Modal */}
-      <EnquiryModal
-        isOpen={isEnquiryModalOpen}
-        onClose={handleCloseEnquiry}
-        initialRoom={selectedRoomForEnquiry}
-      />
-    </div>
+        {/* Booking & Enquiry Modal */}
+        <EnquiryModal
+          isOpen={isEnquiryModalOpen}
+          onClose={handleCloseEnquiry}
+          initialRoom={selectedRoomForEnquiry}
+        />
+      </div>
+    </MotionConfig>
   );
 }

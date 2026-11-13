@@ -50,6 +50,17 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
   }, [phase, onComplete]);
 
   useEffect(() => {
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion) {
+      const quickTimer = setTimeout(() => {
+        onComplete();
+      }, 350);
+      return () => clearTimeout(quickTimer);
+    }
+
     // Start CSS progress bar transition smoothly on mount
     const startTimer = setTimeout(() => {
       setBarStarted(true);
@@ -180,7 +191,7 @@ export const OpeningLogoIntro: React.FC<OpeningLogoIntroProps> = ({ onComplete }
               transition={{ duration: 0.5, delay: 0.1 }}
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#DFB76C]/10 border border-[#DFB76C]/40 text-[11px] sm:text-xs font-bold text-[#DFB76C] uppercase tracking-[0.22em] mb-5 shadow-lg backdrop-blur-md"
             >
-              <Sparkles className="w-3.5 h-3.5 text-[#DFB76C] animate-pulse" />
+              <Sparkles className="w-3.5 h-3.5 text-[#DFB76C]" />
               <span>Welcome to ISHANVI Residence</span>
             </motion.div>
 

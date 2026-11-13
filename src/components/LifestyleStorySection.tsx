@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Sun, BookOpen, Coffee, Moon, CheckCircle2, Sparkles } from 'lucide-react';
 import { DAILY_LIFESTYLE_TIMELINE } from '../data/hostelData';
+import { LUXURY_EASE, VIEWPORT_CONFIG } from '../lib/motion';
 
 export const LifestyleStorySection: React.FC = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -26,15 +27,15 @@ export const LifestyleStorySection: React.FC = () => {
   return (
     <section className="section-space bg-[#FDFBF7] relative overflow-hidden">
       {/* Ambient background accent */}
-      <div className="absolute top-10 right-0 w-96 h-96 bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-10 right-0 w-96 h-96 bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none animate-float-ambient" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={VIEWPORT_CONFIG}
+          transition={{ duration: 0.6, ease: LUXURY_EASE }}
           className="text-center max-w-3xl mx-auto mb-10 sm:mb-14"
         >
           <div className="kicker-label justify-center mb-3">
@@ -59,6 +60,10 @@ export const LifestyleStorySection: React.FC = () => {
               return (
                 <motion.button
                   key={idx}
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={VIEWPORT_CONFIG}
+                  transition={{ duration: 0.45, delay: idx * 0.07, ease: LUXURY_EASE }}
                   whileHover={{ x: 4 }}
                   whileTap={{ scale: 0.99 }}
                   onClick={() => setActiveStep(idx)}
@@ -72,6 +77,7 @@ export const LifestyleStorySection: React.FC = () => {
                   {isActive && (
                     <motion.div
                       layoutId="activeTimelineBar"
+                      transition={{ duration: 0.35, ease: LUXURY_EASE }}
                       className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#102A1C]"
                     />
                   )}
@@ -88,7 +94,7 @@ export const LifestyleStorySection: React.FC = () => {
                     <div className="flex flex-wrap items-center justify-between gap-1.5">
                       <div className="flex items-center gap-1.5">
                         {isActive && (
-                          <span className="w-2 h-2 rounded-full bg-[#DFB76C] animate-ping shrink-0" />
+                          <span className="w-2 h-2 rounded-full bg-[#DFB76C] ring-4 ring-[#DFB76C]/20 shrink-0" />
                         )}
                         <span className="text-xs font-bold text-[#A88238] uppercase tracking-wider tabular-nums">
                           {step.time}
@@ -109,15 +115,21 @@ export const LifestyleStorySection: React.FC = () => {
           </div>
 
           {/* Right Column: Visual Stage of the Moment */}
-          <div className="lg:col-span-7">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={VIEWPORT_CONFIG}
+            transition={{ duration: 0.6, ease: LUXURY_EASE }}
+            className="lg:col-span-7"
+          >
             <div className="bg-white rounded-3xl p-4 sm:p-6 lg:p-8 border border-[#E2D9C8] shadow-2xl overflow-hidden relative">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentItem.time}
-                  initial={{ opacity: 0, scale: 0.97, y: 8 }}
+                  initial={{ opacity: 0, scale: 0.98, y: 10 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.97, y: -8 }}
-                  transition={{ duration: 0.35 }}
+                  exit={{ opacity: 0, scale: 0.98, y: -10 }}
+                  transition={{ duration: 0.38, ease: LUXURY_EASE }}
                   className="space-y-5 sm:space-y-6"
                 >
                   <div className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-[#FAF8F5] group">
@@ -156,7 +168,7 @@ export const LifestyleStorySection: React.FC = () => {
                 </motion.div>
               </AnimatePresence>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

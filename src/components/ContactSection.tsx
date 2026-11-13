@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
-import { Mail, Phone, MapPin, Send, CheckCircle2, MessageSquare, Clock, ArrowRight, Sparkles } from 'lucide-react';
-import { HOSTEL_INFO, ROOMS_DATA } from '../data/hostelData';
+import { motion, AnimatePresence } from 'motion/react';
+import { Phone, MapPin, Send, CheckCircle2, MessageSquare, Clock } from 'lucide-react';
+import { HOSTEL_INFO } from '../data/hostelData';
+import { LUXURY_EASE, VIEWPORT_CONFIG } from '../lib/motion';
 
 interface ContactSectionProps {
   initialRoom?: string;
@@ -64,14 +65,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   return (
     <section id="contact" className={`${isStandalonePage ? 'section-space-lg' : 'section-space'} bg-[#FDFBF7] relative overflow-hidden`}>
       {/* Background ambient lighting */}
-      <div className="absolute top-1/4 -left-20 w-80 h-80 bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 -left-20 w-80 h-80 bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none animate-float-ambient" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={VIEWPORT_CONFIG}
+          transition={{ duration: 0.6, ease: LUXURY_EASE }}
           className="text-center max-w-2xl mx-auto mb-10 sm:mb-14"
         >
           <div className="kicker-label justify-center mb-2">
@@ -90,10 +91,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-start">
           {/* Left: Contact Info matching official banner */}
           <motion.div
-            initial={{ opacity: 0, x: -25 }}
+            initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55 }}
+            viewport={VIEWPORT_CONFIG}
+            transition={{ duration: 0.6, ease: LUXURY_EASE }}
             className="lg:col-span-5 space-y-6"
           >
             <div className="bg-white rounded-3xl p-5 sm:p-8 lg:p-10 border border-[#EFEAE1] shadow-md space-y-6">
@@ -103,6 +104,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
               <div className="space-y-4 pt-1">
                 <motion.a
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={VIEWPORT_CONFIG}
+                  transition={{ duration: 0.45, delay: 0.08, ease: LUXURY_EASE }}
                   whileHover={{ x: 4 }}
                   href={`tel:${HOSTEL_INFO.phonePrimary.replace(/[^0-9+]/g, '')}`}
                   className="flex items-start gap-3.5 p-3.5 rounded-xl bg-[#FAF8F5] border border-[#EFEAE1] hover:border-[#102A1C] transition-colors"
@@ -118,7 +123,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   </div>
                 </motion.a>
 
-                <div className="flex items-start gap-3.5 p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E2D9C8]">
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={VIEWPORT_CONFIG}
+                  transition={{ duration: 0.45, delay: 0.16, ease: LUXURY_EASE }}
+                  className="flex items-start gap-3.5 p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E2D9C8]"
+                >
                   <div className="w-10 h-10 rounded-full bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0 shadow-xs">
                     <MapPin className="w-4 h-4" />
                   </div>
@@ -128,9 +139,15 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       {HOSTEL_INFO.address}
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="flex items-start gap-3.5 p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E2D9C8]">
+                <motion.div
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={VIEWPORT_CONFIG}
+                  transition={{ duration: 0.45, delay: 0.24, ease: LUXURY_EASE }}
+                  className="flex items-start gap-3.5 p-3.5 rounded-xl bg-[#FAF8F5] border border-[#E2D9C8]"
+                >
                   <div className="w-10 h-10 rounded-full bg-[#102A1C] text-[#DFB76C] flex items-center justify-center shrink-0 shadow-xs">
                     <Clock className="w-4 h-4" />
                   </div>
@@ -140,7 +157,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       {HOSTEL_INFO.visitingHours}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               </div>
 
               {/* Direct WhatsApp Action */}
@@ -162,15 +179,23 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
           {/* Right: Enquiry Form */}
           <motion.div
-            initial={{ opacity: 0, x: 25 }}
+            initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.1 }}
+            viewport={VIEWPORT_CONFIG}
+            transition={{ duration: 0.6, delay: 0.08, ease: LUXURY_EASE }}
             className="lg:col-span-7"
           >
             <div className="bg-white rounded-3xl p-5 sm:p-8 lg:p-10 border border-[#EFEAE1] shadow-lg">
-              {submitted ? (
-                <div className="text-center py-8 space-y-4 animate-in zoom-in-95">
+              <AnimatePresence mode="wait">
+                {submitted ? (
+                  <motion.div
+                    key="submitted"
+                    initial={{ opacity: 0, scale: 0.96, y: 8 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.96, y: -8 }}
+                    transition={{ duration: 0.35, ease: LUXURY_EASE }}
+                    className="text-center py-8 space-y-4"
+                  >
                   <div className="w-14 h-14 rounded-full bg-[#102A1C]/10 text-[#102A1C] flex items-center justify-center mx-auto">
                     <CheckCircle2 className="w-8 h-8 text-[#102A1C]" />
                   </div>
@@ -209,14 +234,22 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <div className="pt-2">
                     <button
                       onClick={resetForm}
-                      className="px-5 py-2 text-xs font-semibold text-[#102A1C] bg-[#F4EFE6] rounded-full hover:bg-[#EAE3D2] transition-colors"
+                      className="px-5 py-2 text-xs font-semibold text-[#102A1C] bg-[#F4EFE6] rounded-full hover:bg-[#EAE3D2] transition-colors cursor-pointer"
                     >
                       Submit Another Enquiry
                     </button>
                   </div>
-                </div>
+                </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <motion.form
+                  key="form"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.25 }}
+                  onSubmit={handleSubmit}
+                  className="space-y-4"
+                >
                   <h3 className="heading-card text-lg sm:text-xl text-[#102A1C] pb-2 border-b border-[#EFEAE1]">
                     Online Room Enquiry
                   </h3>
@@ -310,8 +343,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     <Send className="w-3.5 h-3.5" />
                     <span>Submit Enquiry</span>
                   </motion.button>
-                </form>
+                </motion.form>
               )}
+              </AnimatePresence>
             </div>
           </motion.div>
         </div>

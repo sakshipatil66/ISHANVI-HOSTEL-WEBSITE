@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import { TESTIMONIALS_LIST } from '../data/hostelData';
+import { LUXURY_EASE, VIEWPORT_CONFIG } from '../lib/motion';
 
 export const TestimonialsSection: React.FC = () => {
   const [startIndex, setStartIndex] = useState(0);
@@ -28,8 +29,8 @@ export const TestimonialsSection: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={VIEWPORT_CONFIG}
+            transition={{ duration: 0.6, ease: LUXURY_EASE }}
           >
             <div className="kicker-label mb-2">
               <span className="w-5 h-[1.5px] bg-[#C5A059]" />
@@ -45,20 +46,24 @@ export const TestimonialsSection: React.FC = () => {
 
           {/* Navigation Controls */}
           <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.94 }}
               onClick={prevReview}
-              className="w-10 h-10 rounded-full border border-[#EFEAE1] bg-white text-[#102A1C] hover:bg-[#102A1C] hover:text-[#DFB76C] hover:border-[#102A1C] flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95"
+              className="w-10 h-10 rounded-full border border-[#EFEAE1] bg-white text-[#102A1C] hover:bg-[#102A1C] hover:text-[#DFB76C] hover:border-[#102A1C] flex items-center justify-center transition-colors cursor-pointer shadow-xs"
               aria-label="Previous review"
             >
               <ChevronLeft className="w-4 h-4" />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.94 }}
               onClick={nextReview}
-              className="w-10 h-10 rounded-full border border-[#EFEAE1] bg-white text-[#102A1C] hover:bg-[#102A1C] hover:text-[#DFB76C] hover:border-[#102A1C] flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95"
+              className="w-10 h-10 rounded-full border border-[#EFEAE1] bg-white text-[#102A1C] hover:bg-[#102A1C] hover:text-[#DFB76C] hover:border-[#102A1C] flex items-center justify-center transition-colors cursor-pointer shadow-xs"
               aria-label="Next review"
             >
               <ChevronRight className="w-4 h-4" />
-            </button>
+            </motion.button>
           </div>
         </div>
 
@@ -74,10 +79,10 @@ export const TestimonialsSection: React.FC = () => {
               return (
                 <motion.div
                   key={`${t.id}-${startIndex}`}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.4, delay: idx * 0.08 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ duration: 0.38, delay: idx * 0.06, ease: LUXURY_EASE }}
                   whileHover={{ y: -5 }}
                   className="bg-white rounded-3xl p-5 sm:p-7 lg:p-8 border border-[#EFEAE1] shadow-xs hover:shadow-xl hover:border-[#DFB76C]/60 transition-all flex flex-col justify-between space-y-5 sm:space-y-6 group"
                 >

@@ -178,13 +178,13 @@ img {
     letter-spacing: 0.02em;
     white-space: nowrap;
     box-shadow: 0 3px 12px rgba(16, 42, 28, 0.18);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.22s ease, box-shadow 0.22s ease;
     cursor: pointer;
   }
   .btn-primary:hover {
     background-color: #1B3B2B;
-    box-shadow: 0 6px 18px rgba(16, 42, 28, 0.24);
-    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(16, 42, 28, 0.24);
+    transform: translateY(-2px);
   }
   .btn-primary:active {
     transform: scale(0.97);
@@ -206,12 +206,14 @@ img {
     letter-spacing: 0.01em;
     white-space: nowrap;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s ease, background-color 0.22s ease, box-shadow 0.22s ease;
     cursor: pointer;
   }
   .btn-secondary:hover {
-    border-color: #102A1C;
+    border-color: #C5A059;
     background-color: #FAF8F5;
+    box-shadow: 0 4px 12px rgba(16, 42, 28, 0.08);
+    transform: translateY(-1px);
   }
   .btn-secondary:active {
     transform: scale(0.97);
@@ -244,16 +246,25 @@ img {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes floatAmbient {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(12px, -14px, 0) scale(1.04);
   }
 }
 
 @keyframes pulseGlow {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(223, 183, 108, 0.4);
+    box-shadow: 0 0 0 0 rgba(223, 183, 108, 0.35);
   }
   50% {
-    box-shadow: 0 0 20px 4px rgba(223, 183, 108, 0.2);
+    box-shadow: 0 0 18px 4px rgba(223, 183, 108, 0.18);
   }
 }
 
@@ -271,7 +282,7 @@ img {
     transform: rotate(0deg) scale(1);
   }
   50% {
-    transform: rotate(180deg) scale(1.08);
+    transform: rotate(180deg) scale(1.06);
   }
   100% {
     transform: rotate(360deg) scale(1);
@@ -279,19 +290,23 @@ img {
 }
 
 .animate-float-slow {
-  animation: floatSlow 4.5s ease-in-out infinite;
+  animation: floatSlow 5.5s ease-in-out infinite;
+}
+
+.animate-float-ambient {
+  animation: floatAmbient 11s ease-in-out infinite;
 }
 
 .animate-float-delay {
-  animation: floatSlow 5s ease-in-out 1.5s infinite;
+  animation: floatSlow 6s ease-in-out 1.5s infinite;
 }
 
 .animate-pulse-glow {
-  animation: pulseGlow 3s infinite;
+  animation: pulseGlow 3.6s ease-in-out infinite;
 }
 
 .animate-aura-slow {
-  animation: auraSpinSlow 22s linear infinite;
+  animation: auraSpinSlow 26s linear infinite;
 }
 
 /* Cinematic Zoom & Reveal Utilities */
@@ -300,15 +315,15 @@ img {
     transform: scale(1) translate(0, 0);
   }
   100% {
-    transform: scale(1.08) translate(-1%, -1%);
+    transform: scale(1.06) translate(-0.8%, -0.8%);
   }
 }
 
 @keyframes blurToFocusAnim {
   0% {
     opacity: 0;
-    filter: blur(12px);
-    transform: translateY(24px);
+    filter: blur(10px);
+    transform: translateY(20px);
   }
   100% {
     opacity: 1;
@@ -322,14 +337,14 @@ img {
 }
 
 .animate-blur-focus {
-  animation: blurToFocusAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: blurToFocusAnim 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .hover-card-elevate {
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
 }
 .hover-card-elevate:hover {
-  transform: translateY(-6px);
+  transform: translateY(-5px);
   box-shadow: 0 20px 35px -10px rgba(16, 42, 28, 0.12), 0 0 0 1px rgba(223, 183, 108, 0.3);
 }
 

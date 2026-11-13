@@ -1,30 +1,42 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Sparkles, MapPin, Shield, Utensils, Zap } from 'lucide-react';
-import { HOSTEL_INFO } from '../data/hostelData';
+import { Sparkles } from 'lucide-react';
+import { LUXURY_EASE, VIEWPORT_CONFIG } from '../lib/motion';
 
 export const EditorialInterlude: React.FC = () => {
+  const metrics = [
+    { value: '100m', label: 'To ISMS Sankalp Gates' },
+    { value: '4 Meals', label: 'Cooked Fresh Daily' },
+    { value: '24×7', label: 'Guarded Security & CCTV' },
+    { value: '100%', label: 'Power & Wi-Fi Uptime' },
+  ];
+
   return (
     <section className="relative py-14 sm:py-20 lg:py-24 bg-[#102A1C] text-white overflow-hidden">
       {/* Background with Dark Scrim */}
       <div className="absolute inset-0 z-0">
-        <img
+        <motion.img
+          initial={{ scale: 1.05, opacity: 0.25 }}
+          whileInView={{ scale: 1, opacity: 0.4 }}
+          viewport={VIEWPORT_CONFIG}
+          transition={{ duration: 0.9, ease: LUXURY_EASE }}
           src="/assets/images/hero_ishanvi_facade_1793879538556.jpg"
           alt="ISHANVI Residence Atmosphere"
-          className="w-full h-full object-cover object-center opacity-40"
+          className="w-full h-full object-cover object-center"
           referrerPolicy="no-referrer"
           loading="lazy"
           decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0E2016] via-[#102A1C]/80 to-[#0E2016]/90" />
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[520px] h-[240px] bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none animate-float-ambient" />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8 sm:space-y-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          viewport={VIEWPORT_CONFIG}
+          transition={{ duration: 0.65, ease: LUXURY_EASE }}
           className="space-y-4"
         >
           <div className="kicker-label justify-center text-[#DFB76C]">
@@ -42,46 +54,27 @@ export const EditorialInterlude: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* 4 Animated Verified Metrics */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="pt-8 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 border-t border-white/15"
-        >
-          <motion.div
-            whileHover={{ y: -5, scale: 1.03 }}
-            className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-[#DFB76C]/60 hover:bg-white/10 transition-all cursor-default space-y-1 shadow-lg"
-          >
-            <p className="font-serif text-3xl sm:text-4xl font-bold text-[#DFB76C] tabular-nums">100m</p>
-            <p className="text-xs sm:text-[13px] text-[#E2E8F0] font-medium">To ISMS Sankalp Gates</p>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ y: -5, scale: 1.03 }}
-            className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-[#DFB76C]/60 hover:bg-white/10 transition-all cursor-default space-y-1 shadow-lg"
-          >
-            <p className="font-serif text-3xl sm:text-4xl font-bold text-[#DFB76C] tabular-nums">4 Meals</p>
-            <p className="text-xs sm:text-[13px] text-[#E2E8F0] font-medium">Cooked Fresh Daily</p>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ y: -5, scale: 1.03 }}
-            className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-[#DFB76C]/60 hover:bg-white/10 transition-all cursor-default space-y-1 shadow-lg"
-          >
-            <p className="font-serif text-3xl sm:text-4xl font-bold text-[#DFB76C] tabular-nums">24×7</p>
-            <p className="text-xs sm:text-[13px] text-[#E2E8F0] font-medium">Guarded Security &amp; CCTV</p>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ y: -5, scale: 1.03 }}
-            className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-[#DFB76C]/60 hover:bg-white/10 transition-all cursor-default space-y-1 shadow-lg"
-          >
-            <p className="font-serif text-3xl sm:text-4xl font-bold text-[#DFB76C] tabular-nums">100%</p>
-            <p className="text-xs sm:text-[13px] text-[#E2E8F0] font-medium">Power &amp; Wi-Fi Uptime</p>
-          </motion.div>
-        </motion.div>
+        {/* 4 Staggered Verified Metrics */}
+        <div className="pt-8 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 border-t border-white/15">
+          {metrics.map((metric, idx) => (
+            <motion.div
+              key={metric.label}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={VIEWPORT_CONFIG}
+              transition={{ duration: 0.5, delay: idx * 0.08, ease: LUXURY_EASE }}
+              whileHover={{ y: -4 }}
+              className="p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-[#DFB76C]/60 hover:bg-white/10 transition-colors cursor-default space-y-1 shadow-lg"
+            >
+              <p className="font-serif text-3xl sm:text-4xl font-bold text-[#DFB76C] tabular-nums">
+                {metric.value}
+              </p>
+              <p className="text-xs sm:text-[13px] text-[#E2E8F0] font-medium">
+                {metric.label}
+              </p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

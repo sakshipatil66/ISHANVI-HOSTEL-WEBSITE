@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { X, CheckCircle2, Send, Calendar, User, Phone, Mail, MessageSquare } from 'lucide-react';
 import { ROOMS_DATA, HOSTEL_INFO } from '../data/hostelData';
+import { LUXURY_EASE } from '../lib/motion';
 
 interface EnquiryModalProps {
   isOpen: boolean;
@@ -32,7 +34,18 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
     }
   }, [initialRoom]);
 
-  if (!isOpen) return null;
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setSubmitted(false);
+        setErrors({});
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isOpen, onClose]);
 
   const validate = () => {
     const errs: Record<string, string> = {};
@@ -72,30 +85,27 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
     onClose();
   };
 
-  useEffect(() => {
-    if (!isOpen) return;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setSubmitted(false);
-        setErrors({});
-        onClose();
-      }
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [isOpen, onClose]);
-
   return (
-    <div
-      role="dialog"
-      aria-modal="true"
-      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200"
-      onClick={handleClose}
-    >
-      <div
-        className="bg-white rounded-3xl max-w-lg w-full border border-[#EFEAE1] shadow-2xl overflow-hidden relative max-h-[92vh] flex flex-col"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          role="dialog"
+          aria-modal="true"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25, ease: LUXURY_EASE }}
+          className="fixed inset-0 z-50 bg-black/65 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+          onClick={handleClose}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.94, y: 14 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+            transition={{ duration: 0.32, ease: LUXURY_EASE }}
+            className="bg-white rounded-3xl max-w-lg w-full border border-[#EFEAE1] shadow-2xl overflow-hidden relative max-h-[92vh] flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
         {/* Header */}
         <div className="bg-[#102A1C] text-white p-5 sm:p-6 relative shrink-0">
           <button
@@ -119,8 +129,16 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
 
         {/* Content */}
         <div className="p-5 sm:p-6 overflow-y-auto flex-1">
-          {submitted ? (
-            <div className="text-center py-4 space-y-4">
+          <AnimatePresence mode="wait">
+            {submitted ? (
+              <motion.div
+                key="submitted"
+                initial={{ opacity: 0, scale: 0.96, y: 8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.3, ease: LUXURY_EASE }}
+                className="text-center py-4 space-y-4"
+              >
               <div className="w-14 h-14 rounded-full bg-[#102A1C]/10 text-[#102A1C] flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-8 h-8 text-[#102A1C]" />
               </div>
@@ -163,9 +181,17 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
                   Close
                 </button>
               </div>
-            </div>
+            </motion.div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <motion.form
+              key="form"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.22 }}
+              onSubmit={handleSubmit}
+              className="space-y-4"
+            >
               <div>
                 <label className="block text-xs font-semibold text-[#102A1C] mb-1">
                   Full Name *
@@ -265,18 +291,23 @@ export const EnquiryModal: React.FC<EnquiryModalProps> = ({
               </div>
 
               <div className="pt-2">
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   type="submit"
                   className="btn-primary w-full"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>Submit Enquiry Now</span>
-                </button>
+                </motion.button>
               </div>
-            </form>
+            </motion.form>
           )}
+          </AnimatePresence>
         </div>
-      </div>
-    </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

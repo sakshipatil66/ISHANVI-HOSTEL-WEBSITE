@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { MessageSquare, ArrowRight, Phone, MapPin, Sparkles, CheckCircle2 } from 'lucide-react';
 import { HOSTEL_INFO } from '../data/hostelData';
+import { LUXURY_EASE, VIEWPORT_CONFIG } from '../lib/motion';
 
 interface BottomCtaSectionProps {
   onOpenEnquiry: (roomName?: string) => void;
@@ -11,15 +12,15 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({ onOpenEnquir
   return (
     <section className="py-8 sm:py-12 bg-[#FDFBF7] relative overflow-hidden">
       {/* Background ambient decorative glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#DFB76C]/10 rounded-full blur-3xl pointer-events-none animate-float-ambient" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Exact Bottom Card from Reference Screenshot with Motion Animation */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.65 }}
+          viewport={VIEWPORT_CONFIG}
+          transition={{ duration: 0.65, ease: LUXURY_EASE }}
           className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#FAF6ED] via-[#F4EFE6] to-[#EAE3D2] border border-[#EFEAE1] shadow-xl p-5 sm:p-8 lg:p-10"
         >
           {/* Subtle spinning gold accent in corner */}
@@ -91,8 +92,11 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({ onOpenEnquir
               </div>
 
               <motion.div
+                initial={{ opacity: 0, scale: 0.96 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={VIEWPORT_CONFIG}
                 whileHover={{ y: -4, scale: 1.02 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.55, ease: LUXURY_EASE }}
                 className="rounded-2xl overflow-hidden shadow-xl border-4 border-white aspect-[4/3] bg-white group cursor-pointer"
               >
                 <img
@@ -112,8 +116,8 @@ export const BottomCtaSection: React.FC<BottomCtaSectionProps> = ({ onOpenEnquir
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.15 }}
+          viewport={VIEWPORT_CONFIG}
+          transition={{ duration: 0.6, delay: 0.12, ease: LUXURY_EASE }}
           className="mt-6 sm:mt-8 bg-[#102A1C] rounded-2xl p-5 sm:p-8 text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-5 sm:gap-6 shadow-xl border border-[#DFB76C]/30 relative overflow-hidden"
         >
           {/* Subtle pulse background aura */}
